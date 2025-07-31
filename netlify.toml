@@ -1,0 +1,12 @@
+# netlify.toml
+[functions]
+  # This tells Netlify where your serverless functions are located.
+  # The path is relative to the root of your repository/deployed folder.
+  directory = "netlify/functions"
+
+# If you have a build command (e.g., for a React app), you'd add it here.
+# For a simple static site with functions, this might not be strictly necessary,
+# but can be useful if you later add build steps.
+# [build]
+#   command = "npm install && npm run build" # Example if you have a build script
+#   publish = "build" # Example: directory where your static files end up (e.g., 'public', 'dist')
