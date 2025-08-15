@@ -89,3 +89,55 @@ setTimeout(() => {
     event_label: 'Stayed 30s+'
   });
 }, 30000); // 30 seconds
+
+document.addEventListener('DOMContentLoaded', function () {
+  
+  /** -------------------
+   * 1. SOCIAL ICON CLICKS
+   * ------------------- **/
+  const socialLinks = document.querySelectorAll('a[data-social]');
+  
+  socialLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      const platform = this.getAttribute('data-social');
+      
+      gtag('event', 'social_click', {
+        event_category: 'social',
+        event_label: platform,
+        transport_type: 'beacon'
+      });
+
+      console.log(`Tracked click on: ${platform}`);
+    });
+  });
+
+  
+  /** -------------------
+   * 2. SCROLL DEPTH TRACKING
+   * ------------------- **/
+  let scrollDepthTriggered = { 25: false, 50: false, 75: false, 100: false };
+  
+  function trackScrollDepth() {
+    const scrollTop = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+    const scrollPercent = Math.round(((scrollTop + windowHeight) / docHeight) * 100);
+    
+    [25, 50, 75, 100].forEach(depth => {
+      if (scrollPercent >= depth && !scrollDepthTriggered[depth]) {
+        scrollDepthTriggered[depth] = true;
+        
+        gtag('event', 'scroll_depth', {
+          event_category: 'engagement',
+          event_label: `${depth}%`,
+          value: depth
+        });
+
+        console.log(`Scroll depth reached: ${depth}%`);
+      }
+    });
+  }
+  
+  window.addEventListener('scroll', trackScrollDepth);
+
+});
