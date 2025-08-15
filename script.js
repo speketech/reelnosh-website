@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailInput = formElement.querySelector('input[type="email"]');
         const formMessage = formElement.querySelector('.form-message');
         const email = emailInput.value.trim(); // Trim whitespace from email input
+        
+        // Determine which form is being submitted
+        const formType = formElement.id === 'hero-email-form' ? 'Hero Form' : 'Footer Form';
 
         // Reset previous messages
         formMessage.textContent = '';
@@ -27,6 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!email) {
             formMessage.textContent = 'Please enter your email address.';
             formMessage.classList.add('error');
+            
+            // Track form validation error
+            gtag('event', 'form_validation_error', {
+                event_category: 'form',
+                event_label: formType,
+                error_type: 'empty_email'
+            });
+            
             return;
         }
 
@@ -34,11 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!emailRegex.test(email)) {
             formMessage.textContent = 'Please enter a valid email address.';
             formMessage.classList.add('error');
+            
+            // Track form validation error
+            gtag('event', 'form_validation_error', {
+                event_category: 'form',
+                event_label: formType,
+                error_type: 'invalid_email'
+            });
+            
             return;
         }
 
         formMessage.textContent = 'Submitting...';
         formMessage.classList.remove('error', 'success'); // Clear previous states
+
+        // Track form submission attempt
+        gtag('event', 'form_submit_attempt', {
+            event_category: 'form',
+            event_label: formType
+        });
 
         try {
             // Send data to your Netlify Function
@@ -60,16 +85,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 formMessage.textContent = data.message;
                 formMessage.classList.add('success');
                 emailInput.value = ''; // Clear input on successful submission
+                
+                // Track successful form submission
+                gtag('event', 'form_submit_success', {
+                    event_category: 'conversion',
+                    event_label: formType,
+                    value: 1
+                });
+                
+                // Also track as a conversion event
+                gtag('event', 'email_signup', {
+                    event_category: 'conversion',
+                    event_label: formType
+                });
+                
             } else {
                 // Handle non-2xx HTTP responses or backend-specific errors
                 formMessage.textContent = data.message || 'Something went wrong. Please try again.';
                 formMessage.classList.add('error');
+                
+                // Track form submission failure
+                gtag('event', 'form_submit_failure', {
+                    event_category: 'form',
+                    event_label: formType,
+                    error_type: 'server_error',
+                    error_message: data.message || 'Unknown server error'
+                });
             }
         } catch (error) {
             // Handle network errors (e.g., server unreachable) or unexpected errors
             console.error('Frontend Fetch Error:', error);
             formMessage.textContent = 'An unexpected error occurred. Please check your internet connection.';
             formMessage.classList.add('error');
+            
+            // Track network/unexpected errors
+            gtag('event', 'form_submit_failure', {
+                event_category: 'form',
+                event_label: formType,
+                error_type: 'network_error',
+                error_message: error.message || 'Network error'
+            });
         }
     };
 

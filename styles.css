@@ -27,7 +27,7 @@
     --font-size-xxl: clamp(1.5rem, 1.3rem + 1vw, 1.75rem);
     --font-size-h3: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
     --font-size-h2: clamp(2rem, 1.5rem + 2.5vw, 3.25rem);
-    --font-size-h1-hero: clamp(3rem, 2rem + 5vw, 6.25rem);
+    --font-size-h1-hero: clamp(2rem, 1.5rem + 3vw, 4.5rem);
 
     /* Fluid Spacing Scale */
     --spacing-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);
@@ -249,7 +249,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.1;
     text-align: center;
     margin-bottom: var(--spacing-xs);
-    transform: rotate(0deg); /* Remove rotation for small screens */
+     /* Remove rotation for small screens */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -286,15 +286,15 @@ h1, h2, h3, h4, h5, h6 {
     max-width: clamp(20rem, 90vw, 31.25rem);
     padding: var(--spacing-xs);
     background-color: var(--form-background);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(224, 224, 224, 1);
     border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
     transition: var(--transition);
 }
 
 .email-signup-form:focus-within {
     border-color: var(--primary-orange);
-    box-shadow: 0 0 0 3px rgba(255, 119, 77, 0.1);
+    box-shadow: none;
 }
 
 .email-signup-form input {
@@ -303,7 +303,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 var(--spacing-m);
     font-weight: 500;
     font-size: var(--font-size-sm);
-    color: var(--gray-text);
+    color: var(--dark-text);
     background-color: transparent;
     border: none;
     border-radius: var(--border-radius);
@@ -323,7 +323,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     font-size: var(--font-size-sm);
     color: var(--white);
-    background-color: var(--dark-text);
+    background-color: var(--primary-orange);
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -332,7 +332,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .email-signup-form button:hover {
-    background-color: var(--gray-text);
+    background-color: var(--secondary-orange);
     transform: translateY(-1px);
 }
 
@@ -602,7 +602,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .main-headline {
-        transform: rotate(-2deg);
+        /* Removed transform rotation for this breakpoint */
     }
 
     .email-signup-form {
@@ -670,7 +670,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Desktop and above */
 @media (min-width: 1024px) {
     .main-headline {
-        transform: rotate(-3deg);
+        /* Removed transform rotation for this breakpoint */
     }
 
     .feature-cards-grid {
