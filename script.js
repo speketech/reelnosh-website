@@ -82,3 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
         footerForm.addEventListener('submit', (event) => handleSubmit(event, footerForm));
     }
 });
+
+setTimeout(() => {
+  gtag('event', 'time_on_page', {
+    event_category: 'engagement',
+    event_label: 'Stayed 30s+'
+  });
+}, 30000); // 30 seconds

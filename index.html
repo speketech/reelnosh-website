@@ -91,7 +91,7 @@
 
             <form class="email-signup-form hero-form" id="hero-email-form" aria-label="Sign up for early access">
                 <input type="email" placeholder="Enter email address for early access" required aria-label="Email address for early access">
-                <button type="submit">Sign me up</button>
+                <button type="submit" onclick="gtag('event', 'email_signup', {'event_category': 'conversion', 'event_label': 'Hero Form'});"> Sign me up</button>
                 <div class="form-message" aria-live="polite"></div>
             </form>
         </div>
@@ -162,7 +162,7 @@
                 </p>
                 <form class="email-signup-form footer-form" id="footer-email-form" aria-label="Join our mailing list">
                     <input type="email" placeholder="Your email address" required aria-label="Your email address">
-                    <button type="submit">Join</button>
+                    <button type="submit" onclick="gtag('event', 'email_signup', {'event_category': 'conversion', 'event_label': 'Hero Form'});">Join</button>
                     <div class="form-message" aria-live="polite"></div>
                 </form>
             </div>
@@ -172,27 +172,27 @@
                     <a href="mailto:enquiries@reelnosh.com" class="contact-email">enquiries@reelnosh.com</a>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/reelnosh" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+                    <a href="https://www.facebook.com/reelnosh" onclick="gtag('event', 'click', { event_category: 'social', event_label: 'Facebook', transport_type: 'beacon'})" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
                         <div class="social-icon-circle">
                             <img src="images/facebook-icon.png" alt="Facebook icon" width="24" height="24" loading="lazy">
                         </div>
                     </a>
-                    <a href="https://www.instagram.com/reelnosh/" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+                    <a href="https://www.instagram.com/reelnosh/" onclick="gtag('event', 'click', { event_category: 'social', event_label: 'Instagram', transport_type: 'beacon'})" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
                         <div class="social-icon-circle">
                             <img src="images/instagram-icon.png" alt="Instagram icon" width="24" height="24" loading="lazy">
                         </div>
                     </a>
-                    <a href="https://x.com/reelnosh" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X (Twitter)">
+                    <a href="https://x.com/reelnosh" onclick="gtag('event', 'click', { event_category: 'social', event_label: 'X', transport_type: 'beacon'})" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X (Twitter)">
                         <div class="social-icon-circle">
                             <img src="images/x-icon.png" alt="X (Twitter) icon" width="24" height="24" loading="lazy">
                         </div>
                     </a>
-                    <a href="https://www.tiktok.com/@reelnosh" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X Tiktok">
+                    <a href="https://www.tiktok.com/@reelnosh" onclick="gtag('event', 'click', { event_category: 'social', event_label: 'Tiktok', transport_type: 'beacon'})" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Tiktok">
                         <div class="social-icon-circle">
                             <img src="images/tiktok-icon.png" alt="Tiktok icon" width="24" height="24" loading="lazy">
                         </div>
                     </a>
-                    <a href="https://linkedin.com/company/reelnosh" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+                    <a href="https://linkedin.com/company/reelnosh" onclick="gtag('event', 'click', { event_category: 'social', event_label: 'LinkedIn', transport_type: 'beacon'})" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
                         <div class="social-icon-circle">
                             <img src="images/linkedin-icon.png" alt="LinkedIn icon" width="24" height="24" loading="lazy">
                         </div>
@@ -204,5 +204,50 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <script>
+  (function() {
+    let scrollTracked = {
+      25: false,
+      50: false,
+      75: false,
+      100: false
+    };
+
+    function sendScrollEvent(percent) {
+      gtag('event', 'scroll_depth', {
+        event_category: 'engagement',
+        event_label: percent + '% scrolled',
+        value: percent
+      });
+    }
+
+    function checkScrollDepth() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = Math.floor((scrollTop / docHeight) * 100);
+
+      if (scrollPercent >= 25 && !scrollTracked[25]) {
+        sendScrollEvent(25);
+        scrollTracked[25] = true;
+      }
+      if (scrollPercent >= 50 && !scrollTracked[50]) {
+        sendScrollEvent(50);
+        scrollTracked[50] = true;
+      }
+      if (scrollPercent >= 75 && !scrollTracked[75]) {
+        sendScrollEvent(75);
+        scrollTracked[75] = true;
+      }
+      if (scrollPercent >= 100 && !scrollTracked[100]) {
+        sendScrollEvent(100);
+        scrollTracked[100] = true;
+      }
+    }
+
+    window.addEventListener('scroll', checkScrollDepth);
+  })();
+</script>
+
 </body>
 </html>
