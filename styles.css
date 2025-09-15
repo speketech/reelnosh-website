@@ -491,25 +491,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer-form {
-    background-color: var(--footer-input-bg);
-    border-color: var(--footer-input-border);
-}
-
-.footer-form input {
-    color: var(--white);
-}
-
-.footer-form input::placeholder {
-    color: var(--footer-placeholder-color);
-}
-
-.footer-form button {
-    background-color: var(--primary-orange);
-    color: var(--white);
-}
-
-.footer-form button:hover {
-    background-color: var(--secondary-orange);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: 100%;
+    max-width: 31.25rem; /* same as your hero form */
+    margin: 0 auto;
 }
 
 .footer-bottom {
@@ -751,4 +739,74 @@ h1, h2, h3, h4, h5, h6 {
         background: white !important;
         box-shadow: none !important;
     }
+}
+
+/* ============================= */
+/* Footer Form (final unified styling) */
+/* ============================= */
+.footer-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+  max-width: 31.25rem; /* same as hero form */
+  margin: 0 auto;
+  padding: var(--spacing-xs);
+  background-color: var(--footer-input-bg);
+  border: 1px solid var(--footer-input-border);
+  border-radius: var(--border-radius-lg); /* same rounded shape as hero */
+}
+
+.footer-form input {
+  flex: 1;
+  height: 3rem;
+  padding: 0 var(--spacing-m);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--white);
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.footer-form input::placeholder {
+  color: var(--footer-placeholder-color);
+}
+
+.footer-form button {
+  height: 3rem;
+  padding: 0 var(--spacing-l);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--primary-orange); /* matches hero button */
+  border: none;
+  border-radius: var(--border-radius); /* same as hero */
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.footer-form button:hover {
+  background-color: var(--secondary-orange); /* same hover as hero */
+  transform: translateY(-1px);
+}
+
+.footer-form button:active {
+  transform: translateY(0);
+}
+
+/* ✅ Responsive (stack on small screens) */
+@media (max-width: 480px) {
+  .footer-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .footer-form input,
+  .footer-form button {
+    width: 100%;
+    margin: 0.25rem 0;
+  }
 }
