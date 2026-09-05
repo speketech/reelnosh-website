@@ -1,0 +1,11 @@
+node_modules
+.next
+.env.local
+incoming-assets/
+.DS_Store
+*.tsbuildinfo
+CONTENT.md
+DESIGN_OVERRIDES.md
+INTERACTIONS.md
+context.md
+reelnosh-website.zip

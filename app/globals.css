@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-clay: #8B3A2A;
+  --color-clay-hover: #743022;
+  --color-clay-pressed: #5F261A;
+  --color-warm-white: #FFFEFA;
+  --color-soft-cream: #F7F3ED;
+  --color-light-clay: #E7DED5;
+  --color-clay-gray: #6B665F;
+  --color-charcoal: #1E1B18;
+  --color-cocoa: #5A2418;
+  --color-spice-pop: #F4A11A;
+  --color-success: #5F8B4C;
+  --color-urgency: #B84D1B;
+  --color-error: #B44C42;
+  --color-palm-cream: #F4C16D;
+  --color-focus-ring: #D79A8A;
+
+  /* DESIGN_OVERRIDES §2 — vertical rhythm tokens */
+  --rhythm-section-desktop: 120px;
+  --rhythm-section-mobile: 64px;
+  --rhythm-group-desktop: 48px;
+  --rhythm-group-mobile: 32px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #FFFEFA;
+  color: #1E1B18;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #FFFEFA;
+  color: #1E1B18;
+  font-family: var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+::selection {
+  background-color: rgba(139, 58, 42, 0.15);
+  color: #8B3A2A;
+}
