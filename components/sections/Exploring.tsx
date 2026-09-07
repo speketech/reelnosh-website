@@ -45,14 +45,16 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
           {displayItems.map((item) => {
             const mediaUrl = item.public_url || item.media_url;
             const isVideo = item.media_type === 'video';
-            const sourcePostUrl = item.source_post_url || item.creator_profile_url || 'https://instagram.com/kudiratijeoma';
+            const creatorUsername = item.creator_username || item.creator_handle?.replace(/^@/, '') || 'kudiratijeoma';
+            const creatorHandle = `@${creatorUsername.replace(/^@/, '')}`;
+            const sourcePostUrl = item.source_post_url || item.creator_profile_url || `https://instagram.com/${creatorUsername.replace(/^@/, '')}`;
 
             return (
               <div
                 key={item.id}
                 className="flex flex-col justify-between overflow-hidden rounded-[16px] border border-neutral-lightClay/70 bg-white shadow-elevation1 transition-all duration-300 hover:-translate-y-1 hover:shadow-elevation2"
               >
-                {/* 1. Image or Video , Unified 4:3 Aspect Ratio */}
+                {/* 1. Image or Video: Unified 4:3 Aspect Ratio */}
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-softCream">
                   {isVideo ? (
                     <video
@@ -72,22 +74,38 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                       className="object-cover transition-transform duration-300 hover:scale-[1.02]"
                     />
                   )}
+
+                  {/* Credit chip pill: bottom-left corner of image on semi-transparent dark pill */}
                   <a
                     href={sourcePostUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/70 text-neutral-charcoal backdrop-blur-sm transition-colors hover:bg-white hover:text-clay"
-                    aria-label="View on Instagram"
+                    className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-neutral-charcoal/65 px-2.5 py-1 text-white backdrop-blur-sm transition-colors hover:bg-neutral-charcoal/85 shadow-xs"
+                    aria-label={`View ${creatorHandle} on Instagram`}
                   >
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="2" y="2" width="20" height="20" rx="5"/>
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    <svg
+                      width="13"
+                      height="13"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="shrink-0 text-white"
+                      aria-hidden="true"
+                    >
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                     </svg>
+                    <span className="font-sans text-[12px] font-medium tracking-tight text-white leading-none">
+                      {creatorHandle}
+                    </span>
                   </a>
                 </div>
 
-                {/* 2. Content Container: badge → title → description → attribution → CTA */}
+                {/* 2. Content Container: badge, title, description, CTA */}
                 <div className="p-6 flex-1 flex flex-col justify-between">
                   <div>
                     {/* Status Badge */}
