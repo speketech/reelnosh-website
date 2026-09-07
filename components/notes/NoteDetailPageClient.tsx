@@ -1,13 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 import { FounderNoteItem } from '@/lib/constants';
-import { Modal } from '@/components/ui/Modal';
-import { FoodieSignupForm } from '@/components/forms/FoodieSignupForm';
 import { OriginAwareBackButton } from '@/components/notes/OriginAwareBackButton';
+import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
@@ -31,7 +30,7 @@ Every Drop teaches us something that dispatch data never could: which dishes tra
 
 ## What comes next: drops first, dispatch later
 
-We will build delivery when the food experiences we’re enabling demand it — not because it’s the default thing a food tech company is supposed to do. Right now, pickup points and scheduled collection are teaching us more than a fleet of motorbikes ever could.
+We will build delivery when the food experiences we’re enabling demand it , not because it’s the default thing a food tech company is supposed to do. Right now, pickup points and scheduled collection are teaching us more than a fleet of motorbikes ever could.
 
 When we do build dispatch, it won’t look like the delivery apps you use today. It will be built specifically for time-sensitive, limited-quantity food drops where the handoff is part of the experience, not an afterthought.
 
@@ -65,28 +64,29 @@ We will keep listening, testing, and sharing what changes our minds. The work is
 `.trim();
 };
 
+const getComputedReadTime = (body: string) => Math.max(1, Math.ceil(body.trim().split(/\s+/).filter(Boolean).length / 200));
+
+const isExternalLink = (href: string) => {
+  if (!href.startsWith('http')) return false;
+  try {
+    return new URL(href).hostname !== 'reelnosh.com' && !new URL(href).hostname.endsWith('.reelnosh.com');
+  } catch {
+    return false;
+  }
+};
+
 export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note, relatedNotes }) => {
-  const [isFoodieModalOpen, setIsFoodieModalOpen] = useState(false);
   const body = note.body_markdown || fallbackBody(note);
+  const readTime = getComputedReadTime(body);
 
   return (
     <main className="bg-neutral-warmWhite min-h-screen">
       <article>
-        {/* Top Section: Hero Image & Article Header */}
+        {/* Article header */}
         <section className="px-4 pb-10 pt-6 sm:px-6 sm:pb-14 sm:pt-8 md:px-8 md:pb-16 md:pt-10">
           <div className="mx-auto max-w-[800px]">
-            {/* Hero Image */}
-            <picture className="mx-auto block w-full overflow-hidden rounded-[20px] sm:rounded-[32px] shadow-elevation1">
-              <source media="(max-width: 767px)" srcSet="/images/notes/note-detail-hero-mobile.png" />
-              <img
-                src="/images/notes/note-detail-hero.png"
-                alt={note.title}
-                className="h-auto w-full object-cover"
-              />
-            </picture>
-
             {/* Back Button */}
-            <div className="mb-6 mt-6 sm:mb-8 sm:mt-8">
+            <div className="mb-6 mt-2 sm:mb-8 sm:mt-4">
               <OriginAwareBackButton fallbackHref="/founders-note" />
             </div>
 
@@ -95,13 +95,13 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
               <span className="rounded-full bg-[#FCEEEA] px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px] text-clay">
                 {note.category || 'THE ROADMAP'}
               </span>
-              <span>{note.date}</span>
+              <span>{new Date(note.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
               <span className="text-neutral-lightClay">•</span>
-              <span>{note.readTime || '5 min read'}</span>
+              <span>{readTime} min read</span>
             </div>
 
             {/* Article Title */}
-            <h1 className="font-serif text-3xl font-semibold leading-[1.14] text-neutral-charcoal sm:text-4xl md:text-[46px] tracking-tight">
+            <h1 className="font-serif text-3xl font-semibold leading-[1.14] text-neutral-charcoal sm:text-4xl md:text-[52px] tracking-tight">
               {note.title}
             </h1>
 
@@ -112,11 +112,11 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                 alt="Kudirat Ijeoma Ibeabuchi"
                 width={48}
                 height={48}
-                className="rounded-full object-cover shrink-0"
+                className="rounded-full bg-[#F4C16D] object-cover shrink-0"
               />
               <div>
                 <p className="font-sans text-sm sm:text-[15px] font-semibold text-neutral-charcoal leading-snug">
-                  Kudirat Ijeoma Ibeabuchi
+                  Kudirat
                 </p>
                 <p className="font-sans text-xs sm:text-sm text-neutral-clayGray">
                   Founder &amp; CEO, Reelnosh
@@ -126,23 +126,36 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
           </div>
         </section>
 
+        {/* Cover image */}
+        <section className="px-4 pb-12 sm:px-6 md:px-8 md:pb-16">
+          <picture className="mx-auto block max-w-[960px] overflow-hidden rounded-[20px] shadow-elevation1 sm:rounded-[32px]">
+            <source media="(max-width: 767px)" srcSet="/images/notes/note-detail-hero-mobile.png" />
+            <img src="/images/notes/note-detail-hero.png" alt={note.title} className="h-auto w-full object-cover" />
+          </picture>
+        </section>
+
         {/* Editorial Body Content */}
         <section className="px-4 pb-14 sm:px-6 md:px-8 md:pb-20">
-          <div className="mx-auto max-w-[800px] font-sans text-base leading-[1.8] text-neutral-charcoal sm:text-[17px]">
+          <div className="mx-auto max-w-[760px] font-sans text-[17px] leading-[1.8] text-[#3A3530]">
             <ReactMarkdown
               components={{
                 h2: ({ children }) => (
-                  <h2 className="mt-10 mb-5 border-l-2 border-clay pl-4 font-serif text-xl sm:text-2xl font-semibold leading-tight text-neutral-charcoal">
+                  <h2 className="mt-12 mb-5 border-l-2 border-clay pl-3 font-serif text-[21px] font-semibold leading-tight text-neutral-charcoal">
                     {children}
                   </h2>
                 ),
                 p: ({ children }) => (
-                  <p className="my-5 leading-[1.75] text-neutral-charcoal/90">
+                  <p className="my-5 leading-[1.8] text-[#3A3530] first:mb-9 first:border-b first:border-neutral-lightClay first:pb-8 first:font-serif first:text-xl first:leading-[1.45]">
                     {children}
                   </p>
                 ),
+                a: ({ href = '', children }) => isExternalLink(href) ? (
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-clay underline underline-offset-4">{children}</a>
+                ) : (
+                  <Link href={href || '#'} className="text-clay underline underline-offset-4">{children}</Link>
+                ),
                 blockquote: ({ children }) => (
-                  <blockquote className="relative my-9 overflow-hidden rounded-[16px] bg-[#F7F3ED] px-6 py-8 sm:px-12 sm:py-10 text-center shadow-xs">
+                  <blockquote className="relative my-10 overflow-hidden rounded-[12px] bg-[#F7F3ED] px-5 py-7 text-center shadow-xs sm:px-8 sm:py-8 [&_p]:my-0 [&_p+p]:mt-5 [&_p+p]:border-t [&_p+p]:border-[#C9A090] [&_p+p]:pt-5">
                     {/* Decorative quote mark in top-left */}
                     <div
                       className="pointer-events-none absolute left-4 top-3 select-none opacity-[0.08]"
@@ -157,18 +170,18 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                     </div>
 
                     {/* Quote text: dynamic height based on text length */}
-                    <div className="relative z-10 font-serif text-lg sm:text-[21px] italic leading-[1.6] text-neutral-charcoal max-w-[540px] mx-auto">
+                    <div className="relative z-10 mx-auto max-w-[560px] font-serif text-[21px] italic leading-[1.55] text-neutral-charcoal">
                       {children}
                     </div>
 
                     {/* Decorative center divider */}
                     <div
-                      className="mt-6 flex items-center justify-center gap-2 relative z-10"
+                      className="relative z-10 mt-4 flex items-center justify-center gap-2"
                       aria-hidden="true"
                     >
-                      <span className="h-[1px] w-8 bg-[#C9A090]" />
+                      <span className="h-[1px] w-5 bg-[#C9A090]" />
                       <span className="h-1 w-1 rounded-full bg-clay opacity-50" />
-                      <span className="h-[1px] w-8 bg-[#C9A090]" />
+                      <span className="h-[1px] w-5 bg-[#C9A090]" />
                     </div>
                   </blockquote>
                 ),
@@ -177,25 +190,9 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
               {body}
             </ReactMarkdown>
 
-            {/* Foodies Club Community Banner */}
-            <div className="mt-14 rounded-[16px] bg-clay px-6 py-8 text-white sm:px-10 shadow-elevation1">
-              <span className="font-sans text-[11px] font-semibold uppercase tracking-[1.2px] text-white/80">
-                • FOODIES CLUB
-              </span>
-              <h2 className="mt-4 font-serif text-2xl font-semibold sm:text-3xl">
-                Join the community that&apos;s shaping Reelnosh.
-              </h2>
-              <p className="mt-2.5 font-sans text-sm leading-relaxed text-white/80 max-w-xl">
-                Get early access to food Drops, vote on what gets built, and be part
-                of the conversations that happen before anything is announced.
-              </p>
-              <button
-                type="button"
-                onClick={() => setIsFoodieModalOpen(true)}
-                className="mt-6 w-full rounded-brand bg-white px-6 py-3 font-sans text-sm font-semibold text-clay transition-colors hover:bg-[#F7F3ED] sm:w-auto cursor-pointer"
-              >
-                Join the Foodies Club
-              </button>
+            {/* Same Foodies Club card as the homepage, resized for the article column. */}
+            <div className="mt-14">
+              <FoodiesClubCard compact />
             </div>
           </div>
         </section>
@@ -223,8 +220,9 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                   </div>
                   <div className="p-6 flex flex-col justify-between flex-1">
                     <div>
-                      <span className="font-sans text-[11px] font-semibold uppercase tracking-[1.2px] text-clay">
-                        • {related.category || 'COMMUNITY'}
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7F3ED] px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay">
+                        <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop" />
+                        {related.category || 'COMMUNITY'}
                       </span>
                       <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay transition-colors">
                         {related.title}
@@ -241,14 +239,6 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
         </section>
       </article>
 
-      {/* Community / Foodie Signup Modal */}
-      <Modal
-        isOpen={isFoodieModalOpen}
-        onClose={() => setIsFoodieModalOpen(false)}
-        title="Join the Foodies Club"
-      >
-        <FoodieSignupForm onSuccess={() => setIsFoodieModalOpen(false)} />
-      </Modal>
     </main>
   );
 };

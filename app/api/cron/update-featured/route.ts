@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { updateFeaturedContent } from '@/lib/supabase/update-featured';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   try {
     const cronSecret = process.env.CRON_SECRET;

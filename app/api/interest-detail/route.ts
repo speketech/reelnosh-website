@@ -17,13 +17,21 @@ export async function POST(request: Request) {
     const { meal_id, session_id, amount_willing_to_pay, contact } = result.data;
     const supabase = createServerSupabaseClient();
 
+    let parsedAmount: number | null = null;
+    if (typeof amount_willing_to_pay === 'number') {
+      parsedAmount = amount_willing_to_pay;
+    } else if (typeof amount_willing_to_pay === 'string' && amount_willing_to_pay.trim() !== '') {
+      const digits = amount_willing_to_pay.replace(/[^0-9]/g, '');
+      parsedAmount = digits ? parseInt(digits, 10) : null;
+    }
+
     const { data, error } = await supabase
       .from('interest_details')
       .insert([
         {
           meal_id,
           session_id: session_id || null,
-          amount_willing_to_pay: amount_willing_to_pay ?? null,
+          amount_willing_to_pay: parsedAmount,
           contact: contact || null,
         },
       ])

@@ -15,6 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
   const isNotesActive = pathname?.startsWith('/founders-note');
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeAnchor, setActiveAnchor] = useState<string | null>(null);
   const headerRef = useRef<HTMLElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -46,6 +47,34 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
   }, []);
 
   useEffect(() => {
+    if (pathname !== '/') {
+      setActiveAnchor(null);
+      return;
+    }
+
+    const updateActiveAnchor = () => {
+      const navHeight = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
+      ) || 72;
+      const sections = ['how-it-works', 'for-creators']
+        .map((id) => ({ id, element: document.getElementById(id) }))
+        .filter((section): section is { id: string; element: HTMLElement } => Boolean(section.element));
+      const passedSections = sections.filter(
+        ({ element }) => element.getBoundingClientRect().top <= navHeight + 24
+      );
+      setActiveAnchor(passedSections.at(-1)?.id || null);
+    };
+
+    updateActiveAnchor();
+    window.addEventListener('scroll', updateActiveAnchor, { passive: true });
+    window.addEventListener('resize', updateActiveAnchor);
+    return () => {
+      window.removeEventListener('scroll', updateActiveAnchor);
+      window.removeEventListener('resize', updateActiveAnchor);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
     if (pathname !== '/' || !window.location.hash) return;
 
     const targetId = window.location.hash.slice(1);
@@ -65,6 +94,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
     if (pathname !== '/') return;
 
     event.preventDefault();
+    setActiveAnchor(id);
     const target = document.getElementById(id);
     if (!target) return;
     const offset = parseFloat(
@@ -73,6 +103,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
     window.history.pushState(null, '', `/#${id}`);
     window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
   };
+
+  const navLinkClass = (isActive: boolean) =>
+    `rounded-brand px-2 py-1 transition-colors duration-200 ${
+      isActive ? 'text-clay' : 'hover:bg-neutral-softCream hover:text-clay'
+    }`;
 
   return (
     <>
@@ -104,24 +139,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             <Link
               href="/#how-it-works"
               onClick={(event) => handleHomeAnchor(event, 'how-it-works')}
-              className="rounded-brand px-2 py-1 hover:bg-neutral-softCream hover:text-clay transition-colors duration-200"
+              className={navLinkClass(pathname === '/' && activeAnchor === 'how-it-works')}
             >
               How it works
             </Link>
             <Link
               href="/#for-creators"
               onClick={(event) => handleHomeAnchor(event, 'for-creators')}
-              className="rounded-brand px-2 py-1 hover:bg-neutral-softCream hover:text-clay transition-colors duration-200"
+              className={navLinkClass(pathname === '/' && activeAnchor === 'for-creators')}
             >
               For creators
             </Link>
             <Link
               href="/founders-note"
-              className={`transition-all duration-200 ${
-                isNotesActive
-                  ? 'bg-[#F5EFE9] text-clay font-medium px-4 py-1.5 rounded-full'
-                  : 'hover:text-clay'
-              }`}
+              className={navLinkClass(Boolean(isNotesActive))}
             >
               Founder&apos;s note
             </Link>
@@ -129,7 +160,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
 
           {/* Primary CTA & Mobile Toggle */}
           <div className="flex items-center gap-2">
-            {/* Full-size CTA — desktop only */}
+            {/* Full-size CTA , desktop only */}
             <Button
               onClick={onOpenEarlyAccess}
               size="md"
@@ -138,7 +169,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
               Join Early Access
             </Button>
 
-            {/* Compact CTA — mobile only, always visible in header bar (DESIGN_OVERRIDES §6) */}
+            {/* Compact CTA , mobile only, always visible in header bar (DESIGN_OVERRIDES §6) */}
             <button
               type="button"
               onClick={onOpenEarlyAccess}
@@ -199,7 +230,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                     setIsMobileMenuOpen(false);
                     handleHomeAnchor(event, 'how-it-works');
                   }}
-                  className="rounded-brand px-2 py-1 hover:bg-neutral-softCream hover:text-clay transition-colors"
+                  className={navLinkClass(pathname === '/' && activeAnchor === 'how-it-works')}
                 >
                   How it works
                 </Link>
@@ -209,14 +240,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                     setIsMobileMenuOpen(false);
                     handleHomeAnchor(event, 'for-creators');
                   }}
-                  className="rounded-brand px-2 py-1 hover:bg-neutral-softCream hover:text-clay transition-colors"
+                  className={navLinkClass(pathname === '/' && activeAnchor === 'for-creators')}
                 >
                   For creators
                 </Link>
                 <Link
                   href="/founders-note"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="hover:text-clay transition-colors"
+                  className={navLinkClass(Boolean(isNotesActive))}
                 >
                   Founder&apos;s note
                 </Link>

@@ -9,26 +9,22 @@ interface FoodiesClubProps {
   onOpenFoodieWaitlist?: () => void;
 }
 
-export const FoodiesClub: React.FC<FoodiesClubProps> = ({ onOpenFoodieWaitlist }) => {
+interface FoodiesClubCardProps {
+  compact?: boolean;
+}
+
+export const FoodiesClubCard: React.FC<FoodiesClubCardProps> = ({ compact = false }) => {
   return (
-    <section id="foodies-club" className="relative overflow-hidden bg-[#F7F3ED] py-16 md:py-[120px]">
-      
-      {/* Outer subtle concentric decorative lines extending to right edge matching Figma */}
-      <div className="absolute top-1/2 -right-48 -translate-y-1/2 w-[720px] h-[720px] rounded-full border border-neutral-lightClay/80 pointer-events-none" />
-      <div className="absolute top-1/2 -right-24 -translate-y-1/2 w-[940px] h-[940px] rounded-full border border-neutral-lightClay/50 pointer-events-none" />
-
-      <div className="max-w-[1120px] mx-auto px-5 md:px-0 relative z-10">
-        
-        {/* Banner Card */}
-        <ScrollReveal className="relative overflow-hidden rounded-[8px_32px_8px_8px] bg-[#8B3A2A] px-6 py-16 text-center text-white shadow-sm sm:px-12 md:px-20">
+    <ScrollReveal className={`relative overflow-hidden rounded-[28px] bg-[#8B3A2A] text-center text-white shadow-elevation1 ${compact ? 'px-5 py-10 sm:px-8 sm:py-12' : 'px-6 py-16 sm:rounded-[36px] sm:px-12 md:py-20'}`}>
           
-          {/* Inner decorative circular arcs matching reference image */}
-          <div className="absolute -top-32 -right-32 w-[380px] h-[380px] rounded-full border border-white/20 pointer-events-none" />
-          <div className="absolute -top-52 -right-52 w-[540px] h-[540px] rounded-full border border-white/15 pointer-events-none" />
-          <div className="absolute -bottom-40 -right-20 w-[420px] h-[420px] rounded-full border border-white/15 pointer-events-none" />
+          {/* Top-right sweeping arc matching Image 1 */}
+          <div className={`pointer-events-none absolute rounded-full border border-white/25 ${compact ? '-right-[110px] -top-[130px] h-[420px] w-[420px]' : '-right-[140px] -top-[160px] h-[580px] w-[580px]'}`} />
+          
+          {/* Bottom sweeping arc matching Image 1 */}
+          <div className={`pointer-events-none absolute rounded-full border border-white/20 ${compact ? '-bottom-[210px] -right-[40px] h-[480px] w-[480px]' : '-bottom-[280px] -right-[60px] h-[640px] w-[640px]'}`} />
 
-          {/* Badge at top */}
-          <div className="relative w-28 h-28 mx-auto mb-7">
+          {/* Centered Foodies Club Badge */}
+          <div className={`relative z-10 mx-auto ${compact ? 'mb-5 h-20 w-20 sm:h-24 sm:w-24' : 'mb-8 h-28 w-28 sm:h-32 sm:w-32'}`}>
             <Image
               src="/icons/foodies-club-badge.svg"
               alt="Foodies Club"
@@ -38,32 +34,37 @@ export const FoodiesClub: React.FC<FoodiesClubProps> = ({ onOpenFoodieWaitlist }
           </div>
 
           {/* Headline */}
-          {/* DESIGN_OVERRIDES §1: Title role — 36px Lora semibold */}
-          <h2 className="relative z-10 mb-5 font-serif text-[36px] font-semibold leading-[1.2] text-white">
+          {/* DESIGN_OVERRIDES §1: Title role , 36px Lora semibold */}
+          <h2 className={`relative z-10 font-serif font-semibold leading-[1.2] text-white ${compact ? 'mb-3 text-[28px] sm:text-[32px]' : 'mb-4 text-[32px] sm:text-[40px]'}`}>
             Stay close to what we&apos;re<br />
             building.
           </h2>
 
           {/* Subhead */}
-          <p className="font-sans text-sm sm:text-base text-white/90 max-w-xl mx-auto leading-relaxed mb-8 relative z-10">
-            Join the Foodies Club on WhatsApp for early Drop updates, food<br className="hidden sm:inline" /> conversations, and a say in the experiences we explore.
+          <p className={`relative z-10 mx-auto max-w-lg font-sans leading-relaxed text-white/90 ${compact ? 'mb-6 text-sm' : 'mb-8 text-sm sm:text-base'}`}>
+            Join the Foodies Club on WhatsApp for early Drop updates, food conversations, and a say in the experiences we explore.
           </p>
 
-          {/* Primary Button */}
+          {/* White Button with Clay Text */}
           <div className="relative z-10">
             <a
               href={SITE_CONFIG.links.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-7 py-3.5 bg-white text-clay font-sans text-sm font-semibold rounded-brand hover:bg-[#F7F3ED] transition-colors shadow-sm"
+              className={`inline-flex items-center justify-center rounded-brand bg-white font-sans font-semibold text-[#783323] shadow-sm transition-colors hover:bg-[#F7F3ED] ${compact ? 'w-full px-6 py-3 text-sm sm:w-auto' : 'px-8 py-3.5 text-sm'}`}
             >
               Join the Reelnosh community
             </a>
           </div>
 
         </ScrollReveal>
-
-      </div>
-    </section>
   );
 };
+
+export const FoodiesClub: React.FC<FoodiesClubProps> = () => (
+  <section id="foodies-club" className="relative overflow-hidden bg-[#F7F3ED] py-16 md:py-[120px]">
+    <div className="relative z-10 mx-auto max-w-[1120px] px-5 md:px-0">
+      <FoodiesClubCard />
+    </div>
+  </section>
+);

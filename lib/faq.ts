@@ -1,0 +1,7 @@
+export const FAQ_ITEMS = [
+  { question: 'Can I order food on Reelnosh right now?', answer: "Not yet. Right now, Reelnosh is in early access. You can join our waitlist, explore meal ideas, and tell us what you'd order. Our first Drops are still being prepared. We'll let you know the moment that changes." },
+  { question: 'What happens when I tap “I\'d order this”?', answer: "It tells us you're genuinely interested in that meal. There's no payment and no obligation. If you want, you can also share what you'd pay for it, which helps us plan real pricing later. That part is always optional." },
+  { question: 'What exactly is a Drop?', answer: 'A Drop is a small, limited batch of a meal made by a Creator, with a set price, number of servings, and ordering window. It closes when the servings run out or the ordering window ends. Think of it as a pop-up, not a restaurant menu that\'s always open.' },
+  { question: 'When will the first Drop happen?', answer: "We're building slowly and on purpose. You can read exactly why in our Founder's Notes. We'll announce the first Drop through the Reelnosh Community on WhatsApp and here on the site, so join early access if you want to be first to know." },
+  { question: 'Does joining the waitlist cost anything?', answer: "No. Joining is free, and there's no card or payment information required at any point on this website today." },
+] as const;

@@ -5,14 +5,17 @@ import { FounderNoteItem } from '@/lib/constants';
 
 interface ArticleCardProps {
   note: FounderNoteItem;
+  origin?: 'home' | 'founders-note';
 }
 
-export const ArticleCard: React.FC<ArticleCardProps> = ({ note }) => {
+export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founders-note' }) => {
+  const rememberOrigin = () => window.sessionStorage.setItem('reelnosh:note-origin', origin);
   return (
     <article className="flex h-[500px] flex-col justify-between overflow-hidden rounded-[20px] border border-neutral-lightClay/70 bg-white shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 group">
       {/* Note Image (Fixed 210px height) */}
       <Link
         href={`/founders-note/${note.slug}`}
+        onClick={rememberOrigin}
         className="relative w-full h-[210px] shrink-0 overflow-hidden bg-neutral-lightClay/20 block"
       >
         <Image
@@ -38,9 +41,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note }) => {
             </span>
           </div>
 
-          {/* DESIGN_OVERRIDES §1: Card title role — 22px Figtree semibold, clamped to 2 lines */}
+          {/* DESIGN_OVERRIDES §1: Card title role , 22px Figtree semibold, clamped to 2 lines */}
           <h3 className="font-sans text-[22px] font-semibold text-neutral-charcoal leading-[1.3] line-clamp-2 group-hover:text-clay transition-colors mb-2">
-            <Link href={`/founders-note/${note.slug}`}>
+            <Link href={`/founders-note/${note.slug}`} onClick={rememberOrigin}>
               {note.title}
             </Link>
           </h3>
@@ -55,9 +58,10 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note }) => {
         <div className="pt-2 mt-auto">
           <Link
             href={`/founders-note/${note.slug}`}
-            className="font-sans text-xs sm:text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1"
+            onClick={rememberOrigin}
+            className="font-sans text-xs sm:text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5"
           >
-            Read more <span>→</span>
+            Read more <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
           </Link>
         </div>
       </div>

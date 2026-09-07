@@ -1,7 +1,14 @@
-import { getFeaturedContent } from '@/lib/queries';
 import { supabase } from '@/lib/supabase/client';
-import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE, SEED_HERO_CONTENT, FounderNoteItem } from '@/lib/constants';
+import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE, FounderNoteItem } from '@/lib/constants';
 import { HomePageClient } from '@/components/home/HomePageClient';
+import { Hero } from '@/components/sections/Hero';
+import { Exploring } from '@/components/sections/Exploring';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Reelnosh , Where Food Content Becomes Meals',
+  description: 'Explore creator-led meal ideas, join early access, and help shape the first Reelnosh food Drops in Lagos.',
+};
 
 export const revalidate = 300; // ISR, 5-minute refresh per specification
 
@@ -19,10 +26,6 @@ const FALLBACK_NOTES: FounderNoteItem[] = [
 ];
 
 export default async function HomePage() {
-  // Query Supabase for Hero & Exploring content
-  const heroItems = await getFeaturedContent('hero');
-  const exploringItems = await getFeaturedContent('exploring');
-
   // Query Supabase for latest 3 published founder notes
   let notes: FounderNoteItem[] = FALLBACK_NOTES;
   try {
@@ -50,12 +53,10 @@ export default async function HomePage() {
     console.warn('Using seed founder notes on homepage:', err);
   }
 
-  const heroItem = heroItems[0] || SEED_HERO_CONTENT;
-
   return (
     <HomePageClient
-      heroItem={heroItem}
-      exploringItems={exploringItems}
+      hero={<Hero />}
+      exploring={<Exploring />}
       founderNotes={notes}
     />
   );

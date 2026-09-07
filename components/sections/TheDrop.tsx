@@ -2,33 +2,50 @@ import React from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 
 export const TheDrop: React.FC = () => {
-  const steps = [
+  const stations = [
     {
-      number: '1',
+      glyph: 'spark',
       title: 'A Drop goes live',
       description: 'Meal details, price, and portions are announced.',
+      isConcluded: false,
     },
     {
-      number: '2',
+      glyph: 'box',
       title: 'Order your servings',
       description: 'Reserve one or more portions in a few taps.',
+      isConcluded: false,
     },
     {
-      number: '3',
-      title: 'We confirm details',
+      glyph: 'check',
+      title: 'We confirm your order',
       description: 'Order details and delivery timing are locked in.',
+      isConcluded: false,
     },
     {
-      number: '4',
+      glyph: 'close',
       title: 'The Drop closes',
       description: 'Orders close when sold out or window ends.',
+      isConcluded: true,
     },
   ];
+
+  const StationGlyph = ({ glyph }: { glyph: string }) => {
+    if (glyph === 'check') {
+      return <svg aria-hidden="true" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 4 4L19 6" /></svg>;
+    }
+    if (glyph === 'box') {
+      return <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"><rect x="5" y="5" width="14" height="14" rx="2" /></svg>;
+    }
+    if (glyph === 'close') {
+      return <svg aria-hidden="true" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 7l10 10M17 7 7 17" /></svg>;
+    }
+    return <svg aria-hidden="true" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7" /></svg>;
+  };
 
   return (
     <section id="the-drop" className="scroll-mt-[var(--nav-height)] bg-neutral-warmWhite py-16 md:py-[120px]">
       <div className="mx-auto max-w-[1120px] px-5 md:px-0">
-        
+
         {/* Header Row */}
         <div className="mb-12 grid grid-cols-1 items-end gap-6 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-7">
@@ -40,82 +57,105 @@ export const TheDrop: React.FC = () => {
               </span>
             </div>
 
-            {/* DESIGN_OVERRIDES §1: Title role — 36px Lora semibold */}
-            <h2 className="font-serif text-[36px] font-semibold leading-[1.2] text-neutral-charcoal">
+            {/* H2: 36px Lora Title */}
+            <h2 className="font-serif text-[32px] sm:text-[36px] font-semibold leading-[1.2] text-neutral-charcoal">
               Food content becomes a real experience in four steps.
             </h2>
           </div>
 
-          <div className="lg:col-span-5 lg:text-right">
-            <p className="font-sans text-sm sm:text-base text-neutral-clayGray leading-relaxed max-w-md ml-auto">
+          <div className="lg:col-span-5 lg:flex lg:justify-end">
+            <p className="font-sans text-base text-neutral-clayGray leading-relaxed max-w-md text-left">
               A Reelnosh Drop brings a creator&apos;s meal to interested diners through a small, defined experience.
             </p>
           </div>
         </div>
 
-        {/* Contained Panel — 1120px width, min-h-[340px], radius 24 (rounded-[24px]), fill Soft Cream (#F7F3ED), Elevation 1 shadow */}
+        {/* Contained Timeline Panel , Soft Cream (#F7F3ED), 24px radius, Elevation 1 */}
         <div className="relative overflow-hidden rounded-[24px] border border-neutral-lightClay/70 bg-[#F7F3ED] p-8 shadow-elevation1 sm:p-12">
-          
-          {/* Steps Timeline Grid */}
-          <div className="relative">
-            {/* Desktop continuous straight 3px Clay line behind circles */}
-            <div className="absolute top-6 left-12 right-12 hidden h-[3px] bg-clay/90 lg:block z-0" />
 
-            <div className="relative z-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-              {steps.map((step, idx) => (
+          {/* Desktop Layout (lg:block) */}
+          <div className="hidden lg:block relative">
+            {/* Connecting Track: continuous 6px path through vertical center of all 4 badges */}
+            <div
+              className="absolute top-[32px] -translate-y-1/2 left-[12.5%] right-[12.5%] h-[6px] rounded-full bg-clay z-0"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 grid grid-cols-4 gap-6 text-center">
+              {stations.map((station, idx) => (
                 <ScrollReveal
-                  key={step.number}
+                  key={station.title}
                   delay={idx * 80}
-                  className="relative flex flex-col items-start"
+                  className="flex flex-col items-center"
                 >
-                  {/* Circle Header & Chevron Line Container */}
-                  <div className="relative flex w-full items-center mb-5">
-                    {/* 48px Filled-Clay Circle, white 18px numeral */}
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-clay font-sans text-[18px] font-semibold text-white shadow-sm ring-4 ring-[#F7F3ED]">
-                      {step.number}
-                    </div>
-
-                    {/* Directional Chevron past circles 1, 2, 3 on desktop */}
-                    {idx < 3 && (
-                      <div className="absolute left-[70px] hidden items-center lg:flex">
-                        <svg
-                          width="12"
-                          height="14"
-                          viewBox="0 0 12 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="text-clay"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M2 2L8 7L2 12"
-                            stroke="currentColor"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </div>
-                    )}
+                  {/* 64�,64 Station Badge */}
+                  <div
+                    className={`w-16 h-16 rounded-full flex items-center justify-center text-white shadow-sm ring-8 ring-[#F7F3ED] mb-5 ${
+                      station.isConcluded ? 'bg-[#5A2418]' : 'bg-clay'
+                    }`}
+                  >
+                    <span className="text-[24px] leading-none select-none font-medium">
+                      <StationGlyph glyph={station.glyph} />
+                    </span>
                   </div>
 
-                  {/* Step Title — Figtree SemiBold 20px */}
-                  <h3 className="mb-2 font-sans text-[20px] font-semibold leading-snug text-neutral-charcoal">
-                    {step.title}
+                  {/* Station Title , Lora Subtitle-Small 20px */}
+                  <h3 className="font-serif text-[20px] font-semibold text-neutral-charcoal leading-snug mb-2">
+                    {station.title}
                   </h3>
 
-                  {/* Description — Figtree 14px, clamped to 220px width across all four */}
-                  <p className="max-w-[220px] font-sans text-[14px] leading-relaxed text-neutral-clayGray">
-                    {step.description}
+                  {/* Station Description , Figtree Body-Small 14px, 220px max width */}
+                  <p className="font-sans text-[14px] text-neutral-clayGray leading-relaxed max-w-[220px]">
+                    {station.description}
                   </p>
                 </ScrollReveal>
               ))}
             </div>
           </div>
 
-          {/* Closing italic line — Lora Quote 24px italic, Clay, centered near the panel's bottom */}
-          <div className="relative z-10 mt-12 border-t border-neutral-lightClay/80 pt-6 text-center">
-            <p className="font-serif text-[20px] sm:text-[24px] italic text-clay">
+          {/* Mobile Layout (< lg) */}
+          <div className="lg:hidden relative">
+            {/* Vertical Connecting Track: 6px path through badges */}
+            <div
+              className="absolute left-[31px] top-8 bottom-12 w-[6px] -translate-x-1/2 rounded-full bg-clay z-0"
+              aria-hidden="true"
+            />
+
+            <div className="relative z-10 flex flex-col gap-8">
+              {stations.map((station, idx) => (
+                <ScrollReveal
+                  key={station.title}
+                  delay={idx * 80}
+                  className="flex items-start gap-5"
+                >
+                  {/* 64�,64 Station Badge */}
+                  <div
+                    className={`w-16 h-16 shrink-0 rounded-full flex items-center justify-center text-white shadow-sm ring-4 ring-[#F7F3ED] ${
+                      station.isConcluded ? 'bg-[#5A2418]' : 'bg-clay'
+                    }`}
+                  >
+                    <span className="text-[24px] leading-none select-none font-medium">
+                      <StationGlyph glyph={station.glyph} />
+                    </span>
+                  </div>
+
+                  {/* Text Container */}
+                  <div className="pt-1.5">
+                    <h3 className="font-serif text-[18px] sm:text-[20px] font-semibold text-neutral-charcoal leading-snug mb-1">
+                      {station.title}
+                    </h3>
+                    <p className="font-sans text-[14px] text-neutral-clayGray leading-relaxed max-w-[260px]">
+                      {station.description}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+
+          {/* Closing Line , Lora Editorial-Quote 24px italic, Clay-Gray, centered */}
+          <div className="relative z-10 mt-12 text-center">
+            <p className="font-serif text-[20px] sm:text-[24px] italic text-neutral-clayGray">
               &ldquo;A limited meal from a creator, made available to you.&rdquo;
             </p>
           </div>

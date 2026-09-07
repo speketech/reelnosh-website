@@ -1,27 +1,26 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Hero } from '@/components/sections/Hero';
+import React, { useState, useEffect } from 'react';
 import { HowItWorksWrapper } from '@/components/sections/HowItWorksWrapper';
-import { Exploring } from '@/components/sections/Exploring';
 import { FoodiesClub } from '@/components/sections/FoodiesClub';
+import { Faq } from '@/components/sections/Faq';
 import { ForCreators } from '@/components/sections/ForCreators';
 import { FounderNoteTeaser } from '@/components/sections/FounderNoteTeaser';
 import { Modal } from '@/components/ui/Modal';
 import { FoodieSignupForm } from '@/components/forms/FoodieSignupForm';
 import { CreatorSignupForm } from '@/components/forms/CreatorSignupForm';
 import { InterestDetailForm } from '@/components/forms/InterestDetailForm';
-import { FeaturedContentItem, FounderNoteItem } from '@/lib/constants';
+import { FounderNoteItem } from '@/lib/constants';
 
 interface HomePageClientProps {
-  heroItem: FeaturedContentItem;
-  exploringItems: FeaturedContentItem[];
+  hero: React.ReactNode;
+  exploring: React.ReactNode;
   founderNotes: FounderNoteItem[];
 }
 
 export const HomePageClient: React.FC<HomePageClientProps> = ({
-  heroItem,
-  exploringItems,
+  hero,
+  exploring,
   founderNotes,
 }) => {
   const [isFoodieModalOpen, setIsFoodieModalOpen] = useState(false);
@@ -36,33 +35,47 @@ export const HomePageClient: React.FC<HomePageClientProps> = ({
     mealTitle: '',
   });
 
-  const handleOpenDetailModal = (mealId: string, mealTitle: string) => {
-    setDetailModal({
-      isOpen: true,
-      mealId,
-      mealTitle,
-    });
-  };
+  useEffect(() => {
+    const handleOpenCreator = () => setIsCreatorModalOpen(true);
+    const handleOpenFoodie = () => setIsFoodieModalOpen(true);
+    const handleOpenDetail = (e: Event) => {
+      const customEvent = e as CustomEvent<{ mealId: string; mealTitle: string }>;
+      if (customEvent.detail) {
+        setDetailModal({
+          isOpen: true,
+          mealId: customEvent.detail.mealId,
+          mealTitle: customEvent.detail.mealTitle,
+        });
+      }
+    };
+
+    window.addEventListener('open-creator-modal', handleOpenCreator);
+    window.addEventListener('open-foodie-modal', handleOpenFoodie);
+    window.addEventListener('open-detail-modal', handleOpenDetail as EventListener);
+
+    return () => {
+      window.removeEventListener('open-creator-modal', handleOpenCreator);
+      window.removeEventListener('open-foodie-modal', handleOpenFoodie);
+      window.removeEventListener('open-detail-modal', handleOpenDetail as EventListener);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen bg-neutral-warmWhite">
-      {/* 1. Hero */}
-      <Hero
-        content={heroItem}
-        onOpenCreatorWaitlist={() => setIsCreatorModalOpen(true)}
-      />
+      {/* 1. Hero (Server Component) */}
+      {hero}
 
       {/* 2 & 3. How It Works (The Gap & The Drop) */}
       <HowItWorksWrapper />
 
-      {/* 4. What We're Exploring */}
-      <Exploring
-        items={exploringItems}
-        onOpenDetailModal={handleOpenDetailModal}
-      />
+      {/* 4. What We're Exploring (Server Component) */}
+      {exploring}
 
-      {/* 5. Foodies Club */}
-      <FoodiesClub />
+      {/* 5. FAQ */}
+      <Faq />
+
+      {/* 6. Foodies Club */}
+      <FoodiesClub onOpenFoodieWaitlist={() => setIsFoodieModalOpen(true)} />
 
       {/* 6. For Creators */}
       <ForCreators
@@ -76,7 +89,8 @@ export const HomePageClient: React.FC<HomePageClientProps> = ({
       <Modal
         isOpen={isFoodieModalOpen}
         onClose={() => setIsFoodieModalOpen(false)}
-        title="Join Early Access"
+        title="Get on the list"
+        subTitle="Be first to know when a Drop goes live near you."
       >
         <FoodieSignupForm onSuccess={() => {}} />
       </Modal>
@@ -85,6 +99,7 @@ export const HomePageClient: React.FC<HomePageClientProps> = ({
         isOpen={isCreatorModalOpen}
         onClose={() => setIsCreatorModalOpen(false)}
         title="Join the Creator Waitlist"
+        subTitle="Tell us about your food, we'll reach out when Drops open up for creators."
       >
         <CreatorSignupForm onSuccess={() => {}} />
       </Modal>
@@ -94,12 +109,15 @@ export const HomePageClient: React.FC<HomePageClientProps> = ({
         onClose={() =>
           setDetailModal({ isOpen: false, mealId: '', mealTitle: '' })
         }
-        title="Meal Demand"
+        title="Thanks, you're already counted."
+        subTitle="Want to help us plan the real thing? Totally optional."
       >
         <InterestDetailForm
           mealId={detailModal.mealId}
           mealTitle={detailModal.mealTitle}
-          onSuccess={() => {}}
+          onSuccess={() =>
+            setDetailModal({ isOpen: false, mealId: '', mealTitle: '' })
+          }
         />
       </Modal>
     </main>

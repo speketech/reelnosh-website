@@ -12,7 +12,7 @@ export const revalidate = 300; // ISR, 5-minute refresh per specification
 export const metadata: Metadata = {
   title: "Founder's Note | Reelnosh",
   description:
-    'Real thinking from the team — on product decisions, the Lagos food scene, what the community is teaching us, and what we\'re getting wrong.',
+    'Real thinking from the team , on product decisions, the Lagos food scene, what the community is teaching us, and what we\'re getting wrong.',
 };
 
 export default async function FoundersNoteIndexPage() {

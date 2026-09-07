@@ -14,7 +14,8 @@ export const HeaderWrapper: React.FC = () => {
       <Modal
         isOpen={isEarlyAccessOpen}
         onClose={() => setIsEarlyAccessOpen(false)}
-        title="Join Early Access"
+        title="Get on the list"
+        subTitle="Be first to know when a Drop goes live near you."
       >
         <FoodieSignupForm onSuccess={() => {}} />
       </Modal>

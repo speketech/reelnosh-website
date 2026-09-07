@@ -8,6 +8,7 @@ import { Modal } from '@/components/ui/Modal';
 import { FoodieSignupForm } from '@/components/forms/FoodieSignupForm';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ArticleCard } from './ArticleCard';
+import { Button } from '@/components/ui/Button';
 
 interface NotesListPageClientProps {
   featuredNote: {
@@ -52,13 +53,11 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
             </h1>
 
             <p className="mt-4 lg:mt-5 font-sans text-xs md:text-[13px] lg:text-[15px] leading-[1.6] text-neutral-clayGray max-w-[465px]">
-              Real thinking from the team, on product decisions, the Lagos food
-              scene, what the community is teaching us, and what we&apos;re getting
-              wrong.
+              Hi, this is where I write honestly about what we&apos;re learning while building Reelnosh: the product decisions, the Lagos food scene, what you&apos;re teaching us, and yes, what we&apos;re still getting wrong.
             </p>
 
             <p className="mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-sm md:text-base lg:text-[17px]">
-              - Kudirat Ijeoma Ibeabuchi
+              - Kudirat
             </p>
           </div>
         </div>
@@ -82,19 +81,17 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
             </h1>
 
             <p className="mt-2.5 font-sans text-[12.5px] leading-[1.42] text-neutral-clayGray max-w-[268px]">
-              Real thinking from the team — on product decisions, the Lagos food
-              scene, what the community is teaching us, and what we&apos;re getting
-              wrong.
+              Hi, this is where I write honestly about what we&apos;re learning while building Reelnosh: the product decisions, the Lagos food scene, what you&apos;re teaching us, and yes, what we&apos;re still getting wrong.
             </p>
 
             <p className="mt-3.5 font-serif italic font-normal text-neutral-charcoal text-[13.5px]">
-              - Kudirat Ijeoma Ibeabuchi
+              - Kudirat
             </p>
           </div>
         </div>
       </section>
 
-      {/* 2. Latest Note Section — DESIGN_OVERRIDES §4: Clay pull-quote treatment only */}
+      {/* 2. Latest Note Section , DESIGN_OVERRIDES §4: Clay pull-quote treatment only */}
       <section className="bg-neutral-warmWhite px-5 pb-16 pt-6 sm:px-8 sm:pb-20 sm:pt-8 md:px-0 md:pt-10">
         <div className="max-w-[1120px] mx-auto">
           {/* Eyebrow */}
@@ -123,7 +120,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
               </div>
 
               {/* Bottom Quote */}
-              {/* DESIGN_OVERRIDES §1: Quote role — 24px Lora italic, single size */}
+              {/* DESIGN_OVERRIDES §1: Quote role , 24px Lora italic, single size */}
               <blockquote className="font-serif italic text-[24px] text-white leading-snug mt-8 sm:mt-12 relative z-10">
                 {featuredNote.quote}
               </blockquote>
@@ -136,7 +133,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                   {featuredNote.readTime}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal leading-snug mb-3 hover:text-clay transition-colors">
-                  <Link href={`/founders-note/${featuredNote.slug}`}>
+                  <Link href={`/founders-note/${featuredNote.slug}`} onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}>
                     {featuredNote.title}
                   </Link>
                 </h3>
@@ -148,12 +145,11 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
               <div className="pt-6 sm:pt-8 mt-auto">
                 <Link
                   href={`/founders-note/${featuredNote.slug}`}
+                  onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}
                   className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group"
                 >
                   Read full note{' '}
-                  <span>
-                    →
-                  </span>
+                  <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
                 </Link>
               </div>
             </div>
@@ -211,13 +207,14 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
               first to know.
             </p>
 
-            <button
+            <Button
               type="button"
               onClick={() => setIsFoodieModalOpen(true)}
-              className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1 transition-colors cursor-pointer"
+              variant="primary"
+              size="md"
             >
-              Join the Reelnosh community ↗
-            </button>
+              Join the Reelnosh community
+            </Button>
           </div>
         </div>
       </section>

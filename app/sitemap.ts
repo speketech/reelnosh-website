@@ -1,8 +1,20 @@
 import { MetadataRoute } from 'next';
 import { SEED_FOUNDER_NOTES } from '@/lib/constants';
+import { createServerSupabaseClient } from '@/lib/supabase/server';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
+  let notes = SEED_FOUNDER_NOTES;
+
+  try {
+    const { data } = await createServerSupabaseClient()
+      .from('founder_notes')
+      .select('slug, published_at')
+      .lte('published_at', new Date().toISOString());
+    if (data && data.length > 0) notes = data as typeof SEED_FOUNDER_NOTES;
+  } catch {
+    // Keep the seed sitemap available when Supabase is not configured during builds.
+  }
 
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -37,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const notePages: MetadataRoute.Sitemap = SEED_FOUNDER_NOTES.map((note) => ({
+  const notePages: MetadataRoute.Sitemap = notes.map((note) => ({
     url: `${baseUrl}/founders-note/${note.slug}`,
     lastModified: new Date(note.published_at),
     changeFrequency: 'monthly',

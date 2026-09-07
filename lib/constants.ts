@@ -22,10 +22,13 @@ export interface FeaturedContentItem {
   badge?: string;
   creator_name?: string;
   creator_handle?: string;
+  creator_username?: string;
   creator_profile_url?: string;
+  source_post_url?: string;
   media_url: string;
   media_type?: 'image' | 'video';
   public_url?: string;
+  permission_confirmed?: boolean;
   // Dynamic ordering fields (DESIGN_OVERRIDES product fix §3 & §4)
   tap_count?: number;      // live count from featured_content table; undefined until columns added
   is_featured?: boolean;   // set by cron job based on tap_count leadership
@@ -39,9 +42,13 @@ export const SEED_HERO_CONTENT: FeaturedContentItem = {
   description: 'Slow cooked smokey jollof rice with plantain, grilled turkey and house sauce',
   creator_name: 'Kudirat Ijeoma',
   creator_handle: '@kudiratijeoma',
+  creator_username: 'kudiratijeoma',
   creator_profile_url: 'https://instagram.com/kudiratijeoma',
+  source_post_url: 'https://instagram.com/kudiratijeoma',
   media_url: '/images/hero/hero-image.png',
+  public_url: '/images/hero/hero-image.png',
   media_type: 'image',
+  permission_confirmed: true,
 };
 
 export const SEED_EXPLORING_ITEMS: FeaturedContentItem[] = [
@@ -53,11 +60,15 @@ export const SEED_EXPLORING_ITEMS: FeaturedContentItem[] = [
     badge: 'Vote for this Drop',
     creator_name: 'Kudirat Ijeoma',
     creator_handle: '@kudiratijeoma',
+    creator_username: 'kudiratijeoma',
     creator_profile_url: 'https://instagram.com/kudiratijeoma',
+    source_post_url: 'https://instagram.com/kudiratijeoma',
     media_url: '/images/drops/smokey-jollof.jpg',
+    public_url: '/images/drops/smokey-jollof.jpg',
     media_type: 'image',
     display_order: 0,
     is_featured: true,
+    permission_confirmed: true,
   },
   {
     id: 'exp-2',
@@ -67,11 +78,15 @@ export const SEED_EXPLORING_ITEMS: FeaturedContentItem[] = [
     badge: 'Vote for this Drop',
     creator_name: 'Kudirat Ijeoma',
     creator_handle: '@kudiratijeoma',
+    creator_username: 'kudiratijeoma',
     creator_profile_url: 'https://instagram.com/kudiratijeoma',
+    source_post_url: 'https://instagram.com/kudiratijeoma',
     media_url: '/images/drops/abula-ewedu.jpg',
+    public_url: '/images/drops/abula-ewedu.jpg',
     media_type: 'image',
     display_order: 1,
     is_featured: false,
+    permission_confirmed: true,
   },
   {
     id: 'exp-3',
@@ -81,11 +96,15 @@ export const SEED_EXPLORING_ITEMS: FeaturedContentItem[] = [
     badge: 'Vote for this Drop',
     creator_name: 'Kudirat Ijeoma',
     creator_handle: '@kudiratijeoma',
+    creator_username: 'kudiratijeoma',
     creator_profile_url: 'https://instagram.com/kudiratijeoma',
+    source_post_url: 'https://instagram.com/kudiratijeoma',
     media_url: '/images/drops/white-rice-stew.jpg',
+    public_url: '/images/drops/white-rice-stew.jpg',
     media_type: 'image',
     display_order: 2,
     is_featured: false,
+    permission_confirmed: true,
   },
 ];
 
@@ -110,7 +129,7 @@ export const SEED_FEATURED_NOTE = {
   category: 'PRODUCT THINKING',
   quote: '"The future of food discovery starts in the comments."',
   title: "Why we're starting with creator-led food drops",
-  excerpt: 'The "Send location" comment is a signal, not a failure. Here\'s why we think the future of food discovery starts there — and why we\'re betting on the creator relationship first.',
+  excerpt: 'The "Send location" comment is a signal, not a failure. Here\'s why we think the future of food discovery starts there , and why we\'re betting on the creator relationship first.',
   published_at: '2026-08-28T12:00:00Z',
 };
 
@@ -123,7 +142,7 @@ export const SEED_FOUNDER_NOTES: FounderNoteItem[] = [
     category: 'COMMUNITY',
     image: '/images/notes/note-1.png',
     title: 'What the community is teaching us',
-    excerpt: "Cravings, votes, and honest conversations — this is what we've learned in our first weeks. The feedback has been sharper than we expected.",
+    excerpt: "Cravings, votes, and honest conversations , this is what we've learned in our first weeks. The feedback has been sharper than we expected.",
     published_at: '2026-08-14T12:00:00Z',
   },
   {
@@ -134,7 +153,7 @@ export const SEED_FOUNDER_NOTES: FounderNoteItem[] = [
     category: 'STRATEGY',
     image: '/images/notes/note-2.png',
     title: "Why we're not building delivery yet",
-    excerpt: "Building slowly on purpose. Here's the thinking behind our decision to validate before we ship infrastructure — and why that patience is paying off.",
+    excerpt: "Building slowly on purpose. Here's the thinking behind our decision to validate before we ship infrastructure , and why that patience is paying off.",
     published_at: '2026-07-22T12:00:00Z',
   },
   {
@@ -188,7 +207,7 @@ export const SEED_FOUNDER_NOTES: FounderNoteItem[] = [
     readTime: '6 min read',
     category: 'STRATEGY',
     image: '/images/notes/note-7.png',
-    title: 'Why we chose Lagos first — and what that means for everything else',
+    title: 'Why we chose Lagos first , and what that means for everything else',
     excerpt: "Every startup chooses a first market. Ours wasn't a coin flip. Lagos is one of the most demanding food environments in the world, and if it works here, it works anywhere.",
     published_at: '2026-05-14T12:00:00Z',
   },
@@ -200,7 +219,7 @@ export const SEED_FOUNDER_NOTES: FounderNoteItem[] = [
     category: 'PRODUCT THINKING',
     image: '/images/notes/note-8.png',
     title: "From reel to real: the gap we're closing",
-    excerpt: 'A creator posts a jollof rice video. Thousands of people say they want it. Nothing happens. We spent months asking why nothing happens — and what it would take to change that.',
+    excerpt: 'A creator posts a jollof rice video. Thousands of people say they want it. Nothing happens. We spent months asking why nothing happens , and what it would take to change that.',
     published_at: '2026-04-24T12:00:00Z',
   },
   {
@@ -211,7 +230,7 @@ export const SEED_FOUNDER_NOTES: FounderNoteItem[] = [
     category: 'CREATORS',
     image: '/images/notes/note-9.png',
     title: 'How we think about the creator relationship',
-    excerpt: "Reelnosh only works if creators trust us. That trust takes time to earn. Here's how we're approaching the relationship — and what we're refusing to do to make growth faster.",
+    excerpt: "Reelnosh only works if creators trust us. That trust takes time to earn. Here's how we're approaching the relationship , and what we're refusing to do to make growth faster.",
     published_at: '2026-04-08T12:00:00Z',
   },
   {

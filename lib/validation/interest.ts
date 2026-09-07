@@ -10,7 +10,7 @@ export type InterestTapInput = z.infer<typeof interestTapSchema>;
 export const interestDetailSchema = z.object({
   meal_id: z.string().min(1, 'Meal ID is required'),
   session_id: z.string().optional(),
-  amount_willing_to_pay: z.number().optional().nullable(),
+  amount_willing_to_pay: z.union([z.number(), z.string()]).optional().nullable(),
   contact: z.string().optional().or(z.literal('')),
 });
 

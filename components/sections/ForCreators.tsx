@@ -38,12 +38,12 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
               </span>
             </div>
 
-            {/* DESIGN_OVERRIDES §1: Title role — 36px Lora semibold */}
+            {/* DESIGN_OVERRIDES §1: Title role , 36px Lora semibold */}
             <h2 className="font-serif text-[36px] font-semibold leading-[1.2] text-neutral-charcoal max-w-[540px]">
               Your food already has an audience. We&apos;re helping turn that interest into orders.
             </h2>
 
-            {/* Value Propositions — Clean single check icon, NOT placed in another circular border */}
+            {/* Value Propositions , Clean single check icon, NOT placed in another circular border */}
             <div className="space-y-6">
               {valueProps.map((item, idx) => (
                 <ScrollReveal key={item.title} delay={idx * 80} className="flex items-start gap-4">
@@ -70,7 +70,7 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
               <button
                 type="button"
                 onClick={onOpenCreatorWaitlist}
-                className="inline-flex h-[52px] items-center justify-center rounded-brand bg-[#783323] px-8 font-sans text-base font-semibold text-white shadow-elevation1 transition-colors hover:bg-[#63291C] active:bg-[#522217]"
+                className="inline-flex h-[52px] w-full sm:w-auto items-center justify-center rounded-brand bg-[#783323] px-8 font-sans text-base font-semibold text-white shadow-elevation1 transition-colors hover:bg-[#63291C] active:bg-[#522217]"
               >
                 Join the Creator Waitlist
               </button>

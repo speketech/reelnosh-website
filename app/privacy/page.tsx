@@ -1,67 +1,16 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { LegalPage } from '@/components/layout/LegalPage';
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | Reelnosh',
-  description: 'How Reelnosh collects, protects, and respects your data.',
-};
-
-export default function PrivacyPage() {
-  return (
-    <main className="min-h-screen bg-neutral-warmWhite px-5 py-14 md:py-20 font-sans">
-      <div className="max-w-[760px] mx-auto space-y-8">
-        <nav className="flex items-center gap-2 text-xs text-neutral-clayGray">
-          <Link href="/" className="hover:text-clay transition-colors">
-            Home
-          </Link>
-          <span>/</span>
-          <span className="text-clay font-medium">Privacy Policy</span>
-        </nav>
-
-        <header className="pb-6 border-b border-surface-divider space-y-2">
-          <h1 className="font-serif text-3xl sm:text-4xl font-semibold text-neutral-charcoal">
-            Privacy Policy
-          </h1>
-          <p className="text-sm text-neutral-clayGray">
-            Effective Date: August 2026
-          </p>
-        </header>
-
-        <div className="space-y-6 text-sm sm:text-base text-neutral-charcoal leading-relaxed">
-          <section className="space-y-3">
-            <h2 className="font-serif text-xl font-semibold text-neutral-charcoal">
-              1. Information We Collect
-            </h2>
-            <p className="text-neutral-clayGray">
-              When you join our early access waitlist, apply as a food creator, or express interest in upcoming meal drops, we collect relevant contact information including your name, email address, phone/WhatsApp number, and location in Lagos.
-            </p>
-            <p className="text-neutral-clayGray">
-              [COPY NEEDED: Full legal privacy notice details]
-            </p>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="font-serif text-xl font-semibold text-neutral-charcoal">
-              2. How We Use Your Data
-            </h2>
-            <p className="text-neutral-clayGray">
-              We use your information exclusively to notify you about upcoming drops, calibrate batch demand in specific Lagos delivery zones, and coordinate creator partnerships. We never sell your personal information.
-            </p>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="font-serif text-xl font-semibold text-neutral-charcoal">
-              3. Contact
-            </h2>
-            <p className="text-neutral-clayGray">
-              For any privacy-related questions, reach out to us at{' '}
-              <a href="mailto:enquiries@reelnosh.com" className="text-clay hover:underline">
-                enquiries@reelnosh.com
-              </a>.
-            </p>
-          </section>
-        </div>
-      </div>
-    </main>
-  );
-}
+export const metadata: Metadata = { title: 'Privacy Policy | Reelnosh', description: 'How Reelnosh collects, protects, and respects your data.' };
+const sections = [
+  { title: '1. Introduction and Our Commitment', paragraphs: ["Welcome to Reelnosh. We're building Africa's creator-led food marketplace , starting small, with a simple early-access waitlist while we get the first Drops right.", 'We believe your data deserves the same care as anything else we\'re building. This Privacy Policy explains how Reelnosh Ltd ("we," "us," or "our") collects, uses, and protects the personal data of the Foodies and Creators who join our waitlist, and of visitors who use our website. Reelnosh does not yet process payments, orders, or deliveries, and does not yet operate a live marketplace.'] },
+  { title: '2. Data We Collect', paragraphs: ['Foodie waitlist data: name, email address, and optionally your phone number and general location in Lagos, to notify you about future Drops and understand where to launch first.', 'Creator waitlist data: name, Instagram handle, a phone number or email, and a description of what you cook or sell, to reach out when Drops open to creators.', 'Interest signals: anonymous taps on meal ideas, using a session identifier and the meal idea tapped. Optional details may include an amount you would be willing to pay and contact information.', 'Technical data such as browser type, device information, and general usage patterns is collected only if you consent to analytics cookies. We do not currently collect payment or transaction data, delivery addresses, government-issued identification, or health and allergen information.'] },
+  { title: '3. How We Use Your Data', paragraphs: ['We rely on the following lawful bases under the Nigeria Data Protection Act (NDPA) 2023: steps toward a future contract for waitlist details; consent for analytics cookies and future marketing; legitimate interests for aggregate interest in meal ideas; and legal obligation where Nigerian law requires it.'] },
+  { title: '4. Data Sharing', paragraphs: ['We do not sell your personal data. We share it only with infrastructure providers such as Supabase, acting as a data processor, and where required by Nigerian law. We do not currently share your data with advertisers or third-party AI systems.'] },
+  { title: '5. Your Rights as a Data Subject', paragraphs: ['Under the NDPA 2023, contact privacy@reelnosh.com to access, correct, or delete your data, or object to future marketing communications.'] },
+  { title: '6. Data Security and Retention', paragraphs: ['We use industry-standard security practices to protect your data. We retain waitlist and interest data for as long as you remain on our waitlist, or until you ask us to delete it, whichever comes first.'] },
+  { title: '7. International Data Storage', paragraphs: ['Our infrastructure provider may store data outside Nigeria. Where this is the case, we take reasonable steps to ensure your data is protected to a standard consistent with the NDPA.'] },
+  { title: '8. Changes to This Policy', paragraphs: ['As Reelnosh grows, particularly once we introduce live Drops, payments, or delivery, this policy will be updated to reflect new data practices, and we\'ll let you know when that happens.'] },
+  { title: '9. Contact Us', paragraphs: ['Reelnosh Ltd, Lagos, Nigeria. Questions about this policy or your data: privacy@reelnosh.com'] },
+];
+export default function PrivacyPage() { return <LegalPage eyebrow="PRIVACY POLICY" title="Privacy Policy" updated="September 2026" intro="We collect only what we need to make Drops work , and we'll always tell you why." sections={sections} />; }

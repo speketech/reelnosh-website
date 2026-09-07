@@ -9,18 +9,17 @@ export const OriginAwareBackButton: React.FC<{ fallbackHref?: string }> = ({
   const router = useRouter();
 
   const handleBack = () => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
-      router.back();
-    } else {
-      router.push(fallbackHref);
-    }
+    const origin = typeof window !== 'undefined'
+      ? window.sessionStorage.getItem('reelnosh:note-origin')
+      : null;
+    router.push(origin === 'home' ? '/' : fallbackHref);
   };
 
   return (
     <button
       type="button"
       onClick={handleBack}
-      className="inline-flex items-center gap-1.5 font-sans text-sm font-medium text-neutral-clayGray hover:text-neutral-charcoal transition-colors cursor-pointer"
+      className="inline-flex items-center gap-1.5 font-sans text-[13px] text-neutral-clayGray hover:text-neutral-charcoal transition-colors cursor-pointer"
     >
       <svg
         width="16"

@@ -77,5 +77,16 @@ What we're learning while building Reelnosh publicly.
     { ...SEED_FEATURED_NOTE, image: '/images/drops/smokey-jollof.jpg' },
   ].filter((related) => related.slug !== slug).slice(0, 3);
 
-  return <NoteDetailPageClient note={note} relatedNotes={relatedNotes} />;
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: note.title,
+    description: note.excerpt,
+    datePublished: note.published_at,
+    author: { '@type': 'Person', name: 'Kudirat Ijeoma Ibeabuchi' },
+    publisher: { '@type': 'Organization', name: 'Reelnosh', logo: { '@type': 'ImageObject', url: 'https://reelnosh.com/brand/icon-mark.svg' } },
+    mainEntityOfPage: `https://reelnosh.com/founders-note/${note.slug}`,
+  };
+
+  return <><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} /><NoteDetailPageClient note={note} relatedNotes={relatedNotes} /></>;
 }

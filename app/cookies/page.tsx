@@ -1,55 +1,29 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Cookie Policy | Reelnosh',
-  description: 'How Reelnosh uses cookies and local storage.',
-};
+import { useState } from 'react';
+import { LegalPage } from '@/components/layout/LegalPage';
+
+const sections = [
+  { title: '1. What Are Cookies?', paragraphs: ['Cookies are small text files stored on your device when you visit a website. They help the site remember certain information about your visit and how the site is generally being used.', "At this stage, Reelnosh is a simple early-access website , a waitlist, some meal ideas, and a place to read what we're learning as we build. We use cookies only in ways that match that scope."] },
+  { title: '2. Types of Cookies We Use', paragraphs: ['Essential cookies are required for the website to function correctly and are always on. Analytics cookies help us understand, in aggregate, how visitors use the site; they are optional and off by default.', "That's the complete list right now. We don't currently use functional cookies or marketing and advertising cookies."] },
+  { title: '3. How We Use Cookies', paragraphs: ['We use cookies to remember your preference and, if you turn on analytics cookies, to understand site performance in aggregate. Analytics are never used to identify you personally.'] },
+  { title: '4. Your Choices and Consent', paragraphs: ['You can manage your cookie preferences on this page at any time. Essential cookies cannot be turned off; analytics cookies are entirely your choice and start off. You can also manage or delete cookies through your browser settings.'] },
+  { title: '5. Third-Party Cookies', paragraphs: ['If you turn on analytics cookies, we may use a standard analytics service such as Google Analytics. We do not currently use payment, delivery, or social-sharing services on this website.'] },
+  { title: '6. Updates to This Policy', paragraphs: ["As Reelnosh grows, this policy will be updated to reflect any new cookies or tracking. Updates will be reflected here with a new Last Updated date."] },
+  { title: '7. Contact Us', paragraphs: ['Reelnosh Ltd. Questions about our use of cookies: privacy@reelnosh.com'] },
+];
 
 export default function CookiesPage() {
-  return (
-    <main className="min-h-screen bg-neutral-warmWhite px-5 py-14 md:py-20 font-sans">
-      <div className="max-w-[760px] mx-auto space-y-8">
-        <nav className="flex items-center gap-2 text-xs text-neutral-clayGray">
-          <Link href="/" className="hover:text-clay transition-colors">
-            Home
-          </Link>
-          <span>/</span>
-          <span className="text-clay font-medium">Cookie Policy</span>
-        </nav>
-
-        <header className="pb-6 border-b border-surface-divider space-y-2">
-          <h1 className="font-serif text-3xl sm:text-4xl font-semibold text-neutral-charcoal">
-            Cookie Policy
-          </h1>
-          <p className="text-sm text-neutral-clayGray">
-            Effective Date: August 2026
-          </p>
-        </header>
-
-        <div className="space-y-6 text-sm sm:text-base text-neutral-charcoal leading-relaxed">
-          <section className="space-y-3">
-            <h2 className="font-serif text-xl font-semibold text-neutral-charcoal">
-              1. What Are Cookies?
-            </h2>
-            <p className="text-neutral-clayGray">
-              Cookies are small data files placed on your device to remember user sessions, keep track of interactions, and enhance site performance.
-            </p>
-            <p className="text-neutral-clayGray">
-              [COPY NEEDED: Full cookie and analytics policy]
-            </p>
-          </section>
-
-          <section className="space-y-3">
-            <h2 className="font-serif text-xl font-semibold text-neutral-charcoal">
-              2. How We Use Them
-            </h2>
-            <p className="text-neutral-clayGray">
-              We use essential session tokens to remember when you have expressed interest in a meal drop so you don&apos;t have to re-enter details repeatedly.
-            </p>
-          </section>
-        </div>
+  const [analytics, setAnalytics] = useState(() => typeof window !== 'undefined' && localStorage.getItem('reelnosh-analytics-consent') === 'granted');
+  const savePreferences = () => localStorage.setItem('reelnosh-analytics-consent', analytics ? 'granted' : 'denied');
+  return <LegalPage eyebrow="COOKIE POLICY" title="Cookie Policy" updated="September 2026" intro="A few small files help this site remember you. Here's exactly what they do, and you can turn off anything that isn't essential." sections={sections}>
+    <div className="mt-8 rounded-[16px] bg-[#F7F3ED] p-6">
+      <h2 className="font-serif text-xl font-semibold text-neutral-charcoal">Cookie preferences</h2>
+      <div className="mt-5 space-y-5">
+        <div className="flex items-center justify-between gap-5"><div><p className="font-sans text-sm font-semibold text-neutral-charcoal">Essential cookies</p><p className="text-sm text-neutral-clayGray">Required for the site to work</p></div><span className="rounded-full bg-neutral-lightClay px-3 py-1 text-xs font-semibold text-neutral-clayGray">Always on</span></div>
+        <label className="flex cursor-pointer items-center justify-between gap-5"><span><span className="block font-sans text-sm font-semibold text-neutral-charcoal">Analytics cookies</span><span className="block text-sm text-neutral-clayGray">Helps us understand what&apos;s working</span></span><input type="checkbox" checked={analytics} onChange={(event) => setAnalytics(event.target.checked)} className="h-5 w-5 accent-clay" /></label>
+        <button type="button" onClick={savePreferences} className="rounded-brand bg-clay px-5 py-3 text-sm font-semibold text-white hover:bg-clay-hover">Save preferences</button>
       </div>
-    </main>
-  );
+    </div>
+  </LegalPage>;
 }

@@ -3,6 +3,7 @@ import { Lora, Figtree } from 'next/font/google';
 import './globals.css';
 import { HeaderWrapper } from '@/components/layout/HeaderWrapper';
 import { Footer } from '@/components/layout/Footer';
+import { SITE_CONFIG } from '@/lib/constants';
 
 const lora = Lora({
   subsets: ['latin'],
@@ -45,6 +46,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${lora.variable} ${figtree.variable}`}>
       <body className="bg-neutral-warmWhite text-neutral-charcoal antialiased min-h-screen flex flex-col font-sans">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: SITE_CONFIG.name,
+              url: 'https://reelnosh.com',
+              logo: 'https://reelnosh.com/brand/icon-mark.svg',
+              sameAs: Object.values(SITE_CONFIG.links),
+            }),
+          }}
+        />
         <HeaderWrapper />
         <div className="flex-1">{children}</div>
         <Footer />

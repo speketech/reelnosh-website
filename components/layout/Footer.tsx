@@ -35,7 +35,7 @@ export const Footer: React.FC = () => (
       </div>
       <div className="w-full border-t border-white/10" />
       <div className="flex flex-col items-center justify-between gap-6 pt-8 sm:flex-row">
-        <p className="text-xs text-white/60">&copy; 2026 Reelnosh. We&apos;re still learning — and that&apos;s okay.</p>
+        <p className="text-xs text-white/60">&copy; 2026 Reelnosh. We&apos;re still learning, and that&apos;s okay.</p>
         <div className="flex items-center gap-6">
           {socialLinks.map(([icon, href, label]) => (
             <a key={icon} href={href} target="_blank" rel="noopener noreferrer" className="text-white/80 transition-opacity hover:opacity-70" aria-label={label}>

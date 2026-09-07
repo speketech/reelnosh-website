@@ -36,7 +36,7 @@ export const TheGap: React.FC = () => {
     <section className="bg-[#F7F3ED] py-16 md:py-[120px]">
       <div className="mx-auto flex h-full max-w-[1120px] items-center px-5 md:px-0">
         <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
-          
+
           {/* Left Column: Problem Statement */}
           <div className="max-w-[550px] lg:col-span-6">
             {/* Eyebrow with amber dot */}
@@ -47,26 +47,26 @@ export const TheGap: React.FC = () => {
               </span>
             </div>
 
-            {/* DESIGN_OVERRIDES §1: Title role — 36px Lora semibold, max-width 600 */}
+            {/* DESIGN_OVERRIDES §1: Title role , 36px Lora semibold, max-width 600 */}
             <h2 className="mb-5 font-serif text-[36px] font-semibold leading-[1.2] text-neutral-charcoal max-w-[600px]">
               Great food should not end in the comments.
             </h2>
 
-            {/* Body paragraph — Figtree Body 16px, max-width 550 */}
+            {/* Body paragraph , Figtree Body 16px, max-width 550 */}
             <p className="font-sans text-base text-neutral-clayGray leading-relaxed mb-6 max-w-[550px]">
               Food content creates the craving. But too often, there&apos;s no simple way to turn that moment into a meal.
             </p>
 
-            {/* Emphasis line — Figtree Medium 16px, Clay */}
+            {/* Emphasis line , Figtree Medium 16px, Clay */}
             <p className="font-sans text-base font-medium text-clay">
               That&apos;s the gap Reelnosh is built to close.
             </p>
           </div>
 
-          {/* Right Column: The Comment Thread Card (520×560 Soft Cream Card) */}
+          {/* Right Column: The Comment Thread Card (520�,560 Soft Cream Card) */}
           <div className="flex justify-center lg:col-span-6 lg:justify-end">
             <ScrollReveal className="relative h-[540px] sm:h-[560px] w-full max-w-[520px] overflow-hidden rounded-[24px] bg-[#F7F3ED] border border-neutral-lightClay/60 p-6 sm:p-8 shadow-elevation1">
-              
+
               {/* Organic thread: vector stroke, 2px, Divider color #DCCFC4, no fill */}
               <svg
                 viewBox="0 0 520 560"
