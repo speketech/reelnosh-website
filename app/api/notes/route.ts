@@ -10,6 +10,11 @@ export async function GET(request: Request) {
     const limit = parseInt(searchParams.get('limit') || '10', 10);
     const offset = parseInt(searchParams.get('offset') || '0', 10);
 
+    if (!supabase) {
+      const paginatedSeed = SEED_FOUNDER_NOTES.slice(offset, offset + limit);
+      return NextResponse.json({ notes: paginatedSeed, total: SEED_FOUNDER_NOTES.length });
+    }
+
     const { data, error } = await supabase
       .from('founder_notes')
       .select('id, title, slug, excerpt, cover_image_url, published_at')

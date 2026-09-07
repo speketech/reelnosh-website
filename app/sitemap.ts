@@ -7,7 +7,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let notes = SEED_FOUNDER_NOTES;
 
   try {
-    const { data } = await createServerSupabaseClient()
+    const supabase = createServerSupabaseClient();
+    if (!supabase) return buildSitemap(baseUrl, notes);
+    const { data } = await supabase
       .from('founder_notes')
       .select('slug, published_at')
       .lte('published_at', new Date().toISOString());
@@ -16,6 +18,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Keep the seed sitemap available when Supabase is not configured during builds.
   }
 
+  return buildSitemap(baseUrl, notes);
+}
+
+function buildSitemap(baseUrl: string, notes: typeof SEED_FOUNDER_NOTES): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,

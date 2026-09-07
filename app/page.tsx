@@ -29,6 +29,7 @@ export default async function HomePage() {
   // Query Supabase for latest 3 published founder notes
   let notes: FounderNoteItem[] = FALLBACK_NOTES;
   try {
+    if (!supabase) throw new Error('Supabase is not configured');
     const { data, error } = await supabase
       .from('founder_notes')
       .select('id, title, slug, excerpt, published_at')

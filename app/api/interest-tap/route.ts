@@ -16,6 +16,7 @@ export async function POST(request: Request) {
 
     const { meal_id, session_id } = result.data;
     const supabase = createServerSupabaseClient();
+    if (!supabase) return NextResponse.json({ success: true, data: null, local: true }, { status: 201 });
 
     const { data, error } = await supabase
       .from('interest_taps')

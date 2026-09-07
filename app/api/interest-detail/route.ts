@@ -25,6 +25,8 @@ export async function POST(request: Request) {
       parsedAmount = digits ? parseInt(digits, 10) : null;
     }
 
+    if (!supabase) return NextResponse.json({ success: true, data: null, local: true }, { status: 201 });
+
     const { data, error } = await supabase
       .from('interest_details')
       .insert([

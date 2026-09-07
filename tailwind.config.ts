@@ -56,7 +56,7 @@ const config: Config = {
         sans: ['var(--font-figtree)', 'Figtree', 'sans-serif'],
       },
       fontSize: {
-        // DESIGN_OVERRIDES §1 — consolidated 9-step type scale
+        // DESIGN_OVERRIDES §1: consolidated 9-step type scale
         'display':    ['48px', { lineHeight: '1.15', fontWeight: '600' }],  // Hero H1
         'title':      ['36px', { lineHeight: '1.2',  fontWeight: '600' }],  // All section H2s
         'quote':      ['24px', { lineHeight: '1.5',  fontWeight: '400' }],  // Pull-quotes (all contexts)

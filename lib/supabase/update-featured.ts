@@ -21,6 +21,7 @@ export interface UpdateFeaturedResult {
  */
 export async function updateFeaturedContent(): Promise<UpdateFeaturedResult> {
   const supabase = createServerSupabaseClient();
+  if (!supabase) return { updated: false, reason: 'Supabase is not configured' };
 
   const { data: items, error } = await supabase
     .from('featured_content')

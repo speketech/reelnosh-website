@@ -20,6 +20,7 @@ export default async function FoundersNoteIndexPage() {
   const featuredNote = SEED_FEATURED_NOTE;
 
   try {
+    if (!supabase) throw new Error('Supabase is not configured');
     const { data, error } = await supabase
       .from('founder_notes')
       .select('id, title, slug, excerpt, published_at')

@@ -16,6 +16,7 @@ export async function POST(request: Request) {
 
     const { name, instagram_handle, phone_or_email, what_they_cook } = result.data;
     const supabase = createServerSupabaseClient();
+    if (!supabase) return NextResponse.json({ success: true, data: null, local: true }, { status: 201 });
 
     const { data, error } = await supabase
       .from('creator_signups')

@@ -10,6 +10,8 @@ export async function getFeaturedContent(
 ): Promise<FeaturedContentItem[]> {
   try {
     const supabase = createServerSupabaseClient();
+    if (!supabase) return [];
+
     const { data, error } = await supabase
       .from('featured_content')
       .select('*')

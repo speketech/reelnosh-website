@@ -28,6 +28,7 @@ export default async function SingleFoundersNotePage({ params }: PageProps) {
       : null);
 
   try {
+    if (!supabase) throw new Error('Supabase is not configured');
     const { data, error } = await supabase
       .from('founder_notes')
       .select('*')
