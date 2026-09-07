@@ -27,31 +27,32 @@ export default async function SingleFoundersNotePage({ params }: PageProps) {
       ? { ...SEED_FEATURED_NOTE, image: '/images/drops/smokey-jollof.jpg' }
       : null);
 
-  try {
-    if (!supabase) throw new Error('Supabase is not configured');
-    const { data, error } = await supabase
-      .from('founder_notes')
-      .select('*')
-      .eq('slug', slug)
-      .maybeSingle();
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('founder_notes')
+        .select('*')
+        .eq('slug', slug)
+        .maybeSingle();
 
-    if (!error && data) {
-      note = {
-        id: data.id,
-        slug: data.slug,
-        title: data.title,
-        excerpt: data.excerpt || '',
-        body_markdown: data.body_markdown || '',
-        published_at: data.published_at,
-        date: new Date(data.published_at).toLocaleDateString('en-US', {
-          month: 'long',
-          day: 'numeric',
-          year: 'numeric',
-        }),
-      };
+      if (!error && data) {
+        note = {
+          id: data.id,
+          slug: data.slug,
+          title: data.title,
+          excerpt: data.excerpt || '',
+          body_markdown: data.body_markdown || '',
+          published_at: data.published_at,
+          date: new Date(data.published_at).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
+          }),
+        };
+      }
+    } catch (err) {
+      console.warn('Failed to fetch founder note from Supabase:', (err as Error)?.message || err);
     }
-  } catch (err) {
-    console.warn('Using seed note for single founder note:', err);
   }
 
   if (!note) {

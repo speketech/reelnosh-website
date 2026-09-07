@@ -28,30 +28,31 @@ const FALLBACK_NOTES: FounderNoteItem[] = [
 export default async function HomePage() {
   // Query Supabase for latest 3 published founder notes
   let notes: FounderNoteItem[] = FALLBACK_NOTES;
-  try {
-    if (!supabase) throw new Error('Supabase is not configured');
-    const { data, error } = await supabase
-      .from('founder_notes')
-      .select('id, title, slug, excerpt, published_at')
-      .lte('published_at', new Date().toISOString())
-      .order('published_at', { ascending: false })
-      .limit(3);
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('founder_notes')
+        .select('id, title, slug, excerpt, published_at')
+        .lte('published_at', new Date().toISOString())
+        .order('published_at', { ascending: false })
+        .limit(3);
 
-    if (!error && data && data.length > 0) {
-      notes = data.map((item) => ({
-        id: item.id,
-        slug: item.slug,
-        title: item.title,
-        excerpt: item.excerpt || '',
-        published_at: item.published_at,
-        date: new Date(item.published_at).toLocaleDateString('en-US', {
-          month: 'short',
-          year: 'numeric',
-        }),
-      }));
+      if (!error && data && data.length > 0) {
+        notes = data.map((item) => ({
+          id: item.id,
+          slug: item.slug,
+          title: item.title,
+          excerpt: item.excerpt || '',
+          published_at: item.published_at,
+          date: new Date(item.published_at).toLocaleDateString('en-US', {
+            month: 'short',
+            year: 'numeric',
+          }),
+        }));
+      }
+    } catch (err) {
+      console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);
     }
-  } catch (err) {
-    console.warn('Using seed founder notes on homepage:', err);
   }
 
   return (

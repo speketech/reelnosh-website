@@ -19,31 +19,32 @@ export default async function FoundersNoteIndexPage() {
   let notes: FounderNoteItem[] = SEED_FOUNDER_NOTES;
   const featuredNote = SEED_FEATURED_NOTE;
 
-  try {
-    if (!supabase) throw new Error('Supabase is not configured');
-    const { data, error } = await supabase
-      .from('founder_notes')
-      .select('id, title, slug, excerpt, published_at')
-      .lte('published_at', new Date().toISOString())
-      .order('published_at', { ascending: false });
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from('founder_notes')
+        .select('id, title, slug, excerpt, published_at')
+        .lte('published_at', new Date().toISOString())
+        .order('published_at', { ascending: false });
 
-    if (!error && data && data.length > 0) {
-      // Merge supabase notes with seed data so images and categories are preserved
-      notes = SEED_FOUNDER_NOTES.map((seed, idx) => {
-        const dbMatch = data.find((d) => d.slug === seed.slug || d.id === seed.id);
-        if (dbMatch) {
-          return {
-            ...seed,
-            title: dbMatch.title || seed.title,
-            excerpt: dbMatch.excerpt || seed.excerpt,
-            published_at: dbMatch.published_at || seed.published_at,
-          };
-        }
-        return seed;
-      });
+      if (!error && data && data.length > 0) {
+        // Merge supabase notes with seed data so images and categories are preserved
+        notes = SEED_FOUNDER_NOTES.map((seed) => {
+          const dbMatch = data.find((d) => d.slug === seed.slug || d.id === seed.id);
+          if (dbMatch) {
+            return {
+              ...seed,
+              title: dbMatch.title || seed.title,
+              excerpt: dbMatch.excerpt || seed.excerpt,
+              published_at: dbMatch.published_at || seed.published_at,
+            };
+          }
+          return seed;
+        });
+      }
+    } catch (err) {
+      console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);
     }
-  } catch (err) {
-    console.warn('Using seed notes for founders-note index:', err);
   }
 
   return (
