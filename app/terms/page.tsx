@@ -82,20 +82,8 @@ const sections: LegalSection[] = [
   {
     title: '10. Contact Us',
     paragraphs: [
-      'Questions about these Terms? Reach us at:',
+      'Questions about these Terms? Reach us anytime at hello@reelnosh.com.',
     ],
-    customContent: (
-      <div className="rounded-xl border border-neutral-lightClay/70 bg-[#F7F3ED] p-5">
-        <p className="font-serif font-semibold text-neutral-charcoal">Reelnosh Ltd</p>
-        <p className="text-sm text-neutral-clayGray">Lagos, Nigeria</p>
-        <p className="mt-2 text-sm text-neutral-charcoal">
-          Email:{' '}
-          <a href="mailto:legal@reelnosh.com" className="text-clay font-medium hover:underline">
-            legal@reelnosh.com
-          </a>
-        </p>
-      </div>
-    ),
   },
 ];
 
@@ -106,7 +94,6 @@ export default function TermsPage() {
       title="Terms of Service"
       subtitle="Where Content Becomes Meals: The Rules for Now"
       updated="September 2026"
-      effectiveDate="Upon website launch"
       intro="Reelnosh is small and growing carefully. These terms exist so everyone knows exactly where they stand."
       sections={sections}
     />

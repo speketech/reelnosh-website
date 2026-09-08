@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { supabase } from '@/lib/supabase/client';
 import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE, FounderNoteItem } from '@/lib/constants';
 import { NoteDetailPageClient } from '@/components/notes/NoteDetailPageClient';
+import { getFounderNoteBody } from '@/lib/notesContent';
 
 export const revalidate = 300; // ISR, 5-minute refresh per specification
 
@@ -11,7 +12,8 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const seed = SEED_FOUNDER_NOTES.find((n) => n.slug === slug);
+  const seed = SEED_FOUNDER_NOTES.find((n) => n.slug === slug) ||
+    (SEED_FEATURED_NOTE.slug === slug ? SEED_FEATURED_NOTE : null);
   return {
     title: `${seed ? seed.title : "Founder's Note"} | Reelnosh`,
     description: seed?.excerpt || "What we're learning while building Reelnosh publicly.",
@@ -21,11 +23,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function SingleFoundersNotePage({ params }: PageProps) {
   const { slug } = await params;
 
-  let note: FounderNoteItem | null =
+  const matchedSeed =
     SEED_FOUNDER_NOTES.find((n) => n.slug === slug) ||
-    (SEED_FEATURED_NOTE.slug === slug
-      ? { ...SEED_FEATURED_NOTE, image: '/images/drops/smokey-jollof.jpg' }
-      : null);
+    (SEED_FEATURED_NOTE.slug === slug ? SEED_FEATURED_NOTE : null);
+
+  let note: FounderNoteItem | null = matchedSeed
+    ? {
+        ...matchedSeed,
+        body_markdown: matchedSeed.body_markdown || getFounderNoteBody(slug, matchedSeed.excerpt),
+      }
+    : null;
 
   if (supabase) {
     try {
@@ -41,7 +48,9 @@ export default async function SingleFoundersNotePage({ params }: PageProps) {
           slug: data.slug,
           title: data.title,
           excerpt: data.excerpt || '',
-          body_markdown: data.body_markdown || '',
+          category: data.category || matchedSeed?.category || 'THE ROADMAP',
+          image: data.image || matchedSeed?.image || '/images/notes/note-1.png',
+          body_markdown: data.body_markdown || getFounderNoteBody(slug, data.excerpt || matchedSeed?.excerpt),
           published_at: data.published_at,
           date: new Date(data.published_at).toLocaleDateString('en-US', {
             month: 'long',
@@ -64,19 +73,16 @@ export default async function SingleFoundersNotePage({ params }: PageProps) {
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
         .join(' '),
       excerpt: '',
+      image: '/images/notes/note-1.png',
       date: 'Aug 2026',
       published_at: new Date().toISOString(),
-      body_markdown: `
-What we're learning while building Reelnosh publicly.
-
-[COPY NEEDED: Full editorial body text for this note]
-      `.trim(),
+      body_markdown: getFounderNoteBody(slug),
     };
   }
 
   const relatedNotes = [
     ...SEED_FOUNDER_NOTES,
-    { ...SEED_FEATURED_NOTE, image: '/images/drops/smokey-jollof.jpg' },
+    SEED_FEATURED_NOTE,
   ].filter((related) => related.slug !== slug).slice(0, 3);
 
   const articleSchema = {

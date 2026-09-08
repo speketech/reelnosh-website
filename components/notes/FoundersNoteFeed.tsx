@@ -64,7 +64,12 @@ export const FoundersNoteFeed: React.FC<FoundersNoteFeedProps> = ({ initialNotes
       {notes.map((note) => (
         <ScrollReveal key={note.slug} delay={(notes.indexOf(note) % 3) * 80}>
           <article className="rounded-card border border-neutral-lightClay bg-neutral-softCream p-6 shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 group sm:p-7">
-          <Link href={`/founders-note/${note.slug}`} onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')} className="block space-y-3">
+          <Link
+            href={`/founders-note/${note.slug}`}
+            onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}
+            aria-label={`Read note: ${note.title}`}
+            className="block space-y-3"
+          >
             <span className="font-sans text-xs text-neutral-clayGray">
               {note.date}
             </span>
@@ -76,6 +81,7 @@ export const FoundersNoteFeed: React.FC<FoundersNoteFeedProps> = ({ initialNotes
             </p>
             <div className="pt-2 text-xs font-semibold text-clay font-sans inline-flex items-center gap-1.5">
               <span>Read more</span>
+              <span className="sr-only">: {note.title}</span>
               <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
             </div>
           </Link>

@@ -22,15 +22,15 @@ export const Footer: React.FC = () => (
           <p className="text-sm text-white/90">{SITE_CONFIG.tagline}</p>
           <div className="flex flex-wrap items-center gap-6 pt-2 text-xs text-white/70">
             <span>{SITE_CONFIG.location}</span>
-            <a href={`tel:${SITE_CONFIG.phone}`} className="transition-colors hover:text-white">{SITE_CONFIG.phone}</a>
-            <a href={`mailto:${SITE_CONFIG.email}`} className="transition-colors hover:text-white">{SITE_CONFIG.email}</a>
+            <a href={`tel:${SITE_CONFIG.phone}`} className="transition-colors hover:text-white" aria-label={`Call Reelnosh at ${SITE_CONFIG.phone}`}>{SITE_CONFIG.phone}</a>
+            <a href={`mailto:${SITE_CONFIG.email}`} className="transition-colors hover:text-white" aria-label={`Email Reelnosh at ${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>
           </div>
         </div>
         <nav className="flex flex-wrap items-center gap-6 text-sm text-white/90">
           <a href={SITE_CONFIG.links.whatsapp} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">Join the Reelnosh community</a>
-          <Link href="/terms" className="transition-colors hover:text-white">Terms</Link>
-          <Link href="/privacy" className="transition-colors hover:text-white">Privacy</Link>
-          <Link href="/cookies" className="transition-colors hover:text-white">Cookies</Link>
+          <Link href="/terms" className="transition-colors hover:text-white" aria-label="Terms of Service">Terms</Link>
+          <Link href="/privacy" className="transition-colors hover:text-white" aria-label="Privacy Policy">Privacy</Link>
+          <Link href="/cookies" className="transition-colors hover:text-white" aria-label="Cookie Policy">Cookies</Link>
         </nav>
       </div>
       <div className="w-full border-t border-white/10" />

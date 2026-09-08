@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .from('founder_notes')
       .select('slug, published_at')
       .lte('published_at', new Date().toISOString());
-    if (data && data.length > 0) notes = data as typeof SEED_FOUNDER_NOTES;
+    if (data) notes = data as typeof SEED_FOUNDER_NOTES;
   } catch {
     // Keep the seed sitemap available when Supabase is not configured during builds.
   }

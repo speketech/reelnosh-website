@@ -19,6 +19,7 @@ export const OriginAwareBackButton: React.FC<{ fallbackHref?: string }> = ({
     <button
       type="button"
       onClick={handleBack}
+      aria-label="Go back to previous page"
       className="inline-flex items-center gap-1.5 font-sans text-[13px] text-neutral-clayGray hover:text-neutral-charcoal transition-colors cursor-pointer"
     >
       <svg

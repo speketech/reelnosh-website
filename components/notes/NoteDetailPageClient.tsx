@@ -7,76 +7,18 @@ import Image from 'next/image';
 import { FounderNoteItem } from '@/lib/constants';
 import { OriginAwareBackButton } from '@/components/notes/OriginAwareBackButton';
 import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
+import { MarkdownLink } from '@/components/notes/MarkdownLink';
+import { getFounderNoteBody } from '@/lib/notesContent';
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
   relatedNotes: FounderNoteItem[];
 }
 
-const defaultDeliveryNote = `
-Building food discovery in Lagos without delivery feels like building half a car. We hear it every week: “When can I actually order through Reelnosh?”
-
-The honest answer: delivery is a solved problem that breaks in complicated ways. Anyone can hire dispatch riders. Anyone can build a tracking screen. What nobody has solved in Lagos is trust between a food creator and someone who loves their food.
-
-Logistics isn’t the moat. Consistency is. We’ve watched brilliant food businesses in Lagos get crushed by the weight of dispatch logistics before they even knew if their product-market fit was real. We refused to let that happen to the creators on Reelnosh.
-
-## Why we cap the Drop instead of scaling the fleet
-
-A typical food platform wants infinite volume. More orders, more riders, more commission. Reelnosh is built on the opposite premise: artificial scarcity creates real value. When a Drop is limited to 100 orders, quality stays uncompromised and the creator doesn’t burn out.
-
-> "When a Drop is limited to 100 orders, quality stays uncompromised and the creator doesn't burn out."
-
-Every Drop teaches us something that dispatch data never could: which dishes travel well, which packaging survives third mainland bridge, and which creators have an audience that actually shows up.
-
-## What comes next: drops first, dispatch later
-
-We will build delivery when the food experiences we’re enabling demand it , not because it’s the default thing a food tech company is supposed to do. Right now, pickup points and scheduled collection are teaching us more than a fleet of motorbikes ever could.
-
-When we do build dispatch, it won’t look like the delivery apps you use today. It will be built specifically for time-sensitive, limited-quantity food drops where the handoff is part of the experience, not an afterthought.
-
-If that sounds slow, good. We’d rather build something permanent than something fast that falls apart when it rains.
-`;
-
-const fallbackBody = (note: FounderNoteItem) => {
-  if (
-    note.slug === 'why-we-are-not-building-delivery-yet' ||
-    note.title.toLowerCase().includes('delivery')
-  ) {
-    return defaultDeliveryNote.trim();
-  }
-
-  return `
-${note.excerpt}
-
-## What we're learning
-
-${note.excerpt} This note captures the questions, conversations, and small decisions shaping Reelnosh as we build in public.
-
-## The work behind the decision
-
-We are taking this one step at a time. The useful answers come from real conversations with creators and diners, not assumptions made from a distance. Each Drop, reply, and moment of feedback helps us understand what should come next.
-
-> Building carefully is still building. The constraint is the research.
-
-## What comes next
-
-We will keep listening, testing, and sharing what changes our minds. The work is deliberately open because the people this is for should help shape what Reelnosh becomes.
-`.trim();
-};
-
 const getComputedReadTime = (body: string) => Math.max(1, Math.ceil(body.trim().split(/\s+/).filter(Boolean).length / 200));
 
-const isExternalLink = (href: string) => {
-  if (!href.startsWith('http')) return false;
-  try {
-    return new URL(href).hostname !== 'reelnosh.com' && !new URL(href).hostname.endsWith('.reelnosh.com');
-  } catch {
-    return false;
-  }
-};
-
 export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note, relatedNotes }) => {
-  const body = note.body_markdown || fallbackBody(note);
+  const body = note.body_markdown || getFounderNoteBody(note.slug, note.excerpt);
   const readTime = getComputedReadTime(body);
 
   return (
@@ -101,7 +43,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             </div>
 
             {/* Article Title */}
-            <h1 className="font-serif text-3xl font-semibold leading-[1.14] text-neutral-charcoal sm:text-4xl md:text-[52px] tracking-tight">
+            <h1 className="font-serif text-3xl font-semibold leading-[1.32] text-neutral-charcoal sm:text-4xl md:text-[52px] sm:leading-[1.24] md:leading-[1.2] tracking-tight">
               {note.title}
             </h1>
 
@@ -128,10 +70,16 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
 
         {/* Cover image */}
         <section className="px-4 pb-12 sm:px-6 md:px-8 md:pb-16">
-          <picture className="mx-auto block max-w-[960px] overflow-hidden rounded-[20px] shadow-elevation1 sm:rounded-[32px]">
-            <source media="(max-width: 767px)" srcSet="/images/notes/note-detail-hero-mobile.png" />
-            <img src="/images/notes/note-detail-hero.png" alt={note.title} className="h-auto w-full object-cover" />
-          </picture>
+          <div className="relative mx-auto max-w-[960px] aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[20px] shadow-elevation1 sm:rounded-[32px] bg-neutral-lightClay/20">
+            <Image
+              src={note.image || '/images/notes/note-detail-hero.png'}
+              alt={note.title}
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 960px"
+              className="object-cover"
+            />
+          </div>
         </section>
 
         {/* Editorial Body Content */}
@@ -149,13 +97,13 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                     {children}
                   </p>
                 ),
-                a: ({ href = '', children }) => isExternalLink(href) ? (
-                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-clay underline underline-offset-4">{children}</a>
-                ) : (
-                  <Link href={href || '#'} className="text-clay underline underline-offset-4">{children}</Link>
+                a: ({ href = '', title, children }) => (
+                  <MarkdownLink href={href} title={title}>
+                    {children}
+                  </MarkdownLink>
                 ),
                 blockquote: ({ children }) => (
-                  <blockquote className="relative my-10 overflow-hidden rounded-[12px] bg-[#F7F3ED] px-5 py-7 text-center shadow-xs sm:px-8 sm:py-8 [&_p]:my-0 [&_p+p]:mt-5 [&_p+p]:border-t [&_p+p]:border-[#C9A090] [&_p+p]:pt-5">
+                  <blockquote className="relative my-10 overflow-hidden rounded-[12px] bg-[#F7F3ED] px-5 py-7 text-center shadow-xs sm:px-8 sm:py-8 [&_p]:my-0">
                     {/* Decorative quote mark in top-left */}
                     <div
                       className="pointer-events-none absolute left-4 top-3 select-none opacity-[0.08]"
@@ -208,6 +156,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                 <Link
                   key={related.id}
                   href={`/founders-note/${related.slug}`}
+                  aria-label={`Read note: ${related.title}`}
                   className="group overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
                 >
                   <div className="relative aspect-[1.5] w-full overflow-hidden">

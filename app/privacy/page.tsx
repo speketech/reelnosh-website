@@ -116,20 +116,8 @@ const sections: LegalSection[] = [
   {
     title: '9. Contact Us',
     paragraphs: [
-      'Questions about this policy or your data? Reach us at:',
+      'Questions about this policy or your data? Reach us anytime at hello@reelnosh.com.',
     ],
-    customContent: (
-      <div className="rounded-xl border border-neutral-lightClay/70 bg-[#F7F3ED] p-5">
-        <p className="font-serif font-semibold text-neutral-charcoal">Reelnosh Ltd</p>
-        <p className="text-sm text-neutral-clayGray">Lagos, Nigeria</p>
-        <p className="mt-2 text-sm text-neutral-charcoal">
-          Email:{' '}
-          <a href="mailto:privacy@reelnosh.com" className="text-clay font-medium hover:underline">
-            privacy@reelnosh.com
-          </a>
-        </p>
-      </div>
-    ),
   },
 ];
 
@@ -140,7 +128,6 @@ export default function PrivacyPage() {
       title="Privacy Policy"
       subtitle="Transparency, Protection, and Data Dignity"
       updated="September 2026"
-      effectiveDate="Upon website launch"
       intro="We collect only what we need to make Drops work, and we'll always tell you why."
       sections={sections}
     />

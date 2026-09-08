@@ -52,19 +52,7 @@ const sections: LegalSection[] = [
   },
   {
     title: '7. Contact Us',
-    paragraphs: ['Questions about our use of cookies? Reach us at:'],
-    customContent: (
-      <div className="rounded-xl border border-neutral-lightClay/70 bg-[#F7F3ED] p-5">
-        <p className="font-serif font-semibold text-neutral-charcoal">Reelnosh Ltd</p>
-        <p className="text-sm text-neutral-clayGray">Lagos, Nigeria</p>
-        <p className="mt-2 text-sm text-neutral-charcoal">
-          Email:{' '}
-          <a href="mailto:privacy@reelnosh.com" className="text-clay font-medium hover:underline">
-            privacy@reelnosh.com
-          </a>
-        </p>
-      </div>
-    ),
+    paragraphs: ['Questions about our use of cookies? Reach us anytime at hello@reelnosh.com.'],
   },
 ];
 
@@ -83,7 +71,6 @@ export default function CookiesPage() {
       title="Cookie Policy"
       subtitle="Transparency and Control Over Your Browsing Data"
       updated="September 2026"
-      effectiveDate="Upon website launch"
       intro="A few small files help this site remember you. Here's exactly what they do, and you can turn off anything that isn't essential."
       sections={sections}
     >

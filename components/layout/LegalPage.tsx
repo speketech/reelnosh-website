@@ -61,12 +61,6 @@ export function LegalPage({
               <strong className="text-neutral-charcoal font-semibold">Last Updated:</strong>{' '}
               {updated}
             </span>
-            {effectiveDate && (
-              <span>
-                <strong className="text-neutral-charcoal font-semibold">Effective Date:</strong>{' '}
-                {effectiveDate}
-              </span>
-            )}
           </div>
           {intro && (
             <p className="mt-6 max-w-[680px] font-serif text-lg sm:text-xl italic leading-relaxed text-neutral-clayGray">

@@ -16,6 +16,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
       <Link
         href={`/founders-note/${note.slug}`}
         onClick={rememberOrigin}
+        aria-label={`Read note: ${note.title}`}
         className="relative w-full h-[210px] shrink-0 overflow-hidden bg-neutral-lightClay/20 block"
       >
         <Image
@@ -59,9 +60,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
           <Link
             href={`/founders-note/${note.slug}`}
             onClick={rememberOrigin}
+            aria-label={`Read note: ${note.title}`}
             className="font-sans text-xs sm:text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5"
           >
-            Read more <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
+            Read more <span className="sr-only">: {note.title}</span>
+            <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
           </Link>
         </div>
       </div>

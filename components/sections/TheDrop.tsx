@@ -4,25 +4,25 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 export const TheDrop: React.FC = () => {
   const stations = [
     {
-      glyph: 'spark',
+      glyph: '✺',
       title: 'A Drop goes live',
       description: 'Meal details, price, and portions are announced.',
       isConcluded: false,
     },
     {
-      glyph: 'box',
+      glyph: '▣',
       title: 'Order your servings',
       description: 'Reserve one or more portions in a few taps.',
       isConcluded: false,
     },
     {
-      glyph: 'check',
+      glyph: '✓',
       title: 'We confirm your order',
       description: 'Order details and delivery timing are locked in.',
       isConcluded: false,
     },
     {
-      glyph: 'close',
+      glyph: '◐',
       title: 'The Drop closes',
       description: 'Orders close when sold out or window ends.',
       isConcluded: true,
@@ -30,16 +30,11 @@ export const TheDrop: React.FC = () => {
   ];
 
   const StationGlyph = ({ glyph }: { glyph: string }) => {
-    if (glyph === 'check') {
-      return <svg aria-hidden="true" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12 4 4L19 6" /></svg>;
-    }
-    if (glyph === 'box') {
-      return <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"><rect x="5" y="5" width="14" height="14" rx="2" /></svg>;
-    }
-    if (glyph === 'close') {
-      return <svg aria-hidden="true" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M7 7l10 10M17 7 7 17" /></svg>;
-    }
-    return <svg aria-hidden="true" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7" /></svg>;
+    return (
+      <span className="text-[26px] leading-none select-none font-normal inline-flex items-center justify-center" aria-hidden="true">
+        {glyph}
+      </span>
+    );
   };
 
   return (
@@ -70,8 +65,8 @@ export const TheDrop: React.FC = () => {
           </div>
         </div>
 
-        {/* Contained Timeline Panel , Soft Cream (#F7F3ED), 24px radius, Elevation 1 */}
-        <div className="relative overflow-hidden rounded-[24px] border border-neutral-lightClay/70 bg-[#F7F3ED] p-8 shadow-elevation1 sm:p-12">
+        {/* Contained Timeline Panel – Soft Cream (#F7F3ED), generous breathing room, Elevation 1 */}
+        <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-neutral-lightClay/70 bg-[#F7F3ED] px-8 py-14 sm:px-12 sm:py-16 md:py-20 lg:px-14 lg:py-24 shadow-elevation1">
 
           {/* Desktop Layout (lg:block) */}
           <div className="hidden lg:block relative">
@@ -151,13 +146,6 @@ export const TheDrop: React.FC = () => {
                 </ScrollReveal>
               ))}
             </div>
-          </div>
-
-          {/* Closing Line , Lora Editorial-Quote 24px italic, Clay-Gray, centered */}
-          <div className="relative z-10 mt-12 text-center">
-            <p className="font-serif text-[20px] sm:text-[24px] italic text-neutral-clayGray">
-              &ldquo;A limited meal from a creator, made available to you.&rdquo;
-            </p>
           </div>
 
         </div>

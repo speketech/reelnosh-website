@@ -15,12 +15,8 @@ export const revalidate = 300; // ISR, 5-minute refresh per specification
 // The featured note is shown first, then latest 2 from the seed list
 const FALLBACK_NOTES: FounderNoteItem[] = [
   {
-    id: SEED_FEATURED_NOTE.id,
-    slug: SEED_FEATURED_NOTE.slug,
-    title: SEED_FEATURED_NOTE.title,
-    excerpt: SEED_FEATURED_NOTE.excerpt,
-    date: SEED_FEATURED_NOTE.date,
-    published_at: SEED_FEATURED_NOTE.published_at,
+    ...SEED_FEATURED_NOTE,
+    image: SEED_FEATURED_NOTE.image || '/images/notes/hero-note-image.svg',
   },
   ...SEED_FOUNDER_NOTES.slice(0, 2),
 ];
@@ -38,17 +34,24 @@ export default async function HomePage() {
         .limit(3);
 
       if (!error && data && data.length > 0) {
-        notes = data.map((item) => ({
-          id: item.id,
-          slug: item.slug,
-          title: item.title,
-          excerpt: item.excerpt || '',
-          published_at: item.published_at,
-          date: new Date(item.published_at).toLocaleDateString('en-US', {
-            month: 'short',
-            year: 'numeric',
-          }),
-        }));
+        notes = data.map((item, idx) => {
+          const seedMatch =
+            SEED_FOUNDER_NOTES.find((n) => n.slug === item.slug) ||
+            (SEED_FEATURED_NOTE.slug === item.slug ? SEED_FEATURED_NOTE : null);
+          return {
+            id: item.id,
+            slug: item.slug,
+            title: item.title,
+            excerpt: item.excerpt || '',
+            category: seedMatch?.category || 'COMMUNITY',
+            image: seedMatch?.image || `/images/notes/note-${idx + 1}.png`,
+            published_at: item.published_at,
+            date: new Date(item.published_at).toLocaleDateString('en-US', {
+              month: 'short',
+              year: 'numeric',
+            }),
+          };
+        });
       }
     } catch (err) {
       console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);

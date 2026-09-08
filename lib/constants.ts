@@ -121,12 +121,19 @@ export interface FounderNoteItem {
   published_at: string;
 }
 
-export const SEED_FEATURED_NOTE = {
+export interface FeaturedFounderNoteItem extends FounderNoteItem {
+  quote: string;
+  readTime: string;
+  category: string;
+}
+
+export const SEED_FEATURED_NOTE: FeaturedFounderNoteItem = {
   id: 'fn-featured',
   slug: 'why-we-are-starting-with-creator-led-food-drops',
   date: 'Aug 2026',
   readTime: '5 min read',
   category: 'PRODUCT THINKING',
+  image: '/images/notes/hero-note-image.svg',
   quote: '"The future of food discovery starts in the comments."',
   title: "Why we're starting with creator-led food drops",
   excerpt: 'The "Send location" comment is a signal, not a failure. Here\'s why we think the future of food discovery starts there , and why we\'re betting on the creator relationship first.',

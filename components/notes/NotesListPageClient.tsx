@@ -146,9 +146,11 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                 <Link
                   href={`/founders-note/${featuredNote.slug}`}
                   onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}
+                  aria-label={`Read full note: ${featuredNote.title}`}
                   className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group"
                 >
                   Read full note{' '}
+                  <span className="sr-only">: {featuredNote.title}</span>
                   <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
                 </Link>
               </div>
