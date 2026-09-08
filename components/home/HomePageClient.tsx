@@ -1,16 +1,29 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { HowItWorksWrapper } from '@/components/sections/HowItWorksWrapper';
 import { FoodiesClub } from '@/components/sections/FoodiesClub';
 import { Faq } from '@/components/sections/Faq';
 import { ForCreators } from '@/components/sections/ForCreators';
 import { FounderNoteTeaser } from '@/components/sections/FounderNoteTeaser';
 import { Modal } from '@/components/ui/Modal';
-import { FoodieSignupForm } from '@/components/forms/FoodieSignupForm';
-import { CreatorSignupForm } from '@/components/forms/CreatorSignupForm';
-import { InterestDetailForm } from '@/components/forms/InterestDetailForm';
 import { FounderNoteItem } from '@/lib/constants';
+
+const FoodieSignupForm = dynamic(
+  () => import('@/components/forms/FoodieSignupForm').then((mod) => mod.FoodieSignupForm),
+  { ssr: false }
+);
+
+const CreatorSignupForm = dynamic(
+  () => import('@/components/forms/CreatorSignupForm').then((mod) => mod.CreatorSignupForm),
+  { ssr: false }
+);
+
+const InterestDetailForm = dynamic(
+  () => import('@/components/forms/InterestDetailForm').then((mod) => mod.InterestDetailForm),
+  { ssr: false }
+);
 
 interface HomePageClientProps {
   hero: React.ReactNode;
@@ -92,7 +105,7 @@ export const HomePageClient: React.FC<HomePageClientProps> = ({
         title="Get on the list"
         subTitle="Be first to know when a Drop goes live near you."
       >
-        <FoodieSignupForm onSuccess={() => {}} />
+        {isFoodieModalOpen && <FoodieSignupForm onSuccess={() => {}} />}
       </Modal>
 
       <Modal
@@ -101,7 +114,7 @@ export const HomePageClient: React.FC<HomePageClientProps> = ({
         title="Join the Creator Waitlist"
         subTitle="Tell us about your food, we'll reach out when Drops open up for creators."
       >
-        <CreatorSignupForm onSuccess={() => {}} />
+        {isCreatorModalOpen && <CreatorSignupForm onSuccess={() => {}} />}
       </Modal>
 
       <Modal
@@ -112,13 +125,15 @@ export const HomePageClient: React.FC<HomePageClientProps> = ({
         title="Thanks, you're already counted."
         subTitle="Want to help us plan the real thing? Totally optional."
       >
-        <InterestDetailForm
-          mealId={detailModal.mealId}
-          mealTitle={detailModal.mealTitle}
-          onSuccess={() =>
-            setDetailModal({ isOpen: false, mealId: '', mealTitle: '' })
-          }
-        />
+        {detailModal.isOpen && (
+          <InterestDetailForm
+            mealId={detailModal.mealId}
+            mealTitle={detailModal.mealTitle}
+            onSuccess={() =>
+              setDetailModal({ isOpen: false, mealId: '', mealTitle: '' })
+            }
+          />
+        )}
       </Modal>
     </main>
   );

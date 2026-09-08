@@ -70,7 +70,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                       src={mediaUrl}
                       alt={item.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 360px"
                       className="object-cover transition-transform duration-300 hover:scale-[1.02]"
                     />
                   )}

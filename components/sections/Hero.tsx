@@ -71,7 +71,13 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
               <div className="pointer-events-none absolute -right-6 -top-7 z-30 h-24 w-24 sm:h-28 sm:w-28 drop-shadow-sm">
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-36 sm:h-36 rounded-full border border-neutral-lightClay/30 z-0" />
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 sm:w-48 sm:h-48 rounded-full border border-neutral-lightClay/20 z-0" />
-                <img src="/icons/starting-in-lagos.svg" alt="Starting in Lagos" className="relative z-10 h-full w-full object-contain" />
+                <img
+                  src="/icons/starting-in-lagos.svg"
+                  alt="Starting in Lagos"
+                  width={152}
+                  height={152}
+                  className="relative z-10 h-full w-full object-contain"
+                />
               </div>
 
               {/* Outer Soft Cream Container Card */}
@@ -94,8 +100,9 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                       alt={content.title || 'Featured culinary drop'}
                       fill
                       priority
+                      fetchPriority="high"
                       className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 460px"
+                      sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1024px) 408px, 420px"
                     />
                   )}
                 </div>
@@ -109,6 +116,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                         src="/images/hero/hero-avatar.png"
                         alt={`@${creatorUsername}`}
                         fill
+                        sizes="64px"
                         className="object-cover"
                       />
                     </div>

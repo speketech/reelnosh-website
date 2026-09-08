@@ -39,7 +39,7 @@ export const Footer: React.FC = () => (
         <div className="flex items-center gap-6">
           {socialLinks.map(([icon, href, label]) => (
             <a key={icon} href={href} target="_blank" rel="noopener noreferrer" className="text-white/80 transition-opacity hover:opacity-70" aria-label={label}>
-              <img src={`/icons/${icon}.svg`} alt="" className="h-5 w-5" />
+              <img src={`/icons/${icon}.svg`} alt="" width={20} height={20} className="h-5 w-5" />
             </a>
           ))}
         </div>

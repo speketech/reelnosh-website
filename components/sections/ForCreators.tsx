@@ -50,6 +50,8 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
                   <img
                     src="/icons/check-icon.svg"
                     alt=""
+                    width={28}
+                    height={30}
                     className="h-7 w-7 shrink-0 mt-0.5"
                     aria-hidden="true"
                   />
@@ -84,6 +86,8 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
                 <img
                   src="/images/creator/creator-mockup.svg"
                   alt="How one post becomes a sold-out Drop: You post, it becomes a Drop, it sells out"
+                  width={424}
+                  height={486}
                   className="h-auto w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[424px] mx-auto object-contain drop-shadow-sm"
                 />
               </div>
