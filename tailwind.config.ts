@@ -24,45 +24,45 @@ const config: Config = {
     extend: {
       colors: {
         clay: {
-          DEFAULT: '#8B3A2A',
-          hover: '#743022',
-          pressed: '#5F261A',
-          80: '#A45A4B',
-          120: '#743022',
+          DEFAULT: 'var(--color-clay)',
+          hover: 'var(--color-clay-hover)',
+          pressed: 'var(--color-clay-pressed)',
+          80: 'var(--color-clay-80)',
+          120: 'var(--color-clay-120)',
         },
-        cocoa: '#5A2418',
+        cocoa: 'var(--color-cocoa)',
         neutral: {
-          warmWhite: '#FFFEFA',
-          softCream: '#F7F3ED',
-          lightClay: '#E7DED5',
-          clayGray: '#6B665F',
-          charcoal: '#1E1B18',
+          warmWhite: 'var(--color-warm-white)',
+          softCream: 'var(--color-soft-cream)',
+          lightClay: 'var(--color-light-clay)',
+          clayGray: 'var(--color-clay-gray)',
+          charcoal: 'var(--color-charcoal)',
         },
         accent: {
-          spicePop: '#F4A11A',
+          spicePop: 'var(--color-spice-pop)',
         },
         feedback: {
-          success: '#5F8B4C',
-          urgency: '#B84D1B',
-          error: '#B44C42',
+          success: 'var(--color-success)',
+          urgency: 'var(--color-urgency)',
+          error: 'var(--color-error)',
         },
         seasonal: {
-          palmCream: '#F4C16D',
+          palmCream: 'var(--color-palm-cream)',
         },
-        focusRing: '#D79A8A',
+        focusRing: 'var(--color-focus-ring)',
         secondaryCta: {
-          border: '#D8B2A8',
-          hoverBackground: '#F9F3F1',
+          border: 'var(--color-secondary-cta-border)',
+          hoverBackground: 'var(--color-secondary-cta-hover-bg)',
         },
         surface: {
-          altWarmWhite: '#FCFAF7',
-          divider: '#DCCFC4',
-          successTint: '#EAF3EB',
+          altWarmWhite: 'var(--color-surface-alt)',
+          divider: 'var(--color-surface-divider)',
+          successTint: 'var(--color-surface-success-tint)',
         },
         interaction: {
-          disabledBackground: '#E7DED5',
-          disabledText: '#9A948C',
-          selectedBackground: '#F9F3F1',
+          disabledBackground: 'var(--color-disabled-bg)',
+          disabledText: 'var(--color-disabled-text)',
+          selectedBackground: 'var(--color-selected-bg)',
         },
       },
       fontFamily: {
@@ -71,11 +71,11 @@ const config: Config = {
       },
       fontSize: {
         // DESIGN_OVERRIDES §1: consolidated 9-step type scale
-        'display':    ['48px', { lineHeight: '1.15', fontWeight: '600' }],  // Hero H1
-        'title':      ['36px', { lineHeight: '1.2',  fontWeight: '600' }],  // All section H2s
-        'quote':      ['24px', { lineHeight: '1.5',  fontWeight: '400' }],  // Pull-quotes (all contexts)
-        'subtitle':   ['20px', { lineHeight: '1.4',  fontWeight: '500' }],  // Drop step titles
-        'card-title': ['22px', { lineHeight: '1.3',  fontWeight: '600' }],  // All card headings
+        'display': ['48px', { lineHeight: '1.15', fontWeight: '600' }],  // Hero H1
+        'title': ['36px', { lineHeight: '1.2', fontWeight: '600' }],  // All section H2s
+        'quote': ['24px', { lineHeight: '1.5', fontWeight: '400' }],  // Pull-quotes (all contexts)
+        'subtitle': ['20px', { lineHeight: '1.4', fontWeight: '500' }],  // Drop step titles
+        'card-title': ['22px', { lineHeight: '1.3', fontWeight: '600' }],  // All card headings
         // body (16px), body-small (14px), caption (13px), eyebrow (12px) use Tailwind defaults
       },
       boxShadow: {

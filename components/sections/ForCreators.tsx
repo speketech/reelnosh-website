@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface ForCreatorsProps {
   onOpenCreatorWaitlist?: () => void;
@@ -23,6 +24,7 @@ const valueProps = [
 ];
 
 export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist }) => {
+  const { theme } = useTheme();
   return (
     <section id="for-creators" className="scroll-mt-[var(--nav-height)] bg-neutral-warmWhite py-16 md:py-[120px]">
       <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
@@ -84,7 +86,7 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
             <ScrollReveal className="w-full flex justify-center lg:justify-end">
               <div className="w-full max-w-[424px]">
                 <img
-                  src="/images/creator/creator-mockup.svg"
+                  src={theme === 'dark' ? '/images/creator/creator-mockup-dark.svg' : '/images/creator/creator-mockup.svg'}
                   alt="How one post becomes a sold-out Drop: You post, it becomes a Drop, it sells out"
                   width={424}
                   height={486}

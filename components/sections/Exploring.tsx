@@ -53,7 +53,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
               return (
                 <div
                   key={item.id}
-                  className="flex flex-col justify-between overflow-hidden rounded-[16px] border border-neutral-lightClay/70 bg-white shadow-elevation1 transition-all duration-300 hover:-translate-y-1 hover:shadow-elevation2"
+                  className="flex flex-col justify-between overflow-hidden rounded-[16px] border border-neutral-lightClay/70 bg-[var(--color-warm-white)] shadow-elevation1 transition-all duration-300 hover:-translate-y-1 hover:shadow-elevation2"
                 >
                   {/* 1. Image or Video */}
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-softCream">
@@ -113,7 +113,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                     <div>
                       {/* Status Badge */}
                       <div>
-                        <span className="bg-[#FAF0E6] text-clay text-[11px] font-semibold px-2.5 py-0.5 rounded-full inline-block">
+                        <span className="bg-clay/10 text-clay text-[11px] font-semibold px-2.5 py-0.5 rounded-full inline-block">
                           {item.tap_count && item.tap_count >= 10
                             ? `${item.tap_count} interested`
                             : (item.badge || 'Vote for this Drop')}

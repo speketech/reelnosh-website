@@ -113,7 +113,7 @@ export function LegalPage({
               {section.table && (
                 <div className="my-6 overflow-x-auto rounded-xl border border-neutral-lightClay/70 shadow-xs">
                   <table className="w-full text-left text-sm">
-                    <thead className="bg-[#F7F3ED] text-neutral-charcoal font-semibold border-b border-neutral-lightClay/70">
+                    <thead className="bg-neutral-softCream text-neutral-charcoal font-semibold border-b border-neutral-lightClay/70">
                       <tr>
                         {section.table.headers.map((h, hIdx) => (
                           <th key={hIdx} className="p-3.5 font-semibold">
@@ -122,7 +122,7 @@ export function LegalPage({
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-neutral-lightClay/40 bg-white">
+                    <tbody className="divide-y divide-neutral-lightClay/40 bg-[var(--color-warm-white)]">
                       {section.table.rows.map((row, rIdx) => (
                         <tr key={rIdx} className="hover:bg-neutral-warmWhite/50 transition-colors">
                           {row.map((cell, cIdx) => (

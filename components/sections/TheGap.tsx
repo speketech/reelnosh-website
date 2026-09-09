@@ -72,7 +72,7 @@ export const TheGap: React.FC = () => {
 
           {/* Right Column: The Comment Thread Card */}
           <div className="flex w-full items-center justify-center lg:col-span-6">
-            <ScrollReveal className="relative h-[450px] sm:h-[500px] w-full max-w-[360px] sm:max-w-[460px] overflow-hidden rounded-[24px] bg-[#F7F3ED] border border-neutral-lightClay/60 shadow-elevation1">
+            <ScrollReveal className="relative h-[450px] sm:h-[500px] w-full max-w-[360px] sm:max-w-[460px] overflow-hidden rounded-[24px] bg-neutral-softCream border border-neutral-lightClay/60 shadow-elevation1">
 
               {/* Organic thread: vector stroke, 2px, Divider color #DCCFC4, no fill */}
               <svg
@@ -83,7 +83,7 @@ export const TheGap: React.FC = () => {
               >
                 <path
                   d="M 145 100 C 125 135, 100 165, 125 205 C 175 240, 285 220, 275 270 C 265 315, 150 310, 130 350 C 110 395, 175 440, 195 485"
-                  stroke="#DCCFC4"
+                  stroke="var(--color-surface-divider)"
                   strokeWidth="2"
                   strokeLinecap="round"
                   fill="none"
@@ -134,7 +134,7 @@ export const TheGap: React.FC = () => {
                     key={bubble.id}
                     className={`absolute ${bubble.positionClasses} ${bubble.widthClass} ${bubble.rotation} transition-transform duration-300 hover:scale-[1.02]`}
                   >
-                    <div className="relative flex items-center gap-3 rounded-[14px] sm:rounded-[16px] bg-[#FCFAF7] p-2.5 sm:p-3 shadow-elevation1 border border-neutral-lightClay/50">
+                    <div className="relative flex items-center gap-3 rounded-[14px] sm:rounded-[16px] bg-[var(--color-surface-alt)] p-2.5 sm:p-3 shadow-elevation1 border border-neutral-lightClay/50">
                       {/* 28px/32px Circular Avatar with distinct initials & tints */}
                       <div className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full ${bubble.avatarBg}`}>
                         <span className="font-sans text-[11px] font-semibold">{bubble.initials}</span>
@@ -152,7 +152,7 @@ export const TheGap: React.FC = () => {
 
                       {/* Small hollow accessibility-sequence badge */}
                       <span
-                        className="absolute -bottom-1.5 -left-1.5 sm:-bottom-2 sm:-left-2 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border border-clay bg-[#FCFAF7] font-sans text-[10px] sm:text-[11px] font-semibold text-clay shadow-xs"
+                        className="absolute -bottom-1.5 -left-1.5 sm:-bottom-2 sm:-left-2 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border border-clay bg-[var(--color-surface-alt)] font-sans text-[10px] sm:text-[11px] font-semibold text-clay shadow-xs"
                         aria-label={`Comment sequence ${bubble.number}`}
                       >
                         {bubble.number}
@@ -163,7 +163,7 @@ export const TheGap: React.FC = () => {
               </div>
 
               {/* Bottom Gradient Fade with closing line sitting over it */}
-              <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex h-20 sm:h-24 items-end justify-center bg-gradient-to-t from-[#F7F3ED] via-[#F7F3ED]/95 to-transparent pb-4 sm:pb-5">
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex h-20 sm:h-24 items-end justify-center bg-gradient-to-t from-[var(--color-soft-cream)] via-[var(--color-soft-cream)] to-transparent pb-4 sm:pb-5">
                 <p className="font-sans text-[13px] sm:text-[14px] text-neutral-clayGray">
                   ...and more like this.
                 </p>

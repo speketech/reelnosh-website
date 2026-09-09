@@ -81,10 +81,10 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
               </div>
 
               {/* Outer Soft Cream Container Card */}
-              <div className="rounded-[16px] border border-neutral-lightClay/80 bg-[#F7F3ED] p-4 sm:p-5 shadow-elevation2">
+              <div className="rounded-[16px] border border-neutral-lightClay/80 bg-neutral-softCream p-4 sm:p-5 shadow-elevation2">
                 
                 {/* Food Image or Video */}
-                <div className="relative aspect-[440/380] w-full overflow-hidden rounded-[12px] border border-neutral-lightClay bg-white">
+                <div className="relative aspect-[440/380] w-full overflow-hidden rounded-[12px] border border-neutral-lightClay bg-[var(--color-warm-white)]">
                   {isVideo ? (
                     <video
                       src={mediaUrl}
@@ -111,7 +111,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                 <div className="relative flex items-center justify-between pt-2 px-1">
                   <div className="flex items-center gap-3 min-w-0">
                     {/* Overlapping Avatar */}
-                    <div className="relative -mt-9 sm:-mt-11 h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border-4 border-[#F7F3ED] bg-neutral-softCream shadow-elevation1 z-10">
+                    <div className="relative -mt-9 sm:-mt-11 h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border-4 border-neutral-softCream bg-neutral-softCream shadow-elevation1 z-10">
                       <Image
                         src="/images/hero/hero-avatar.png"
                         alt={`@${creatorUsername}`}

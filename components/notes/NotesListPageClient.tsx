@@ -160,7 +160,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
           </h2>
 
           {/* Featured Split Card */}
-          <ScrollReveal className="grid grid-cols-1 overflow-hidden rounded-[24px] border border-neutral-lightClay/70 bg-[#F7F3ED] shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 md:grid-cols-12">
+          <ScrollReveal className="grid grid-cols-1 overflow-hidden rounded-[24px] border border-neutral-lightClay/70 bg-neutral-softCream shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 md:grid-cols-12">
             {/* Left Side: Deep Clay Quote Box */}
             <div className="relative flex min-h-[300px] flex-col justify-between overflow-hidden bg-clay p-8 text-white sm:p-10 md:col-span-5">
               {/* Concentric Decorative Circular Lines */}

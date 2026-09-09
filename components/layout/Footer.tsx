@@ -12,7 +12,7 @@ const socialLinks = [
 ] as const;
 
 export const Footer: React.FC = () => (
-  <footer className="bg-[#1E1B18] px-0 pb-12 pt-14 font-sans text-white">
+  <footer className="bg-[var(--color-footer-bg)] border-t border-[var(--color-footer-border)] px-0 pb-12 pt-14 font-sans text-white">
     <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
       <div className="flex flex-col justify-between gap-8 pb-12 md:flex-row md:items-start">
         <div className="space-y-4">

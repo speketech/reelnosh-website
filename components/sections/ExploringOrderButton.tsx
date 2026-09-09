@@ -45,11 +45,10 @@ export const ExploringOrderButton: React.FC<ExploringOrderButtonProps> = ({
         type="button"
         onClick={handleOrderTap}
         disabled={isInterested}
-        className={`w-full h-[46px] px-5 text-sm font-semibold rounded-brand border transition-colors flex items-center justify-center ${
-          isInterested
+        className={`w-full h-[46px] px-5 text-sm font-semibold rounded-brand border transition-colors flex items-center justify-center ${isInterested
             ? 'bg-surface-successTint border-feedback-success text-feedback-success cursor-default'
-            : 'bg-white border-secondaryCta-border text-clay hover:bg-secondaryCta-hoverBackground'
-        }`}
+            : 'bg-[var(--color-warm-white)] border-secondaryCta-border text-clay hover:bg-secondaryCta-hoverBackground'
+          }`}
       >
         {isInterested ? (
           <span className="inline-flex items-center justify-center gap-1.5">

@@ -16,7 +16,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
   const readTime = calculateReadingTime(body);
 
   return (
-    <article className="flex h-[500px] flex-col justify-between overflow-hidden rounded-[20px] border border-neutral-lightClay/70 bg-white shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 group">
+    <article className="flex h-[500px] flex-col justify-between overflow-hidden rounded-[20px] border border-neutral-lightClay/70 bg-[var(--color-warm-white)] shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 group">
       {/* Note Image (Fixed 210px height) */}
       <Link
         href={`/founders-note/${note.slug}`}
@@ -38,7 +38,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
         <div>
           {/* Category & Read Meta */}
           <div className="flex items-center justify-between gap-2 mb-3">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#F7F3ED] text-clay text-[11px] font-semibold tracking-wide uppercase">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-softCream text-clay text-[11px] font-semibold tracking-wide uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop" />
               {note.category || 'COMMUNITY'}
             </span>

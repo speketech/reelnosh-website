@@ -33,7 +33,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
 
             {/* Metadata Badges */}
             <div className="mb-4 flex flex-wrap items-center gap-2.5 font-sans text-xs text-neutral-clayGray">
-              <span className="rounded-full bg-[#FCEEEA] px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px] text-clay">
+              <span className="rounded-full bg-clay/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px] text-clay">
                 {note.category || 'THE ROADMAP'}
               </span>
               <span>{new Date(note.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
@@ -83,7 +83,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
 
         {/* Editorial Body Content */}
         <section className="px-4 pb-14 sm:px-6 md:px-8 md:pb-20">
-          <div className="mx-auto max-w-[760px] font-sans text-[17px] leading-[1.8] text-[#3A3530]">
+          <div className="mx-auto max-w-[760px] font-sans text-[17px] leading-[1.8] text-neutral-charcoal">
             <ReactMarkdown
               components={{
                 h2: ({ children }) => (
@@ -92,7 +92,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                   </h2>
                 ),
                 p: ({ children }) => (
-                  <p className="my-5 leading-[1.8] text-[#3A3530] first:mb-9 first:border-b first:border-neutral-lightClay first:pb-8 first:font-serif first:text-xl first:leading-[1.45]">
+                  <p className="my-5 leading-[1.8] text-neutral-charcoal first:mb-9 first:border-b first:border-neutral-lightClay first:pb-8 first:font-serif first:text-xl first:leading-[1.45]">
                     {children}
                   </p>
                 ),
@@ -102,7 +102,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                   </MarkdownLink>
                 ),
                 blockquote: ({ children }) => (
-                  <blockquote className="relative my-10 overflow-hidden rounded-[12px] bg-[#F7F3ED] px-5 py-7 text-center shadow-xs sm:px-8 sm:py-8 [&_p]:my-0">
+                  <blockquote className="relative my-10 overflow-hidden rounded-[12px] bg-neutral-softCream px-5 py-7 text-center shadow-xs sm:px-8 sm:py-8 [&_p]:my-0">
                     {/* Decorative quote mark in top-left */}
                     <div
                       className="pointer-events-none absolute left-4 top-3 select-none opacity-[0.08]"
@@ -111,7 +111,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                       <svg width="40" height="32" viewBox="0 0 40 32" fill="none">
                         <path
                           d="M14.5 3C12.97 3.88 11.73 4.64 10.79 5.3C9.84 5.92 8.88 6.75 7.91 7.79C7 8.76 6.3 9.79 5.81 10.86C5.32 11.94 4.98 13.32 4.78 15.01H7.13C9.15 15.01 10.72 15.52 11.86 16.53C13.04 17.5 13.62 18.95 13.62 20.87C13.62 22.24 13.1 23.53 12.06 24.73C11.05 25.9 9.65 26.49 7.86 26.49C5.06 26.49 3.06 25.57 1.85 23.75C0.65 21.9 0.05 19.47 0.05 16.48C0.05 14.36 0.5 12.44 1.41 10.72C2.33 8.96 3.43 7.4 4.73 6.03C6.07 4.63 7.49 3.44 8.98 2.47C10.48 1.49 11.73 0.69 12.74 0.07L14.5 3ZM32.57 3C31.04 3.88 29.8 4.64 28.86 5.3C27.91 5.92 26.95 6.75 25.97 7.79C25.03 8.8 24.31 9.84 23.83 10.91C23.37 11.96 23.05 13.32 22.85 15.01H25.19C27.21 15.01 28.79 15.52 29.93 16.53C31.1 17.5 31.69 18.95 31.69 20.87C31.69 22.24 31.17 23.53 30.13 24.73C29.12 25.9 27.72 26.49 25.93 26.49C23.13 26.49 21.12 25.57 19.92 23.75C18.72 21.9 18.11 19.47 18.11 16.48C18.11 14.36 18.57 12.44 19.48 10.72C20.39 8.96 21.5 7.4 22.8 6.03C24.14 4.63 25.55 3.44 27.05 2.47C28.55 1.49 29.8 0.69 30.81 0.07L32.57 3Z"
-                          fill="#8B3A2A"
+                          fill="var(--color-clay)"
                         />
                       </svg>
                     </div>
@@ -145,7 +145,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
         </section>
 
         {/* More Notes Section */}
-        <section className="bg-[#F7F3ED] px-4 py-16 sm:px-6 md:px-8 md:py-20">
+        <section className="bg-neutral-softCream px-4 py-16 sm:px-6 md:px-8 md:py-20">
           <div className="mx-auto max-w-[1120px]">
             <div className="mb-8 flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
               <span className="text-accent-spicePop">•</span> MORE NOTES
@@ -168,7 +168,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                   </div>
                   <div className="p-6 flex flex-col justify-between flex-1">
                     <div>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#F7F3ED] px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay">
                         <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop" />
                         {related.category || 'COMMUNITY'}
                       </span>

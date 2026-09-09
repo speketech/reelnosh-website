@@ -5,12 +5,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { useTheme } from '@/components/providers/ThemeProvider';
 
 interface HeaderProps {
   onOpenEarlyAccess?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
+  const { theme } = useTheme();
   const pathname = usePathname();
   const isNotesActive = pathname?.startsWith('/founders-note');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -138,8 +141,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
   };
 
   const navLinkClass = (isActive: boolean) =>
-    `rounded-brand px-2 py-1 transition-colors duration-200 ${
-      isActive ? 'text-clay' : 'hover:bg-neutral-softCream hover:text-clay'
+    `rounded-brand px-2 py-1 transition-colors duration-200 ${isActive ? 'text-clay' : 'hover:bg-neutral-softCream hover:text-clay'
     }`;
 
   return (
@@ -147,11 +149,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
       <div ref={sentinelRef} aria-hidden="true" className="h-px w-px" />
       <header
         ref={headerRef}
-        className={`sticky top-0 z-40 w-full transition-colors duration-300 ${
-          isScrolled
+        className={`sticky top-0 z-40 w-full transition-colors duration-300 ${isScrolled
             ? 'bg-neutral-warmWhite/95 backdrop-blur-md border-b border-surface-divider shadow-elevation1 h-[72px] py-3'
             : 'bg-neutral-warmWhite h-[72px] py-3'
-        }`}
+          }`}
       >
         <div className="max-w-[1120px] mx-auto px-5 md:px-12 min-[1120px]:px-0 flex items-center justify-between">
           {/* Logo: icon-only mark at tablet (md–lg), full lockup at lg+ and mobile */}
@@ -159,7 +160,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             {/* Full logo: visible on mobile (< md) and desktop (lg+) */}
             <div className="relative h-8 w-32 sm:h-9 sm:w-36 tablet:hidden lg:block">
               <Image
-                src="/brand/logo-primary.svg"
+                src={theme === 'dark' ? '/brand/logo-white.svg' : '/brand/logo-primary.svg'}
                 alt="Reelnosh"
                 fill
                 priority
@@ -169,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             {/* Icon mark: visible only in tablet range (md–lg) */}
             <div className="relative hidden tablet:block lg:hidden h-8 w-8">
               <Image
-                src="/brand/icon-mark.svg"
+                src={theme === 'dark' ? '/brand/icon-mark-white.svg' : '/brand/icon-mark.svg'}
                 alt="Reelnosh"
                 fill
                 priority
@@ -203,7 +204,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
           </nav>
 
           {/* Primary CTA & Mobile Toggle */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <ThemeToggle />
+
             {/* Full CTA — shown from tablet (834px) up; compact CTA covers below that */}
             <Button
               onClick={onOpenEarlyAccess}
@@ -250,7 +253,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
               <div className="flex items-center justify-between pb-6 border-b border-surface-divider">
                 <div className="relative h-7 w-28">
                   <Image
-                    src="/brand/logo-primary.svg"
+                    src={theme === 'dark' ? '/brand/logo-white.svg' : '/brand/logo-primary.svg'}
                     alt="Reelnosh"
                     fill
                     className="object-contain object-left"

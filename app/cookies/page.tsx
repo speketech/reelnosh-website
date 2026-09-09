@@ -85,7 +85,7 @@ export default function CookiesPage() {
       intro="A few small files help this site remember you. Here's exactly what they do, and you can turn off anything that isn't essential."
       sections={sections}
     >
-      <div className="mt-8 rounded-[16px] bg-[#F7F3ED] p-6 border border-neutral-lightClay/70">
+      <div className="mt-8 rounded-[16px] bg-neutral-softCream p-6 border border-neutral-lightClay/70">
         <h2 className="font-serif text-xl font-semibold text-neutral-charcoal">Cookie preferences</h2>
         <div className="mt-5 space-y-5">
           <div className="flex items-center justify-between gap-5">

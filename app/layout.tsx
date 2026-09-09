@@ -40,13 +40,22 @@ export const metadata: Metadata = {
   },
 };
 
+import { ThemeProvider } from '@/components/providers/ThemeProvider';
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${lora.variable} ${figtree.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${lora.variable} ${figtree.variable}`}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var stored=localStorage.getItem('theme');var theme=stored||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',theme);}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="bg-neutral-warmWhite text-neutral-charcoal antialiased min-h-screen flex flex-col font-sans">
         <script
           type="application/ld+json"
@@ -61,9 +70,11 @@ export default function RootLayout({
             }),
           }}
         />
-        <HeaderWrapper />
-        <div className="flex-1">{children}</div>
-        <Footer />
+        <ThemeProvider>
+          <HeaderWrapper />
+          <div className="flex-1">{children}</div>
+          <Footer />
+        </ThemeProvider>
         <Analytics />
         <GoogleAnalytics />
       </body>

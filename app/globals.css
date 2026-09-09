@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 :root {
+  color-scheme: light;
   --color-clay: #8B3A2A;
   --color-clay-hover: #743022;
   --color-clay-pressed: #5F261A;
+  --color-clay-80: #A45A4B;
+  --color-clay-120: #743022;
   --color-warm-white: #FFFEFA;
   --color-soft-cream: #F7F3ED;
   --color-light-clay: #E7DED5;
@@ -18,6 +21,16 @@
   --color-error: #B44C42;
   --color-palm-cream: #F4C16D;
   --color-focus-ring: #D79A8A;
+  --color-secondary-cta-border: #D8B2A8;
+  --color-secondary-cta-hover-bg: #F9F3F1;
+  --color-surface-alt: #FCFAF7;
+  --color-surface-divider: #DCCFC4;
+  --color-surface-success-tint: #EAF3EB;
+  --color-footer-bg: #1E1B18;
+  --color-footer-border: transparent;
+  --color-disabled-bg: #E7DED5;
+  --color-disabled-text: #9A948C;
+  --color-selected-bg: #F9F3F1;
 
   /* DESIGN_OVERRIDES §2 , vertical rhythm tokens */
   --rhythm-section-desktop: 120px;
@@ -26,26 +39,58 @@
   --rhythm-group-mobile: 32px;
 }
 
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-clay: #C06B54;
+  --color-clay-hover: #D27E67;
+  --color-clay-pressed: #AD5842;
+  --color-clay-80: #D68874;
+  --color-clay-120: #9C4733;
+  --color-warm-white: #1A1613;
+  --color-soft-cream: #242019;
+  --color-light-clay: #3A332C;
+  --color-clay-gray: #A69C8F;
+  --color-charcoal: #F5F0E8;
+  --color-cocoa: #5A2418;
+  --color-spice-pop: #F5B23E;
+  --color-success: #7FAE68;
+  --color-urgency: #D2653A;
+  --color-error: #D16860;
+  --color-palm-cream: #D9A857;
+  --color-focus-ring: #E3AC9E;
+  --color-secondary-cta-border: #4D4238;
+  --color-secondary-cta-hover-bg: #2F2922;
+  --color-surface-alt: #2C2720;
+  --color-surface-divider: #3A332C;
+  --color-surface-success-tint: #1A2A15;
+  --color-footer-bg: #14110E;
+  --color-footer-border: #3A332C;
+  --color-disabled-bg: #3A332C;
+  --color-disabled-text: #6B665F;
+  --color-selected-bg: #2F2922;
+}
+
 * {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: #FFFEFA;
-  color: #1E1B18;
+  background-color: var(--color-warm-white);
+  color: var(--color-charcoal);
   -webkit-font-smoothing: antialiased;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #FFFEFA;
-  color: #1E1B18;
+  background-color: var(--color-warm-white);
+  color: var(--color-charcoal);
   font-family: var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::selection {
-  background-color: rgba(139, 58, 42, 0.15);
-  color: #8B3A2A;
+  background-color: rgba(192, 107, 84, 0.25);
+  color: var(--color-clay);
 }
