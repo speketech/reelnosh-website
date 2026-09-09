@@ -62,9 +62,9 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
 
           {/* Layer 2: Visual Anchor — Spicepop accent + Kudirat photo
               - Desktop (lg+): original size (41.04% width, left-[54.1%])
-              - Tablet / iPad Mini (sm to md): sized smaller (~27%–30% width)
-              - Surface Duo (500px–639px): very adjusted (~24% width, 78% height) to maximize text room */}
-          <div className="pointer-events-none absolute bottom-0 select-none min-[500px]:right-[2%] min-[500px]:w-[24%] min-[500px]:h-[78%] sm:right-[2%] sm:w-[27%] sm:h-[84%] md:right-[3%] md:w-[30%] md:h-[88%] lg:left-[54.1%] lg:right-auto lg:w-[41.04%] lg:h-full">
+              - Tablet / iPad Mini (sm to md): sized gracefully (~30%–33% width)
+              - Surface Duo (500px–639px): slightly increased (~27% width, 84% height) */}
+          <div className="pointer-events-none absolute bottom-0 select-none min-[500px]:right-[2%] min-[500px]:w-[27%] min-[500px]:h-[84%] sm:right-[2%] sm:w-[30%] sm:h-[88%] md:right-[3%] md:w-[33%] md:h-[92%] lg:left-[54.1%] lg:right-auto lg:w-[41.04%] lg:h-full">
             {/* Spicepop background shape */}
             <img
               src="/images/notes/hero-spicepop.svg"
@@ -80,17 +80,17 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                 alt="Kudirat Ijeoma Ibeabuchi, Founder of Reelnosh"
                 fill
                 priority
-                sizes="(max-width: 640px) 180px, (max-width: 768px) 250px, (max-width: 1024px) 320px, 450px"
+                sizes="(max-width: 640px) 210px, (max-width: 768px) 270px, (max-width: 1024px) 340px, 450px"
                 className="object-contain object-bottom"
               />
             </div>
           </div>
 
           {/* Content Layer:
-              - Left padding: min-[500px]:pl-14 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] to completely clear the top-left curve on Surface Duo and tablets
+              - Left padding: min-[500px]:pl-12 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] to completely clear the top-left curve on Surface Duo and tablets
               - Heading line height: leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] + explicit margin on 'publicly.' for luxurious breathing room
-              - Max-width: min-[500px]:w-[70%] sm:w-[68%] md:w-[62%] lg:w-[52%] — allows text to have more lines smoothly */}
-          <div className="relative z-10 flex h-full flex-col justify-center pl-6 min-[500px]:pl-14 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] min-[500px]:pt-1.5 sm:pt-0 pr-3 sm:pr-4 w-[74%] min-[500px]:w-[70%] sm:w-[68%] md:w-[62%] lg:w-[52%]">
+              - Max-width: min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] lg:w-[52%] */}
+          <div className="relative z-10 flex h-full flex-col justify-center pl-6 min-[500px]:pl-12 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] min-[500px]:pt-1 sm:pt-0 pr-3 sm:pr-4 w-[74%] min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] lg:w-[52%]">
             <h1 className="font-serif text-lg min-[500px]:text-[19px] sm:text-2xl md:text-[30px] lg:text-[44px] xl:text-[50px] font-semibold leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] text-neutral-charcoal tracking-tight">
               Building{' '}
               <span className="italic text-clay font-normal">Reelnosh</span>
