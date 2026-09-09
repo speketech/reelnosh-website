@@ -52,40 +52,56 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
             borderRadius: '30.65% 21.46% 21.46% 12.26% / 71.43% 50% 50% 28.57%',
           }}
         >
-          {/* Layer 1: Background Vector Frame & Decorative Accent */}
+          {/* Layer 1: Background Vector Frame (Cream container with border) */}
           <img
-            src="/images/notes/hero-note-image.svg"
+            src="/images/notes/hero-note-container.svg"
             alt=""
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 h-full w-full object-contain select-none"
           />
 
-          {/* Layer 2: Real Photo - Positioned to align bottom with big container and right side with spice pop container */}
-          <div className="pointer-events-none absolute left-[57.44%] w-[35.26%] top-[-1.49%] h-[102.61%] select-none">
-            <Image
-              src="/images/notes/kudirat-hero.png"
-              alt="Kudirat Ijeoma Ibeabuchi, Founder of Reelnosh"
-              fill
-              priority
-              sizes="(max-width: 1200px) 450px, 500px"
-              className="object-cover object-top"
+          {/* Layer 2: Visual Anchor — Spicepop accent + Kudirat photo
+              - Desktop (lg+): original size (41.04% width, left-[54.1%])
+              - Tablet / iPad Mini (sm to md): sized smaller (~28%–30% width) to accommodate smaller container sizes gracefully */}
+          <div className="pointer-events-none absolute bottom-0 select-none sm:right-[2%] sm:w-[28%] sm:h-[85%] md:right-[3%] md:w-[30%] md:h-[88%] lg:left-[54.1%] lg:right-auto lg:w-[41.04%] lg:h-full">
+            {/* Spicepop background shape */}
+            <img
+              src="/images/notes/hero-spicepop.svg"
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 h-full w-full object-contain object-bottom select-none"
             />
+
+            {/* Kudirat photo locked proportionally with spicepop shape */}
+            <div className="pointer-events-none absolute left-[8.11%] w-[85.91%] top-[-1.49%] h-[102.61%] select-none">
+              <Image
+                src="/images/notes/kudirat-hero.png"
+                alt="Kudirat Ijeoma Ibeabuchi, Founder of Reelnosh"
+                fill
+                priority
+                sizes="(max-width: 768px) 250px, (max-width: 1024px) 320px, 450px"
+                className="object-contain object-bottom"
+              />
+            </div>
           </div>
 
-          {/* Content Layer — strictly constrained to 53% max-width so text never touches the spice pop region (at 55%+) */}
-          <div className="relative z-10 flex h-full flex-col justify-center pl-6 sm:pl-8 md:pl-12 lg:pl-[90px] xl:pl-[115px] pr-2 sm:pr-4 w-[53%] max-w-[53%]">
-            <h1 className="font-serif text-xl sm:text-2xl md:text-[34px] lg:text-[44px] xl:text-[50px] font-semibold leading-[1.12] text-neutral-charcoal tracking-tight">
+          {/* Content Layer:
+              - Left padding: pl-10 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] to completely clear the top-left curve on iPad Mini & tablet
+              - Heading leading: leading-[1.25] for clean, un-cramped line height
+              - Max-width: w-[66%] sm:w-[66%] md:w-[62%] lg:w-[52%] */}
+          <div className="relative z-10 flex h-full flex-col justify-center pl-8 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] pr-4 w-[66%] sm:w-[66%] md:w-[62%] lg:w-[52%]">
+            <h1 className="font-serif text-xl sm:text-2xl md:text-[30px] lg:text-[44px] xl:text-[50px] font-semibold leading-[1.25] text-neutral-charcoal tracking-tight">
               Building{' '}
               <span className="italic text-clay font-normal">Reelnosh</span>
               <br />
               publicly.
             </h1>
 
-            <p className="mt-2 sm:mt-3 md:mt-4 lg:mt-5 font-sans text-[11px] sm:text-xs md:text-[13px] lg:text-[15px] leading-[1.35] sm:leading-[1.5] lg:leading-[1.6] text-neutral-clayGray">
+            <p className="mt-2.5 sm:mt-3 md:mt-4 lg:mt-5 font-sans text-xs sm:text-[13px] lg:text-[15px] leading-[1.5] lg:leading-[1.6] text-neutral-clayGray max-w-[465px]">
               Hi, this is where I write honestly about what we&apos;re learning while building Reelnosh: the product decisions, the Lagos food scene, what you&apos;re teaching us, and yes, what we&apos;re still getting wrong.
             </p>
 
-            <p className="mt-2 sm:mt-3.5 md:mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-xs sm:text-sm md:text-base lg:text-[17px]">
+            <p className="mt-2.5 sm:mt-3.5 md:mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-xs sm:text-sm md:text-base lg:text-[17px]">
               - Kudirat
             </p>
           </div>
