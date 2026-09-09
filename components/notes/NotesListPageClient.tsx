@@ -45,9 +45,9 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
     <main className="min-h-screen bg-neutral-warmWhite">
       {/* 1. Hero Section */}
       <section className="bg-neutral-warmWhite px-4 pt-4 pb-2 sm:px-6 sm:pt-6 sm:pb-4 md:px-12 md:pt-8 md:pb-6 min-[1120px]:px-0">
-        {/* Desktop Version (sm and up — covers tablets & iPad Mini) */}
+        {/* Desktop Version (500px and up — covers Surface Duo 540x720, tablets, iPad Mini, and desktop) */}
         <div
-          className="relative mx-auto hidden w-full max-w-[1072px] sm:block aspect-[1072/460] overflow-hidden"
+          className="relative mx-auto hidden w-full max-w-[1072px] min-[500px]:block aspect-[1072/460] overflow-hidden"
           style={{
             borderRadius: '30.65% 21.46% 21.46% 12.26% / 71.43% 50% 50% 28.57%',
           }}
@@ -62,8 +62,9 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
 
           {/* Layer 2: Visual Anchor — Spicepop accent + Kudirat photo
               - Desktop (lg+): original size (41.04% width, left-[54.1%])
-              - Tablet / iPad Mini (sm to md): sized smaller (~28%–30% width) to accommodate smaller container sizes gracefully */}
-          <div className="pointer-events-none absolute bottom-0 select-none sm:right-[2%] sm:w-[28%] sm:h-[85%] md:right-[3%] md:w-[30%] md:h-[88%] lg:left-[54.1%] lg:right-auto lg:w-[41.04%] lg:h-full">
+              - Tablet / iPad Mini (sm to md): sized smaller (~27%–30% width)
+              - Surface Duo (500px–639px): very adjusted (~24% width, 78% height) to maximize text room */}
+          <div className="pointer-events-none absolute bottom-0 select-none min-[500px]:right-[2%] min-[500px]:w-[24%] min-[500px]:h-[78%] sm:right-[2%] sm:w-[27%] sm:h-[84%] md:right-[3%] md:w-[30%] md:h-[88%] lg:left-[54.1%] lg:right-auto lg:w-[41.04%] lg:h-full">
             {/* Spicepop background shape */}
             <img
               src="/images/notes/hero-spicepop.svg"
@@ -79,36 +80,36 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                 alt="Kudirat Ijeoma Ibeabuchi, Founder of Reelnosh"
                 fill
                 priority
-                sizes="(max-width: 768px) 250px, (max-width: 1024px) 320px, 450px"
+                sizes="(max-width: 640px) 180px, (max-width: 768px) 250px, (max-width: 1024px) 320px, 450px"
                 className="object-contain object-bottom"
               />
             </div>
           </div>
 
           {/* Content Layer:
-              - Left padding: pl-10 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] to completely clear the top-left curve on iPad Mini & tablet
-              - Heading leading: leading-[1.25] for clean, un-cramped line height
-              - Max-width: w-[66%] sm:w-[66%] md:w-[62%] lg:w-[52%] */}
-          <div className="relative z-10 flex h-full flex-col justify-center pl-8 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] pr-4 w-[66%] sm:w-[66%] md:w-[62%] lg:w-[52%]">
-            <h1 className="font-serif text-xl sm:text-2xl md:text-[30px] lg:text-[44px] xl:text-[50px] font-semibold leading-[1.25] text-neutral-charcoal tracking-tight">
+              - Left padding: min-[500px]:pl-14 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] to completely clear the top-left curve on Surface Duo and tablets
+              - Heading line height: leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] + explicit margin on 'publicly.' for luxurious breathing room
+              - Max-width: min-[500px]:w-[70%] sm:w-[68%] md:w-[62%] lg:w-[52%] — allows text to have more lines smoothly */}
+          <div className="relative z-10 flex h-full flex-col justify-center pl-6 min-[500px]:pl-14 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] min-[500px]:pt-1.5 sm:pt-0 pr-3 sm:pr-4 w-[74%] min-[500px]:w-[70%] sm:w-[68%] md:w-[62%] lg:w-[52%]">
+            <h1 className="font-serif text-lg min-[500px]:text-[19px] sm:text-2xl md:text-[30px] lg:text-[44px] xl:text-[50px] font-semibold leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] text-neutral-charcoal tracking-tight">
               Building{' '}
               <span className="italic text-clay font-normal">Reelnosh</span>
               <br />
-              publicly.
+              <span className="inline-block mt-0.5 sm:mt-1 md:mt-1.5 lg:mt-2">publicly.</span>
             </h1>
 
-            <p className="mt-2.5 sm:mt-3 md:mt-4 lg:mt-5 font-sans text-xs sm:text-[13px] lg:text-[15px] leading-[1.5] lg:leading-[1.6] text-neutral-clayGray max-w-[465px]">
+            <p className="mt-1.5 min-[500px]:mt-2 sm:mt-3 md:mt-4 lg:mt-5 font-sans text-[10.5px] min-[500px]:text-[11px] sm:text-xs md:text-[13px] lg:text-[15px] leading-[1.45] sm:leading-[1.5] lg:leading-[1.6] text-neutral-clayGray max-w-[465px]">
               Hi, this is where I write honestly about what we&apos;re learning while building Reelnosh: the product decisions, the Lagos food scene, what you&apos;re teaching us, and yes, what we&apos;re still getting wrong.
             </p>
 
-            <p className="mt-2.5 sm:mt-3.5 md:mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-xs sm:text-sm md:text-base lg:text-[17px]">
+            <p className="mt-1.5 min-[500px]:mt-2 sm:mt-3.5 md:mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-[11px] sm:text-xs md:text-base lg:text-[17px]">
               - Kudirat
             </p>
           </div>
         </div>
 
-        {/* Mobile Version (< sm) */}
-        <div className="relative mx-auto w-full max-w-[363px] sm:hidden aspect-[363/320]">
+        {/* Mobile Version (< 500px, true small phones) */}
+        <div className="relative mx-auto w-full max-w-[363px] min-[500px]:hidden aspect-[363/320]">
           {/* Layer 1: Background Vector Frame & Yellow Accent */}
           <img
             src="/images/notes/hero-note-image-mobile.svg"
