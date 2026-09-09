@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase/client';
 import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE, FounderNoteItem } from '@/lib/constants';
+import { getFounderNoteBody } from '@/lib/notesContent';
 import { HomePageClient } from '@/components/home/HomePageClient';
 import { Hero } from '@/components/sections/Hero';
 import { Exploring } from '@/components/sections/Exploring';
@@ -16,7 +17,7 @@ export const revalidate = 300; // ISR, 5-minute refresh per specification
 const FALLBACK_NOTES: FounderNoteItem[] = [
   {
     ...SEED_FEATURED_NOTE,
-    image: SEED_FEATURED_NOTE.image || '/images/notes/hero-note-image.svg',
+    image: SEED_FEATURED_NOTE.image || '/images/notes/note-detail-hero.png',
   },
   ...SEED_FOUNDER_NOTES.slice(0, 2),
 ];
@@ -50,6 +51,7 @@ export default async function HomePage() {
               month: 'short',
               year: 'numeric',
             }),
+            body_markdown: seedMatch?.body_markdown || getFounderNoteBody(item.slug, item.excerpt),
           };
         });
       }

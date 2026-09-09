@@ -9,17 +9,16 @@ import { OriginAwareBackButton } from '@/components/notes/OriginAwareBackButton'
 import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 import { MarkdownLink } from '@/components/notes/MarkdownLink';
 import { getFounderNoteBody } from '@/lib/notesContent';
+import { calculateReadingTime } from '@/lib/utils/reading-time';
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
   relatedNotes: FounderNoteItem[];
 }
 
-const getComputedReadTime = (body: string) => Math.max(1, Math.ceil(body.trim().split(/\s+/).filter(Boolean).length / 200));
-
 export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note, relatedNotes }) => {
   const body = note.body_markdown || getFounderNoteBody(note.slug, note.excerpt);
-  const readTime = getComputedReadTime(body);
+  const readTime = calculateReadingTime(body);
 
   return (
     <main className="bg-neutral-warmWhite min-h-screen">
@@ -70,7 +69,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
 
         {/* Cover image */}
         <section className="px-4 pb-12 sm:px-6 md:px-8 md:pb-16">
-          <div className="relative mx-auto max-w-[960px] aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[20px] shadow-elevation1 sm:rounded-[32px] bg-neutral-lightClay/20">
+          <div className="relative mx-auto max-w-[960px] aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[20px] sm:rounded-[24px] shadow-elevation1">
             <Image
               src={note.image || '/images/notes/note-detail-hero.png'}
               alt={note.title}
@@ -178,7 +177,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                       </h3>
                     </div>
                     <p className="mt-4 font-sans text-xs text-neutral-clayGray">
-                      {related.date} · {related.readTime || '5 min read'}
+                      {related.date} · {calculateReadingTime(related.body_markdown || getFounderNoteBody(related.slug, related.excerpt))} min read
                     </p>
                   </div>
                 </Link>

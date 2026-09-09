@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FounderNoteItem } from '@/lib/constants';
+import { calculateReadingTime } from '@/lib/utils/reading-time';
+import { getFounderNoteBody } from '@/lib/notesContent';
 
 interface ArticleCardProps {
   note: FounderNoteItem;
@@ -10,6 +12,9 @@ interface ArticleCardProps {
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founders-note' }) => {
   const rememberOrigin = () => window.sessionStorage.setItem('reelnosh:note-origin', origin);
+  const body = note.body_markdown || getFounderNoteBody(note.slug, note.excerpt);
+  const readTime = calculateReadingTime(body);
+
   return (
     <article className="flex h-[500px] flex-col justify-between overflow-hidden rounded-[20px] border border-neutral-lightClay/70 bg-white shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 group">
       {/* Note Image (Fixed 210px height) */}
@@ -38,7 +43,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
               {note.category || 'COMMUNITY'}
             </span>
             <span className="font-sans text-xs text-neutral-clayGray font-normal">
-              {note.date} · {note.readTime || '5 min read'}
+              {note.date} · {readTime} min read
             </span>
           </div>
 
@@ -61,10 +66,10 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
             href={`/founders-note/${note.slug}`}
             onClick={rememberOrigin}
             aria-label={`Read note: ${note.title}`}
-            className="font-sans text-xs sm:text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5"
+            className="font-sans text-xs sm:text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 cursor-pointer group/link"
           >
-            Read more <span className="sr-only">: {note.title}</span>
-            <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
+            <span>Read more</span> <span className="sr-only">: {note.title}</span>
+            <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover/link:translate-x-0.5" />
           </Link>
         </div>
       </div>

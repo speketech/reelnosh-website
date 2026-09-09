@@ -38,7 +38,7 @@ export const TheDrop: React.FC = () => {
   };
 
   return (
-    <section id="the-drop" className="scroll-mt-[var(--nav-height)] bg-neutral-warmWhite py-16 md:py-[120px]">
+    <section id="the-drop" className="scroll-mt-[var(--nav-height)] bg-neutral-softCream py-16 md:py-[120px]">
       <div className="mx-auto max-w-[1120px] px-5 md:px-0">
 
         {/* Header Row */}
@@ -66,7 +66,7 @@ export const TheDrop: React.FC = () => {
         </div>
 
         {/* Contained Timeline Panel – Soft Cream (#F7F3ED), generous breathing room, Elevation 1 */}
-        <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-neutral-lightClay/70 bg-[#F7F3ED] px-8 py-14 sm:px-12 sm:py-16 md:py-20 lg:px-14 lg:py-24 shadow-elevation1">
+        <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-neutral-lightClay/70 bg-neutral-warmWhite px-8 py-14 sm:px-12 sm:py-16 md:py-20 lg:px-14 lg:py-24 shadow-elevation1">
 
           {/* Desktop Layout (lg:block) */}
           <div className="hidden lg:block relative">

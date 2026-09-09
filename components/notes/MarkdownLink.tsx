@@ -49,6 +49,7 @@ const GENERIC_LINK_TEXTS = new Set([
 
 const INTERNAL_ROUTE_LABELS: Record<string, string> = {
   '/': 'Reelnosh Homepage',
+  '/#the-drop': 'How Reelnosh Works',
   '/#how-it-works': 'How Reelnosh Works',
   '/#for-creators': 'Reelnosh for Creators',
   '/#exploring': 'Food Drops We Are Exploring',

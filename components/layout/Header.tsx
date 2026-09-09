@@ -47,43 +47,77 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
   }, []);
 
   useEffect(() => {
+    // "How it works" and "For creators" must only ever be capable of being active
+    // when the current route is exactly "/". On every other route they render in
+    // their default inactive style, full stop — no exceptions.
     if (pathname !== '/') {
       setActiveAnchor(null);
       return;
     }
 
-    const updateActiveAnchor = () => {
-      const navHeight = parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
-      ) || 72;
-      const sections = ['how-it-works', 'for-creators']
-        .map((id) => ({ id, element: document.getElementById(id) }))
-        .filter((section): section is { id: string; element: HTMLElement } => Boolean(section.element));
-      const passedSections = sections.filter(
-        ({ element }) => element.getBoundingClientRect().top <= navHeight + 24
+    // When returning to "/" by any path, mount fresh with no highlighted item
+    // until a section actually scrolls into view.
+    setActiveAnchor(null);
+
+    const sectionIds = ['the-drop', 'for-creators'];
+    const intersectingMap = new Map<string, boolean>();
+    let observer: IntersectionObserver | null = null;
+
+    const setupObserver = () => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const id = entry.target.id;
+            if (entry.isIntersecting) {
+              intersectingMap.set(id, true);
+            } else {
+              intersectingMap.delete(id);
+            }
+          });
+
+          // A nav item is active ONLY while IntersectionObserver reports
+          // isIntersecting === true for its target section. The instant isIntersecting
+          // goes false — scrolling down past the section OR scrolling back up above it —
+          // remove the active state immediately.
+          const activeId = sectionIds.find((id) => intersectingMap.get(id)) || null;
+          setActiveAnchor(activeId);
+        },
+        {
+          root: null,
+          rootMargin: '-80px 0px -25% 0px',
+          threshold: 0,
+        }
       );
-      setActiveAnchor(passedSections.at(-1)?.id || null);
+
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          observer?.observe(el);
+        }
+      });
     };
 
-    updateActiveAnchor();
-    window.addEventListener('scroll', updateActiveAnchor, { passive: true });
-    window.addEventListener('resize', updateActiveAnchor);
+    const frame = window.requestAnimationFrame(setupObserver);
+
     return () => {
-      window.removeEventListener('scroll', updateActiveAnchor);
-      window.removeEventListener('resize', updateActiveAnchor);
+      window.cancelAnimationFrame(frame);
+      observer?.disconnect();
+      setActiveAnchor(null);
     };
   }, [pathname]);
 
   useEffect(() => {
     if (pathname !== '/' || !window.location.hash) return;
 
-    const targetId = window.location.hash.slice(1);
+    let targetId = window.location.hash.slice(1);
+    if (targetId === 'how-it-works') targetId = 'the-drop';
+
     const frame = window.requestAnimationFrame(() => {
       const target = document.getElementById(targetId);
       if (!target) return;
       const offset = parseFloat(
         getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
-      ) || 0;
+      ) || 72;
       window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
     });
 
@@ -94,12 +128,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
     if (pathname !== '/') return;
 
     event.preventDefault();
-    setActiveAnchor(id);
     const target = document.getElementById(id);
     if (!target) return;
     const offset = parseFloat(
       getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
-    ) || 0;
+    ) || 72;
     window.history.pushState(null, '', `/#${id}`);
     window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
   };
@@ -137,9 +170,9 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
           {/* Desktop Nav Links */}
           <nav className="hidden items-center gap-5 font-sans text-base font-medium text-neutral-charcoal md:flex">
             <Link
-              href="/#how-it-works"
-              onClick={(event) => handleHomeAnchor(event, 'how-it-works')}
-              className={navLinkClass(pathname === '/' && activeAnchor === 'how-it-works')}
+              href="/#the-drop"
+              onClick={(event) => handleHomeAnchor(event, 'the-drop')}
+              className={navLinkClass(pathname === '/' && activeAnchor === 'the-drop')}
             >
               How it works
             </Link>
@@ -225,12 +258,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
 
               <div className="py-6 flex flex-col gap-5 text-base font-sans font-medium text-neutral-charcoal">
                 <Link
-                  href="/#how-it-works"
+                  href="/#the-drop"
                   onClick={(event) => {
                     setIsMobileMenuOpen(false);
-                    handleHomeAnchor(event, 'how-it-works');
+                    handleHomeAnchor(event, 'the-drop');
                   }}
-                  className={navLinkClass(pathname === '/' && activeAnchor === 'how-it-works')}
+                  className={navLinkClass(pathname === '/' && activeAnchor === 'the-drop')}
                 >
                   How it works
                 </Link>

@@ -36,8 +36,8 @@ export const FoodiesClubCard: React.FC<FoodiesClubCardProps> = ({ compact = fals
           {/* Headline */}
           {/* DESIGN_OVERRIDES §1: Title role , 36px Lora semibold */}
           <h2 className={`relative z-10 font-serif font-semibold leading-[1.2] text-white ${compact ? 'mb-3 text-[28px] sm:text-[32px]' : 'mb-4 text-[32px] sm:text-[40px]'}`}>
-            Stay close to what we&apos;re<br />
-            building.
+            Stay close to what <br />
+            we&apos;re building!
           </h2>
 
           {/* Subhead */}

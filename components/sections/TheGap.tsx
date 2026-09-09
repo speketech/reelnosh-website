@@ -40,7 +40,7 @@ export const TheGap: React.FC = () => {
   ];
 
   return (
-    <section className="bg-[#F7F3ED] py-16 md:py-[100px]">
+    <section className="bg-neutral-warmWhite py-16 md:py-[100px]">
       <div className="mx-auto flex h-full max-w-[1120px] items-center px-5 md:px-0">
         <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-12">
 
@@ -165,7 +165,7 @@ export const TheGap: React.FC = () => {
               {/* Bottom Gradient Fade with closing line sitting over it */}
               <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 flex h-20 sm:h-24 items-end justify-center bg-gradient-to-t from-[#F7F3ED] via-[#F7F3ED]/95 to-transparent pb-4 sm:pb-5">
                 <p className="font-sans text-[13px] sm:text-[14px] text-neutral-clayGray">
-                  ...and then, nothing.
+                  ...and more like this.
                 </p>
               </div>
 

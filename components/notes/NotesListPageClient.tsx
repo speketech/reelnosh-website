@@ -9,17 +9,19 @@ import { FoodieSignupForm } from '@/components/forms/FoodieSignupForm';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ArticleCard } from './ArticleCard';
 import { Button } from '@/components/ui/Button';
+import { calculateReadingTime } from '@/lib/utils/reading-time';
+import { getFounderNoteBody } from '@/lib/notesContent';
 
 interface NotesListPageClientProps {
   featuredNote: {
     id: string;
     slug: string;
     date: string;
-    readTime: string;
     category: string;
     quote: string;
     title: string;
     excerpt: string;
+    body_markdown?: string;
   };
   notes: FounderNoteItem[];
 }
@@ -29,19 +31,39 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
   notes,
 }) => {
   const [isFoodieModalOpen, setIsFoodieModalOpen] = useState(false);
+  const featuredBody = featuredNote.body_markdown || getFounderNoteBody(featuredNote.slug, featuredNote.excerpt);
+  const featuredReadTime = calculateReadingTime(featuredBody);
 
   return (
     <main className="min-h-screen bg-neutral-warmWhite">
       {/* 1. Hero Section */}
       <section className="bg-neutral-warmWhite px-4 pt-4 pb-2 sm:px-6 sm:pt-6 sm:pb-4 md:px-8 md:pt-8 md:pb-6">
         {/* Desktop Version (md and up) */}
-        <div className="relative mx-auto hidden w-full max-w-[1072px] md:block aspect-[1072/460]">
-          {/* Background & Artwork SVG */}
+        <div
+          className="relative mx-auto hidden w-full max-w-[1072px] md:block aspect-[1072/460] overflow-hidden"
+          style={{
+            borderRadius: '30.65% 21.46% 21.46% 12.26% / 71.43% 50% 50% 28.57%',
+          }}
+        >
+          {/* Layer 1: Background Vector Frame & Decorative Accent */}
           <img
             src="/images/notes/hero-note-image.svg"
-            alt="Kudirat Ijeoma Ibeabuchi, Founder of Reelnosh"
+            alt=""
+            aria-hidden="true"
             className="pointer-events-none absolute inset-0 h-full w-full object-contain select-none"
           />
+
+          {/* Layer 2: Real Photo - Positioned to align bottom with big container and right side with spice pop container */}
+          <div className="pointer-events-none absolute left-[57.44%] w-[35.26%] top-[-1.49%] h-[102.61%] select-none">
+            <Image
+              src="/images/notes/kudirat-hero.png"
+              alt="Kudirat Ijeoma Ibeabuchi, Founder of Reelnosh"
+              fill
+              priority
+              sizes="(max-width: 1200px) 450px, 500px"
+              className="object-cover object-top"
+            />
+          </div>
 
           {/* Content Layer */}
           <div className="relative z-10 flex h-full flex-col justify-center pl-[50px] md:pl-[75px] lg:pl-[115px] pr-6 max-w-[580px]">
@@ -64,12 +86,25 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
 
         {/* Mobile Version (< md) */}
         <div className="relative mx-auto w-full max-w-[363px] md:hidden aspect-[363/320]">
-          {/* Background & Avatar SVG */}
+          {/* Layer 1: Background Vector Frame & Yellow Accent */}
           <img
             src="/images/notes/hero-note-image-mobile.svg"
-            alt="Kudirat Ijeoma Ibeabuchi"
+            alt=""
+            aria-hidden="true"
             className="pointer-events-none absolute inset-0 h-full w-full object-contain select-none"
           />
+
+          {/* Layer 2: Real Photo in Coded Circular Container */}
+          <div className="pointer-events-none absolute left-[36.41%] top-[0%] h-[20%] w-[17.63%] overflow-hidden rounded-full select-none">
+            <Image
+              src="/images/notes/kudirat-hero.png"
+              alt="Kudirat Ijeoma Ibeabuchi"
+              fill
+              priority
+              sizes="64px"
+              className="object-cover object-top"
+            />
+          </div>
 
           {/* Content Layer */}
           <div className="relative z-10 flex h-full flex-col justify-start pt-[82px] pl-[26px] pr-5">
@@ -108,11 +143,8 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
               <div className="absolute -right-8 -bottom-8 w-40 h-40 border border-white/15 rounded-full pointer-events-none" />
               <div className="absolute -right-0 -bottom-0 w-24 h-24 border border-white/15 rounded-full pointer-events-none" />
 
-              {/* Top Meta */}
+              {/* Top Meta: Category Badge */}
               <div className="relative z-10">
-                <span className="text-xs text-white/80 font-medium block mb-2">
-                  {featuredNote.date}
-                </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] font-semibold tracking-wide uppercase">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop" />
                   {featuredNote.category}
@@ -130,7 +162,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
             <div className="flex flex-col justify-between p-8 sm:p-10 md:col-span-7">
               <div>
                 <span className="font-sans text-xs font-medium text-neutral-clayGray block mb-3">
-                  {featuredNote.readTime}
+                  {featuredNote.date} · {featuredReadTime} min read
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal leading-snug mb-3 hover:text-clay transition-colors">
                   <Link href={`/founders-note/${featuredNote.slug}`} onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}>
@@ -147,11 +179,11 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                   href={`/founders-note/${featuredNote.slug}`}
                   onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}
                   aria-label={`Read full note: ${featuredNote.title}`}
-                  className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group"
+                  className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group cursor-pointer"
                 >
-                  Read full note{' '}
+                  <span>Read full note</span>
                   <span className="sr-only">: {featuredNote.title}</span>
-                  <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
+                  <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
             </div>
@@ -183,22 +215,6 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
 
           {/* 4. Pre-Footer Callout ("You've read them all.") */}
           <div className="mt-20 sm:mt-28 mb-8 text-center max-w-lg mx-auto">
-            {/* Center Circle Arrow */}
-            <div className="w-12 h-12 rounded-full bg-white border border-neutral-lightClay flex items-center justify-center text-clay mx-auto mb-5 shadow-xs">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </div>
 
             <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal mb-2">
               You&apos;ve read them all.

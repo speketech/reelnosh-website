@@ -4,6 +4,8 @@ import './globals.css';
 import { HeaderWrapper } from '@/components/layout/HeaderWrapper';
 import { Footer } from '@/components/layout/Footer';
 import { SITE_CONFIG } from '@/lib/constants';
+import { Analytics } from '@vercel/analytics/react';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 
 const lora = Lora({
   subsets: ['latin'],
@@ -62,6 +64,8 @@ export default function RootLayout({
         <HeaderWrapper />
         <div className="flex-1">{children}</div>
         <Footer />
+        <Analytics />
+        <GoogleAnalytics />
       </body>
     </html>
   );

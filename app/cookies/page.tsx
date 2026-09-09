@@ -22,7 +22,7 @@ const sections: LegalSection[] = [
     title: '3. How We Use Cookies',
     bulletList: [
       'Remembering your preference: so we don\'t ask you about your cookie preferences on every visit.',
-      'Understanding site performance: if you\'ve turned on analytics cookies, we use them to understand how visitors use the website and improve the experience.',
+      'Understanding site performance: if you\'ve turned on analytics cookies, we use Google Analytics to understand how visitors use the website and improve the experience.',
     ],
     customContent: (
       <p className="mt-3 text-neutral-clayGray leading-relaxed">
@@ -39,8 +39,9 @@ const sections: LegalSection[] = [
   {
     title: '5. Third-Party Cookies',
     paragraphs: [
-      'If you turn on analytics cookies, we may use a third-party analytics service to understand how visitors use the website and improve our experience.',
-      'The specific analytics provider and cookies used will be identified in the Cookie Preferences panel.',
+      'If you choose to enable analytics cookies, we use Google Analytics (GA4), a service provided by Google LLC, to collect aggregate insights on how visitors navigate and interact with our pages.',
+      'Google Analytics uses cookies to gather pseudonymized usage information. It is strictly optional, completely off by default, and never loaded unless you explicitly toggle on Analytics cookies in the Cookie Preferences panel below.',
+      'In addition, we use Vercel Analytics for core platform health and traffic measurement. Vercel Analytics is entirely cookieless, does not collect personal data, and does not require consent cookies.',
       'We do not currently use payment, delivery, advertising, or social-media tracking cookies on this website. As we add features that involve third-party services, we\'ll update this policy to reflect them.',
     ],
   },
@@ -60,9 +61,19 @@ export default function CookiesPage() {
   const [analytics, setAnalytics] = useState(
     () => typeof window !== 'undefined' && localStorage.getItem('reelnosh-analytics-consent') === 'granted'
   );
+  const [saved, setSaved] = useState(false);
+
+  const handleToggle = (checked: boolean) => {
+    setAnalytics(checked);
+    localStorage.setItem('reelnosh-analytics-consent', checked ? 'granted' : 'denied');
+    window.dispatchEvent(new CustomEvent('reelnosh-consent-change', { detail: { granted: checked } }));
+  };
 
   const savePreferences = () => {
     localStorage.setItem('reelnosh-analytics-consent', analytics ? 'granted' : 'denied');
+    window.dispatchEvent(new CustomEvent('reelnosh-consent-change', { detail: { granted: analytics } }));
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
   };
 
   return (
@@ -87,24 +98,31 @@ export default function CookiesPage() {
             </span>
           </div>
           <label className="flex cursor-pointer items-center justify-between gap-5">
-            <span>
-              <span className="block font-sans text-sm font-semibold text-neutral-charcoal">Analytics cookies</span>
-              <span className="block text-sm text-neutral-clayGray">Helps us understand what&apos;s working</span>
-            </span>
+            <div>
+              <span className="block font-sans text-sm font-semibold text-neutral-charcoal">Analytics cookies (Google Analytics)</span>
+              <span className="block text-sm text-neutral-clayGray">Helps us understand site traffic and usage. Off by default.</span>
+            </div>
             <input
               type="checkbox"
               checked={analytics}
-              onChange={(event) => setAnalytics(event.target.checked)}
+              onChange={(event) => handleToggle(event.target.checked)}
               className="h-5 w-5 accent-clay"
             />
           </label>
-          <button
-            type="button"
-            onClick={savePreferences}
-            className="rounded-brand bg-clay px-5 py-3 text-sm font-semibold text-white hover:bg-clay-hover transition-colors"
-          >
-            Save preferences
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={savePreferences}
+              className="rounded-brand bg-clay px-5 py-3 text-sm font-semibold text-white hover:bg-clay-hover transition-colors"
+            >
+              {saved ? 'Preferences saved' : 'Save preferences'}
+            </button>
+            {saved && (
+              <span className="text-sm text-accent-herbGreen font-medium">
+                Saved successfully
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </LegalPage>

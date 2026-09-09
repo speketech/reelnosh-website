@@ -79,10 +79,10 @@ export const FoundersNoteFeed: React.FC<FoundersNoteFeedProps> = ({ initialNotes
             <p className="font-sans text-sm sm:text-base text-neutral-clayGray leading-relaxed">
               {note.excerpt}
             </p>
-            <div className="pt-2 text-xs font-semibold text-clay font-sans inline-flex items-center gap-1.5">
+            <div className="pt-2 text-xs font-semibold text-clay font-sans inline-flex items-center gap-1.5 group-hover:underline">
               <span>Read more</span>
               <span className="sr-only">: {note.title}</span>
-              <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4" />
+              <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover:translate-x-0.5" />
             </div>
           </Link>
           </article>
