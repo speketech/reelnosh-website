@@ -20,9 +20,8 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
     >
       {/* Sun Icon: visible in dark mode, clicking switches to light */}
       <svg
-        className={`absolute h-5 w-5 transition-opacity duration-300 ${
-          mounted && theme === 'dark' ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`absolute h-5 w-5 transition-opacity duration-300 ${mounted && theme === 'dark' ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -37,9 +36,8 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className = '' }) => {
 
       {/* Moon Icon: visible in light mode (and before mounted to avoid FOUC), clicking switches to dark */}
       <svg
-        className={`absolute h-5 w-5 transition-opacity duration-300 ${
-          mounted && theme === 'dark' ? 'opacity-0 pointer-events-none' : 'opacity-100'
-        }`}
+        className={`absolute h-5 w-5 transition-opacity duration-300 ${mounted && theme === 'dark' ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
