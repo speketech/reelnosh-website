@@ -61,10 +61,11 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
           />
 
           {/* Layer 2: Visual Anchor — Spicepop accent + Kudirat photo
-              - Desktop (lg+): original size (41.04% width, left-[54.1%])
-              - Tablet / iPad Mini (sm to md): sized gracefully (~30%–33% width)
-              - Surface Duo (500px–639px): slightly increased (~27% width, 84% height) */}
-          <div className="pointer-events-none absolute bottom-0 select-none min-[500px]:right-[2%] min-[500px]:w-[27%] min-[500px]:h-[84%] sm:right-[2%] sm:w-[30%] sm:h-[88%] md:right-[3%] md:w-[33%] md:h-[92%] lg:left-[54.1%] lg:right-auto lg:w-[41.04%] lg:h-full">
+              - Desktop (xl+ 1280px): original size (41.04% width, left-[54.1%])
+              - iPad Pro only (tablet: 834px & lg: 1024px): slightly reduced (~34%–36% width, ~92% height)
+              - Tablets / iPad Mini (sm to md): sized gracefully (~29%–32% width)
+              - Surface Duo (500px–639px): ~26% width, 82% height */}
+          <div className="pointer-events-none absolute bottom-0 select-none min-[500px]:right-[2%] min-[500px]:w-[26%] min-[500px]:h-[82%] sm:right-[2%] sm:w-[29%] sm:h-[86%] md:right-[2.5%] md:w-[32%] md:h-[88%] tablet:right-[3%] tablet:w-[34%] tablet:h-[91%] lg:right-[3.5%] lg:w-[36%] lg:h-[93%] lg:left-auto xl:left-[54.1%] xl:right-auto xl:w-[41.04%] xl:h-full">
             {/* Spicepop background shape */}
             <img
               src="/images/notes/hero-spicepop.svg"
@@ -87,22 +88,22 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
           </div>
 
           {/* Content Layer:
-              - Left padding: min-[500px]:pl-12 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] to completely clear the top-left curve on Surface Duo and tablets
-              - Heading line height: leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] + explicit margin on 'publicly.' for luxurious breathing room
-              - Max-width: min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] lg:w-[52%] */}
-          <div className="relative z-10 flex h-full flex-col justify-center pl-6 min-[500px]:pl-12 sm:pl-16 md:pl-24 lg:pl-[95px] xl:pl-[115px] min-[500px]:pt-1 sm:pt-0 pr-3 sm:pr-4 w-[74%] min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] lg:w-[52%]">
-            <h1 className="font-serif text-lg min-[500px]:text-[19px] sm:text-2xl md:text-[30px] lg:text-[44px] xl:text-[50px] font-semibold leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] text-neutral-charcoal tracking-tight">
+              - Left padding: min-[500px]:pl-16 sm:pl-20 md:pl-28 tablet:pl-[105px] lg:pl-[120px] xl:pl-[130px] to give the letter 'B' generous clearance from the edge curve
+              - Heading line height: leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] + explicit margin on 'publicly.'
+              - Body text: increased font size across all tablets (Surface Duo: 12.5px, iPad Mini/Air/Surface Pro: 15px, iPad Pro: 16px, Desktop: 17px) */}
+          <div className="relative z-10 flex h-full flex-col justify-center pl-8 min-[500px]:pl-16 sm:pl-20 md:pl-28 tablet:pl-[105px] lg:pl-[120px] xl:pl-[130px] pt-3 min-[500px]:pt-3 sm:pt-4 md:pt-4 lg:pt-0 pr-3 sm:pr-4 w-[74%] min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] tablet:w-[58%] lg:w-[54%] xl:w-[50%]">
+            <h1 className="font-serif text-lg min-[500px]:text-[19px] sm:text-2xl md:text-[30px] lg:text-[42px] xl:text-[50px] font-semibold leading-[1.3] min-[500px]:leading-[1.35] lg:leading-[1.4] text-neutral-charcoal tracking-tight">
               Building{' '}
               <span className="italic text-clay font-normal">Reelnosh</span>
               <br />
               <span className="inline-block mt-0.5 sm:mt-1 md:mt-1.5 lg:mt-2">publicly.</span>
             </h1>
 
-            <p className="mt-1.5 min-[500px]:mt-2 sm:mt-3 md:mt-4 lg:mt-5 font-sans text-[10.5px] min-[500px]:text-[11px] sm:text-xs md:text-[13px] lg:text-[15px] leading-[1.45] sm:leading-[1.5] lg:leading-[1.6] text-neutral-clayGray max-w-[465px]">
+            <p className="mt-1.5 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-4 font-sans text-[11px] min-[500px]:text-[12.5px] sm:text-[13.5px] md:text-[15px] lg:text-[16px] xl:text-[17px] leading-[1.45] min-[500px]:leading-[1.5] md:leading-[1.6] lg:leading-[1.65] text-neutral-clayGray max-w-[465px]">
               Hi, this is where I write honestly about what we&apos;re learning while building Reelnosh: the product decisions, the Lagos food scene, what you&apos;re teaching us, and yes, what we&apos;re still getting wrong.
             </p>
 
-            <p className="mt-1.5 min-[500px]:mt-2 sm:mt-3.5 md:mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-[11px] sm:text-xs md:text-base lg:text-[17px]">
+            <p className="mt-1.5 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-5 font-serif italic font-normal text-neutral-charcoal text-[11px] min-[500px]:text-[12.5px] sm:text-sm md:text-[15px] lg:text-base xl:text-[17px]">
               - Kudirat
             </p>
           </div>
