@@ -32,6 +32,19 @@
   --color-disabled-text: #9A948C;
   --color-selected-bg: #F9F3F1;
 
+  /* Comment thread avatar tokens — high contrast against card surface #FCFAF7 */
+  --comment-avatar-1-bg: #8B3A2A;
+  --comment-avatar-1-text: #FFFFFF;
+  --comment-avatar-1-border: #743022;
+
+  --comment-avatar-2-bg: #5A2418;
+  --comment-avatar-2-text: #FFFFFF;
+  --comment-avatar-2-border: #441A10;
+
+  --comment-avatar-3-bg: #B84D1B;
+  --comment-avatar-3-text: #FFFFFF;
+  --comment-avatar-3-border: #993F14;
+
   /* DESIGN_OVERRIDES §2 , vertical rhythm tokens */
   --rhythm-section-desktop: 120px;
   --rhythm-section-mobile: 64px;
@@ -68,6 +81,19 @@
   --color-disabled-bg: #3A332C;
   --color-disabled-text: #6B665F;
   --color-selected-bg: #2F2922;
+
+  /* Comment thread avatar tokens — high contrast against dark card surface #2C2720 */
+  --comment-avatar-1-bg: #D68874;
+  --comment-avatar-1-text: #1A1613;
+  --comment-avatar-1-border: #E5A594;
+
+  --comment-avatar-2-bg: #F4C16D;
+  --comment-avatar-2-text: #1A1613;
+  --comment-avatar-2-border: #F7D18E;
+
+  --comment-avatar-3-bg: #E29B84;
+  --comment-avatar-3-text: #1A1613;
+  --comment-avatar-3-border: #EBB09D;
 }
 
 * {

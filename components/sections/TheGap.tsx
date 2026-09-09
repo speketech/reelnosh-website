@@ -8,7 +8,7 @@ export const TheGap: React.FC = () => {
       id: 'b1',
       number: '1',
       initials: 'AO',
-      avatarBg: 'bg-clay/15 text-clay',
+      avatarBg: 'bg-[var(--comment-avatar-1-bg)] text-[var(--comment-avatar-1-text)] border border-[var(--comment-avatar-1-border)]',
       text: 'I need this.',
       timestamp: '2m ago',
       positionClasses: 'top-[114px] sm:top-[134px] left-3 sm:left-[32px]',
@@ -19,7 +19,7 @@ export const TheGap: React.FC = () => {
       id: 'b2',
       number: '2',
       initials: 'TA',
-      avatarBg: 'bg-[#5A2418]/15 text-[#5A2418]',
+      avatarBg: 'bg-[var(--comment-avatar-2-bg)] text-[var(--comment-avatar-2-text)] border border-[var(--comment-avatar-2-border)]',
       text: 'How much?',
       timestamp: '14m ago',
       positionClasses: 'top-[186px] sm:top-[214px] left-[110px] sm:left-[215px]',
@@ -30,7 +30,7 @@ export const TheGap: React.FC = () => {
       id: 'b3',
       number: '3',
       initials: 'CO',
-      avatarBg: 'bg-[#B84D1B]/15 text-[#B84D1B]',
+      avatarBg: 'bg-[var(--comment-avatar-3-bg)] text-[var(--comment-avatar-3-text)] border border-[var(--comment-avatar-3-border)]',
       text: 'Can I order?',
       timestamp: '1h ago',
       positionClasses: 'top-[258px] sm:top-[294px] left-4 sm:left-[48px]',
@@ -136,8 +136,8 @@ export const TheGap: React.FC = () => {
                   >
                     <div className="relative flex items-center gap-3 rounded-[14px] sm:rounded-[16px] bg-[var(--color-surface-alt)] p-2.5 sm:p-3 shadow-elevation1 border border-neutral-lightClay/50">
                       {/* 28px/32px Circular Avatar with distinct initials & tints */}
-                      <div className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full ${bubble.avatarBg}`}>
-                        <span className="font-sans text-[11px] font-semibold">{bubble.initials}</span>
+                      <div className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full shadow-xs transition-colors duration-200 ${bubble.avatarBg}`}>
+                        <span className="font-sans text-[11px] font-bold tracking-tight">{bubble.initials}</span>
                       </div>
 
                       {/* Comment text & timestamp */}
