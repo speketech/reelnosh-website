@@ -12,7 +12,7 @@ export const FounderNoteTeaser: React.FC<FounderNoteTeaserProps> = ({ notes }) =
 
   return (
     <section id="founders-note" className="bg-neutral-warmWhite py-16 md:py-[120px]">
-      <div className="mx-auto max-w-[1120px] px-5 md:px-0">
+      <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
         
         {/* Header Row */}
         <div className="mb-10">
@@ -32,8 +32,8 @@ export const FounderNoteTeaser: React.FC<FounderNoteTeaserProps> = ({ notes }) =
           </div>
         </div>
 
-        {/* 3-Column ArticleCard Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* 3-Column ArticleCard Grid — evenly sized across all viewports */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {displayNotes.map((note, index) => (
             <ScrollReveal key={note.id} delay={index * 80}>
               <ArticleCard note={note} origin="home" />

@@ -25,7 +25,7 @@ const valueProps = [
 export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist }) => {
   return (
     <section id="for-creators" className="scroll-mt-[var(--nav-height)] bg-neutral-warmWhite py-16 md:py-[120px]">
-      <div className="mx-auto max-w-[1120px] px-5 md:px-0">
+      <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
 
           {/* Left Column: Creator Value Proposition */}

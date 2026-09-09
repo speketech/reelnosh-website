@@ -21,7 +21,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
 
   return (
     <section id="exploring" className="bg-neutral-warmWhite py-16 md:py-[120px]">
-      <div className="mx-auto max-w-[1120px] px-5 md:px-0">
+      <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
         
         {/* Section Header */}
         <div className="mb-10">
@@ -40,15 +40,10 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
           </p>
         </div>
 
-        {/* Unified Card Grid:
-            - Mobile (<md): single column
-            - Tablet (md–lg): hero card spans full width, 2 compact cards below in a row
-            - Desktop (lg+): 3-column uniform grid */}
+        {/* Uniform Card Grid — all cards evenly sized */}
         <ScrollReveal className="mb-10">
-          {displayItems.length > 0 && (() => {
-            const [heroItem, ...restItems] = displayItems;
-
-            const renderCard = (item: typeof heroItem) => {
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {displayItems.map((item) => {
               const mediaUrl = item.public_url || item.media_url;
               const isVideo = item.media_type === 'video';
               const creatorUsername = item.creator_username || item.creator_handle?.replace(/^@/, '') || 'kudiratijeoma';
@@ -73,25 +68,27 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                       />
                     ) : (
                       <Image
-                        src={mediaUrl}
+                        src={mediaUrl || '/images/hero/hero-food.png'}
                         alt={item.title}
                         fill
-                        sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 360px"
-                        className="object-cover transition-transform duration-300 hover:scale-[1.02]"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-300 hover:scale-105"
                       />
                     )}
 
-                    {/* Credit chip */}
+                    {/* Gradient Overlay for Handle */}
+                    <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+
+                    {/* Creator Handle Pill */}
                     <a
                       href={sourcePostUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-1.5 rounded-full bg-neutral-charcoal/65 px-2.5 py-1 text-white backdrop-blur-sm transition-colors hover:bg-neutral-charcoal/85 shadow-xs"
-                      aria-label={`View ${creatorHandle} on Instagram`}
+                      className="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-black/40 backdrop-blur-md px-3 py-1.5 transition-all hover:bg-black/60 border border-white/20"
                     >
                       <svg
-                        width="13"
-                        height="13"
+                        width="12"
+                        height="12"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -139,25 +136,8 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                   </div>
                 </div>
               );
-            };
-
-            return (
-              <>
-                {/* Grid:
-                    mobile: 1-col
-                    tablet (md): 2-col grid — hero card is col-span-2 (full width), 2 compact cards are 1-col each on the next row
-                    desktop (lg+): 3-col — all cards are 1-col each */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                  {/* Hero card: full-width at tablet via col-span-2, normal 1-col at lg */}
-                  <div className="md:col-span-2 lg:col-span-1">
-                    {renderCard(heroItem)}
-                  </div>
-                  {/* Remaining 2 cards: each 1/2 width at tablet, 1/3 at desktop */}
-                  {restItems.map((item) => renderCard(item))}
-                </div>
-              </>
-            );
-          })()}
+            })}
+          </div>
         </ScrollReveal>
 
       </div>

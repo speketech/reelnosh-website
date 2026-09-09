@@ -6,8 +6,8 @@ import { FAQ_ITEMS } from '@/lib/faq';
 export const Faq: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   return (
-    <section id="faq" className="bg-neutral-warmWhite px-5 py-16 md:py-[120px]">
-      <div className="mx-auto grid max-w-[1120px] gap-12 md:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.2fr)] md:gap-20">
+    <section id="faq" className="bg-neutral-warmWhite py-16 md:py-[120px]">
+      <div className="mx-auto grid max-w-[1120px] gap-12 px-5 md:px-12 min-[1120px]:px-0 md:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.2fr)] md:gap-20">
         <div className="max-w-md">
           <div className="mb-3 inline-flex items-center gap-2">
             <span className="h-2 w-2 shrink-0 rounded-full bg-accent-spicePop" />

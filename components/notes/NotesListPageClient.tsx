@@ -44,10 +44,10 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
   return (
     <main className="min-h-screen bg-neutral-warmWhite">
       {/* 1. Hero Section */}
-      <section className="bg-neutral-warmWhite px-4 pt-4 pb-2 sm:px-6 sm:pt-6 sm:pb-4 tablet:px-12 md:px-8 md:pt-8 md:pb-6">
-        {/* Desktop Version (md and up) */}
+      <section className="bg-neutral-warmWhite px-4 pt-4 pb-2 sm:px-6 sm:pt-6 sm:pb-4 md:px-12 md:pt-8 md:pb-6 min-[1120px]:px-0">
+        {/* Desktop Version (sm and up — covers tablets & iPad Mini) */}
         <div
-          className="relative mx-auto hidden w-full max-w-[1072px] md:block aspect-[1072/460] overflow-hidden"
+          className="relative mx-auto hidden w-full max-w-[1072px] sm:block aspect-[1072/460] overflow-hidden"
           style={{
             borderRadius: '30.65% 21.46% 21.46% 12.26% / 71.43% 50% 50% 28.57%',
           }}
@@ -72,27 +72,27 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
             />
           </div>
 
-          {/* Content Layer */}
-          <div className="relative z-10 flex h-full flex-col justify-center pl-[50px] md:pl-[75px] lg:pl-[115px] pr-6 max-w-[580px]">
-            <h1 className="font-serif text-3xl md:text-[38px] lg:text-[46px] xl:text-[50px] font-semibold leading-[1.12] text-neutral-charcoal tracking-tight">
+          {/* Content Layer — strictly constrained to 53% max-width so text never touches the spice pop region (at 55%+) */}
+          <div className="relative z-10 flex h-full flex-col justify-center pl-6 sm:pl-8 md:pl-12 lg:pl-[90px] xl:pl-[115px] pr-2 sm:pr-4 w-[53%] max-w-[53%]">
+            <h1 className="font-serif text-xl sm:text-2xl md:text-[34px] lg:text-[44px] xl:text-[50px] font-semibold leading-[1.12] text-neutral-charcoal tracking-tight">
               Building{' '}
               <span className="italic text-clay font-normal">Reelnosh</span>
               <br />
               publicly.
             </h1>
 
-            <p className="mt-4 lg:mt-5 font-sans text-xs md:text-[13px] lg:text-[15px] leading-[1.6] text-neutral-clayGray max-w-[465px]">
+            <p className="mt-2 sm:mt-3 md:mt-4 lg:mt-5 font-sans text-[11px] sm:text-xs md:text-[13px] lg:text-[15px] leading-[1.35] sm:leading-[1.5] lg:leading-[1.6] text-neutral-clayGray">
               Hi, this is where I write honestly about what we&apos;re learning while building Reelnosh: the product decisions, the Lagos food scene, what you&apos;re teaching us, and yes, what we&apos;re still getting wrong.
             </p>
 
-            <p className="mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-sm md:text-base lg:text-[17px]">
+            <p className="mt-2 sm:mt-3.5 md:mt-5 lg:mt-7 font-serif italic font-normal text-neutral-charcoal text-xs sm:text-sm md:text-base lg:text-[17px]">
               - Kudirat
             </p>
           </div>
         </div>
 
-        {/* Mobile Version (< md) */}
-        <div className="relative mx-auto w-full max-w-[363px] md:hidden aspect-[363/320]">
+        {/* Mobile Version (< sm) */}
+        <div className="relative mx-auto w-full max-w-[363px] sm:hidden aspect-[363/320]">
           {/* Layer 1: Background Vector Frame & Yellow Accent */}
           <img
             src="/images/notes/hero-note-image-mobile.svg"
@@ -134,7 +134,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
       </section>
 
       {/* 2. Latest Note Section , DESIGN_OVERRIDES §4: Clay pull-quote treatment only */}
-      <section className="bg-neutral-warmWhite px-5 pb-16 pt-6 sm:px-8 sm:pb-20 sm:pt-8 md:px-0 md:pt-10">
+      <section className="bg-neutral-warmWhite px-5 pb-16 pt-6 sm:px-8 sm:pb-20 sm:pt-8 md:px-12 md:pt-10 min-[1120px]:px-0">
         <div className="max-w-[1120px] mx-auto">
           {/* Eyebrow */}
           <h2 className="font-sans text-xs font-semibold uppercase tracking-[1.5px] text-neutral-charcoal mb-4">
@@ -199,7 +199,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
       </section>
 
       {/* 3. All Notes Grid Section */}
-      <section className="pb-16 sm:pb-20 px-5 sm:px-8 md:px-0">
+      <section className="pb-16 sm:pb-20 px-5 sm:px-8 md:px-12 min-[1120px]:px-0">
         <div className="max-w-[1120px] mx-auto">
           {/* Header row */}
           <div className="flex items-center justify-between mb-6 sm:mb-8">

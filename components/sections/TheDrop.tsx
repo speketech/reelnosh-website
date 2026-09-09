@@ -39,7 +39,7 @@ export const TheDrop: React.FC = () => {
 
   return (
     <section id="the-drop" className="scroll-mt-[var(--nav-height)] bg-neutral-softCream py-16 md:py-[120px]">
-      <div className="mx-auto max-w-[1120px] px-5 md:px-0">
+      <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
 
         {/* Header Row */}
         <div className="mb-12 grid grid-cols-1 items-end gap-6 lg:grid-cols-12 lg:gap-12">

@@ -41,7 +41,7 @@ export const TheGap: React.FC = () => {
 
   return (
     <section className="bg-neutral-warmWhite py-16 md:py-[100px]">
-      <div className="mx-auto flex h-full max-w-[1120px] items-center px-5 md:px-0">
+      <div className="mx-auto flex h-full max-w-[1120px] items-center px-5 md:px-12 min-[1120px]:px-0">
         <div className="grid w-full grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-12">
 
           {/* Left Column: Problem Statement */}

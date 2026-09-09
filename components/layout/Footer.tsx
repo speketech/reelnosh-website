@@ -13,7 +13,7 @@ const socialLinks = [
 
 export const Footer: React.FC = () => (
   <footer className="bg-[#1E1B18] px-0 pb-12 pt-14 font-sans text-white">
-    <div className="mx-auto max-w-[1120px] px-5 md:px-0">
+    <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
       <div className="flex flex-col justify-between gap-8 pb-12 md:flex-row md:items-start">
         <div className="space-y-4">
           <div className="relative h-8 w-32 sm:h-9 sm:w-36">

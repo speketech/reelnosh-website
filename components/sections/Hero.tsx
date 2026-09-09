@@ -23,7 +23,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
 
   return (
     <section className="relative overflow-hidden bg-neutral-warmWhite py-12 md:py-16 lg:py-20">
-      <div className="mx-auto max-w-[1120px] px-5 md:px-0">
+      <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-8">
           
           {/* Left Column: Copy & Actions */}

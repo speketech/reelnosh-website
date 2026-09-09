@@ -63,7 +63,7 @@ export const FoodiesClubCard: React.FC<FoodiesClubCardProps> = ({ compact = fals
 
 export const FoodiesClub: React.FC<FoodiesClubProps> = () => (
   <section id="foodies-club" className="relative overflow-hidden bg-[#F7F3ED] py-16 md:py-[120px]">
-    <div className="relative z-10 mx-auto max-w-[1120px] px-5 md:px-0">
+    <div className="relative z-10 mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
       <FoodiesClubCard />
     </div>
   </section>

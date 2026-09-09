@@ -153,7 +153,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             : 'bg-neutral-warmWhite h-[72px] py-3'
         }`}
       >
-        <div className="max-w-[1120px] mx-auto px-5 md:px-0 flex items-center justify-between">
+        <div className="max-w-[1120px] mx-auto px-5 md:px-12 min-[1120px]:px-0 flex items-center justify-between">
           {/* Logo: icon-only mark at tablet (md–lg), full lockup at lg+ and mobile */}
           <Link href="/" className="flex items-center gap-2" aria-label="Reelnosh Home">
             {/* Full logo: visible on mobile (< md) and desktop (lg+) */}
@@ -204,11 +204,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
 
           {/* Primary CTA & Mobile Toggle */}
           <div className="flex items-center gap-2">
-            {/* Full-size CTA , desktop only */}
+            {/* Full CTA — shown from tablet (834px) up; compact CTA covers below that */}
             <Button
               onClick={onOpenEarlyAccess}
               size="md"
-              className="hidden sm:inline-flex"
+              className="hidden tablet:inline-flex"
             >
               Join Early Access
             </Button>
@@ -244,7 +244,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
 
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-neutral-charcoal/60 backdrop-blur-sm md:hidden transition-opacity">
+        <div className="fixed inset-0 z-50 bg-neutral-charcoal/60 backdrop-blur-sm tablet:hidden transition-opacity">
           <div className="fixed inset-y-0 right-0 w-4/5 max-w-sm bg-neutral-warmWhite p-6 shadow-elevation2 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-6 border-b border-surface-divider">
