@@ -65,27 +65,27 @@ export const TheDrop: React.FC = () => {
           </div>
         </div>
 
-        {/* Contained Timeline Panel – Soft Cream (#F7F3ED), generous breathing room, Elevation 1 */}
+        {/* Contained Timeline Panel */}
         <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-neutral-lightClay/70 bg-neutral-warmWhite px-8 py-14 sm:px-12 sm:py-16 md:py-20 lg:px-14 lg:py-24 shadow-elevation1">
 
-          {/* Desktop Layout (lg:block) */}
-          <div className="hidden lg:block relative">
+          {/* Tablet/Desktop Layout (md:block) — horizontal track */}
+          <div className="hidden md:block relative">
             {/* Connecting Track: continuous 6px path through vertical center of all 4 badges */}
             <div
               className="absolute top-[32px] -translate-y-1/2 left-[12.5%] right-[12.5%] h-[6px] rounded-full bg-clay z-0"
               aria-hidden="true"
             />
 
-            <div className="relative z-10 grid grid-cols-4 gap-6 text-center">
+            <div className="relative z-10 grid grid-cols-4 gap-4 lg:gap-6 text-center">
               {stations.map((station, idx) => (
                 <ScrollReveal
                   key={station.title}
                   delay={idx * 80}
                   className="flex flex-col items-center"
                 >
-                  {/* 64�,64 Station Badge */}
+                  {/* 64×64 Station Badge */}
                   <div
-                    className={`w-16 h-16 rounded-full flex items-center justify-center text-white shadow-sm ring-8 ring-[#F7F3ED] mb-5 ${
+                    className={`w-14 h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center text-white shadow-sm ring-4 lg:ring-8 ring-neutral-warmWhite mb-5 ${
                       station.isConcluded ? 'bg-[#5A2418]' : 'bg-clay'
                     }`}
                   >
@@ -108,8 +108,8 @@ export const TheDrop: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Layout (< lg) */}
-          <div className="lg:hidden relative">
+          {/* Mobile Layout (< md) */}
+          <div className="md:hidden relative">
             {/* Vertical Connecting Track: 6px path through badges */}
             <div
               className="absolute left-[31px] top-8 bottom-12 w-[6px] -translate-x-1/2 rounded-full bg-clay z-0"
@@ -125,7 +125,7 @@ export const TheDrop: React.FC = () => {
                 >
                   {/* 64�,64 Station Badge */}
                   <div
-                    className={`w-16 h-16 shrink-0 rounded-full flex items-center justify-center text-white shadow-sm ring-4 ring-[#F7F3ED] ${
+                    className={`w-16 h-16 shrink-0 rounded-full flex items-center justify-center text-white shadow-sm ring-4 ring-neutral-warmWhite ${
                       station.isConcluded ? 'bg-[#5A2418]' : 'bg-clay'
                     }`}
                   >

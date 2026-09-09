@@ -3,14 +3,21 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { FounderNoteItem } from '@/lib/constants';
 import { Modal } from '@/components/ui/Modal';
-import { FoodieSignupForm } from '@/components/forms/FoodieSignupForm';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ArticleCard } from './ArticleCard';
 import { Button } from '@/components/ui/Button';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 import { getFounderNoteBody } from '@/lib/notesContent';
+
+// Load form + its dependencies (react-hook-form, zod) only when the modal opens.
+const FoodieSignupForm = dynamic(
+  () => import('@/components/forms/FoodieSignupForm').then((mod) => mod.FoodieSignupForm),
+  { ssr: false }
+);
+
 
 interface NotesListPageClientProps {
   featuredNote: {
@@ -37,7 +44,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
   return (
     <main className="min-h-screen bg-neutral-warmWhite">
       {/* 1. Hero Section */}
-      <section className="bg-neutral-warmWhite px-4 pt-4 pb-2 sm:px-6 sm:pt-6 sm:pb-4 md:px-8 md:pt-8 md:pb-6">
+      <section className="bg-neutral-warmWhite px-4 pt-4 pb-2 sm:px-6 sm:pt-6 sm:pb-4 tablet:px-12 md:px-8 md:pt-8 md:pb-6">
         {/* Desktop Version (md and up) */}
         <div
           className="relative mx-auto hidden w-full max-w-[1072px] md:block aspect-[1072/460] overflow-hidden"
@@ -243,9 +250,11 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
         onClose={() => setIsFoodieModalOpen(false)}
         title="Stay close to what we're building"
       >
-        <FoodieSignupForm
-          onSuccess={() => setIsFoodieModalOpen(false)}
-        />
+        {isFoodieModalOpen && (
+          <FoodieSignupForm
+            onSuccess={() => setIsFoodieModalOpen(false)}
+          />
+        )}
       </Modal>
     </main>
   );

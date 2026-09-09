@@ -34,7 +34,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
             </p>
 
             {/* H1 with exact line breaks matching reference */}
-            <h1 className="mb-6 font-serif text-[36px] font-semibold leading-[1.15] text-neutral-charcoal sm:text-[48px]">
+            <h1 className="mb-6 font-serif text-[36px] font-semibold leading-[1.15] text-neutral-charcoal tablet:text-[40px] sm:text-[48px]">
               Where food content <span className="font-medium italic text-clay">becomes meals.</span>
             </h1>
 

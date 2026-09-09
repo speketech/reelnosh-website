@@ -154,9 +154,10 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
         }`}
       >
         <div className="max-w-[1120px] mx-auto px-5 md:px-0 flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo: icon-only mark at tablet (md–lg), full lockup at lg+ and mobile */}
           <Link href="/" className="flex items-center gap-2" aria-label="Reelnosh Home">
-            <div className="relative h-8 w-32 sm:h-9 sm:w-36">
+            {/* Full logo: visible on mobile (< md) and desktop (lg+) */}
+            <div className="relative h-8 w-32 sm:h-9 sm:w-36 tablet:hidden lg:block">
               <Image
                 src="/brand/logo-primary.svg"
                 alt="Reelnosh"
@@ -165,10 +166,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                 className="object-contain object-left"
               />
             </div>
+            {/* Icon mark: visible only in tablet range (md–lg) */}
+            <div className="relative hidden tablet:block lg:hidden h-8 w-8">
+              <Image
+                src="/brand/icon-mark.svg"
+                alt="Reelnosh"
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden items-center gap-5 font-sans text-base font-medium text-neutral-charcoal md:flex">
+          {/* Desktop Nav Links — shown from tablet (834px) up */}
+          <nav className="hidden items-center gap-5 font-sans text-base font-medium text-neutral-charcoal tablet:flex">
             <Link
               href="/#the-drop"
               onClick={(event) => handleHomeAnchor(event, 'the-drop')}
@@ -202,20 +213,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
               Join Early Access
             </Button>
 
-            {/* Compact CTA , mobile only, always visible in header bar (DESIGN_OVERRIDES §6) */}
+            {/* Compact CTA — mobile only, always visible in header bar */}
             <button
               type="button"
               onClick={onOpenEarlyAccess}
-              className="sm:hidden inline-flex items-center justify-center rounded-brand bg-clay px-3 py-1.5 font-sans text-xs font-semibold text-white transition-colors hover:bg-clay-hover active:bg-clay-pressed"
+              className="tablet:hidden inline-flex items-center justify-center rounded-brand bg-clay px-3 py-1.5 font-sans text-xs font-semibold text-white transition-colors hover:bg-clay-hover active:bg-clay-pressed"
             >
               Join Early Access
             </button>
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile Hamburger Button — hidden from tablet up */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
-              className="md:hidden p-2 text-neutral-charcoal hover:text-clay rounded-md transition-colors"
+              className="tablet:hidden p-2 text-neutral-charcoal hover:text-clay rounded-md transition-colors"
             >
               {isMobileMenuOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

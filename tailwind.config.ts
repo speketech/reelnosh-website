@@ -7,6 +7,20 @@ const config: Config = {
     './lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      // Keep Tailwind defaults but add an explicit tablet breakpoint.
+      // 'sm' = 640px (small phones landscape / large phones)
+      // 'md' = 768px (tablet portrait min)
+      // 'tablet' = 834px (iPad Pro 11" portrait — design reference for tablet-specific layouts)
+      // 'lg' = 1024px (tablet landscape / small desktop)
+      // 'xl' = 1280px, '2xl' = 1536px
+      'sm': '640px',
+      'md': '768px',
+      'tablet': '834px',
+      'lg': '1024px',
+      'xl': '1280px',
+      '2xl': '1536px',
+    },
     extend: {
       colors: {
         clay: {
