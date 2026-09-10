@@ -1,29 +1,26 @@
-import type { Config } from 'tailwindcss';
-
-const config: Config = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './lib/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: ['selector', '[data-theme="dark"], .dark'],
+  content: [
+    './src/**/*.{html,js,jsx,ts,tsx,vue,svelte}',
+    './app/**/*.{html,js,jsx,ts,tsx,vue,svelte}',
+    './pages/**/*.{html,js,jsx,ts,tsx,vue,svelte}',
+    './components/**/*.{html,js,jsx,ts,tsx,vue,svelte}',
+    './lib/**/*.{html,js,jsx,ts,tsx,vue,svelte}',
+  ],
   theme: {
-    screens: {
-      // Keep Tailwind defaults but add an explicit tablet breakpoint.
-      // 'sm' = 640px (small phones landscape / large phones)
-      // 'md' = 768px (tablet portrait min)
-      // 'tablet' = 834px (iPad Pro 11" portrait — design reference for tablet-specific layouts)
-      // 'lg' = 1024px (tablet landscape / small desktop)
-      // 'xl' = 1280px, '2xl' = 1536px
-      'sm': '640px',
-      'md': '768px',
-      'tablet': '834px',
-      'lg': '1024px',
-      'xl': '1280px',
-      '2xl': '1536px',
-    },
     extend: {
+      screens: {
+        'sm': '640px',
+        'md': '768px',
+        'tablet': '834px',
+        'lg': '1024px',
+        'xl': '1280px',
+        '2xl': '1536px',
+      },
       colors: {
+        // LIGHT: #FFF5FA — Warm White page background.
+        // DARK: #1E1B18 — replaces Warm White as the primary canvas.
         rn: {
           canvas: 'var(--rn-dark-canvas)',
           surface: 'var(--rn-dark-surface)',
@@ -38,24 +35,97 @@ const config: Config = {
           'accent-warmth': 'var(--rn-dark-accent-warmth)',
           'accent-clay': 'var(--rn-dark-accent-clay)',
           base: 'rgb(var(--rn-dark-base) / <alpha-value>)',
+
+          // LIGHT: #F7F3ED — Soft Cream elevated surface.
+          // DARK: #2A211D — replaces Soft Cream for dark elevated surfaces.
+          surface: 'rgb(var(--rn-dark-surface) / <alpha-value>)',
+
+          // LIGHT: #E7DED5 — Light Clay borders / disabled surfaces.
+          // DARK: #342620 — replaces Light Clay for raised dark panels.
+          raised: 'rgb(var(--rn-dark-surface-raised) / <alpha-value>)',
+
+          // LIGHT: #E7DED5 — Light Clay borders and dividers.
+          // DARK: #4A352E — replaces Light Clay as the dark divider token.
+          divider: 'rgb(var(--rn-dark-divider) / <alpha-value>)',
+
+          // LIGHT: #8B3A2A — Deep Clay primary identity colour.
+          // DARK: preserved as the primary brand colour.
           clay: 'rgb(var(--rn-deep-clay) / <alpha-value>)',
+
+          // LIGHT: #743022 — Deep Clay 120 tonal depth.
+          // DARK: preserved as the pressed / deep tonal brand state.
           'clay-120': 'rgb(var(--rn-deep-clay-120) / <alpha-value>)',
+
+          // LIGHT: #A45A4B — Deep Clay 80 watermark / subtle signature.
+          // DARK: preserved as the soft brand signature.
           'clay-80': 'rgb(var(--rn-deep-clay-80) / <alpha-value>)',
+
+          // LIGHT: #5A2418 — Spiced Cocoa structural colour.
+          // DARK: preserved for controlled warm panels and editorial framing.
           cocoa: 'rgb(var(--rn-spiced-cocoa) / <alpha-value>)',
+
+          // LIGHT: #FFF5FA — Warm White primary text on dark-compatible surfaces.
+          // DARK: preserved as primary text on Dark Charcoal.
+          'text-primary': 'rgb(var(--rn-text-primary) / <alpha-value>)',
+
+          // LIGHT: #F7F3ED — Soft Cream supporting text.
+          // DARK: preserved as secondary text.
+          'text-secondary': 'rgb(var(--rn-text-secondary) / <alpha-value>)',
+
+          // LIGHT: #E7DED5 — Light Clay low-priority text / disabled surface.
+          // DARK: #C9BDB4 — replaces Light Clay for readable tertiary text.
           'text-tertiary': 'rgb(var(--rn-text-tertiary) / <alpha-value>)',
+
+          // LIGHT: #6B665F — Clay Gray secondary text.
+          // DARK: #B9ADA4 — replaces Clay Gray with a lighter dark-mode counterpart.
+          'text-muted': 'rgb(var(--rn-text-muted) / <alpha-value>)',
+
+          // LIGHT: #E7DED5 — Light Clay disabled background.
+          // DARK: #4A403A — replaces Light Clay for disabled dark controls.
           'disabled-bg': 'rgb(var(--rn-disabled-bg) / <alpha-value>)',
+
+          // LIGHT: #9A948C — Disabled Text.
+          // DARK: #8E837B — replaces Disabled Text for dark disabled controls.
           'disabled-text': 'rgb(var(--rn-disabled-text) / <alpha-value>)',
+
+          // LIGHT: #F9F3F1 — Selected State.
+          // DARK: #3C2B25 — replaces Selected State for selected dark surfaces.
           selected: 'rgb(var(--rn-selected) / <alpha-value>)',
+
+          // LIGHT: #F4A11A — Spice Pop participation energy.
+          // DARK: preserved unchanged for notification and activity sparks.
           pop: 'rgb(var(--rn-spice-pop) / <alpha-value>)',
+
+          // LIGHT: #5F8B4C — Fresh Basil success colour.
+          // DARK: #9BC47E — lighter replacement for readable success text.
           success: 'rgb(var(--rn-success) / <alpha-value>)',
+
+          // LIGHT: #B84D1B — Burnt Pepper limited-availability colour.
+          // DARK: #F09A5C — lighter replacement for readable dark-mode indicators.
           limited: 'rgb(var(--rn-limited) / <alpha-value>)',
+
+          // LIGHT: #B44C42 — Muted Terracotta error / warning colour.
+          // DARK: #E58B83 — lighter replacement for readable dark-mode feedback text.
           error: 'rgb(var(--rn-error) / <alpha-value>)',
+
+          // LIGHT: #D79A8A — Focus Ring.
+          // DARK: preserved unchanged for visible keyboard focus.
           focus: 'rgb(var(--rn-focus) / <alpha-value>)',
+
+          // LIGHT: #F4C16D — Palm Cream seasonal warmth.
+          // DARK: preserved unchanged as a restrained atmospheric highlight.
           seasonal: 'rgb(var(--rn-seasonal) / <alpha-value>)',
         },
+
+        // Direct semantic aliases for convenient utility classes.
+        // LIGHT: Warm White #FFF5FA; DARK: Dark Charcoal #1E1B18.
         canvas: 'rgb(var(--rn-dark-base) / <alpha-value>)',
+        // LIGHT: Deep Charcoal #1E1B18 as primary text; DARK: Warm White #FFF5FA.
         ink: 'rgb(var(--rn-text-primary) / <alpha-value>)',
+        // LIGHT: Deep Clay #8B3A2A; DARK: Deep Clay #8B3A2A.
         brand: 'rgb(var(--rn-deep-clay) / <alpha-value>)',
+
+        // Legacy / component compatibility mappings
         clay: {
           DEFAULT: 'var(--color-clay)',
           hover: 'var(--color-clay-hover)',
@@ -130,13 +200,11 @@ const config: Config = {
         sans: ['var(--font-figtree)', 'Figtree', 'sans-serif'],
       },
       fontSize: {
-        // DESIGN_OVERRIDES §1: consolidated 9-step type scale
-        'display': ['48px', { lineHeight: '1.15', fontWeight: '600' }],  // Hero H1
-        'title': ['36px', { lineHeight: '1.2', fontWeight: '600' }],  // All section H2s
-        'quote': ['24px', { lineHeight: '1.5', fontWeight: '400' }],  // Pull-quotes (all contexts)
-        'subtitle': ['20px', { lineHeight: '1.4', fontWeight: '500' }],  // Drop step titles
-        'card-title': ['22px', { lineHeight: '1.3', fontWeight: '600' }],  // All card headings
-        // body (16px), body-small (14px), caption (13px), eyebrow (12px) use Tailwind defaults
+        'display': ['48px', { lineHeight: '1.15', fontWeight: '600' }],
+        'title': ['36px', { lineHeight: '1.2', fontWeight: '600' }],
+        'quote': ['24px', { lineHeight: '1.5', fontWeight: '400' }],
+        'subtitle': ['20px', { lineHeight: '1.4', fontWeight: '500' }],
+        'card-title': ['22px', { lineHeight: '1.3', fontWeight: '600' }],
       },
       boxShadow: {
         elevation1: '0px 2px 8px rgba(0, 0, 0, 0.06)',
@@ -155,5 +223,3 @@ const config: Config = {
   },
   plugins: [],
 };
-
-export default config;

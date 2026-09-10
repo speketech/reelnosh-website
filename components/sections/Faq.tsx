@@ -11,7 +11,7 @@ export const Faq: React.FC = () => {
         <div className="max-w-md">
           <div className="mb-3 inline-flex items-center gap-2">
             <span className="h-2 w-2 shrink-0 rounded-full bg-accent-spicePop" />
-            <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">CLEAR BEFORE CLEVER</span>
+            <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-[#F4A11A]">CLEAR BEFORE CLEVER</span>
           </div>
           <h2 className="font-serif text-[36px] font-semibold leading-[1.2] text-neutral-charcoal">Frequently Asked Questions</h2>
           <p className="mt-4 font-sans text-base leading-relaxed text-neutral-clayGray">Everything in this first version is designed to help us learn, with you.</p>
@@ -24,7 +24,9 @@ export const Faq: React.FC = () => {
               <div key={item.question} className="border-b border-neutral-lightClay py-5 sm:py-6">
                 <button type="button" aria-expanded={isOpen} onClick={() => setOpenIndex(isOpen ? null : index)} className="flex w-full items-start justify-between gap-6 text-left">
                   <span className="font-serif text-xl font-medium leading-snug text-neutral-charcoal">{item.question}</span>
-                  <span className="shrink-0 font-sans text-2xl leading-none text-clay" aria-hidden="true">{isOpen ? '−' : '+'}</span>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-neutral-softCream dark:bg-[#FFF5FA] font-sans text-xl font-semibold leading-none text-clay shadow-xs transition-colors" aria-hidden="true">
+                    {isOpen ? '−' : '+'}
+                  </span>
                 </button>
                 {isOpen && <p className="mt-3 max-w-[680px] font-sans text-base leading-relaxed text-neutral-clayGray">{item.answer}</p>}
               </div>

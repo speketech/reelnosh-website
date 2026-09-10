@@ -8,7 +8,7 @@ export const TheGap: React.FC = () => {
       id: 'b1',
       number: '1',
       initials: 'AO',
-      avatarBg: 'bg-[var(--comment-avatar-1-bg)] text-[var(--comment-avatar-1-text)] border border-[var(--comment-avatar-1-border)]',
+      avatarBg: 'bg-[#8B3A2A] text-white',
       text: 'I need this.',
       timestamp: '2m ago',
       positionClasses: 'top-[114px] sm:top-[134px] left-3 sm:left-[32px]',
@@ -19,7 +19,7 @@ export const TheGap: React.FC = () => {
       id: 'b2',
       number: '2',
       initials: 'TA',
-      avatarBg: 'bg-[var(--comment-avatar-2-bg)] text-[var(--comment-avatar-2-text)] border border-[var(--comment-avatar-2-border)]',
+      avatarBg: 'bg-[#5A2418] text-white',
       text: 'How much?',
       timestamp: '14m ago',
       positionClasses: 'top-[186px] sm:top-[214px] left-[110px] sm:left-[215px]',
@@ -30,7 +30,7 @@ export const TheGap: React.FC = () => {
       id: 'b3',
       number: '3',
       initials: 'CO',
-      avatarBg: 'bg-[var(--comment-avatar-3-bg)] text-[var(--comment-avatar-3-text)] border border-[var(--comment-avatar-3-border)]',
+      avatarBg: 'bg-[#B84D1B] text-white',
       text: 'Can I order?',
       timestamp: '1h ago',
       positionClasses: 'top-[258px] sm:top-[294px] left-4 sm:left-[48px]',
@@ -49,7 +49,7 @@ export const TheGap: React.FC = () => {
             {/* Eyebrow with amber dot */}
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full bg-accent-spicePop inline-block shrink-0" />
-              <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
+              <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-[#F4A11A]">
                 THE GAP
               </span>
             </div>
@@ -65,7 +65,7 @@ export const TheGap: React.FC = () => {
             </p>
 
             {/* Emphasis line , Figtree Medium 16px, Clay */}
-            <p className="font-sans text-base font-medium text-clay">
+            <p className="font-sans text-base font-medium text-clay dark:text-[#D79A8A]">
               That&apos;s the gap Reelnosh is built to close.
             </p>
           </div>
@@ -136,8 +136,8 @@ export const TheGap: React.FC = () => {
                   >
                     <div className="relative flex items-center gap-3 rounded-[14px] sm:rounded-[16px] bg-[var(--color-surface-alt)] p-2.5 sm:p-3 shadow-elevation1 border border-neutral-lightClay/50">
                       {/* 28px/32px Circular Avatar with distinct initials & tints */}
-                      <div className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full shadow-xs transition-colors duration-200 ${bubble.avatarBg}`}>
-                        <span className="font-sans text-[11px] font-bold tracking-tight">{bubble.initials}</span>
+                      <div className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full ${bubble.avatarBg}`}>
+                        <span className="font-sans text-[11px] font-semibold">{bubble.initials}</span>
                       </div>
 
                       {/* Comment text & timestamp */}
@@ -152,7 +152,7 @@ export const TheGap: React.FC = () => {
 
                       {/* Small hollow accessibility-sequence badge */}
                       <span
-                        className="absolute -bottom-1.5 -left-1.5 sm:-bottom-2 sm:-left-2 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border border-clay bg-[var(--color-surface-alt)] font-sans text-[10px] sm:text-[11px] font-semibold text-clay shadow-xs"
+                        className="absolute -bottom-1.5 -left-1.5 sm:-bottom-2 sm:-left-2 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border border-clay dark:border-[#8B3A2A] bg-[var(--color-surface-alt)] dark:bg-[#FFF5FA] font-sans text-[10px] sm:text-[11px] font-semibold text-clay dark:text-[#8B3A2A] shadow-xs"
                         aria-label={`Comment sequence ${bubble.number}`}
                       >
                         {bubble.number}

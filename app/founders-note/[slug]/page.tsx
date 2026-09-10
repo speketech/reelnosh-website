@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabase/client';
-import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE, FounderNoteItem } from '@/lib/constants';
+import { FounderNoteItem } from '@/lib/constants';
 import { NoteDetailPageClient } from '@/components/notes/NoteDetailPageClient';
 import { getFounderNoteBody } from '@/lib/notesContent';
 
@@ -12,78 +13,140 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const seed = SEED_FOUNDER_NOTES.find((n) => n.slug === slug) ||
-    (SEED_FEATURED_NOTE.slug === slug ? SEED_FEATURED_NOTE : null);
+  const pageUrl = `https://reelnosh.com/founders-note/${slug}`;
+
+  let title = "Founder's Note";
+  let description = "What we're learning while building Reelnosh publicly.";
+  let imageUrl = 'https://reelnosh.com/images/notes/note-detail-hero.png';
+  let publishedAt: string | undefined = undefined;
+
+  if (supabase) {
+    try {
+      const { data } = await supabase
+        .from('founder_notes')
+        .select('title, excerpt, cover_image_url, published_at')
+        .eq('slug', slug)
+        .maybeSingle();
+
+      if (data) {
+        if (data.title) title = data.title;
+        if (data.excerpt) description = data.excerpt;
+        if (data.published_at) publishedAt = data.published_at;
+        if (data.cover_image_url) {
+          imageUrl = data.cover_image_url.startsWith('http')
+            ? data.cover_image_url
+            : `https://reelnosh.com${data.cover_image_url.startsWith('/') ? '' : '/'}${data.cover_image_url}`;
+        }
+      }
+    } catch (err) {
+      console.warn('Failed to fetch founder note metadata from Supabase:', err);
+    }
+  }
+
+  const fullTitle = `${title} | Reelnosh`;
+
   return {
-    title: `${seed ? seed.title : "Founder's Note"} | Reelnosh`,
-    description: seed?.excerpt || "What we're learning while building Reelnosh publicly.",
+    title: fullTitle,
+    description,
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title: fullTitle,
+      description,
+      url: pageUrl,
+      siteName: 'Reelnosh',
+      locale: 'en_NG',
+      type: 'article',
+      publishedTime: publishedAt,
+      authors: ['Kudirat Ijeoma Ibeabuchi'],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: fullTitle,
+      description,
+      images: [imageUrl],
+    },
   };
 }
 
 export default async function SingleFoundersNotePage({ params }: PageProps) {
   const { slug } = await params;
 
-  const matchedSeed =
-    SEED_FOUNDER_NOTES.find((n) => n.slug === slug) ||
-    (SEED_FEATURED_NOTE.slug === slug ? SEED_FEATURED_NOTE : null);
+  if (!supabase) {
+    notFound();
+  }
 
-  let note: FounderNoteItem | null = matchedSeed
-    ? {
-        ...matchedSeed,
-        body_markdown: matchedSeed.body_markdown || getFounderNoteBody(slug, matchedSeed.excerpt),
-      }
-    : null;
+  let note: FounderNoteItem | null = null;
+  let relatedNotes: FounderNoteItem[] = [];
 
-  if (supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('founder_notes')
-        .select('*')
-        .eq('slug', slug)
-        .maybeSingle();
+  try {
+    const { data, error } = await supabase
+      .from('founder_notes')
+      .select('id, title, slug, excerpt, body_markdown, cover_image_url, published_at')
+      .eq('slug', slug)
+      .maybeSingle();
 
-      if (!error && data) {
-        note = {
-          id: data.id,
-          slug: data.slug,
-          title: data.title,
-          excerpt: data.excerpt || '',
-          category: data.category || matchedSeed?.category || 'THE ROADMAP',
-          image: data.image || matchedSeed?.image || '/images/notes/note-1.png',
-          body_markdown: data.body_markdown || getFounderNoteBody(slug, data.excerpt || matchedSeed?.excerpt),
-          published_at: data.published_at,
-          date: new Date(data.published_at).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric',
-          }),
-        };
-      }
-    } catch (err) {
-      console.warn('Failed to fetch founder note from Supabase:', (err as Error)?.message || err);
+    if (error || !data) {
+      notFound();
     }
+
+    note = {
+      id: data.id,
+      slug: data.slug,
+      title: data.title,
+      excerpt: data.excerpt || '',
+      category: (data as any).category || 'PRODUCT THINKING',
+      image: data.cover_image_url || '/images/notes/note-detail-hero.png',
+      body_markdown: data.body_markdown || getFounderNoteBody(slug, data.excerpt),
+      published_at: data.published_at,
+      date: new Date(data.published_at).toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      }),
+    };
+
+    const { data: otherNotes } = await supabase
+      .from('founder_notes')
+      .select('id, title, slug, excerpt, cover_image_url, published_at')
+      .neq('slug', slug)
+      .lte('published_at', new Date().toISOString())
+      .order('published_at', { ascending: false })
+      .limit(3);
+
+    if (otherNotes) {
+      relatedNotes = otherNotes.map((o, idx) => ({
+        id: o.id,
+        slug: o.slug,
+        title: o.title,
+        excerpt: o.excerpt || '',
+        category: (o as any).category || 'COMMUNITY',
+        image: o.cover_image_url || `/images/notes/note-${idx + 1}.png`,
+        published_at: o.published_at,
+        date: new Date(o.published_at).toLocaleDateString('en-US', {
+          month: 'short',
+          year: 'numeric',
+        }),
+        body_markdown: (o as any).body_markdown || getFounderNoteBody(o.slug, o.excerpt),
+      }));
+    }
+  } catch (err) {
+    console.warn('Failed to fetch founder note from Supabase:', (err as Error)?.message || err);
+    notFound();
   }
 
   if (!note) {
-    note = {
-      id: slug,
-      slug,
-      title: slug
-        .split('-')
-        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-        .join(' '),
-      excerpt: '',
-      image: '/images/notes/note-1.png',
-      date: 'Aug 2026',
-      published_at: new Date().toISOString(),
-      body_markdown: getFounderNoteBody(slug),
-    };
+    notFound();
   }
-
-  const relatedNotes = [
-    ...SEED_FOUNDER_NOTES,
-    SEED_FEATURED_NOTE,
-  ].filter((related) => related.slug !== slug).slice(0, 3);
 
   const articleSchema = {
     '@context': 'https://schema.org',

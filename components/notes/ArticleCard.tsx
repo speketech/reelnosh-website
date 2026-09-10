@@ -38,7 +38,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
         <div>
           {/* Category & Read Meta */}
           <div className="flex items-center justify-between gap-2 mb-3">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-softCream text-clay text-[11px] font-semibold tracking-wide uppercase">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-softCream dark:bg-[#FFF5FA] text-clay dark:text-[#8B3A2A] text-[11px] font-semibold tracking-wide uppercase shadow-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop" />
               {note.category || 'COMMUNITY'}
             </span>
@@ -66,10 +66,13 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
             href={`/founders-note/${note.slug}`}
             onClick={rememberOrigin}
             aria-label={`Read note: ${note.title}`}
-            className="font-sans text-xs sm:text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 cursor-pointer group/link"
+            className="font-sans text-xs sm:text-sm font-semibold text-clay dark:text-[#F4C16D] hover:underline inline-flex items-center gap-1.5 cursor-pointer group/link"
           >
             <span>Read more</span> <span className="sr-only">: {note.title}</span>
-            <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover/link:translate-x-0.5" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover/link:translate-x-0.5 shrink-0 text-clay dark:text-[#F4C16D]">
+              <path d="M7.99976 3L12.9998 8L7.99976 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2.99609 7.875H12.9961" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </Link>
         </div>
       </div>

@@ -4,38 +4,50 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 export const TheDrop: React.FC = () => {
   const stations = [
     {
-      glyph: '✺',
+      id: 'live',
       title: 'A Drop goes live',
       description: 'Meal details, price, and portions are announced.',
       isConcluded: false,
+      renderIcon: () => (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7 shrink-0 text-white" aria-hidden="true">
+          <path d="M21 9.75012H20.2153C20.0269 7.70157 19.0799 5.79733 17.56 4.41089C16.0402 3.02445 14.0572 2.25586 12 2.25586C9.9428 2.25586 7.95981 3.02445 6.43998 4.41089C4.92015 5.79733 3.97314 7.70157 3.78469 9.75012H3C2.80109 9.75012 2.61032 9.82914 2.46967 9.96979C2.32902 10.1104 2.25 10.3012 2.25 10.5001C2.2533 12.2837 2.74415 14.0325 3.66948 15.5573C4.59481 17.0821 5.9194 18.3249 7.5 19.1514V19.5001C7.5 19.8979 7.65804 20.2795 7.93934 20.5608C8.22064 20.8421 8.60218 21.0001 9 21.0001H15C15.3978 21.0001 15.7794 20.8421 16.0607 20.5608C16.342 20.2795 16.5 19.8979 16.5 19.5001V19.1514C18.0806 18.3249 19.4052 17.0821 20.3305 15.5573C21.2559 14.0325 21.7467 12.2837 21.75 10.5001C21.75 10.3012 21.671 10.1104 21.5303 9.96979C21.3897 9.82914 21.1989 9.75012 21 9.75012ZM16.2637 5.27168C16.4356 5.41231 16.6003 5.56075 16.7578 5.717C14.7613 6.41933 13.1114 7.86275 12.15 9.74825H9.38437C9.85313 8.43427 10.7161 7.29706 11.8555 6.49198C12.9948 5.68689 14.3549 5.25319 15.75 5.25012C15.9216 5.25012 16.0931 5.25856 16.2637 5.27168ZM13.8862 9.75012C14.7955 8.38595 16.1712 7.40029 17.7553 6.97793C18.2733 7.82042 18.5982 8.76714 18.7069 9.75012H13.8862ZM12 3.75012C12.6018 3.75052 13.2009 3.83155 13.7812 3.99106C12.3679 4.34166 11.072 5.05863 10.024 6.0697C8.97606 7.08078 8.21316 8.35023 7.81219 9.75012H5.29312C5.47917 8.10093 6.26562 6.57787 7.50254 5.47132C8.73946 4.36476 10.3403 3.75209 12 3.75012Z" fill="currentColor"/>
+        </svg>
+      ),
     },
     {
-      glyph: '▣',
+      id: 'order',
       title: 'Order your servings',
       description: 'Reserve one or more portions in a few taps.',
       isConcluded: false,
+      renderIcon: () => (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7 shrink-0 text-white" aria-hidden="true">
+          <path d="M9.75 20.25C9.75 20.5467 9.66203 20.8367 9.4972 21.0834C9.33238 21.33 9.09811 21.5223 8.82402 21.6358C8.54994 21.7494 8.24834 21.7791 7.95736 21.7212C7.66639 21.6633 7.39912 21.5204 7.18934 21.3107C6.97956 21.1009 6.8367 20.8336 6.77882 20.5426C6.72094 20.2517 6.75065 19.9501 6.86418 19.676C6.97771 19.4019 7.16997 19.1676 7.41664 19.0028C7.66332 18.838 7.95333 18.75 8.25 18.75C8.64782 18.75 9.02936 18.908 9.31066 19.1893C9.59196 19.4706 9.75 19.8522 9.75 20.25ZM18 18.75C17.7033 18.75 17.4133 18.838 17.1666 19.0028C16.92 19.1676 16.7277 19.4019 16.6142 19.676C16.5006 19.9501 16.4709 20.2517 16.5288 20.5426C16.5867 20.8336 16.7296 21.1009 16.9393 21.3107C17.1491 21.5204 17.4164 21.6633 17.7074 21.7212C17.9983 21.7791 18.2999 21.7494 18.574 21.6358C18.8481 21.5223 19.0824 21.33 19.2472 21.0834C19.412 20.8367 19.5 20.5467 19.5 20.25C19.5 19.8522 19.342 19.4706 19.0607 19.1893C18.7794 18.908 18.3978 18.75 18 18.75ZM22.4728 6.95062L20.0691 15.6019C19.9369 16.0745 19.6542 16.4911 19.2639 16.7885C18.8736 17.0859 18.397 17.2479 17.9062 17.25H8.64C8.14784 17.2498 7.66926 17.0886 7.27725 16.791C6.88523 16.4935 6.6013 16.0758 6.46875 15.6019L3.18 3.75H1.5C1.30109 3.75 1.11032 3.67098 0.96967 3.53033C0.829018 3.38968 0.75 3.19891 0.75 3C0.75 2.80109 0.829018 2.61032 0.96967 2.46967C1.11032 2.32902 1.30109 2.25 1.5 2.25H3.75C3.91397 2.24997 4.07343 2.30367 4.20398 2.40289C4.33452 2.50211 4.42895 2.64138 4.47281 2.79938L5.36156 6H21.75C21.8656 5.99998 21.9797 6.02669 22.0833 6.07805C22.1869 6.1294 22.2772 6.20401 22.3472 6.29605C22.4171 6.38809 22.4649 6.49506 22.4867 6.60861C22.5085 6.72216 22.5037 6.83922 22.4728 6.95062ZM20.7628 7.5H5.77875L7.91719 15.2006C7.96105 15.3586 8.05548 15.4979 8.18602 15.5971C8.31657 15.6963 8.47603 15.75 8.64 15.75H17.9062C18.0702 15.75 18.2297 15.6963 18.3602 15.5971C18.4908 15.4979 18.5852 15.3586 18.6291 15.2006L20.7628 7.5Z" fill="currentColor"/>
+        </svg>
+      ),
     },
     {
-      glyph: '✓',
+      id: 'confirm',
       title: 'We confirm your order',
       description: 'Order details and delivery timing are locked in.',
       isConcluded: false,
+      renderIcon: () => (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7 shrink-0 text-white" aria-hidden="true">
+          <path d="M16.2806 9.21937C16.3504 9.28903 16.4057 9.37175 16.4434 9.46279C16.4812 9.55384 16.5006 9.65144 16.5006 9.75C16.5006 9.84856 16.4812 9.94616 16.4434 10.0372C16.4057 10.1283 16.3504 10.211 16.2806 10.2806L11.0306 15.5306C10.961 15.6004 10.8783 15.6557 10.7872 15.6934C10.6962 15.7312 10.5986 15.7506 10.5 15.7506C10.4014 15.7506 10.3038 15.7312 10.2128 15.6934C10.1217 15.6557 10.039 15.6004 9.96937 15.5306L7.71937 13.2806C7.57864 13.1399 7.49958 12.949 7.49958 12.75C7.49958 12.551 7.57864 12.3601 7.71937 12.2194C7.86011 12.0786 8.05098 11.9996 8.25 11.9996C8.44902 11.9996 8.63989 12.0786 8.78063 12.2194L10.5 13.9397L15.2194 9.21937C15.289 9.14964 15.3717 9.09432 15.4628 9.05658C15.5538 9.01884 15.6514 8.99941 15.75 8.99941C15.8486 8.99941 15.9462 9.01884 16.0372 9.05658C16.1283 9.09432 16.211 9.14964 16.2806 9.21937ZM21 4.5V19.5C21 19.8978 20.842 20.2794 20.5607 20.5607C20.2794 20.842 19.8978 21 19.5 21H4.5C4.10218 21 3.72064 20.842 3.43934 20.5607C3.15804 20.2794 3 19.8978 3 19.5V4.5C3 4.10218 3.15804 3.72064 3.43934 3.43934C3.72064 3.15804 4.10218 3 4.5 3H19.5C19.8978 3 20.2794 3.15804 20.5607 3.43934C20.842 3.72064 21 4.10218 21 4.5ZM19.5 19.5V4.5H4.5V19.5H19.5Z" fill="currentColor"/>
+        </svg>
+      ),
     },
     {
-      glyph: '◐',
+      id: 'closes',
       title: 'The Drop closes',
       description: 'Orders close when sold out or window ends.',
       isConcluded: true,
+      renderIcon: () => (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 sm:w-7 sm:h-7 shrink-0 text-white" aria-hidden="true">
+          <path d="M21.75 12.8115C21.5907 14.664 20.9056 16.4324 19.7753 17.9087C18.645 19.3851 17.1166 20.5079 15.3699 21.1451C13.6232 21.7823 11.7308 21.9074 9.91544 21.5056C8.10005 21.1038 6.43717 20.1919 5.12243 18.8772C3.8077 17.5625 2.89581 15.8996 2.49404 14.0842C2.09227 12.2688 2.21735 10.3764 2.85455 8.62971C3.49175 6.88299 4.61456 5.35459 6.0909 4.22433C7.56723 3.09407 9.33567 2.40896 11.1881 2.24962C11.2866 2.24149 11.3858 2.25285 11.4799 2.28303C11.574 2.31321 11.6612 2.36164 11.7366 2.42554C11.812 2.48943 11.8741 2.56756 11.9192 2.65544C11.9644 2.74333 11.9919 2.83925 12 2.93774C12.0081 3.03623 11.9968 3.13536 11.9666 3.22947C11.9364 3.32357 11.888 3.41081 11.8241 3.4862C11.7602 3.56159 11.6821 3.62365 11.5942 3.66885C11.5063 3.71405 11.4104 3.74149 11.3119 3.74962C9.74401 3.88433 8.24721 4.46406 6.99762 5.42058C5.74803 6.37711 4.79764 7.67064 4.25826 9.14899C3.71888 10.6273 3.61297 12.229 3.95297 13.7655C4.29298 15.302 5.06476 16.7094 6.17751 17.8221C7.29026 18.9349 8.69768 19.7067 10.2342 20.0467C11.7707 20.3867 13.3723 20.2808 14.8506 19.7414C16.329 19.202 17.6225 18.2516 18.5791 17.002C19.5356 15.7524 20.1153 14.2556 20.25 12.6877C20.2664 12.4888 20.3612 12.3046 20.5134 12.1755C20.6657 12.0465 20.863 11.9832 21.0619 11.9996C21.2608 12.016 21.4451 12.1108 21.5741 12.263C21.7031 12.4153 21.7664 12.6126 21.75 12.8115ZM11.25 6.74962V11.9996C11.25 12.1985 11.329 12.3893 11.4697 12.5299C11.6103 12.6706 11.8011 12.7496 12 12.7496H17.25C17.4489 12.7496 17.6397 12.6706 17.7803 12.5299C17.921 12.3893 18 12.1985 18 11.9996C18 11.8007 17.921 11.6099 17.7803 11.4693C17.6397 11.3286 17.4489 11.2496 17.25 11.2496H12.75V6.74962C12.75 6.55071 12.671 6.35994 12.5303 6.21929C12.3897 6.07864 12.1989 5.99962 12 5.99962C11.8011 5.99962 11.6103 6.07864 11.4697 6.21929C11.329 6.35994 11.25 6.55071 11.25 6.74962ZM15 4.49962C15.2225 4.49962 15.44 4.43364 15.625 4.31002C15.81 4.18641 15.9542 4.0107 16.0394 3.80514C16.1245 3.59957 16.1468 3.37337 16.1034 3.15514C16.06 2.93691 15.9528 2.73646 15.7955 2.57912C15.6382 2.42179 15.4377 2.31464 15.2195 2.27124C15.0013 2.22783 14.7751 2.25011 14.5695 2.33525C14.3639 2.4204 14.1882 2.5646 14.0646 2.7496C13.941 2.93461 13.875 3.15211 13.875 3.37462C13.875 3.67299 13.9935 3.95914 14.2045 4.17011C14.4155 4.38109 14.7016 4.49962 15 4.49962ZM18.375 6.74962C18.5975 6.74962 18.815 6.68364 19 6.56002C19.185 6.43641 19.3292 6.2607 19.4144 6.05514C19.4995 5.84957 19.5218 5.62337 19.4784 5.40514C19.435 5.18691 19.3278 4.98646 19.1705 4.82912C19.0132 4.67179 18.8127 4.56464 18.5945 4.52123C18.3763 4.47783 18.1501 4.50011 17.9445 4.58525C17.7389 4.6704 17.5632 4.8146 17.4396 4.9996C17.316 5.18461 17.25 5.40211 17.25 5.62462C17.25 5.92299 17.3685 6.20914 17.5795 6.42011C17.7905 6.63109 18.0766 6.74962 18.375 6.74962ZM20.625 10.1246C20.8475 10.1246 21.065 10.0586 21.25 9.93502C21.435 9.81141 21.5792 9.6357 21.6644 9.43014C21.7495 9.22457 21.7718 8.99837 21.7284 8.78014C21.685 8.56191 21.5778 8.36146 21.4205 8.20412C21.2632 8.04679 21.0627 7.93964 20.8445 7.89623C20.6263 7.85283 20.4001 7.87511 20.1945 7.96025C19.9889 8.0454 19.8132 8.1896 19.6896 8.3746C19.566 8.55961 19.5 8.77711 19.5 8.99962C19.5 9.29799 19.6185 9.58413 19.8295 9.79511C20.0405 10.0061 20.3266 10.1246 20.625 10.1246Z" fill="currentColor"/>
+        </svg>
+      ),
     },
   ];
-
-  const StationGlyph = ({ glyph }: { glyph: string }) => {
-    return (
-      <span className="text-[26px] leading-none select-none font-normal inline-flex items-center justify-center" aria-hidden="true">
-        {glyph}
-      </span>
-    );
-  };
 
   return (
     <section id="the-drop" className="scroll-mt-[var(--nav-height)] bg-neutral-softCream py-16 md:py-[120px]">
@@ -47,7 +59,7 @@ export const TheDrop: React.FC = () => {
             {/* Eyebrow with amber dot */}
             <div className="inline-flex items-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full bg-accent-spicePop inline-block shrink-0" />
-              <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
+              <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-[#F4A11A]">
                 THE DROP
               </span>
             </div>
@@ -66,80 +78,36 @@ export const TheDrop: React.FC = () => {
         </div>
 
         {/* Contained Timeline Panel */}
-        <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-neutral-lightClay/70 bg-neutral-warmWhite px-8 py-14 sm:px-12 sm:py-16 md:py-20 lg:px-14 lg:py-24 shadow-elevation1">
-
-          {/* Tablet/Desktop Layout (md:block) — horizontal track */}
-          <div className="hidden md:block relative">
-            {/* Connecting Track: continuous 6px path through vertical center of all 4 badges */}
+        <div className="relative overflow-hidden rounded-[24px] sm:rounded-[32px] border border-neutral-lightClay/70 bg-neutral-warmWhite px-6 py-12 sm:px-12 sm:py-16 md:py-20 lg:px-14 lg:py-24 shadow-elevation1">
+          <div className="relative">
+            {/* Connecting Track: vertical on mobile (< md), horizontal through vertical center of badges on md+ */}
             <div
-              className="absolute top-[32px] -translate-y-1/2 left-[12.5%] right-[12.5%] h-[6px] rounded-full bg-clay z-0"
+              className="absolute z-0 rounded-full bg-clay dark:bg-[#D79A8A] left-[28px] sm:left-[32px] -translate-x-1/2 top-8 bottom-12 w-[5px] md:w-auto md:h-[6px] md:left-[12.5%] md:right-[12.5%] md:top-[28px] lg:top-[32px] md:bottom-auto md:translate-x-0 md:-translate-y-1/2"
               aria-hidden="true"
             />
 
-            <div className="relative z-10 grid grid-cols-4 gap-4 lg:gap-6 text-center">
+            <div className="relative z-10 flex flex-col gap-8 md:grid md:grid-cols-4 md:gap-4 lg:gap-6 md:text-center text-left">
               {stations.map((station, idx) => (
                 <ScrollReveal
                   key={station.title}
                   delay={idx * 80}
-                  className="flex flex-col items-center"
+                  className="flex items-start gap-6 sm:gap-7 md:flex-col md:items-center md:gap-0"
                 >
-                  {/* 64×64 Station Badge */}
+                  {/* Station Badge with inner ring and outer separation ring */}
                   <div
-                    className={`w-14 h-14 lg:w-16 lg:h-16 rounded-full flex items-center justify-center text-white shadow-sm ring-4 lg:ring-8 ring-neutral-warmWhite mb-5 ${
+                    className={`relative z-10 w-14 h-14 sm:w-16 sm:h-16 md:w-14 md:h-14 lg:w-16 lg:h-16 shrink-0 rounded-full flex items-center justify-center text-white shadow-sm ring-4 md:ring-6 lg:ring-8 ring-neutral-warmWhite border-2 border-white/35 md:mb-5 ${
                       station.isConcluded ? 'bg-[#5A2418]' : 'bg-clay'
                     }`}
                   >
-                    <span className="text-[24px] leading-none select-none font-medium">
-                      <StationGlyph glyph={station.glyph} />
-                    </span>
+                    {station.renderIcon()}
                   </div>
 
-                  {/* Station Title , Lora Subtitle-Small 20px */}
-                  <h3 className="font-serif text-[20px] font-semibold text-neutral-charcoal leading-snug mb-2">
-                    {station.title}
-                  </h3>
-
-                  {/* Station Description , Figtree Body-Small 14px, 220px max width */}
-                  <p className="font-sans text-[14px] text-neutral-clayGray leading-relaxed max-w-[220px]">
-                    {station.description}
-                  </p>
-                </ScrollReveal>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile Layout (< md) */}
-          <div className="md:hidden relative">
-            {/* Vertical Connecting Track: 6px path through badges */}
-            <div
-              className="absolute left-[31px] top-8 bottom-12 w-[6px] -translate-x-1/2 rounded-full bg-clay z-0"
-              aria-hidden="true"
-            />
-
-            <div className="relative z-10 flex flex-col gap-8">
-              {stations.map((station, idx) => (
-                <ScrollReveal
-                  key={station.title}
-                  delay={idx * 80}
-                  className="flex items-start gap-5"
-                >
-                  {/* 64�,64 Station Badge */}
-                  <div
-                    className={`w-16 h-16 shrink-0 rounded-full flex items-center justify-center text-white shadow-sm ring-4 ring-neutral-warmWhite ${
-                      station.isConcluded ? 'bg-[#5A2418]' : 'bg-clay'
-                    }`}
-                  >
-                    <span className="text-[24px] leading-none select-none font-medium">
-                      <StationGlyph glyph={station.glyph} />
-                    </span>
-                  </div>
-
-                  {/* Text Container */}
-                  <div className="pt-1.5">
-                    <h3 className="font-serif text-[18px] sm:text-[20px] font-semibold text-neutral-charcoal leading-snug mb-1">
+                  {/* Text Container - relative z-20 and pl-1 on mobile so ring NEVER layers on text */}
+                  <div className="relative z-20 pt-1 md:pt-0 pl-1 md:pl-0 min-w-0">
+                    <h3 className="font-serif text-[18px] sm:text-[20px] font-semibold text-neutral-charcoal leading-snug mb-1 md:mb-2">
                       {station.title}
                     </h3>
-                    <p className="font-sans text-[14px] text-neutral-clayGray leading-relaxed max-w-[260px]">
+                    <p className="font-sans text-[14px] text-neutral-clayGray leading-relaxed max-w-[260px] md:max-w-[220px]">
                       {station.description}
                     </p>
                   </div>
@@ -147,9 +115,7 @@ export const TheDrop: React.FC = () => {
               ))}
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

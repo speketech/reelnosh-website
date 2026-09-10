@@ -27,7 +27,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
         <div className="mb-10">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-accent-spicePop inline-block shrink-0" />
-            <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
+            <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-[#F4A11A]">
               WHAT WE&apos;RE EXPLORING
             </span>
           </div>
@@ -113,7 +113,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                     <div>
                       {/* Status Badge */}
                       <div>
-                        <span className="bg-clay/10 text-clay text-[11px] font-semibold px-2.5 py-0.5 rounded-full inline-block">
+                        <span className="bg-neutral-softCream dark:bg-[#FFF5FA] text-clay dark:text-[#8B3A2A] border border-neutral-lightClay/70 dark:border-[#FFF5FA] text-[11px] font-semibold px-3 py-1 rounded-full inline-block shadow-xs">
                           {item.tap_count && item.tap_count >= 10
                             ? `${item.tap_count} interested`
                             : (item.badge || 'Vote for this Drop')}

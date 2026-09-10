@@ -1,27 +1,29 @@
 import { MetadataRoute } from 'next';
-import { SEED_FOUNDER_NOTES } from '@/lib/constants';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
-  let notes = SEED_FOUNDER_NOTES;
+  let notes: Array<{ slug: string; published_at: string }> = [];
 
   try {
     const supabase = createServerSupabaseClient();
-    if (!supabase) return buildSitemap(baseUrl, notes);
-    const { data } = await supabase
-      .from('founder_notes')
-      .select('slug, published_at')
-      .lte('published_at', new Date().toISOString());
-    if (data) notes = data as typeof SEED_FOUNDER_NOTES;
+    if (supabase) {
+      const { data, error } = await supabase
+        .from('founder_notes')
+        .select('slug, published_at')
+        .lte('published_at', new Date().toISOString());
+      if (!error && data) {
+        notes = data;
+      }
+    }
   } catch {
-    // Keep the seed sitemap available when Supabase is not configured during builds.
+    // Keep notes empty on connection failure
   }
 
   return buildSitemap(baseUrl, notes);
 }
 
-function buildSitemap(baseUrl: string, notes: typeof SEED_FOUNDER_NOTES): MetadataRoute.Sitemap {
+function buildSitemap(baseUrl: string, notes: Array<{ slug: string; published_at: string }>): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,

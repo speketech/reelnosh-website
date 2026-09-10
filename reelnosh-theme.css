@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* LIGHT MODE SOURCE VALUES */
+  --rn-light-warm-white: 255 245 250;       /* #FFF5FA */
+  --rn-light-soft-cream: 247 243 237;       /* #F7F3ED */
+  --rn-light-light-clay: 231 222 213;      /* #E7DED5 */
+  --rn-light-clay-gray: 107 102 95;        /* #6B665F */
+  --rn-light-deep-charcoal: 30 27 24;      /* #1E1B18 */
+  --rn-light-deep-clay: 139 58 42;         /* #8B3A2A */
+  --rn-light-deep-clay-80: 164 90 75;      /* #A45A4B */
+  --rn-light-deep-clay-120: 116 48 34;     /* #743022 */
+  --rn-light-spiced-cocoa: 90 36 24;       /* #5A2418 */
+  --rn-light-spice-pop: 244 161 26;        /* #F4A11A */
+  --rn-light-fresh-basil: 95 139 76;       /* #5F8B4C */
+  --rn-light-burnt-pepper: 184 77 27;      /* #B84D1B */
+  --rn-light-muted-terracotta: 180 76 66;   /* #B44C42 */
+  --rn-light-focus-ring: 215 154 138;      /* #D79A8A */
+  --rn-light-disabled-text: 154 148 140;   /* #9A948C */
+  --rn-light-selected: 249 243 241;        /* #F9F3F1 */
+  --rn-light-palm-cream: 244 193 109;       /* #F4C16D */
+
+  /* DARK MODE TOKENS — active light-mode replacements are annotated below. */
+
+  /* LIGHT: Warm White #FFF5FA page background. */
+  --rn-dark-base: 30 27 24;                /* DARK: Dark Charcoal #1E1B18 */
+
+  /* LIGHT: Soft Cream #F7F3ED elevated surface. */
+  --rn-dark-surface: 42 33 29;             /* DARK: Night Cocoa #2A211D */
+
+  /* LIGHT: Light Clay #E7DED5 raised / selected surface. */
+  --rn-dark-surface-raised: 52 38 32;      /* DARK: Roasted Clay #342620 */
+
+  /* LIGHT: Light Clay #E7DED5 divider. */
+  --rn-dark-divider: 74 53 46;             /* DARK: Cocoa Divider #4A352E */
+
+  /* LIGHT: Deep Clay #8B3A2A primary identity. */
+  --rn-deep-clay: 139 58 42;               /* DARK: preserved #8B3A2A */
+
+  /* LIGHT: Deep Clay 120 #743022 pressed / deep state. */
+  --rn-deep-clay-120: 116 48 34;           /* DARK: preserved #743022 */
+
+  /* LIGHT: Deep Clay 80 #A45A4B watermark / subtle signature. */
+  --rn-deep-clay-80: 164 90 75;            /* DARK: preserved #A45A4B */
+
+  /* LIGHT: Spiced Cocoa #5A2418 structural colour. */
+  --rn-spiced-cocoa: 90 36 24;             /* DARK: preserved #5A2418 */
+
+  /* LIGHT: Warm White #FFF5FA / Deep Charcoal #1E1B18 text pairing. */
+  --rn-text-primary: 255 245 250;           /* DARK: Warm White #FFF5FA */
+
+  /* LIGHT: Soft Cream #F7F3ED supporting text. */
+  --rn-text-secondary: 247 243 237;         /* DARK: Soft Cream #F7F3ED */
+
+  /* LIGHT: Light Clay #E7DED5 tertiary text. */
+  --rn-text-tertiary: 201 189 180;          /* DARK: Light Clay Dark #C9BDB4 */
+
+  /* LIGHT: Clay Gray #6B665F secondary text. */
+  --rn-text-muted: 185 173 164;             /* DARK: Clay Gray Dark #B9ADA4 */
+
+  /* LIGHT: Light Clay #E7DED5 disabled background. */
+  --rn-disabled-bg: 74 64 58;               /* DARK: Disabled Background #4A403A */
+
+  /* LIGHT: Disabled Text #9A948C. */
+  --rn-disabled-text: 142 131 123;          /* DARK: Disabled Text Dark #8E837B */
+
+  /* LIGHT: Selected State #F9F3F1. */
+  --rn-selected: 60 43 37;                  /* DARK: Selected State #3C2B25 */
+
+  /* LIGHT: Spice Pop #F4A11A participation energy. */
+  --rn-spice-pop: 244 161 26;               /* DARK: preserved #F4A11A */
+
+  /* LIGHT: Fresh Basil #5F8B4C success colour. */
+  --rn-success: 155 196 126;                /* DARK: readable success replacement #9BC47E */
+
+  /* LIGHT: Burnt Pepper #B84D1B limited availability. */
+  --rn-limited: 240 154 92;                 /* DARK: readable limited-state replacement #F09A5C */
+
+  /* LIGHT: Muted Terracotta #B44C42 error / warning. */
+  --rn-error: 229 139 131;                  /* DARK: readable error replacement #E58B83 */
+
+  /* LIGHT: Focus Ring #D79A8A. */
+  --rn-focus: 215 154 138;                  /* DARK: preserved #D79A8A */
+
+  /* LIGHT: Palm Cream #F4C16D seasonal warmth. */
+  --rn-seasonal: 244 193 109;               /* DARK: preserved #F4C16D */
+  /* CORRECTED ACCESSIBLE DARK-MODE SEMANTIC TOKEN SET */
+  --rn-dark-canvas: #1E1B18;
+  --rn-dark-surface: #2A211D;
+  --rn-dark-surface-raised: #342620;
+  --rn-dark-divider: #4A352E;
+  --rn-dark-text-primary: #FFF5FA;
+  --rn-dark-text-secondary: #F7F3ED;
+  --rn-dark-text-muted: #B9ADA4;
+  --rn-dark-accent-energy: #F4A11A; /* Spice Pop: Section eyebrows, micro-labels, active participation */
+  --rn-dark-accent-warmth: #F4C16D; /* Palm Cream: Links, seasonal warmth */
+  --rn-dark-accent-clay: #D79A8A;   /* Focus Ring: Lighter clay for editorial accents & process lines */
+  --rn-dark-brand-surface: #8B3A2A; /* Deep Clay: Filled brand controls only with light text */
+  --rn-dark-brand-surface-pressed: #743022; /* Deep Clay 120 */
+}
+
+/* Optional automatic dark-mode activation. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Explicit class-based dark mode for Tailwind's darkMode: 'class' and .rn-dark */
+.rn-dark,
+[data-theme="dark"],
+.dark {
+  color-scheme: dark;
+  background-color: var(--rn-dark-canvas);
+  color: var(--rn-dark-text-primary);
+}
+
+.rn-dark .eyebrow,
+.rn-dark .section-label,
+[data-theme="dark"] .eyebrow,
+[data-theme="dark"] .section-label,
+.dark .eyebrow,
+.dark .section-label {
+  color: var(--rn-dark-accent-energy);
+  font-weight: 600;
+}
+
+.rn-dark .editorial-accent,
+[data-theme="dark"] .editorial-accent,
+.dark .editorial-accent {
+  color: var(--rn-dark-accent-clay);
+}
+
+.rn-dark .process-line,
+.rn-dark .active-rule,
+[data-theme="dark"] .process-line,
+[data-theme="dark"] .active-rule,
+.dark .process-line,
+.dark .active-rule {
+  color: var(--rn-dark-accent-clay);
+  background-color: var(--rn-dark-accent-clay);
+}
+
+.rn-dark .secondary-link,
+[data-theme="dark"] .secondary-link,
+.dark .secondary-link {
+  color: var(--rn-dark-accent-warmth);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.rn-dark .primary-cta,
+[data-theme="dark"] .primary-cta,
+.dark .primary-cta {
+  background: var(--rn-dark-brand-surface);
+  color: var(--rn-dark-text-primary);
+}
+
+.rn-dark .primary-cta:hover,
+.rn-dark .primary-cta:active,
+[data-theme="dark"] .primary-cta:hover,
+[data-theme="dark"] .primary-cta:active,
+.dark .primary-cta:hover,
+.dark .primary-cta:active {
+  background: var(--rn-dark-brand-surface-pressed);
+}
+
+/* Useful semantic component defaults. */
+.rn-dark-surface {
+  background-color: rgb(var(--rn-dark-surface));
+  color: rgb(var(--rn-text-primary));
+}
+
+.rn-dark-divider {
+  border-color: rgb(var(--rn-dark-divider));
+}
+
+.rn-dark-focus:focus-visible {
+  outline: 2px solid rgb(var(--rn-focus));
+  outline-offset: 3px;
+}

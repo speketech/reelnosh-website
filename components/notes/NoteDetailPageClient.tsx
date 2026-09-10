@@ -145,46 +145,48 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
         </section>
 
         {/* More Notes Section */}
-        <section className="bg-neutral-softCream px-4 py-16 sm:px-6 md:px-8 md:py-20">
-          <div className="mx-auto max-w-[1120px]">
-            <div className="mb-8 flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
-              <span className="text-accent-spicePop">•</span> MORE NOTES
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedNotes.map((related) => (
-                <Link
-                  key={related.id}
-                  href={`/founders-note/${related.slug}`}
-                  aria-label={`Read note: ${related.title}`}
-                  className="group overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
-                >
-                  <div className="relative aspect-[1.5] w-full overflow-hidden">
-                    <Image
-                      src={related.image || '/images/notes/note-1.png'}
-                      alt={related.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col justify-between flex-1">
-                    <div>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay">
-                        <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop" />
-                        {related.category || 'COMMUNITY'}
-                      </span>
-                      <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay transition-colors">
-                        {related.title}
-                      </h3>
+        {relatedNotes && relatedNotes.length > 0 && (
+          <section className="bg-neutral-softCream px-4 py-16 sm:px-6 md:px-8 md:py-20">
+            <div className="mx-auto max-w-[1120px]">
+              <div className="mb-8 flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-[#F4A11A]">
+                <span className="text-accent-spicePop">•</span> MORE NOTES
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedNotes.map((related) => (
+                  <Link
+                    key={related.id}
+                    href={`/founders-note/${related.slug}`}
+                    aria-label={`Read note: ${related.title}`}
+                    className="group overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
+                  >
+                    <div className="relative aspect-[1.5] w-full overflow-hidden">
+                      <Image
+                        src={related.image || '/images/notes/note-1.png'}
+                        alt={related.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
                     </div>
-                    <p className="mt-4 font-sans text-xs text-neutral-clayGray">
-                      {related.date} · {calculateReadingTime(related.body_markdown || getFounderNoteBody(related.slug, related.excerpt))} min read
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    <div className="p-6 flex flex-col justify-between flex-1">
+                      <div>
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream dark:bg-[#FFF5FA] px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay dark:text-[#8B3A2A] shadow-xs">
+                          <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop" />
+                          {related.category || 'COMMUNITY'}
+                        </span>
+                        <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay transition-colors">
+                          {related.title}
+                        </h3>
+                      </div>
+                      <p className="mt-4 font-sans text-xs text-neutral-clayGray">
+                        {related.date} · {calculateReadingTime(related.body_markdown || getFounderNoteBody(related.slug, related.excerpt))} min read
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </article>
 
     </main>

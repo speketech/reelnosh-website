@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase/client';
-import { SEED_FOUNDER_NOTES } from '@/lib/constants';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,24 +10,24 @@ export async function GET(request: Request) {
     const offset = parseInt(searchParams.get('offset') || '0', 10);
 
     if (!supabase) {
-      const paginatedSeed = SEED_FOUNDER_NOTES.slice(offset, offset + limit);
-      return NextResponse.json({ notes: paginatedSeed, total: SEED_FOUNDER_NOTES.length });
+      return NextResponse.json({ notes: [], total: 0 });
     }
 
-    const { data, error } = await supabase
+    const { data, error, count } = await supabase
       .from('founder_notes')
-      .select('id, title, slug, excerpt, cover_image_url, published_at')
+      .select('id, title, slug, excerpt, cover_image_url, published_at', { count: 'exact' })
       .lte('published_at', new Date().toISOString())
       .order('published_at', { ascending: false })
       .range(offset, offset + limit - 1);
 
-    if (error || !data || data.length === 0) {
-      // Return seed notes if table is empty or unconfigured
-      const paginatedSeed = SEED_FOUNDER_NOTES.slice(offset, offset + limit);
-      return NextResponse.json({ notes: paginatedSeed, total: SEED_FOUNDER_NOTES.length });
+    if (error) {
+      throw error;
     }
 
-    return NextResponse.json({ notes: data });
+    return NextResponse.json({
+      notes: data || [],
+      total: count ?? (data?.length || 0),
+    });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error';
     return NextResponse.json({ error: message }, { status: 500 });

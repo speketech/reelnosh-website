@@ -141,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
   };
 
   const navLinkClass = (isActive: boolean) =>
-    `rounded-brand px-2 py-1 transition-colors duration-200 ${isActive ? 'text-clay' : 'hover:bg-neutral-softCream hover:text-clay'
+    `rounded-brand px-2 py-1 transition-colors duration-200 ${isActive ? 'text-clay dark:text-[#F4C16D]' : 'hover:bg-neutral-softCream hover:text-clay dark:hover:text-[#F4C16D]'
     }`;
 
   return (
@@ -207,20 +207,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
           <div className="flex items-center gap-1.5 sm:gap-2">
             <ThemeToggle />
 
-            {/* Full CTA — shown from tablet (834px) up; compact CTA covers below that */}
-            <Button
-              onClick={onOpenEarlyAccess}
-              size="md"
-              className="hidden tablet:inline-flex"
-            >
-              Join Early Access
-            </Button>
-
-            {/* Compact CTA — mobile only, always visible in header bar */}
+            {/* CTA button — compact on mobile (< tablet), full on tablet (834px) up */}
             <button
               type="button"
               onClick={onOpenEarlyAccess}
-              className="tablet:hidden inline-flex items-center justify-center rounded-brand bg-clay px-3 py-1.5 font-sans text-xs font-semibold text-white transition-colors hover:bg-clay-hover active:bg-clay-pressed"
+              className="inline-flex items-center justify-center rounded-brand bg-[#8B3A2A] px-3 py-1.5 font-sans text-xs font-semibold text-white shadow-elevation1 transition-colors hover:bg-[#743022] active:bg-[#5F261A] tablet:px-5 tablet:py-2.5 tablet:text-[15px]"
             >
               Join Early Access
             </button>
@@ -229,7 +220,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
-              className="tablet:hidden p-2 text-neutral-charcoal hover:text-clay rounded-md transition-colors"
+              className="tablet:hidden p-2 text-neutral-charcoal hover:text-clay dark:hover:text-[#F4C16D] rounded-md transition-colors"
             >
               {isMobileMenuOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -262,7 +253,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   aria-label="Close menu"
-                  className="p-2 text-neutral-charcoal hover:text-clay"
+                  className="p-2 text-neutral-charcoal hover:text-clay dark:hover:text-[#F4C16D]"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

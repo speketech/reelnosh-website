@@ -114,8 +114,8 @@ export function resolveDescriptiveContext(href: string, explicitTitle?: string):
   const noteMatch = cleanHref.match(/(?:\/founders-note\/|^founders-note\/)([a-zA-Z0-9_-]+)/);
   if (noteMatch) {
     const slug = noteMatch[1];
-    if (slug === SEED_FEATURED_NOTE.slug) {
-      return SEED_FEATURED_NOTE.title;
+    if (SEED_FEATURED_NOTE && slug === (SEED_FEATURED_NOTE as any).slug) {
+      return (SEED_FEATURED_NOTE as any).title;
     }
     const match = SEED_FOUNDER_NOTES.find((n) => n.slug === slug);
     if (match) {

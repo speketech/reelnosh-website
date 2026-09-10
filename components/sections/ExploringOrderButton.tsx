@@ -47,7 +47,7 @@ export const ExploringOrderButton: React.FC<ExploringOrderButtonProps> = ({
         disabled={isInterested}
         className={`w-full h-[46px] px-5 text-sm font-semibold rounded-brand border transition-colors flex items-center justify-center ${isInterested
             ? 'bg-surface-successTint border-feedback-success text-feedback-success cursor-default'
-            : 'bg-[var(--color-warm-white)] border-secondaryCta-border text-clay hover:bg-secondaryCta-hoverBackground'
+            : 'bg-[var(--color-warm-white)] dark:bg-[#FFF5FA] border-secondaryCta-border dark:border-[#FFF5FA] text-clay dark:text-[#8B3A2A] hover:bg-secondaryCta-hoverBackground dark:hover:bg-[#F7F3ED] shadow-xs'
           }`}
       >
         {isInterested ? (

@@ -113,7 +113,7 @@ export default function CookiesPage() {
             <button
               type="button"
               onClick={savePreferences}
-              className="rounded-brand bg-clay px-5 py-3 text-sm font-semibold text-white hover:bg-clay-hover transition-colors"
+              className="rounded-brand bg-[#8B3A2A] px-5 py-3 text-sm font-semibold text-white shadow-elevation1 hover:bg-[#743022] active:bg-[#5F261A] transition-colors"
             >
               {saved ? 'Preferences saved' : 'Save preferences'}
             </button>

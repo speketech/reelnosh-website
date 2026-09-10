@@ -33,6 +33,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     setThemeState(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
+    if (initialTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
     setMounted(true);
 
     // 2. Listen to system preference changes if user hasn't explicitly set localStorage
@@ -43,6 +48,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         const sysTheme = e.matches ? 'dark' : 'light';
         setThemeState(sysTheme);
         document.documentElement.setAttribute('data-theme', sysTheme);
+        if (sysTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       }
     };
 
@@ -55,6 +65,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (typeof window !== 'undefined') {
       localStorage.setItem('theme', newTheme);
       document.documentElement.setAttribute('data-theme', newTheme);
+      if (newTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
     }
   }, []);
 
@@ -64,6 +79,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (typeof window !== 'undefined') {
         localStorage.setItem('theme', nextTheme);
         document.documentElement.setAttribute('data-theme', nextTheme);
+        if (nextTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       }
       return nextTheme;
     });

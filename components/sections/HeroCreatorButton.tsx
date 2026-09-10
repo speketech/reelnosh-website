@@ -13,7 +13,7 @@ export const HeroCreatorButton: React.FC = () => {
     <button
       type="button"
       onClick={handleClick}
-      className="inline-flex items-center justify-center font-sans text-base font-semibold text-clay hover:text-clay-hover underline underline-offset-4 decoration-clay/70 hover:decoration-clay transition-colors shrink-0 cursor-pointer"
+      className="inline-flex items-center justify-center font-sans text-base font-semibold text-clay dark:text-[#F4C16D] hover:text-clay-hover dark:hover:text-[#F4A11A] underline underline-offset-4 decoration-clay/70 dark:decoration-[#F4C16D]/70 hover:decoration-clay dark:hover:decoration-[#F4C16D] transition-colors shrink-0 cursor-pointer"
     >
       <span>Join the Creator Waitlist</span>
     </button>

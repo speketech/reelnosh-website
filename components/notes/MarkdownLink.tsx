@@ -109,7 +109,7 @@ function getDescriptiveContext(href: string, title?: string): string {
     const slug = noteMatch[1];
     const matchedSeed =
       SEED_FOUNDER_NOTES.find((n) => n.slug === slug) ||
-      (SEED_FEATURED_NOTE.slug === slug ? SEED_FEATURED_NOTE : null);
+      (SEED_FEATURED_NOTE && (SEED_FEATURED_NOTE as any).slug === slug ? SEED_FEATURED_NOTE : null);
 
     if (matchedSeed) {
       return matchedSeed.title;
@@ -192,7 +192,7 @@ export const MarkdownLink: React.FC<MarkdownLinkProps> = ({
     : undefined;
 
   const linkTitle = title || (isGeneric ? descriptiveContext : undefined);
-  const linkClass = className || 'text-clay underline underline-offset-4';
+  const linkClass = className || 'text-clay dark:text-[#F4C16D] underline underline-offset-4';
 
   const content = isGeneric ? (
     <>

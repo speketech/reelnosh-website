@@ -79,10 +79,13 @@ export const FoundersNoteFeed: React.FC<FoundersNoteFeedProps> = ({ initialNotes
             <p className="font-sans text-sm sm:text-base text-neutral-clayGray leading-relaxed">
               {note.excerpt}
             </p>
-            <div className="pt-2 text-xs font-semibold text-clay font-sans inline-flex items-center gap-1.5 group-hover:underline">
+            <div className="pt-2 text-xs font-semibold text-clay dark:text-[#F4C16D] font-sans inline-flex items-center gap-1.5 group-hover:underline">
               <span>Read more</span>
               <span className="sr-only">: {note.title}</span>
-              <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover:translate-x-0.5" />
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover:translate-x-0.5 shrink-0 text-clay dark:text-[#F4C16D]">
+                <path d="M7.99976 3L12.9998 8L7.99976 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2.99609 7.875H12.9961" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </div>
           </Link>
           </article>

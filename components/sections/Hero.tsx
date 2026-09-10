@@ -29,13 +29,13 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
           {/* Left Column: Copy & Actions */}
           <div className="lg:col-span-6 flex max-w-[540px] flex-col justify-center text-center lg:text-left items-center lg:items-start mx-auto lg:mx-0">
             {/* Eyebrow label */}
-            <p className="mb-6 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
+            <p className="mb-6 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-[#F4A11A]">
               A NEW WAY TO EXPERIENCE CREATOR-MADE FOOD
             </p>
 
             {/* H1 with exact line breaks matching reference */}
             <h1 className="mb-6 font-serif text-[36px] font-semibold leading-[1.15] text-neutral-charcoal tablet:text-[40px] sm:text-[48px]">
-              Where food content <span className="font-medium italic text-clay">becomes meals.</span>
+              Where food content <span className="font-medium italic text-clay dark:text-[#D79A8A]">becomes meals.</span>
             </h1>
 
             {/* Subhead with exact break */}
@@ -49,7 +49,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                 href={SITE_CONFIG.links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-[52px] w-full sm:w-auto shrink-0 items-center justify-center rounded-brand bg-[#783323] px-7 font-sans text-base font-semibold text-white shadow-elevation1 transition-colors hover:bg-[#63291C] active:bg-[#522217]"
+                className="inline-flex h-[52px] w-full sm:w-auto shrink-0 items-center justify-center rounded-brand bg-[#8B3A2A] px-7 font-sans text-base font-semibold text-white shadow-elevation1 transition-colors hover:bg-[#743022] active:bg-[#5F261A]"
               >
                 Join the Reelnosh Community
               </a>
@@ -67,10 +67,13 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
           <div className="lg:col-span-6 flex justify-center lg:justify-end items-center">
             <div className="relative w-full max-w-[440px] xl:max-w-[460px]">
               
-              {/* Starburst Badge + concentric ring motif */}
+              {/* Starburst Badge + subtle complimenting ring */}
               <div className="pointer-events-none absolute -right-6 -top-7 z-30 h-24 w-24 sm:h-28 sm:w-28 drop-shadow-sm">
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-36 sm:h-36 rounded-full border border-neutral-lightClay/30 z-0" />
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 sm:w-48 sm:h-48 rounded-full border border-neutral-lightClay/20 z-0" />
+                {/* Single subtle framing ring — proportional, delicate halo that compliments the badge */}
+                <div
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[114%] h-[114%] rounded-full border border-clay/15 dark:border-white/10 z-0"
+                  aria-hidden="true"
+                />
                 <img
                   src="/icons/starting-in-lagos.svg"
                   alt="Starting in Lagos"
@@ -107,7 +110,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                   )}
                 </div>
 
-                {/* Creator attribution bar with Instagram icon link */}
+                {/* Creator attribution bar with simplified icon-plus-handle treatment */}
                 <div className="relative flex items-center justify-between pt-2 px-1">
                   <div className="flex items-center gap-3 min-w-0">
                     {/* Overlapping Avatar */}
@@ -120,30 +123,34 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                         className="object-cover"
                       />
                     </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <p className="font-sans text-xs text-neutral-clayGray leading-tight">
-                          Food by <strong className="font-semibold text-neutral-charcoal">@{creatorUsername}</strong>
-                        </p>
-                        <span className="text-xs text-neutral-clayGray/60">·</span>
-                      </div>
-                    </div>
+                    <a
+                      href={sourcePostUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-neutral-charcoal hover:text-clay dark:hover:text-[#F4C16D] hover:bg-neutral-lightClay/40 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-focusRing"
+                      aria-label={`View @${creatorUsername}'s post on Instagram`}
+                    >
+                      <svg
+                        width="15"
+                        height="15"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="shrink-0 text-clay dark:text-[#F4A11A]"
+                        aria-hidden="true"
+                      >
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                      </svg>
+                      <span className="font-sans text-xs sm:text-sm font-semibold tracking-tight text-neutral-charcoal leading-none">
+                        @{creatorUsername}
+                      </span>
+                    </a>
                   </div>
-
-                  {/* Instagram Icon */}
-                  <a
-                    href={sourcePostUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-full text-neutral-charcoal hover:text-clay transition-colors shrink-0 ml-2"
-                    aria-label={`View @${creatorUsername}'s post on Instagram`}
-                  >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
-                  </a>
                 </div>
 
               </div>

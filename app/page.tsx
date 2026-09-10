@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase/client';
-import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE, FounderNoteItem } from '@/lib/constants';
+import { FounderNoteItem } from '@/lib/constants';
 import { getFounderNoteBody } from '@/lib/notesContent';
 import { HomePageClient } from '@/components/home/HomePageClient';
 import { Hero } from '@/components/sections/Hero';
@@ -13,47 +13,33 @@ export const metadata: Metadata = {
 
 export const revalidate = 300; // ISR, 5-minute refresh per specification
 
-// The featured note is shown first, then latest 2 from the seed list
-const FALLBACK_NOTES: FounderNoteItem[] = [
-  {
-    ...SEED_FEATURED_NOTE,
-    image: SEED_FEATURED_NOTE.image || '/images/notes/note-detail-hero.png',
-  },
-  ...SEED_FOUNDER_NOTES.slice(0, 2),
-];
-
 export default async function HomePage() {
   // Query Supabase for latest 3 published founder notes
-  let notes: FounderNoteItem[] = FALLBACK_NOTES;
+  let notes: FounderNoteItem[] = [];
   if (supabase) {
     try {
       const { data, error } = await supabase
         .from('founder_notes')
-        .select('id, title, slug, excerpt, published_at')
+        .select('id, title, slug, excerpt, cover_image_url, published_at')
         .lte('published_at', new Date().toISOString())
         .order('published_at', { ascending: false })
         .limit(3);
 
-      if (!error && data && data.length > 0) {
-        notes = data.map((item, idx) => {
-          const seedMatch =
-            SEED_FOUNDER_NOTES.find((n) => n.slug === item.slug) ||
-            (SEED_FEATURED_NOTE.slug === item.slug ? SEED_FEATURED_NOTE : null);
-          return {
-            id: item.id,
-            slug: item.slug,
-            title: item.title,
-            excerpt: item.excerpt || '',
-            category: seedMatch?.category || 'COMMUNITY',
-            image: seedMatch?.image || `/images/notes/note-${idx + 1}.png`,
-            published_at: item.published_at,
-            date: new Date(item.published_at).toLocaleDateString('en-US', {
-              month: 'short',
-              year: 'numeric',
-            }),
-            body_markdown: seedMatch?.body_markdown || getFounderNoteBody(item.slug, item.excerpt),
-          };
-        });
+      if (!error && data) {
+        notes = data.map((item, idx) => ({
+          id: item.id,
+          slug: item.slug,
+          title: item.title,
+          excerpt: item.excerpt || '',
+          category: (item as any).category || 'COMMUNITY',
+          image: item.cover_image_url || `/images/notes/note-${idx + 1}.png`,
+          published_at: item.published_at,
+          date: new Date(item.published_at).toLocaleDateString('en-US', {
+            month: 'short',
+            year: 'numeric',
+          }),
+          body_markdown: (item as any).body_markdown || getFounderNoteBody(item.slug, item.excerpt),
+        }));
       }
     } catch (err) {
       console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);
