@@ -4,12 +4,54 @@
 
 :root {
   color-scheme: light;
+
+  /* Reelnosh Semantic Token Architecture */
+  /* Backgrounds */
+  --rn-bg-canvas: #FFF5FA;              /* LIGHT: Warm White #FFF5FA. */
+  --rn-bg-surface: #F7F3ED;             /* LIGHT: Soft Cream #F7F3ED. */
+  --rn-bg-surface-raised: #FFFFFF;      /* LIGHT: white elevated surface. */
+  --rn-bg-subtle: #F9F3F1;               /* LIGHT: Selected State #F9F3F1. */
+  --rn-bg-disabled: #E7DED5;             /* LIGHT: Light Clay #E7DED5. */
+
+  /* Text */
+  --rn-text-primary: #1E1B18;             /* LIGHT: Deep Charcoal #1E1B18. */
+  --rn-text-secondary: #5A2418;           /* LIGHT: Spiced Cocoa #5A2418. */
+  --rn-text-muted: #6B665F;               /* LIGHT: Clay Gray #6B665F. */
+  --rn-text-disabled: #9A948C;            /* LIGHT: Disabled Text #9A948C. */
+  --rn-text-on-brand: #FFF5FA;            /* LIGHT: Warm White #FFF5FA. */
+
+  /* Brand and action */
+  --rn-brand: #8B3A2A;                    /* LIGHT: Deep Clay #8B3A2A. */
+  --rn-brand-hover: #743022;              /* LIGHT: Deep Clay 120 #743022. */
+  --rn-brand-pressed: #5A2418;            /* LIGHT: Spiced Cocoa #5A2418. */
+  --rn-brand-subtle: #F9F3F1;             /* LIGHT: Selected State #F9F3F1. */
+  --rn-border-brand: #8B3A2A;             /* LIGHT: Deep Clay #8B3A2A. */
+
+  /* Borders and focus */
+  --rn-border-default: #E7DED5;           /* LIGHT: Light Clay #E7DED5. */
+  --rn-border-strong: #CFC2B8;            /* LIGHT: stronger Light Clay derivative. */
+  --rn-focus: #D79A8A;                    /* LIGHT: Focus Ring #D79A8A. */
+
+  /* Participation and system feedback */
+  --rn-accent-energy: #F4A11A;            /* LIGHT: Spice Pop #F4A11A. */
+  --rn-accent-warmth: #F4C16D;            /* LIGHT: Palm Cream #F4C16D. */
+  --rn-success: #5F8B4C;                  /* LIGHT: Fresh Basil #5F8B4C. */
+  --rn-warning: #B84D1B;                  /* LIGHT: Burnt Pepper #B84D1B. */
+  --rn-error: #B44C42;                    /* LIGHT: Muted Terracotta #B44C42. */
+
+  /* Layout */
+  --rn-radius-sm: 0.25rem;
+  --rn-radius-md: 0.5rem;
+  --rn-radius-lg: 0.75rem;
+  --rn-shadow-soft: 0 8px 24px rgb(30 27 24 / 0.08);
+
+  /* Legacy aliases for backwards compatibility */
   --color-clay: #8B3A2A;
   --color-clay-hover: #743022;
-  --color-clay-pressed: #5F261A;
+  --color-clay-pressed: #5A2418;
   --color-clay-80: #A45A4B;
   --color-clay-120: #743022;
-  --color-warm-white: #FFFEFA;
+  --color-warm-white: #FFF5FA;
   --color-soft-cream: #F7F3ED;
   --color-light-clay: #E7DED5;
   --color-clay-gray: #6B665F;
@@ -32,18 +74,18 @@
   --color-disabled-text: #9A948C;
   --color-selected-bg: #F9F3F1;
 
-  /* Comment thread avatar tokens — high contrast against card surface #FCFAF7 */
-  --comment-avatar-1-bg: #8B3A2A;
+  /* Comment thread avatar tokens — bold, saturated fills, never faint */
+  --comment-avatar-1-bg: #9C3D28;
   --comment-avatar-1-text: #FFFFFF;
-  --comment-avatar-1-border: #743022;
+  --comment-avatar-1-border: #7F2F1D;
 
-  --comment-avatar-2-bg: #5A2418;
+  --comment-avatar-2-bg: #4F2015;
   --comment-avatar-2-text: #FFFFFF;
-  --comment-avatar-2-border: #441A10;
+  --comment-avatar-2-border: #3A160E;
 
-  --comment-avatar-3-bg: #B84D1B;
+  --comment-avatar-3-bg: #BD531E;
   --comment-avatar-3-text: #FFFFFF;
-  --comment-avatar-3-border: #993F14;
+  --comment-avatar-3-border: #994014;
 
   /* DESIGN_OVERRIDES §2 , vertical rhythm tokens */
   --rhythm-section-desktop: 120px;
@@ -52,48 +94,415 @@
   --rhythm-group-mobile: 32px;
 }
 
-[data-theme="dark"] {
+[data-theme="dark"],
+.dark {
   color-scheme: dark;
+
+  /* Reelnosh Semantic Token Architecture (Dark Mode) */
+  /* LIGHT: Warm White #FFF5FA canvas. DARK: Dark Charcoal #1E1B18. */
+  --rn-bg-canvas: #1E1B18;
+  /* LIGHT: Soft Cream #F7F3ED surface. DARK: Night Cocoa #2A211D. */
+  --rn-bg-surface: #2A211D;
+  /* LIGHT: white elevated surface. DARK: Roasted Clay #342620. */
+  --rn-bg-surface-raised: #342620;
+  /* LIGHT: Selected State #F9F3F1. DARK: Selected Surface #3C2B25. */
+  --rn-bg-subtle: #3C2B25;
+  /* LIGHT: Light Clay #E7DED5. DARK: Disabled Background #4A403A. */
+  --rn-bg-disabled: #4A403A;
+
+  /* LIGHT: Deep Charcoal #1E1B18 primary text. DARK: Warm White #FFF5FA. */
+  --rn-text-primary: #FFF5FA;
+  /* LIGHT: Spiced Cocoa #5A2418 secondary text. DARK: Soft Cream #F7F3ED. */
+  --rn-text-secondary: #F7F3ED;
+  /* LIGHT: Clay Gray #6B665F muted text. DARK: Clay Gray Dark #B9ADA4. */
+  --rn-text-muted: #B9ADA4;
+  /* LIGHT: Disabled Text #9A948C. DARK: Dark Disabled Text #8E837B. */
+  --rn-text-disabled: #8E837B;
+  /* LIGHT: Warm White #FFF5FA. DARK: Warm White remains unchanged. */
+  --rn-text-on-brand: #FFF5FA;
+
+  /* LIGHT: Deep Clay #8B3A2A. DARK: Deep Clay remains a filled brand surface. */
+  --rn-brand: #8B3A2A;
+  /* LIGHT: Deep Clay 120 #743022. DARK: Deep Clay 120 remains the hover surface. */
+  --rn-brand-hover: #743022;
+  /* LIGHT: Spiced Cocoa #5A2418. DARK: Spiced Cocoa remains a pressed/deep surface. */
+  --rn-brand-pressed: #5A2418;
+  /* LIGHT: Selected State #F9F3F1. DARK: Selected Surface #3C2B25. */
+  --rn-brand-subtle: #3C2B25;
+  /* LIGHT: Deep Clay #8B3A2A. DARK: no default Deep Clay text; use as filled control border. */
+  --rn-border-brand: #8B3A2A;
+
+  /* LIGHT: Light Clay #E7DED5. DARK: Cocoa Divider #4A352E. */
+  --rn-border-default: #4A352E;
+  /* LIGHT: stronger Light Clay derivative #CFC2B8. DARK: lighter warm divider #72564B. */
+  --rn-border-strong: #72564B;
+  /* LIGHT: Focus Ring #D79A8A. DARK: Focus Ring remains unchanged. */
+  --rn-focus: #D79A8A;
+
+  /* LIGHT: Spice Pop #F4A11A. DARK: Spice Pop remains unchanged. */
+  --rn-accent-energy: #F4A11A;
+  /* LIGHT: Palm Cream #F4C16D. DARK: Palm Cream remains unchanged. */
+  --rn-accent-warmth: #F4C16D;
+  /* LIGHT: Fresh Basil #5F8B4C. DARK: lighter readable success #9BC47E. */
+  --rn-success: #9BC47E;
+  /* LIGHT: Burnt Pepper #B84D1B. DARK: lighter readable warning #F09A5C. */
+  --rn-warning: #F09A5C;
+  /* LIGHT: Muted Terracotta #B44C42. DARK: lighter readable error #E58B83. */
+  --rn-error: #E58B83;
+
+  --rn-shadow-soft: 0 8px 24px rgb(0 0 0 / 0.24);
+
+  /* Legacy aliases mapped to dark tokens */
   --color-clay: #C06B54;
   --color-clay-hover: #D27E67;
   --color-clay-pressed: #AD5842;
   --color-clay-80: #D68874;
   --color-clay-120: #9C4733;
-  --color-warm-white: #1A1613;
-  --color-soft-cream: #242019;
-  --color-light-clay: #3A332C;
-  --color-clay-gray: #A69C8F;
-  --color-charcoal: #F5F0E8;
+  --color-warm-white: #1E1B18;
+  --color-soft-cream: #2A211D;
+  --color-light-clay: #4A352E;
+  --color-clay-gray: #B9ADA4;
+  --color-charcoal: #FFF5FA;
   --color-cocoa: #5A2418;
-  --color-spice-pop: #F5B23E;
-  --color-success: #7FAE68;
-  --color-urgency: #D2653A;
-  --color-error: #D16860;
-  --color-palm-cream: #D9A857;
-  --color-focus-ring: #E3AC9E;
-  --color-secondary-cta-border: #4D4238;
-  --color-secondary-cta-hover-bg: #2F2922;
-  --color-surface-alt: #2C2720;
-  --color-surface-divider: #3A332C;
+  --color-spice-pop: #F4A11A;
+  --color-success: #9BC47E;
+  --color-urgency: #F09A5C;
+  --color-error: #E58B83;
+  --color-palm-cream: #F4C16D;
+  --color-focus-ring: #D79A8A;
+  --color-secondary-cta-border: #4A352E;
+  --color-secondary-cta-hover-bg: #3C2B25;
+  --color-surface-alt: #342620;
+  --color-surface-divider: #4A352E;
   --color-surface-success-tint: #1A2A15;
   --color-footer-bg: #14110E;
-  --color-footer-border: #3A332C;
-  --color-disabled-bg: #3A332C;
-  --color-disabled-text: #6B665F;
-  --color-selected-bg: #2F2922;
+  --color-footer-border: #4A352E;
+  --color-disabled-bg: #4A403A;
+  --color-disabled-text: #8E837B;
+  --color-selected-bg: #3C2B25;
 
-  /* Comment thread avatar tokens — high contrast against dark card surface #2C2720 */
-  --comment-avatar-1-bg: #D68874;
-  --comment-avatar-1-text: #1A1613;
-  --comment-avatar-1-border: #E5A594;
+  /* Comment thread avatar tokens — bold, saturated fills, never faint */
+  --comment-avatar-1-bg: #B84D2B;
+  --comment-avatar-1-text: #FFFFFF;
+  --comment-avatar-1-border: #D66D4A;
 
-  --comment-avatar-2-bg: #F4C16D;
-  --comment-avatar-2-text: #1A1613;
-  --comment-avatar-2-border: #F7D18E;
+  --comment-avatar-2-bg: #D97706;
+  --comment-avatar-2-text: #FFFFFF;
+  --comment-avatar-2-border: #F59E0B;
 
-  --comment-avatar-3-bg: #E29B84;
-  --comment-avatar-3-text: #1A1613;
-  --comment-avatar-3-border: #EBB09D;
+  --comment-avatar-3-bg: #9E3820;
+  --comment-avatar-3-text: #FFFFFF;
+  --comment-avatar-3-border: #BA4E33;
+}
+
+/* ==========================================================================
+   Reelnosh UI Component Kit Base & Typography
+   ========================================================================== */
+
+.rn-eyebrow {
+  color: var(--rn-accent-energy);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.rn-body {
+  color: var(--rn-text-secondary);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.rn-caption {
+  color: var(--rn-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Background Components */
+.rn-page {
+  min-height: 100vh;
+  background: var(--rn-bg-canvas);
+  color: var(--rn-text-primary);
+}
+
+.rn-section {
+  background: var(--rn-bg-canvas);
+  color: var(--rn-text-primary);
+}
+
+.rn-section-muted {
+  background: var(--rn-bg-surface);
+  color: var(--rn-text-primary);
+}
+
+.rn-section-warm {
+  background: var(--rn-bg-surface-raised);
+  color: var(--rn-text-primary);
+}
+
+.rn-brand-band {
+  background: var(--rn-brand);
+  color: var(--rn-text-on-brand);
+}
+
+.rn-brand-band h1,
+.rn-brand-band h2,
+.rn-brand-band p {
+  color: var(--rn-text-on-brand);
+}
+
+/* Buttons */
+.rn-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  border-radius: var(--rn-radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.rn-button:focus-visible,
+.rn-input:focus-visible,
+.rn-card:focus-visible {
+  outline: 2px solid var(--rn-focus);
+  outline-offset: 3px;
+}
+
+.rn-button-primary {
+  background: var(--rn-brand);
+  color: var(--rn-text-on-brand);
+}
+
+.rn-button-primary:hover {
+  background: var(--rn-brand-hover);
+}
+
+.rn-button-primary:active {
+  background: var(--rn-brand-pressed);
+}
+
+.rn-button-secondary {
+  border-color: var(--rn-border-brand);
+  background: transparent;
+  color: var(--rn-brand);
+}
+
+.dark .rn-button-secondary,
+[data-theme='dark'] .rn-button-secondary {
+  border-color: var(--rn-focus);
+  color: var(--rn-accent-warmth);
+}
+
+.rn-button-secondary:hover {
+  background: var(--rn-brand-subtle);
+}
+
+.rn-button-quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--rn-text-secondary);
+}
+
+.rn-button-quiet:hover {
+  background: var(--rn-bg-subtle);
+  color: var(--rn-text-primary);
+}
+
+.rn-button-danger {
+  background: var(--rn-error);
+  color: var(--rn-text-primary);
+}
+
+.rn-button:disabled,
+.rn-button[aria-disabled='true'] {
+  background: var(--rn-bg-disabled);
+  color: var(--rn-text-disabled);
+  cursor: not-allowed;
+}
+
+/* Cards */
+.rn-card {
+  border: 1px solid var(--rn-border-default);
+  border-radius: var(--rn-radius-lg);
+  background: var(--rn-bg-surface);
+  color: var(--rn-text-primary);
+  box-shadow: var(--rn-shadow-soft);
+}
+
+.rn-card-raised {
+  border-color: var(--rn-border-strong);
+  background: var(--rn-bg-surface-raised);
+}
+
+.rn-card-selected {
+  border-color: var(--rn-focus);
+  background: var(--rn-bg-subtle);
+}
+
+.rn-card-brand {
+  border-color: var(--rn-brand);
+  background: var(--rn-brand);
+  color: var(--rn-text-on-brand);
+}
+
+.rn-card-brand h3,
+.rn-card-brand p,
+.rn-card-brand small {
+  color: var(--rn-text-on-brand);
+}
+
+.rn-card-media {
+  overflow: hidden;
+  border-radius: var(--rn-radius-lg) var(--rn-radius-lg) 0 0;
+  background: var(--rn-bg-surface-raised);
+}
+
+.rn-card-body {
+  padding: 1.25rem;
+}
+
+.rn-card-title {
+  color: var(--rn-text-primary);
+  font-family: var(--font-lora), Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+
+.rn-card-description {
+  margin-top: 0.5rem;
+  color: var(--rn-text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+/* Badges */
+.rn-badge {
+  display: inline-flex;
+  min-height: 1.5rem;
+  align-items: center;
+  gap: 0.375rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.rn-badge-new {
+  border-color: var(--rn-accent-energy);
+  background: color-mix(in srgb, var(--rn-accent-energy) 16%, var(--rn-bg-canvas));
+  color: var(--rn-accent-energy);
+}
+
+.rn-badge-success {
+  border-color: var(--rn-success);
+  background: color-mix(in srgb, var(--rn-success) 16%, var(--rn-bg-canvas));
+  color: var(--rn-success);
+}
+
+.rn-badge-warning {
+  border-color: var(--rn-warning);
+  background: color-mix(in srgb, var(--rn-warning) 16%, var(--rn-bg-canvas));
+  color: var(--rn-warning);
+}
+
+.rn-badge-error {
+  border-color: var(--rn-error);
+  background: color-mix(in srgb, var(--rn-error) 16%, var(--rn-bg-canvas));
+  color: var(--rn-error);
+}
+
+.rn-badge-neutral {
+  border-color: var(--rn-border-default);
+  background: var(--rn-bg-subtle);
+  color: var(--rn-text-secondary);
+}
+
+.rn-status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* Inputs, Notices, Dividers, Links */
+.rn-input,
+.rn-select,
+.rn-textarea {
+  width: 100%;
+  border: 1px solid var(--rn-border-default);
+  border-radius: var(--rn-radius-md);
+  background: var(--rn-bg-surface-raised);
+  color: var(--rn-text-primary);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.rn-input,
+.rn-select {
+  min-height: 2.75rem;
+  padding: 0.75rem;
+}
+
+.rn-textarea {
+  min-height: 7rem;
+  padding: 0.75rem;
+  resize: vertical;
+}
+
+.rn-input::placeholder,
+.rn-textarea::placeholder {
+  color: var(--rn-text-muted);
+}
+
+.rn-input[aria-invalid='true'],
+.rn-select[aria-invalid='true'],
+.rn-textarea[aria-invalid='true'] {
+  border-color: var(--rn-error);
+}
+
+.rn-help-text {
+  color: var(--rn-text-muted);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.rn-error-text {
+  color: var(--rn-error);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.rn-divider {
+  height: 1px;
+  border: 0;
+  background: var(--rn-border-default);
+}
+
+.rn-link {
+  color: var(--rn-brand);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.dark .rn-link,
+[data-theme='dark'] .rn-link {
+  color: var(--rn-accent-warmth);
+}
+
+.rn-link:hover {
+  color: var(--rn-brand-hover);
 }
 
 * {

@@ -22,32 +22,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const stored = typeof window !== 'undefined' ? (localStorage.getItem('theme') as Theme | null) : null;
     const domTheme = typeof document !== 'undefined' ? (document.documentElement.getAttribute('data-theme') as Theme | null) : null;
     
+    // Default to 'light' unless explicitly stored as 'dark' or 'light'
     const initialTheme: Theme =
       stored === 'dark' || stored === 'light'
         ? stored
         : domTheme === 'dark' || domTheme === 'light'
         ? domTheme
-        : window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
         : 'light';
 
     setThemeState(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
+    document.documentElement.classList.toggle('dark', initialTheme === 'dark');
     setMounted(true);
-
-    // 2. Listen to system preference changes if user hasn't explicitly set localStorage
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => {
-      const manual = localStorage.getItem('theme');
-      if (!manual) {
-        const sysTheme = e.matches ? 'dark' : 'light';
-        setThemeState(sysTheme);
-        document.documentElement.setAttribute('data-theme', sysTheme);
-      }
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
   const setTheme = useCallback((newTheme: Theme) => {
@@ -55,6 +41,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (typeof window !== 'undefined') {
       localStorage.setItem('theme', newTheme);
       document.documentElement.setAttribute('data-theme', newTheme);
+      document.documentElement.classList.toggle('dark', newTheme === 'dark');
     }
   }, []);
 
@@ -64,6 +51,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (typeof window !== 'undefined') {
         localStorage.setItem('theme', nextTheme);
         document.documentElement.setAttribute('data-theme', nextTheme);
+        document.documentElement.classList.toggle('dark', nextTheme === 'dark');
       }
       return nextTheme;
     });

@@ -37,7 +37,7 @@ export const FoodiesClubCard: React.FC<FoodiesClubCardProps> = ({ compact = fals
           {/* DESIGN_OVERRIDES §1: Title role , 36px Lora semibold */}
           <h2 className={`relative z-10 font-serif font-semibold leading-[1.2] text-white ${compact ? 'mb-3 text-[28px] sm:text-[32px]' : 'mb-4 text-[32px] sm:text-[40px]'}`}>
             Stay close to what <br />
-            we&apos;re building!
+            we&apos;re building.
           </h2>
 
           {/* Subhead */}
@@ -51,7 +51,7 @@ export const FoodiesClubCard: React.FC<FoodiesClubCardProps> = ({ compact = fals
               href={SITE_CONFIG.links.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center justify-center rounded-brand bg-white font-sans font-semibold text-[#783323] shadow-sm transition-colors hover:bg-[#F7F3ED] ${compact ? 'w-full px-6 py-3 text-sm sm:w-auto' : 'px-8 py-3.5 text-sm'}`}
+              className={`inline-flex items-center justify-center rounded-brand bg-white font-sans font-semibold text-[#8B3A2A] shadow-sm transition-colors hover:bg-[#F7F3ED] ${compact ? 'w-full px-6 py-3 text-sm sm:w-auto' : 'px-8 py-3.5 text-sm'}`}
             >
               Join the Reelnosh community
             </a>

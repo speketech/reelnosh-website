@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default async function FoundersNoteIndexPage() {
   let notes: FounderNoteItem[] = SEED_FOUNDER_NOTES;
-  const featuredNote = SEED_FEATURED_NOTE;
+  let featuredNote: (FounderNoteItem & { quote?: string }) | null = SEED_FEATURED_NOTE;
 
   if (supabase) {
     try {
@@ -27,20 +27,36 @@ export default async function FoundersNoteIndexPage() {
         .lte('published_at', new Date().toISOString())
         .order('published_at', { ascending: false });
 
-      if (!error && data && data.length > 0) {
-        // Merge supabase notes with seed data so images and categories are preserved
-        notes = SEED_FOUNDER_NOTES.map((seed) => {
-          const dbMatch = data.find((d) => d.slug === seed.slug || d.id === seed.id);
-          if (dbMatch) {
+      if (!error && data) {
+        if (data.length === 0) {
+          notes = [];
+          featuredNote = null;
+        } else {
+          const mappedNotes = data.map((item, idx) => {
+            const seedMatch =
+              SEED_FOUNDER_NOTES.find((s) => s.slug === item.slug || s.id === item.id) ||
+              (SEED_FEATURED_NOTE.slug === item.slug ? SEED_FEATURED_NOTE : null);
+
             return {
-              ...seed,
-              title: dbMatch.title || seed.title,
-              excerpt: dbMatch.excerpt || seed.excerpt,
-              published_at: dbMatch.published_at || seed.published_at,
+              id: item.id,
+              slug: item.slug,
+              title: item.title,
+              excerpt: item.excerpt || '',
+              quote: (seedMatch && 'quote' in seedMatch) ? (seedMatch as { quote?: string }).quote : item.excerpt || '',
+              category: seedMatch?.category || 'COMMUNITY',
+              image: seedMatch?.image || `/images/notes/note-${((idx % 3) + 1)}.png`,
+              published_at: item.published_at,
+              date: new Date(item.published_at).toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric',
+              }),
+              body_markdown: seedMatch?.body_markdown || '',
             };
-          }
-          return seed;
-        });
+          });
+
+          featuredNote = mappedNotes[0] || null;
+          notes = mappedNotes.slice(1);
+        }
       }
     } catch (err) {
       console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);

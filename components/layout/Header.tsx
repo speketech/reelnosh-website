@@ -220,7 +220,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             <button
               type="button"
               onClick={onOpenEarlyAccess}
-              className="tablet:hidden inline-flex items-center justify-center rounded-brand bg-clay px-3 py-1.5 font-sans text-xs font-semibold text-white transition-colors hover:bg-clay-hover active:bg-clay-pressed"
+              className="tablet:hidden inline-flex items-center justify-center rounded-brand bg-[#8B3A2A] px-3 py-1.5 font-sans text-xs font-semibold text-[#FFF5FA] transition-colors hover:bg-[#743022] active:bg-[#5A2418]"
             >
               Join Early Access
             </button>

@@ -69,7 +69,17 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
             className="font-sans text-xs sm:text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 cursor-pointer group/link"
           >
             <span>Read more</span> <span className="sr-only">: {note.title}</span>
-            <img src="/icons/forward-arrow.svg" alt="" aria-hidden="true" className="h-4 w-4 pointer-events-none transition-transform group-hover/link:translate-x-0.5" />
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              className="h-4 w-4 pointer-events-none transition-transform group-hover/link:translate-x-0.5"
+              aria-hidden="true"
+            >
+              <path d="M7.99976 3L12.9998 8L7.99976 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M2.99609 7.875H12.9961" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </Link>
         </div>
       </div>

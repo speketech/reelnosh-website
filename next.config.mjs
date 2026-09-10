@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ['@supabase/supabase-js'],
   experimental: {
     // Inline critical CSS for first paint; defer the rest.
     // Requires the `critters` package (installed as a devDependency).

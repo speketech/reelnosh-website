@@ -34,26 +34,30 @@ export default async function HomePage() {
         .order('published_at', { ascending: false })
         .limit(3);
 
-      if (!error && data && data.length > 0) {
-        notes = data.map((item, idx) => {
-          const seedMatch =
-            SEED_FOUNDER_NOTES.find((n) => n.slug === item.slug) ||
-            (SEED_FEATURED_NOTE.slug === item.slug ? SEED_FEATURED_NOTE : null);
-          return {
-            id: item.id,
-            slug: item.slug,
-            title: item.title,
-            excerpt: item.excerpt || '',
-            category: seedMatch?.category || 'COMMUNITY',
-            image: seedMatch?.image || `/images/notes/note-${idx + 1}.png`,
-            published_at: item.published_at,
-            date: new Date(item.published_at).toLocaleDateString('en-US', {
-              month: 'short',
-              year: 'numeric',
-            }),
-            body_markdown: seedMatch?.body_markdown || getFounderNoteBody(item.slug, item.excerpt),
-          };
-        });
+      if (!error && data) {
+        if (data.length === 0) {
+          notes = [];
+        } else {
+          notes = data.map((item, idx) => {
+            const seedMatch =
+              SEED_FOUNDER_NOTES.find((n) => n.slug === item.slug) ||
+              (SEED_FEATURED_NOTE.slug === item.slug ? SEED_FEATURED_NOTE : null);
+            return {
+              id: item.id,
+              slug: item.slug,
+              title: item.title,
+              excerpt: item.excerpt || '',
+              category: seedMatch?.category || 'COMMUNITY',
+              image: seedMatch?.image || `/images/notes/note-${idx + 1}.png`,
+              published_at: item.published_at,
+              date: new Date(item.published_at).toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric',
+              }),
+              body_markdown: seedMatch?.body_markdown || getFounderNoteBody(item.slug, item.excerpt),
+            };
+          });
+        }
       }
     } catch (err) {
       console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);

@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: ['selector', '[data-theme="dark"]'],
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -64,6 +65,30 @@ const config: Config = {
           disabledText: 'var(--color-disabled-text)',
           selectedBackground: 'var(--color-selected-bg)',
         },
+        rn: {
+          canvas: 'var(--rn-bg-canvas)',
+          surface: 'var(--rn-bg-surface)',
+          raised: 'var(--rn-bg-surface-raised)',
+          subtle: 'var(--rn-bg-subtle)',
+          disabled: 'var(--rn-bg-disabled)',
+          'text-primary': 'var(--rn-text-primary)',
+          'text-secondary': 'var(--rn-text-secondary)',
+          'text-muted': 'var(--rn-text-muted)',
+          'text-disabled': 'var(--rn-text-disabled)',
+          'text-on-brand': 'var(--rn-text-on-brand)',
+          brand: 'var(--rn-brand)',
+          'brand-hover': 'var(--rn-brand-hover)',
+          'brand-pressed': 'var(--rn-brand-pressed)',
+          'brand-subtle': 'var(--rn-brand-subtle)',
+          border: 'var(--rn-border-default)',
+          'border-strong': 'var(--rn-border-strong)',
+          focus: 'var(--rn-focus)',
+          energy: 'var(--rn-accent-energy)',
+          warmth: 'var(--rn-accent-warmth)',
+          success: 'var(--rn-success)',
+          warning: 'var(--rn-warning)',
+          error: 'var(--rn-error)',
+        },
       },
       fontFamily: {
         serif: ['var(--font-lora)', 'Lora', 'Georgia', 'serif'],
@@ -81,6 +106,7 @@ const config: Config = {
       boxShadow: {
         elevation1: '0px 2px 8px rgba(0, 0, 0, 0.06)',
         elevation2: '0px 4px 12px rgba(0, 0, 0, 0.08)',
+        'rn-soft': 'var(--rn-shadow-soft)',
       },
       maxWidth: {
         desktopContent: '1120px',
@@ -90,6 +116,9 @@ const config: Config = {
         brand: '12px',
         card: '16px',
         pill: '9999px',
+        'rn-sm': 'var(--rn-radius-sm)',
+        'rn-md': 'var(--rn-radius-md)',
+        'rn-lg': 'var(--rn-radius-lg)',
       },
     },
   },

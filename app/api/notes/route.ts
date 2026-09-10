@@ -22,13 +22,13 @@ export async function GET(request: Request) {
       .order('published_at', { ascending: false })
       .range(offset, offset + limit - 1);
 
-    if (error || !data || data.length === 0) {
-      // Return seed notes if table is empty or unconfigured
+    if (error) {
+      // Return seed notes if database errors or unconfigured
       const paginatedSeed = SEED_FOUNDER_NOTES.slice(offset, offset + limit);
       return NextResponse.json({ notes: paginatedSeed, total: SEED_FOUNDER_NOTES.length });
     }
 
-    return NextResponse.json({ notes: data });
+    return NextResponse.json({ notes: data || [], total: data?.length || 0 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Internal Server Error';
     return NextResponse.json({ error: message }, { status: 500 });

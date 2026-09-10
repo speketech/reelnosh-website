@@ -29,13 +29,13 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
           {/* Left Column: Copy & Actions */}
           <div className="lg:col-span-6 flex max-w-[540px] flex-col justify-center text-center lg:text-left items-center lg:items-start mx-auto lg:mx-0">
             {/* Eyebrow label */}
-            <p className="mb-6 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
+            <p className="mb-6 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-accent-spicePop">
               A NEW WAY TO EXPERIENCE CREATOR-MADE FOOD
             </p>
 
             {/* H1 with exact line breaks matching reference */}
             <h1 className="mb-6 font-serif text-[36px] font-semibold leading-[1.15] text-neutral-charcoal tablet:text-[40px] sm:text-[48px]">
-              Where food content <span className="font-medium italic text-clay">becomes meals.</span>
+              Where food content <span className="font-medium italic text-[#8B3A2A] dark:text-[#D79A8A]">becomes meals.</span>
             </h1>
 
             {/* Subhead with exact break */}
@@ -49,7 +49,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                 href={SITE_CONFIG.links.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-[52px] w-full sm:w-auto shrink-0 items-center justify-center rounded-brand bg-[#783323] px-7 font-sans text-base font-semibold text-white shadow-elevation1 transition-colors hover:bg-[#63291C] active:bg-[#522217]"
+                className="inline-flex h-[52px] w-full sm:w-auto shrink-0 items-center justify-center rounded-brand bg-[#8B3A2A] px-7 font-sans text-base font-semibold text-[#FFF5FA] shadow-elevation1 transition-colors hover:bg-[#743022] active:bg-[#5A2418]"
               >
                 Join the Reelnosh Community
               </a>
@@ -67,10 +67,10 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
           <div className="lg:col-span-6 flex justify-center lg:justify-end items-center">
             <div className="relative w-full max-w-[440px] xl:max-w-[460px]">
               
-              {/* Starburst Badge + concentric ring motif */}
-              <div className="pointer-events-none absolute -right-6 -top-7 z-30 h-24 w-24 sm:h-28 sm:w-28 drop-shadow-sm">
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-36 sm:h-36 rounded-full border border-neutral-lightClay/30 z-0" />
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 sm:w-48 sm:h-48 rounded-full border border-neutral-lightClay/20 z-0" />
+              {/* Starburst Badge + complimenting, less pronounced concentric ring motif (hidden on mobile to prevent text layering) */}
+              <div className="pointer-events-none absolute -right-3 -top-5 sm:-right-6 sm:-top-7 z-30 h-20 w-20 sm:h-28 sm:w-28 drop-shadow-sm">
+                <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-neutral-lightClay/25 dark:border-neutral-lightClay/10 z-0 pointer-events-none" />
+                <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 sm:w-40 sm:h-40 rounded-full border border-neutral-lightClay/15 dark:border-neutral-lightClay/5 z-0 pointer-events-none" />
                 <img
                   src="/icons/starting-in-lagos.svg"
                   alt="Starting in Lagos"
@@ -83,7 +83,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
               {/* Outer Soft Cream Container Card */}
               <div className="rounded-[16px] border border-neutral-lightClay/80 bg-neutral-softCream p-4 sm:p-5 shadow-elevation2">
                 
-                {/* Food Image or Video */}
+                {/* Food Image or Video with Creator Handle Pill Overlay */}
                 <div className="relative aspect-[440/380] w-full overflow-hidden rounded-[12px] border border-neutral-lightClay bg-[var(--color-warm-white)]">
                   {isVideo ? (
                     <video
@@ -105,44 +105,36 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                       sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1024px) 408px, 420px"
                     />
                   )}
-                </div>
 
-                {/* Creator attribution bar with Instagram icon link */}
-                <div className="relative flex items-center justify-between pt-2 px-1">
-                  <div className="flex items-center gap-3 min-w-0">
-                    {/* Overlapping Avatar */}
-                    <div className="relative -mt-9 sm:-mt-11 h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border-4 border-neutral-softCream bg-neutral-softCream shadow-elevation1 z-10">
-                      <Image
-                        src="/images/hero/hero-avatar.png"
-                        alt={`@${creatorUsername}`}
-                        fill
-                        sizes="64px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5 flex-wrap">
-                        <p className="font-sans text-xs text-neutral-clayGray leading-tight">
-                          Food by <strong className="font-semibold text-neutral-charcoal">@{creatorUsername}</strong>
-                        </p>
-                        <span className="text-xs text-neutral-clayGray/60">·</span>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Gradient Overlay for Handle */}
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
 
-                  {/* Instagram Icon */}
+                  {/* Creator Handle Pill (Unified exactly as Exploring meal cards) */}
                   <a
                     href={sourcePostUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-full text-neutral-charcoal hover:text-clay transition-colors shrink-0 ml-2"
-                    aria-label={`View @${creatorUsername}'s post on Instagram`}
+                    className="absolute bottom-3 left-3 z-10 flex items-center gap-1.5 rounded-full bg-black/40 backdrop-blur-md px-3 py-1.5 transition-all hover:bg-black/60 border border-white/20"
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="shrink-0 text-white"
+                      aria-hidden="true"
+                    >
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                     </svg>
+                    <span className="font-sans text-[12px] font-medium tracking-tight text-white leading-none">
+                      @{creatorUsername}
+                    </span>
                   </a>
                 </div>
 

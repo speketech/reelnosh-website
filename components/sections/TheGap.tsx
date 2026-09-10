@@ -48,8 +48,8 @@ export const TheGap: React.FC = () => {
           <div className="max-w-[520px] lg:col-span-6">
             {/* Eyebrow with amber dot */}
             <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-accent-spicePop inline-block shrink-0" />
-              <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
+              <span className="w-2 h-2 rounded-full bg-[#F4A11A] inline-block shrink-0" />
+              <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-[#8B3A2A] dark:text-[#F4A11A]">
                 THE GAP
               </span>
             </div>
@@ -65,7 +65,7 @@ export const TheGap: React.FC = () => {
             </p>
 
             {/* Emphasis line , Figtree Medium 16px, Clay */}
-            <p className="font-sans text-base font-medium text-clay">
+            <p className="font-sans text-base font-medium text-clay dark:text-[#D79A8A]">
               That&apos;s the gap Reelnosh is built to close.
             </p>
           </div>
@@ -136,7 +136,14 @@ export const TheGap: React.FC = () => {
                   >
                     <div className="relative flex items-center gap-3 rounded-[14px] sm:rounded-[16px] bg-[var(--color-surface-alt)] p-2.5 sm:p-3 shadow-elevation1 border border-neutral-lightClay/50">
                       {/* 28px/32px Circular Avatar with distinct initials & tints */}
-                      <div className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full shadow-xs transition-colors duration-200 ${bubble.avatarBg}`}>
+                      <div
+                        style={{
+                          backgroundColor: `var(--comment-avatar-${bubble.number}-bg)`,
+                          color: `var(--comment-avatar-${bubble.number}-text)`,
+                          borderColor: `var(--comment-avatar-${bubble.number}-border)`,
+                        }}
+                        className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full shadow-xs transition-colors duration-200 border ${bubble.avatarBg}`}
+                      >
                         <span className="font-sans text-[11px] font-bold tracking-tight">{bubble.initials}</span>
                       </div>
 
