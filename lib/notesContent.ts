@@ -74,7 +74,7 @@ Every Drop teaches us something that dispatch data never could: which dishes tra
 
 ## What comes next: drops first, dispatch later
 
-We will build delivery when the food experiences we’re enabling demand it , not because it’s the default thing a food tech company is supposed to do. Right now, pickup points and scheduled collection are teaching us more than a fleet of motorbikes ever could.
+We will build delivery when the food experiences we’re enabling demand it, not because it’s the default thing a food tech company is supposed to do. Right now, pickup points and scheduled collection are teaching us more than a fleet of motorbikes ever could.
 
 When we do build dispatch, it won’t look like the delivery apps you use today. It will be built specifically for time-sensitive, limited-quantity food drops where the handoff is part of the experience, not an afterthought.
 

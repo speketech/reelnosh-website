@@ -12,7 +12,7 @@ export default function NotFound() {
           This page must still be in the kitchen.
         </h1>
         <p className="mb-8 max-w-md font-sans text-base leading-relaxed text-neutral-clayGray">
-          We couldn&apos;t find what you were looking for , but there&apos;s plenty else cooking. Head back home, or see what we&apos;re exploring.
+          We couldn&apos;t find what you were looking for, but there&apos;s plenty else cooking. Head back home, or see what we&apos;re exploring.
         </p>
       <Link
         href="/"

@@ -53,7 +53,7 @@ export const CreatorSignupForm: React.FC<CreatorSignupFormProps> = ({
       const data = await res.json();
 
       if (!res.ok) {
-        setServerError(data.error || "Something didn't quite go through , mind trying again in a moment?");
+        setServerError(data.error || "Something didn't quite go through, mind trying again in a moment?");
         return;
       }
 

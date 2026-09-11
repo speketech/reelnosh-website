@@ -97,7 +97,7 @@ export const InterestDetailForm: React.FC<InterestDetailFormProps> = ({
       {showHeader && (
         <div className="space-y-1 mb-2">
           <h3 className="font-serif text-2xl font-bold text-neutral-charcoal">
-            Thanks , you&apos;re already counted.
+            Thanks, you&apos;re already counted.
           </h3>
           <p className="text-sm text-neutral-clayGray">
             Want to help us plan the real thing? Totally optional.

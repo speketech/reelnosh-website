@@ -179,8 +179,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             </div>
           </Link>
 
-          {/* Desktop Nav Links — shown from tablet (834px) up */}
-          <nav className="hidden items-center gap-5 font-sans text-base font-medium text-neutral-charcoal tablet:flex">
+          {/* Desktop Nav Links & Theme Toggle — shown from tablet (834px) up */}
+          <nav aria-label="Main navigation" className="hidden items-center gap-5 font-sans text-base font-medium text-neutral-charcoal tablet:flex">
             <Link
               href="/#the-drop"
               onClick={(event) => handleHomeAnchor(event, 'the-drop')}
@@ -201,11 +201,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
             >
               Founder&apos;s note
             </Link>
+            <ThemeToggle className="ml-1" />
           </nav>
 
           {/* Primary CTA & Mobile Toggle */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            <ThemeToggle />
+            {/* Mobile Header Theme Toggle */}
+            <ThemeToggle className="tablet:hidden" />
 
             {/* Full CTA — shown from tablet (834px) up; compact CTA covers below that */}
             <Button
@@ -270,7 +272,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                 </button>
               </div>
 
-              <div className="py-6 flex flex-col gap-5 text-base font-sans font-medium text-neutral-charcoal">
+              <nav aria-label="Mobile navigation" className="py-6 flex flex-col gap-5 text-base font-sans font-medium text-neutral-charcoal">
                 <Link
                   href="/#the-drop"
                   onClick={(event) => {
@@ -298,7 +300,12 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                 >
                   Founder&apos;s note
                 </Link>
-              </div>
+
+                <div className="pt-4 border-t border-surface-divider/70 flex items-center justify-between">
+                  <span className="text-sm font-sans text-neutral-clayGray">Switch theme</span>
+                  <ThemeToggle />
+                </div>
+              </nav>
             </div>
 
             <div className="pt-6 border-t border-surface-divider">

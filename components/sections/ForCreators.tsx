@@ -40,12 +40,12 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
               </span>
             </div>
 
-            {/* DESIGN_OVERRIDES §1: Title role , 36px Lora semibold */}
+            {/* DESIGN_OVERRIDES §1: Title role, 36px Lora semibold */}
             <h2 className="font-serif text-[36px] font-semibold leading-[1.2] text-neutral-charcoal max-w-[540px]">
               Your food already has an audience. We&apos;re helping turn that interest into orders.
             </h2>
 
-            {/* Value Propositions , Clean single check icon, NOT placed in another circular border */}
+            {/* Value Propositions, Clean single check icon, NOT placed in another circular border */}
             <div className="space-y-6">
               {valueProps.map((item, idx) => (
                 <ScrollReveal key={item.title} delay={idx * 80} className="flex items-start gap-4">
@@ -90,11 +90,18 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
             <ScrollReveal className="w-full flex justify-center lg:justify-end">
               <div className="w-full max-w-[424px]">
                 <img
-                  src={theme === 'dark' ? '/images/creator/creator-mockup-dark.svg' : '/images/creator/creator-mockup.svg'}
+                  src="/images/creator/creator-mockup.svg"
                   alt="How one post becomes a sold-out Drop: You post, it becomes a Drop, it sells out"
                   width={424}
                   height={486}
-                  className="h-auto w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[424px] mx-auto object-contain drop-shadow-sm"
+                  className="dark:hidden h-auto w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[424px] mx-auto object-contain drop-shadow-sm"
+                />
+                <img
+                  src="/images/creator/creator-mockup-dark.svg"
+                  alt="How one post becomes a sold-out Drop: You post, it becomes a Drop, it sells out"
+                  width={424}
+                  height={486}
+                  className="hidden dark:block h-auto w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[424px] mx-auto object-contain drop-shadow-sm"
                 />
               </div>
             </ScrollReveal>

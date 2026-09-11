@@ -54,17 +54,17 @@ export const TheGap: React.FC = () => {
               </span>
             </div>
 
-            {/* DESIGN_OVERRIDES §1: Title role , 36px Lora semibold, max-width 600 */}
+            {/* DESIGN_OVERRIDES §1: Title role, 36px Lora semibold, max-width 600 */}
             <h2 className="mb-5 font-serif text-[32px] sm:text-[36px] font-semibold leading-[1.2] text-neutral-charcoal max-w-[600px]">
               Great food should not end in the comments.
             </h2>
 
-            {/* Body paragraph , Figtree Body 16px, max-width 550 */}
+            {/* Body paragraph, Figtree Body 16px, max-width 550 */}
             <p className="font-sans text-base text-neutral-clayGray leading-relaxed mb-6 max-w-[500px]">
               Food content creates the craving. But too often, there&apos;s no simple way to turn that moment into a meal.
             </p>
 
-            {/* Emphasis line , Figtree Medium 16px, Clay */}
+            {/* Emphasis line, Figtree Medium 16px, Clay */}
             <p className="font-sans text-base font-medium text-clay dark:text-[#D79A8A]">
               That&apos;s the gap Reelnosh is built to close.
             </p>

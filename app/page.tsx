@@ -7,7 +7,7 @@ import { Exploring } from '@/components/sections/Exploring';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Reelnosh , Where Food Content Becomes Meals',
+  title: 'Reelnosh | Where food content becomes meals.',
   description: 'Explore creator-led meal ideas, join early access, and help shape the first Reelnosh food Drops in Lagos.',
 };
 
