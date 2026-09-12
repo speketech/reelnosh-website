@@ -8,7 +8,7 @@
   /* Reelnosh Semantic Token Architecture */
   /* Backgrounds */
   --rn-bg-canvas: #FFFEFA;              /* LIGHT: Warm White #FFFEFA. */
-  --rn-bg-surface: #F9F3ED;             /* LIGHT: Soft Cream #F9F3ED. */
+  --rn-bg-surface: #F7F3ED;             /* LIGHT: Soft Cream #F7F3ED. */
   --rn-bg-surface-raised: #FFFFFF;      /* LIGHT: white elevated surface. */
   --rn-bg-subtle: #F9F3F1;               /* LIGHT: Selected State #F9F3F1. */
   --rn-bg-disabled: #E7DED5;             /* LIGHT: Light Clay #E7DED5. */
@@ -52,7 +52,7 @@
   --color-clay-80: #A45A4B;
   --color-clay-120: #743022;
   --color-warm-white: #FFFEFA;
-  --color-soft-cream: #F9F3ED;
+  --color-soft-cream: #F7F3ED;
   --color-light-clay: #E7DED5;
   --color-clay-gray: #6B665F;
   --color-charcoal: #1E1B18;
@@ -101,7 +101,7 @@
   /* Reelnosh Semantic Token Architecture (Dark Mode) */
   /* LIGHT: Warm White #FFFEFA canvas. DARK: Dark Charcoal #1E1B18. */
   --rn-bg-canvas: #1E1B18;
-  /* LIGHT: Soft Cream #F9F3ED surface. DARK: Night Cocoa #2A211D. */
+  /* LIGHT: Soft Cream #F7F3ED surface. DARK: Night Cocoa #2A211D. */
   --rn-bg-surface: #2A211D;
   /* LIGHT: white elevated surface. DARK: Roasted Clay #342620. */
   --rn-bg-surface-raised: #342620;
@@ -112,8 +112,8 @@
 
   /* LIGHT: Deep Charcoal #1E1B18 primary text. DARK: Warm White #FFFEFA. */
   --rn-text-primary: #FFFEFA;
-  /* LIGHT: Spiced Cocoa #5A2418 secondary text. DARK: Soft Cream #F9F3ED. */
-  --rn-text-secondary: #F9F3ED;
+  /* LIGHT: Spiced Cocoa #5A2418 secondary text. DARK: Soft Cream #F7F3ED. */
+  --rn-text-secondary: #F7F3ED;
   /* LIGHT: Clay Gray #6B665F muted text. DARK: Clay Gray Dark #B9ADA4. */
   --rn-text-muted: #B9ADA4;
   /* LIGHT: Disabled Text #9A948C. DARK: Dark Disabled Text #8E837B. */

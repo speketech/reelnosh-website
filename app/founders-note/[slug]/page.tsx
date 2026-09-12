@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getFounderNoteBySlug, getRelatedFounderNotes } from '@/lib/supabase/queries';
 import { NoteDetailPageClient } from '@/components/notes/NoteDetailPageClient';
+import { DEFAULT_NOTE_EXCERPT } from '@/lib/notesContent';
 
 export const revalidate = 300; // ISR, 5-minute refresh
 
@@ -28,13 +29,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: note.title,
-    description: note.excerpt || "What we're learning while building Reelnosh publicly in Lagos.",
+    description: note.excerpt || DEFAULT_NOTE_EXCERPT,
     alternates: {
       canonical: noteUrl,
     },
     openGraph: {
       title: note.title,
-      description: note.excerpt || "What we're learning while building Reelnosh publicly in Lagos.",
+      description: note.excerpt || DEFAULT_NOTE_EXCERPT,
       url: noteUrl,
       siteName: 'Reelnosh',
       type: 'article',
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: 'summary_large_image',
       title: note.title,
-      description: note.excerpt || "What we're learning while building Reelnosh publicly in Lagos.",
+      description: note.excerpt || DEFAULT_NOTE_EXCERPT,
       images: [imageUrl],
       creator: '@reelnosh',
     },

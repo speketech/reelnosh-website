@@ -9,6 +9,7 @@ import { OriginAwareBackButton } from '@/components/notes/OriginAwareBackButton'
 import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 import { MarkdownLink } from '@/components/notes/MarkdownLink';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
+import { LikeButton } from '@/components/notes/LikeButton';
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
@@ -146,6 +147,14 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             >
               {body}
             </ReactMarkdown>
+
+            {/* Like Action */}
+            <div className="mt-12 flex items-center gap-4 border-t border-neutral-lightClay/60 pt-8">
+              <span className="font-sans text-[14px] font-semibold text-neutral-charcoal uppercase tracking-[1px]">
+                Did you like this note?
+              </span>
+              <LikeButton slug={note.slug} initialLikes={note.likes_count || 0} className="scale-[1.15] origin-left" />
+            </div>
 
             {/* Same Foodies Club card as the homepage, resized for the article column. */}
             <div className="mt-14">

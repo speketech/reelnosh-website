@@ -4,6 +4,7 @@ import { FeaturedContentItem } from '@/lib/constants';
 import { getFeaturedContent } from '@/lib/supabase/queries';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ExploringOrderButton } from './ExploringOrderButton';
+import { ImageWithLightbox } from '@/components/ui/ImageWithLightbox';
 
 interface ExploringProps {
   items?: FeaturedContentItem[];
@@ -74,12 +75,13 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                             className="h-full w-full object-cover"
                           />
                         ) : (
-                          <Image
+                          <ImageWithLightbox
                             src={mediaUrl}
                             alt={item.title}
                             fill
+                            imageClassName="object-cover"
+                            containerClassName="absolute inset-0 z-0"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-300 hover:scale-105"
                           />
                         )
                       ) : (

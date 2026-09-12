@@ -121,6 +121,7 @@ export interface FounderNoteItem {
   body_markdown?: string;
   published_at: string;
   quote?: string;
+  likes_count?: number;
 }
 
 export interface FeaturedFounderNoteItem extends FounderNoteItem {

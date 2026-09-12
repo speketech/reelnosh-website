@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FounderNoteItem } from '@/lib/constants';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
+import { LikeButton } from './LikeButton';
 
 interface ArticleCardProps {
   note: FounderNoteItem;
@@ -61,11 +62,16 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
             </Link>
           </h3>
 
-          {/* Excerpt */}
-          <p className="font-sans text-xs sm:text-sm text-neutral-clayGray leading-relaxed line-clamp-3">
-            {note.excerpt}
-          </p>
-        </div>
+        {/* Excerpt */}
+        <p className="font-sans text-xs sm:text-sm text-neutral-clayGray leading-relaxed line-clamp-3 mb-4">
+          {note.excerpt}
+        </p>
+      </div>
+      
+      {/* Footer: Like Action */}
+      <div className="mt-auto border-t border-neutral-lightClay/30 pt-4 pb-2">
+        <LikeButton slug={note.slug} initialLikes={note.likes_count || 0} />
+      </div>
       </div>
     </article>
   );

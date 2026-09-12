@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { SITE_CONFIG, FeaturedContentItem } from '@/lib/constants';
 import { getFeaturedContent } from '@/lib/supabase/queries';
 import { HeroCreatorButton } from './HeroCreatorButton';
+import { ImageWithLightbox } from '@/components/ui/ImageWithLightbox';
 
 interface HeroProps {
   content?: FeaturedContentItem;
@@ -99,13 +100,14 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                         className="h-full w-full object-cover"
                       />
                     ) : (
-                      <Image
+                      <ImageWithLightbox
                         src={mediaUrl}
                         alt={content?.title || 'Featured culinary drop'}
                         fill
                         priority
                         fetchPriority="high"
-                        className="object-cover"
+                        imageClassName="object-cover"
+                        containerClassName="absolute inset-0 z-0"
                         sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1024px) 408px, 420px"
                       />
                     )

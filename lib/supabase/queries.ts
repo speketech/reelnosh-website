@@ -81,6 +81,7 @@ export async function getFounderNotes(limit?: number): Promise<FounderNoteItem[]
       }),
       body_markdown: row.body_markdown || '',
       quote: row.quote || row.excerpt || '',
+      likes_count: row.likes_count || 0,
     }));
   } catch (err) {
     console.warn('Exception querying founder_notes:', err);
@@ -120,6 +121,7 @@ export async function getFounderNoteBySlug(slug: string): Promise<FounderNoteIte
       }),
       body_markdown: data.body_markdown || '',
       quote: data.quote || data.excerpt || '',
+      likes_count: data.likes_count || 0,
     };
   } catch (err) {
     console.warn(`Exception querying founder note by slug ${slug}:`, err);
@@ -162,6 +164,7 @@ export async function getRelatedFounderNotes(
       }),
       body_markdown: row.body_markdown || '',
       quote: row.quote || row.excerpt || '',
+      likes_count: row.likes_count || 0,
     }));
   } catch (err) {
     console.warn('Exception querying related founder notes:', err);
