@@ -22,21 +22,30 @@ const figtree = Figtree({
   display: 'swap',
 });
 
+const defaultTitle = `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`;
+
 export const metadata: Metadata = {
-  title: 'Reelnosh | Where food content becomes meals.',
-  description:
-    'We turn food content into meals you can actually order. Help shape the first creator-led food drops in Lagos.',
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com'),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${SITE_CONFIG.name}`,
+  },
+  description: SITE_CONFIG.description,
   icons: {
     icon: '/brand/icon-mark.svg',
     apple: '/brand/icon-mark.svg',
   },
   openGraph: {
-    title: 'Reelnosh | Where food content becomes meals.',
-    description:
-      'We turn food content into meals you can actually order. Help shape the first creator-led food drops in Lagos.',
-    siteName: 'Reelnosh',
+    title: defaultTitle,
+    description: SITE_CONFIG.description,
+    siteName: SITE_CONFIG.name,
     locale: 'en_NG',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: defaultTitle,
+    description: SITE_CONFIG.description,
   },
 };
 

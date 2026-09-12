@@ -4,6 +4,16 @@
  * distinct headers, and customized pull-quotes.
  */
 
+export const FOUNDERS_NOTES_INDEX_CONTENT = {
+  title: "Founder's Note",
+  headingPart1: 'Building ',
+  brandWord: 'Reelnosh',
+  headingPart2: 'publicly.',
+  author: '- Kudirat',
+  description:
+    "Hi, this is where I write honestly about what we're learning while building Reelnosh: the product decisions, the Lagos food scene, what you're teaching us, and yes, what we're still getting wrong.",
+};
+
 export const FOUNDER_NOTES_EDITORIAL: Record<string, string> = {
   'why-we-are-starting-with-creator-led-food-drops': `
 The most honest feedback in Nigerian food culture happens in the comment section under a 30-second reel. Someone spends four hours preparing smokey party jollof with goat meat, uploads a video, and within six minutes, two hundred people comment: “Send location,” “Do you deliver to Lekki Phase 1?”, “Please take my money.”

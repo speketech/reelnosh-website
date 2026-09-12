@@ -1,55 +1,45 @@
-import { supabase } from '@/lib/supabase/client';
-import { FounderNoteItem } from '@/lib/constants';
+import { getFounderNotes, getFeaturedContent } from '@/lib/supabase/queries';
 import { HomePageClient } from '@/components/home/HomePageClient';
 import { Hero } from '@/components/sections/Hero';
 import { Exploring } from '@/components/sections/Exploring';
+import { SITE_CONFIG } from '@/lib/constants';
 import type { Metadata } from 'next';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
+
 export const metadata: Metadata = {
-  title: 'Reelnosh | Where food content becomes meals.',
-  description: 'Explore creator-led meal ideas, join early access, and help shape the first Reelnosh food Drops in Lagos.',
+  title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+  description: SITE_CONFIG.description,
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+    description: SITE_CONFIG.description,
+    url: siteUrl,
+    siteName: SITE_CONFIG.name,
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
+    description: SITE_CONFIG.description,
+  },
 };
 
 export const revalidate = 300; // ISR, 5-minute refresh per specification
 
 export default async function HomePage() {
-  // Query Supabase for latest 3 published founder notes; default to empty
-  let notes: FounderNoteItem[] = [];
-
-  if (supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('founder_notes')
-        .select('id, title, slug, excerpt, published_at, category, image, body_markdown')
-        .lte('published_at', new Date().toISOString())
-        .order('published_at', { ascending: false })
-        .limit(3);
-
-      if (!error && data && data.length > 0) {
-        notes = data.map((item, idx) => ({
-          id: item.id,
-          slug: item.slug,
-          title: item.title,
-          excerpt: item.excerpt || '',
-          category: item.category || 'COMMUNITY',
-          image: item.image || `/images/notes/note-${idx + 1}.png`,
-          published_at: item.published_at,
-          date: new Date(item.published_at).toLocaleDateString('en-US', {
-            month: 'short',
-            year: 'numeric',
-          }),
-          body_markdown: item.body_markdown || '',
-        }));
-      }
-    } catch (err) {
-      console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);
-    }
-  }
+  const [notes, heroItems, exploringItems] = await Promise.all([
+    getFounderNotes(3),
+    getFeaturedContent('hero'),
+    getFeaturedContent('exploring'),
+  ]);
 
   return (
     <HomePageClient
-      hero={<Hero />}
-      exploring={<Exploring />}
+      hero={<Hero content={heroItems[0]} />}
+      exploring={<Exploring items={exploringItems} />}
       founderNotes={notes}
     />
   );

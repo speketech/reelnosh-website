@@ -7,8 +7,8 @@
 
   /* Reelnosh Semantic Token Architecture */
   /* Backgrounds */
-  --rn-bg-canvas: #FFF5FA;              /* LIGHT: Warm White #FFF5FA. */
-  --rn-bg-surface: #F7F3ED;             /* LIGHT: Soft Cream #F7F3ED. */
+  --rn-bg-canvas: #FFFEFA;              /* LIGHT: Warm White #FFFEFA. */
+  --rn-bg-surface: #F9F3ED;             /* LIGHT: Soft Cream #F9F3ED. */
   --rn-bg-surface-raised: #FFFFFF;      /* LIGHT: white elevated surface. */
   --rn-bg-subtle: #F9F3F1;               /* LIGHT: Selected State #F9F3F1. */
   --rn-bg-disabled: #E7DED5;             /* LIGHT: Light Clay #E7DED5. */
@@ -18,7 +18,7 @@
   --rn-text-secondary: #5A2418;           /* LIGHT: Spiced Cocoa #5A2418. */
   --rn-text-muted: #6B665F;               /* LIGHT: Clay Gray #6B665F. */
   --rn-text-disabled: #9A948C;            /* LIGHT: Disabled Text #9A948C. */
-  --rn-text-on-brand: #FFF5FA;            /* LIGHT: Warm White #FFF5FA. */
+  --rn-text-on-brand: #FFFEFA;            /* LIGHT: Warm White #FFFEFA. */
 
   /* Brand and action */
   --rn-brand: #8B3A2A;                    /* LIGHT: Deep Clay #8B3A2A. */
@@ -51,8 +51,8 @@
   --color-clay-pressed: #5A2418;
   --color-clay-80: #A45A4B;
   --color-clay-120: #743022;
-  --color-warm-white: #FFF5FA;
-  --color-soft-cream: #F7F3ED;
+  --color-warm-white: #FFFEFA;
+  --color-soft-cream: #F9F3ED;
   --color-light-clay: #E7DED5;
   --color-clay-gray: #6B665F;
   --color-charcoal: #1E1B18;
@@ -99,9 +99,9 @@
   color-scheme: dark;
 
   /* Reelnosh Semantic Token Architecture (Dark Mode) */
-  /* LIGHT: Warm White #FFF5FA canvas. DARK: Dark Charcoal #1E1B18. */
+  /* LIGHT: Warm White #FFFEFA canvas. DARK: Dark Charcoal #1E1B18. */
   --rn-bg-canvas: #1E1B18;
-  /* LIGHT: Soft Cream #F7F3ED surface. DARK: Night Cocoa #2A211D. */
+  /* LIGHT: Soft Cream #F9F3ED surface. DARK: Night Cocoa #2A211D. */
   --rn-bg-surface: #2A211D;
   /* LIGHT: white elevated surface. DARK: Roasted Clay #342620. */
   --rn-bg-surface-raised: #342620;
@@ -110,16 +110,16 @@
   /* LIGHT: Light Clay #E7DED5. DARK: Disabled Background #4A403A. */
   --rn-bg-disabled: #4A403A;
 
-  /* LIGHT: Deep Charcoal #1E1B18 primary text. DARK: Warm White #FFF5FA. */
-  --rn-text-primary: #FFF5FA;
-  /* LIGHT: Spiced Cocoa #5A2418 secondary text. DARK: Soft Cream #F7F3ED. */
-  --rn-text-secondary: #F7F3ED;
+  /* LIGHT: Deep Charcoal #1E1B18 primary text. DARK: Warm White #FFFEFA. */
+  --rn-text-primary: #FFFEFA;
+  /* LIGHT: Spiced Cocoa #5A2418 secondary text. DARK: Soft Cream #F9F3ED. */
+  --rn-text-secondary: #F9F3ED;
   /* LIGHT: Clay Gray #6B665F muted text. DARK: Clay Gray Dark #B9ADA4. */
   --rn-text-muted: #B9ADA4;
   /* LIGHT: Disabled Text #9A948C. DARK: Dark Disabled Text #8E837B. */
   --rn-text-disabled: #8E837B;
-  /* LIGHT: Warm White #FFF5FA. DARK: Warm White remains unchanged. */
-  --rn-text-on-brand: #FFF5FA;
+  /* LIGHT: Warm White #FFFEFA. DARK: Warm White remains unchanged. */
+  --rn-text-on-brand: #FFFEFA;
 
   /* LIGHT: Deep Clay #8B3A2A. DARK: Deep Clay remains a filled brand surface. */
   --rn-brand: #8B3A2A;
@@ -162,7 +162,7 @@
   --color-soft-cream: #2A211D;
   --color-light-clay: #4A352E;
   --color-clay-gray: #B9ADA4;
-  --color-charcoal: #FFF5FA;
+  --color-charcoal: #FFFEFA;
   --color-cocoa: #5A2418;
   --color-spice-pop: #F4A11A;
   --color-success: #9BC47E;
@@ -498,31 +498,39 @@
 
 .dark .rn-link,
 [data-theme='dark'] .rn-link {
-  color: var(--rn-accent-warmth);
+  color: #FFFFFF;
 }
 
 .rn-link:hover {
   color: var(--rn-brand-hover);
 }
 
+.dark .rn-link:hover,
+[data-theme='dark'] .rn-link:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-  background-color: var(--color-warm-white);
-  color: var(--color-charcoal);
-  -webkit-font-smoothing: antialiased;
-}
-
+html,
 body {
   margin: 0;
   padding: 0;
   background-color: var(--color-warm-white);
   color: var(--color-charcoal);
   font-family: var(--font-figtree), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.rn-page,
+.rn-section,
+.rn-section-muted,
+.rn-section-warm,
+header,
+footer {
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
 }
 
 ::selection {

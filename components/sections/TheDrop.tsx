@@ -88,7 +88,7 @@ export const TheDrop: React.FC = () => {
                       }`}
                     >
                       {/* Inner concentric ring in each circle */}
-                      <div className="absolute inset-[3px] rounded-full border border-white/30 pointer-events-none" />
+                      <div className="absolute inset-[3px] rounded-full border border-focusRing pointer-events-none" />
                       <img
                         src={station.icon}
                         alt=""

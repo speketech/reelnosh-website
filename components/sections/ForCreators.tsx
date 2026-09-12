@@ -78,7 +78,7 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
               <button
                 type="button"
                 onClick={onOpenCreatorWaitlist}
-                className="inline-flex h-[52px] w-full sm:w-auto items-center justify-center rounded-brand bg-[#8B3A2A] px-8 font-sans text-base font-semibold text-[#FFF5FA] shadow-elevation1 transition-colors hover:bg-[#743022] active:bg-[#5A2418]"
+                className="inline-flex h-[52px] w-full sm:w-auto items-center justify-center rounded-brand bg-[#8B3A2A] px-8 font-sans text-base font-semibold text-[#FFFEFA] shadow-elevation1 transition-colors hover:bg-[#743022] active:bg-[#5A2418]"
               >
                 Join the Creator Waitlist
               </button>
@@ -94,13 +94,16 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
                   alt="How one post becomes a sold-out Drop: You post, it becomes a Drop, it sells out"
                   width={424}
                   height={486}
+                  loading="lazy"
                   className="dark:hidden h-auto w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[424px] mx-auto object-contain drop-shadow-sm"
                 />
                 <img
                   src="/images/creator/creator-mockup-dark.svg"
-                  alt="How one post becomes a sold-out Drop: You post, it becomes a Drop, it sells out"
+                  alt=""
+                  aria-hidden="true"
                   width={424}
                   height={486}
+                  loading="lazy"
                   className="hidden dark:block h-auto w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[424px] mx-auto object-contain drop-shadow-sm"
                 />
               </div>

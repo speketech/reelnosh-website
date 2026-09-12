@@ -184,7 +184,7 @@ export const MarkdownLink: React.FC<MarkdownLinkProps> = ({
     : undefined;
 
   const linkTitle = title || (isGeneric ? descriptiveContext : undefined);
-  const linkClass = className || 'text-clay underline underline-offset-4';
+  const linkClass = className || 'text-clay dark:text-white underline underline-offset-4 hover:text-clay-hover dark:hover:text-white/90';
 
   const content = isGeneric ? (
     <>

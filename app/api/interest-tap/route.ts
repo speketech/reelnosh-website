@@ -1,9 +1,19 @@
 import { NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { interestTapSchema } from '@/lib/validation/interest';
+import { rateLimit, getClientIp } from '@/lib/utils/rate-limit';
+
+const limiter = rateLimit({ interval: 60 * 1000 });
 
 export async function POST(request: Request) {
   try {
+    const ip = getClientIp(request);
+    if (!limiter.check(30, ip)) {
+      return NextResponse.json(
+        { error: 'Too many taps recorded. Please slow down.' },
+        { status: 429 }
+      );
+    }
     const json = await request.json();
     const result = interestTapSchema.safeParse(json);
 

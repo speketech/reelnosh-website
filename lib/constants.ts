@@ -1,6 +1,8 @@
 export const SITE_CONFIG = {
   name: 'Reelnosh',
   tagline: 'Where food content becomes meals.',
+  description:
+    'We turn food content into meals you can actually order. Help shape the first creator-led food drops in Lagos.',
   location: 'Lagos, Nigeria',
   phone: '+2348080821273',
   email: 'enquiries@reelnosh.com',
@@ -118,6 +120,7 @@ export interface FounderNoteItem {
   image?: string;
   body_markdown?: string;
   published_at: string;
+  quote?: string;
 }
 
 export interface FeaturedFounderNoteItem extends FounderNoteItem {

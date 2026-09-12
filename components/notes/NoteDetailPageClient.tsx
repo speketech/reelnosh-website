@@ -8,7 +8,6 @@ import { FounderNoteItem } from '@/lib/constants';
 import { OriginAwareBackButton } from '@/components/notes/OriginAwareBackButton';
 import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 import { MarkdownLink } from '@/components/notes/MarkdownLink';
-import { getFounderNoteBody } from '@/lib/notesContent';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 
 interface NoteDetailPageClientProps {
@@ -17,7 +16,7 @@ interface NoteDetailPageClientProps {
 }
 
 export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note, relatedNotes }) => {
-  const body = note.body_markdown || getFounderNoteBody(note.slug, note.excerpt);
+  const body = note.body_markdown || note.excerpt || '';
   const readTime = calculateReadingTime(body);
 
   return (
@@ -33,9 +32,11 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
 
             {/* Metadata Badges */}
             <div className="mb-4 flex flex-wrap items-center gap-2.5 font-sans text-xs text-neutral-clayGray">
-              <span className="rounded-full bg-clay/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px] text-clay">
-                {note.category || 'THE ROADMAP'}
-              </span>
+              {note.category && (
+                <span className="rounded-full bg-[#8B3A2A]/10 dark:bg-[#C06B54]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px] text-clay">
+                  {note.category}
+                </span>
+              )}
               <span>{new Date(note.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
               <span className="text-neutral-lightClay">•</span>
               <span>{readTime} min read</span>
@@ -45,6 +46,13 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             <h1 className="font-serif text-3xl font-semibold leading-[1.32] text-neutral-charcoal sm:text-4xl md:text-[52px] sm:leading-[1.24] md:leading-[1.2] tracking-tight">
               {note.title}
             </h1>
+
+            {/* Note Snippet / Standfirst */}
+            {note.excerpt && (
+              <p className="mt-4 sm:mt-5 font-sans text-base sm:text-lg md:text-xl text-neutral-clayGray leading-relaxed max-w-[760px]">
+                {note.excerpt}
+              </p>
+            )}
 
             {/* Author Row */}
             <div className="mt-6 flex items-center gap-3 sm:mt-7">
@@ -68,18 +76,20 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
         </section>
 
         {/* Cover image */}
-        <section className="px-4 pb-12 sm:px-6 md:px-8 md:pb-16">
-          <div className="relative mx-auto max-w-[960px] aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[20px] sm:rounded-[24px] shadow-elevation1">
-            <Image
-              src={note.image || '/images/notes/note-detail-hero.png'}
-              alt={note.title}
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 960px"
-              className="object-cover"
-            />
-          </div>
-        </section>
+        {note.image && (
+          <section className="px-4 pb-12 sm:px-6 md:px-8 md:pb-16">
+            <div className="relative mx-auto max-w-[960px] aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[20px] sm:rounded-[24px] shadow-elevation1">
+              <Image
+                src={note.image}
+                alt={note.title}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 960px"
+                className="object-cover"
+              />
+            </div>
+          </section>
+        )}
 
         {/* Editorial Body Content */}
         <section className="px-4 pb-14 sm:px-6 md:px-8 md:pb-20">
@@ -145,49 +155,58 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
         </section>
 
         {/* More Notes Section */}
-        <section className="bg-neutral-softCream px-4 py-16 sm:px-6 md:px-8 md:py-20">
-          <div className="mx-auto max-w-[1120px]">
-            <div className="mb-8 flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
-              <span className="text-accent-spicePop">•</span> MORE NOTES
-            </div>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedNotes.map((related) => (
-                <Link
-                  key={related.id}
-                  href={`/founders-note/${related.slug}`}
-                  aria-label={`Read note: ${related.title}`}
-                  className="group overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
-                >
-                  <div className="relative aspect-[1.5] w-full overflow-hidden">
-                    <Image
-                      src={related.image || '/images/notes/note-1.png'}
-                      alt={related.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="p-6 flex flex-col justify-between flex-1">
-                    <div>
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay">
-                        <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop" />
-                        {related.category || 'COMMUNITY'}
-                      </span>
-                      <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay transition-colors">
-                        {related.title}
-                      </h3>
+        {relatedNotes.length > 0 && (
+          <section className="bg-neutral-softCream px-4 py-16 sm:px-6 md:px-8 md:py-20">
+            <div className="mx-auto max-w-[1120px]">
+              <div className="mb-8 flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
+                <span className="text-accent-spicePop">•</span> MORE NOTES
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedNotes.map((related) => (
+                  <Link
+                    key={related.id}
+                    href={`/founders-note/${related.slug}`}
+                    aria-label={`Read note: ${related.title}`}
+                    className="group overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
+                  >
+                    <div className="relative aspect-[1.5] w-full overflow-hidden bg-neutral-softCream">
+                      {related.image ? (
+                        <Image
+                          src={related.image}
+                          alt={related.title}
+                          fill
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center p-4 text-center">
+                          <span className="font-serif text-xs text-neutral-clayGray">Reelnosh Note</span>
+                        </div>
+                      )}
                     </div>
-                    <p className="mt-4 font-sans text-xs text-neutral-clayGray">
-                      {related.date} · {calculateReadingTime(related.body_markdown || getFounderNoteBody(related.slug, related.excerpt))} min read
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    <div className="p-6 flex flex-col justify-between flex-1">
+                      <div>
+                        {related.category && (
+                          <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay">
+                            <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop" />
+                            {related.category}
+                          </span>
+                        )}
+                        <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay transition-colors">
+                          {related.title}
+                        </h3>
+                      </div>
+                      <p className="mt-4 font-sans text-xs text-neutral-clayGray">
+                        {related.date} · {calculateReadingTime(related.body_markdown || related.excerpt || '')} min read
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
       </article>
 
     </main>
   );
 };
-

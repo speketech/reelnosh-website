@@ -17,5 +17,15 @@ export const createServerSupabaseClient = () => {
     auth: {
       persistSession: false,
     },
+    global: {
+      fetch: (url, options = {}) => {
+        // Enforce a 15-second timeout so remote queries never stall server rendering
+        const timeoutSignal = AbortSignal.timeout(15000);
+        const signal = options.signal
+          ? (typeof AbortSignal.any === 'function' ? AbortSignal.any([options.signal, timeoutSignal]) : options.signal)
+          : timeoutSignal;
+        return fetch(url, { ...options, signal });
+      },
+    },
   });
 };

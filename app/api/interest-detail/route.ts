@@ -1,9 +1,19 @@
 import { NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { interestDetailSchema } from '@/lib/validation/interest';
+import { rateLimit, getClientIp } from '@/lib/utils/rate-limit';
+
+const limiter = rateLimit({ interval: 60 * 1000 });
 
 export async function POST(request: Request) {
   try {
+    const ip = getClientIp(request);
+    if (!limiter.check(10, ip)) {
+      return NextResponse.json(
+        { error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      );
+    }
     const json = await request.json();
     const result = interestDetailSchema.safeParse(json);
 

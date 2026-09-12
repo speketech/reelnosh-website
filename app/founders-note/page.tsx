@@ -1,52 +1,38 @@
 import type { Metadata } from 'next';
-import { supabase } from '@/lib/supabase/client';
-import { FounderNoteItem } from '@/lib/constants';
+import { getFounderNotes } from '@/lib/supabase/queries';
 import { NotesListPageClient } from '@/components/notes/NotesListPageClient';
+import { FOUNDERS_NOTES_INDEX_CONTENT } from '@/lib/notesContent';
 
 export const revalidate = 300; // ISR, 5-minute refresh per specification
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
+const canonicalUrl = `${siteUrl}/founders-note`;
+
 export const metadata: Metadata = {
-  title: "Founder's Note | Reelnosh",
-  description:
-    'Real thinking from the team, on product decisions, the Lagos food scene, what the community is teaching us, and what we\'re getting wrong.',
+  title: FOUNDERS_NOTES_INDEX_CONTENT.title,
+  description: FOUNDERS_NOTES_INDEX_CONTENT.description,
+  alternates: {
+    canonical: canonicalUrl,
+  },
+  openGraph: {
+    title: `${FOUNDERS_NOTES_INDEX_CONTENT.title} | Reelnosh`,
+    description: FOUNDERS_NOTES_INDEX_CONTENT.description,
+    url: canonicalUrl,
+    siteName: 'Reelnosh',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${FOUNDERS_NOTES_INDEX_CONTENT.title} | Reelnosh`,
+    description: FOUNDERS_NOTES_INDEX_CONTENT.description,
+  },
 };
 
 export default async function FoundersNoteIndexPage() {
-  let notes: FounderNoteItem[] = [];
-  let featuredNote: (FounderNoteItem & { quote?: string }) | null = null;
+  const allNotes = await getFounderNotes();
 
-  if (supabase) {
-    try {
-      const { data, error } = await supabase
-        .from('founder_notes')
-        .select('id, title, slug, excerpt, published_at, category, image, body_markdown, quote')
-        .lte('published_at', new Date().toISOString())
-        .order('published_at', { ascending: false });
-
-      if (!error && data && data.length > 0) {
-        const mappedNotes = data.map((item, idx) => ({
-          id: item.id,
-          slug: item.slug,
-          title: item.title,
-          excerpt: item.excerpt || '',
-          quote: item.quote || item.excerpt || '',
-          category: item.category || 'COMMUNITY',
-          image: item.image || `/images/notes/note-${((idx % 3) + 1)}.png`,
-          published_at: item.published_at,
-          date: new Date(item.published_at).toLocaleDateString('en-US', {
-            month: 'short',
-            year: 'numeric',
-          }),
-          body_markdown: item.body_markdown || '',
-        }));
-
-        featuredNote = mappedNotes[0] || null;
-        notes = mappedNotes.slice(1);
-      }
-    } catch (err) {
-      console.warn('Failed to fetch founder notes from Supabase:', (err as Error)?.message || err);
-    }
-  }
+  const featuredNote = allNotes.length > 0 ? allNotes[0] : null;
+  const notes = allNotes.length > 1 ? allNotes.slice(1) : [];
 
   return (
     <NotesListPageClient

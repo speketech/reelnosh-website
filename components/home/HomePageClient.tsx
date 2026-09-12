@@ -10,20 +10,9 @@ import { FounderNoteTeaser } from '@/components/sections/FounderNoteTeaser';
 import { Modal } from '@/components/ui/Modal';
 import { FounderNoteItem } from '@/lib/constants';
 
-const FoodieSignupForm = dynamic(
-  () => import('@/components/forms/FoodieSignupForm').then((mod) => mod.FoodieSignupForm),
-  { ssr: false }
-);
-
-const CreatorSignupForm = dynamic(
-  () => import('@/components/forms/CreatorSignupForm').then((mod) => mod.CreatorSignupForm),
-  { ssr: false }
-);
-
-const InterestDetailForm = dynamic(
-  () => import('@/components/forms/InterestDetailForm').then((mod) => mod.InterestDetailForm),
-  { ssr: false }
-);
+import { FoodieSignupForm } from '@/components/forms/FoodieSignupForm';
+import { CreatorSignupForm } from '@/components/forms/CreatorSignupForm';
+import { InterestDetailForm } from '@/components/forms/InterestDetailForm';
 
 interface HomePageClientProps {
   hero: React.ReactNode;

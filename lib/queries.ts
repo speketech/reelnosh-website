@@ -1,1 +1,6 @@
-export { getFeaturedContent } from '@/lib/supabase/queries';
+export {
+  getFeaturedContent,
+  getFounderNotes,
+  getFounderNoteBySlug,
+  getRelatedFounderNotes,
+} from '@/lib/supabase/queries';

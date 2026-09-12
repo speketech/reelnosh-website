@@ -10,7 +10,7 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ArticleCard } from './ArticleCard';
 import { Button } from '@/components/ui/Button';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
-import { getFounderNoteBody } from '@/lib/notesContent';
+import { getFounderNoteBody, FOUNDERS_NOTES_INDEX_CONTENT } from '@/lib/notesContent';
 import { EmptyNoteState } from '@/components/notes/EmptyNoteState';
 
 // Load form + its dependencies (react-hook-form, zod) only when the modal opens.
@@ -105,18 +105,18 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
           {/* Content Layer (Single responsive block) */}
           <div className="relative z-10 flex h-full flex-col justify-start pt-[88px] px-6 min-[500px]:justify-center min-[500px]:pt-3 sm:pt-4 md:pt-4 lg:pt-0 pl-6 min-[500px]:pl-16 sm:pl-20 md:pl-28 tablet:pl-[105px] lg:pl-[120px] xl:pl-[130px] pr-4 w-full min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] tablet:w-[58%] lg:w-[54%] xl:w-[50%]">
             <h1 className="font-serif text-[24px] xs:text-[26px] min-[500px]:text-[19px] sm:text-2xl md:text-[30px] lg:text-[42px] xl:text-[50px] font-semibold leading-[1.2] min-[500px]:leading-[1.35] lg:leading-[1.18] xl:leading-[1.2] text-neutral-charcoal tracking-tight">
-              Building{' '}
-              <span className="italic text-clay font-normal">Reelnosh</span>
+              {FOUNDERS_NOTES_INDEX_CONTENT.headingPart1}
+              <span className="italic text-clay font-normal">{FOUNDERS_NOTES_INDEX_CONTENT.brandWord}</span>
               <br />
-              <span className="inline-block mt-0.5 sm:mt-1 md:mt-1.5 lg:mt-0">publicly.</span>
+              <span className="inline-block mt-0.5 sm:mt-1 md:mt-1.5 lg:mt-0">{FOUNDERS_NOTES_INDEX_CONTENT.headingPart2}</span>
             </h1>
 
             <p className="mt-2.5 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-4 font-sans text-[12.5px] min-[500px]:text-[12.5px] sm:text-[13.5px] md:text-[15px] lg:text-[16px] xl:text-[17px] leading-[1.45] min-[500px]:leading-[1.5] md:leading-[1.6] lg:leading-[1.65] text-neutral-clayGray max-w-[268px] min-[500px]:max-w-[465px]">
-              Hi, this is where I write honestly about what we&apos;re learning while building Reelnosh: the product decisions, the Lagos food scene, what you&apos;re teaching us, and yes, what we&apos;re still getting wrong.
+              {FOUNDERS_NOTES_INDEX_CONTENT.description}
             </p>
 
             <p className="mt-3 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-5 font-serif italic font-normal text-neutral-charcoal text-[13.5px] min-[500px]:text-[12.5px] sm:text-sm md:text-[15px] lg:text-base xl:text-[17px]">
-              - Kudirat
+              {FOUNDERS_NOTES_INDEX_CONTENT.author}
             </p>
           </div>
         </div>
@@ -149,10 +149,12 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
 
                     {/* Top Meta: Category Badge */}
                     <div className="relative z-10">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] font-semibold tracking-wide uppercase">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop" />
-                        {featuredNote.category || 'COMMUNITY'}
-                      </span>
+                      {featuredNote.category && (
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-white text-[11px] font-semibold tracking-wide uppercase">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop" />
+                          {featuredNote.category}
+                        </span>
+                      )}
                     </div>
 
                     {/* Bottom Quote */}
@@ -182,7 +184,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                         href={`/founders-note/${featuredNote.slug}`}
                         onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}
                         aria-label={`Read full note: ${featuredNote.title}`}
-                        className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group cursor-pointer dark:text-accent-warmth"
+                        className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group cursor-pointer dark:text-white dark:hover:text-white/90"
                       >
                         <span>Read full note</span>
                         <span className="sr-only">: {featuredNote.title}</span>

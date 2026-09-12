@@ -138,22 +138,14 @@ export const InterestDetailForm: React.FC<InterestDetailFormProps> = ({
         <p className="text-xs text-feedback-error font-medium">{serverError}</p>
       )}
 
-      {/* Two equally-weighted buttons */}
-      <div className="flex items-center gap-3 pt-3">
+      <div className="pt-3">
         <Button
           type="submit"
           isLoading={isSubmitting}
-          className="flex-1 h-[48px] text-sm font-semibold rounded-brand"
+          className="w-full h-[48px] text-sm font-semibold rounded-brand"
         >
-          Send
+          Submit
         </Button>
-        <button
-          type="button"
-          onClick={handleMaybeLater}
-          className="flex-1 h-[48px] text-sm font-semibold rounded-brand border border-neutral-lightClay bg-white text-neutral-charcoal hover:bg-neutral-softCream transition-colors flex items-center justify-center"
-        >
-          Maybe later
-        </button>
       </div>
     </form>
   );
