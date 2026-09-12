@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE } from '@/lib/constants';
 
 interface MarkdownLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href?: string;
@@ -107,13 +106,6 @@ function getDescriptiveContext(href: string, title?: string): string {
   const noteMatch = href.match(/\/founders-note\/([^/?#]+)/);
   if (noteMatch) {
     const slug = noteMatch[1];
-    const matchedSeed =
-      SEED_FOUNDER_NOTES.find((n) => n.slug === slug) ||
-      (SEED_FEATURED_NOTE.slug === slug ? SEED_FEATURED_NOTE : null);
-
-    if (matchedSeed) {
-      return matchedSeed.title;
-    }
     return slugToTitle(slug);
   }
 

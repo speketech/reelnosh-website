@@ -11,6 +11,7 @@ import { ArticleCard } from './ArticleCard';
 import { Button } from '@/components/ui/Button';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 import { getFounderNoteBody } from '@/lib/notesContent';
+import { EmptyNoteState } from '@/components/notes/EmptyNoteState';
 
 // Load form + its dependencies (react-hook-form, zod) only when the modal opens.
 const FoodieSignupForm = dynamic(
@@ -123,30 +124,8 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
 
       {!hasNotes ? (
         /* Empty state when zero notes are published */
-        <section className="bg-neutral-warmWhite px-5 py-16 sm:py-24 md:px-12">
-          <div className="max-w-[620px] mx-auto text-center">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-accent-spicePop/15 text-accent-spicePop mb-6">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
-                <path d="M6 6h10" />
-                <path d="M6 10h10" />
-              </svg>
-            </div>
-            <h2 className="font-serif text-[28px] sm:text-[34px] font-semibold text-neutral-charcoal leading-tight mb-4">
-              Nothing published yet.
-            </h2>
-            <p className="font-sans text-base text-neutral-clayGray leading-relaxed max-w-md mx-auto mb-8">
-              We&apos;re currently drafting our first founder reflections as we build Reelnosh in Lagos. Join the community to be notified when the first note goes live.
-            </p>
-            <Button
-              type="button"
-              onClick={() => setIsFoodieModalOpen(true)}
-              variant="primary"
-              size="md"
-            >
-              Join the Reelnosh community
-            </Button>
-          </div>
+        <section className="bg-neutral-warmWhite px-5 py-12 sm:py-16 md:px-12">
+          <EmptyNoteState onAction={() => setIsFoodieModalOpen(true)} />
         </section>
       ) : (
         <>

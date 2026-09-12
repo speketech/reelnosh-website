@@ -45,13 +45,15 @@ export const ExploringOrderButton: React.FC<ExploringOrderButtonProps> = ({
         type="button"
         onClick={handleOrderTap}
         disabled={isInterested}
-        className={`w-full h-[46px] px-5 text-sm font-semibold rounded-brand border transition-colors flex items-center justify-center ${isInterested
-            ? 'bg-surface-successTint border-feedback-success text-feedback-success cursor-default'
-            : 'bg-[var(--color-warm-white)] border-secondaryCta-border text-clay hover:bg-secondaryCta-hoverBackground'
+        aria-label={isInterested ? `Registered interest in ${mealTitle}` : `I'd order this - ${mealTitle}`}
+        aria-pressed={isInterested}
+        className={`w-full h-[46px] px-5 text-sm font-semibold rounded-brand border transition-all duration-200 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-focusRing focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#1E1B18] ${isInterested
+            ? 'bg-surface-successTint border-feedback-success text-feedback-success dark:bg-[#1A2A15] dark:border-[#9BC47E] dark:text-[#9BC47E] cursor-default'
+            : 'bg-transparent border-[#D8B2A8] text-[#743022] hover:bg-secondaryCta-hoverBackground dark:bg-transparent dark:border-[#D79A8A] dark:text-[#FFF5FA] dark:hover:bg-[#342620] dark:hover:text-white dark:hover:border-[#F4C16D] active:scale-[0.99]'
           }`}
       >
         {isInterested ? (
-          <span className="inline-flex items-center justify-center gap-1.5">
+          <span className="inline-flex items-center justify-center gap-1.5 font-medium">
             <span>Interested</span>
             <svg
               width="16"
@@ -75,7 +77,7 @@ export const ExploringOrderButton: React.FC<ExploringOrderButtonProps> = ({
         )}
       </button>
 
-      <p className="font-sans text-[12px] text-neutral-clayGray text-center mt-2">
+      <p className="font-sans text-[12px] text-neutral-clayGray dark:text-[#B9ADA4] text-center mt-2">
         Tap to show interest, no payment, no obligation.
       </p>
     </div>

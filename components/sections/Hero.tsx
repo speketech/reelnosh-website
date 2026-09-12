@@ -67,10 +67,13 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
           <div className="lg:col-span-6 flex justify-center lg:justify-end items-center">
             <div className="relative w-full max-w-[440px] xl:max-w-[460px]">
               
-              {/* Starburst Badge + complimenting concentric ring motif (hidden on mobile to prevent text layering) */}
+              {/* Decorative Ring positioned at the back of the hero image container (hidden on mobile) */}
+              <div className="pointer-events-none absolute -right-4 -top-6 sm:-right-7 sm:-top-8 z-0 h-24 w-24 sm:h-[126px] sm:w-[126px]">
+                <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[98px] h-[98px] sm:w-[130px] sm:h-[130px] rounded-full border-[0.3px] border-neutral-lightClay/20 dark:border-neutral-lightClay/10 pointer-events-none" />
+              </div>
+
+              {/* Starburst Badge in front of hero container */}
               <div className="pointer-events-none absolute -right-4 -top-6 sm:-right-7 sm:-top-8 z-30 h-24 w-24 sm:h-[126px] sm:w-[126px] drop-shadow-sm">
-                <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[98px] h-[98px] sm:w-[130px] sm:h-[130px] rounded-full border-[0.3px] border-neutral-lightClay/20 dark:border-neutral-lightClay/10 z-0 pointer-events-none" />
-                <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[136px] h-[136px] sm:w-[176px] sm:h-[176px] rounded-full border-[0.3px] border-neutral-lightClay/12 dark:border-neutral-lightClay/6 z-0 pointer-events-none" />
                 <img
                   src="/icons/starting-in-lagos.svg"
                   alt="Starting in Lagos"
@@ -81,7 +84,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
               </div>
 
               {/* Outer Soft Cream Container Card */}
-              <div className="rounded-[16px] border border-neutral-lightClay/80 bg-neutral-softCream p-4 sm:p-5 shadow-elevation2">
+              <div className="relative z-10 rounded-[16px] border border-neutral-lightClay/80 bg-neutral-softCream p-4 sm:p-5 shadow-elevation2">
                 
                 {/* Food Image or Video with Creator Handle Pill Overlay */}
                 <div className="relative aspect-[440/380] w-full overflow-hidden rounded-[12px] border border-neutral-lightClay bg-neutral-softCream">

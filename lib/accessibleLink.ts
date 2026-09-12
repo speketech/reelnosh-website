@@ -1,5 +1,4 @@
 import React from 'react';
-import { SEED_FOUNDER_NOTES, SEED_FEATURED_NOTE } from '@/lib/constants';
 
 /**
  * Common generic link text phrases flagged by Google Lighthouse / WCAG / SEO audits.
@@ -114,13 +113,6 @@ export function resolveDescriptiveContext(href: string, explicitTitle?: string):
   const noteMatch = cleanHref.match(/(?:\/founders-note\/|^founders-note\/)([a-zA-Z0-9_-]+)/);
   if (noteMatch) {
     const slug = noteMatch[1];
-    if (slug === SEED_FEATURED_NOTE.slug) {
-      return SEED_FEATURED_NOTE.title;
-    }
-    const match = SEED_FOUNDER_NOTES.find((n) => n.slug === slug);
-    if (match) {
-      return match.title;
-    }
     return formatSlugToTitle(slug);
   }
 
