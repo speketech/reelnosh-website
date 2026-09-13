@@ -151,13 +151,13 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Giant Logo - Edge to Edge, Blend Mode, Sharp Crop */}
-        <div className="w-full opacity-[0.15] mix-blend-overlay -mb-6 sm:-mb-12 flex justify-center">
+        <div className="w-full opacity-[0.15] mix-blend-overlay -mb-4 sm:-mb-8 md:-mb-10 lg:-mb-12 flex justify-center overflow-hidden">
           <Image 
             src="/brand/logo-white.svg" 
             alt="Reelnosh" 
             width={2400} 
             height={600} 
-            className="w-[110%] sm:w-full h-auto object-contain object-bottom" 
+            className="w-[180%] sm:w-[150%] md:w-[120%] lg:w-full max-w-none h-auto object-contain object-bottom" 
             priority 
           />
         </div>
