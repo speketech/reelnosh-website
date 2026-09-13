@@ -70,7 +70,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
           </div>
 
           {/* DESIGN_OVERRIDES §1: Card title role , 22px Figtree semibold, clamped to 2 lines */}
-          <h3 className="font-sans text-[22px] font-semibold text-neutral-charcoal leading-[1.3] line-clamp-2 group-hover:text-clay transition-colors mb-2">
+          <h3 className="font-sans text-[22px] font-semibold text-neutral-charcoal leading-[1.3] line-clamp-2 group-hover:text-clay dark:group-hover:text-[#F4A11A] transition-colors mb-2">
             <Link href={`/founders-note/${note.slug}`} onClick={rememberOrigin}>
               {note.title}
             </Link>

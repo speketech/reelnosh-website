@@ -90,17 +90,17 @@ export const Footer: React.FC = () => {
                 The Ingredients
               </h3>
               <nav className="flex flex-col gap-5">
-                <Link href="/terms" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#FFFEFA] transition-colors duration-300 group">
+                <Link href="/terms" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#F4A11A] transition-colors duration-300 group">
                   Terms of Service
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#FFFEFA] transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#F4A11A] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link href="/privacy" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#FFFEFA] transition-colors duration-300 group">
+                <Link href="/privacy" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#F4A11A] transition-colors duration-300 group">
                   Privacy Policy
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#FFFEFA] transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#F4A11A] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
-                <Link href="/cookies" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#FFFEFA] transition-colors duration-300 group">
+                <Link href="/cookies" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#F4A11A] transition-colors duration-300 group">
                   Cookie Policy
-                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#FFFEFA] transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#F4A11A] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </nav>
 

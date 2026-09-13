@@ -229,7 +229,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                             {related.category}
                           </span>
                         )}
-                        <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay transition-colors">
+                        <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay dark:group-hover:text-[#F4A11A] transition-colors">
                           <Link
                             href={`/founders-note/${related.slug}`}
                             onClick={() => {

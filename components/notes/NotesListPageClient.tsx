@@ -169,7 +169,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                       <span className="font-sans text-xs font-medium text-neutral-clayGray block mb-3">
                         {featuredNote.date} · {featuredReadTime} min read
                       </span>
-                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal leading-snug mb-3 hover:text-clay transition-colors">
+                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal leading-snug mb-3 hover:text-clay dark:hover:text-[#F4A11A] transition-colors">
                         <Link
                           href={`/founders-note/${featuredNote.slug}`}
                           onClick={() => {

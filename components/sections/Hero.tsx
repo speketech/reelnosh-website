@@ -73,14 +73,21 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                 <div className="hidden sm:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[98px] h-[98px] sm:w-[130px] sm:h-[130px] rounded-full border-[0.3px] border-neutral-lightClay/20 dark:border-neutral-lightClay/10 pointer-events-none" />
               </div>
 
-              {/* Starburst Badge in front of hero container */}
+              {/* Starburst Badge in front of hero container (Light & Dark optimized, glitch-free) */}
               <div className="pointer-events-none absolute -right-4 -top-6 sm:-right-7 sm:-top-8 z-30 h-24 w-24 sm:h-[126px] sm:w-[126px] drop-shadow-sm">
                 <img
                   src="/icons/starting-in-lagos.svg"
                   alt="Starting in Lagos"
                   width={152}
                   height={152}
-                  className="relative z-10 h-full w-full object-contain"
+                  className="relative z-10 h-full w-full object-contain dark:hidden"
+                />
+                <img
+                  src="/icons/starting-in-lagos-dark.svg"
+                  alt="Starting in Lagos"
+                  width={152}
+                  height={152}
+                  className="relative z-10 h-full w-full object-contain hidden dark:block"
                 />
               </div>
 

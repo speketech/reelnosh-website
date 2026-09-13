@@ -23,7 +23,7 @@ export const Faq: React.FC = () => {
             return (
               <div key={item.question} className="border-b border-neutral-lightClay dark:border-[#4A352E] py-5 sm:py-6">
                 <button type="button" aria-expanded={isOpen} onClick={() => setOpenIndex(isOpen ? null : index)} className="flex w-full items-start justify-between gap-6 text-left group">
-                  <span className="font-serif text-xl font-medium leading-snug text-neutral-charcoal dark:text-[#FFFEFA] group-hover:text-clay dark:group-hover:text-white transition-colors">{item.question}</span>
+                  <span className="font-serif text-xl font-medium leading-snug text-neutral-charcoal dark:text-[#FFFEFA] group-hover:text-clay dark:group-hover:text-[#F4A11A] transition-colors">{item.question}</span>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F7F3ED] border border-[#E7DED5] text-[#8B3A2A] dark:bg-[#3C2B25] dark:border-[#4A352E] dark:text-white font-sans text-lg font-semibold leading-none transition-colors" aria-hidden="true">{isOpen ? '−' : '+'}</span>
                 </button>
                 {isOpen && <p className="mt-3 max-w-[680px] font-sans text-base leading-relaxed text-neutral-clayGray dark:text-[#B9ADA4]">{item.answer}</p>}

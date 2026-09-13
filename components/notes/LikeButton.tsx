@@ -76,8 +76,8 @@ export const LikeButton: React.FC<LikeButtonProps> = ({
 
   const isFloating = variant === 'floating';
 
-  // Deep clay #8B3A2A when clicked/liked, never spice pop
-  const iconColor = isLiked ? '#8B3A2A' : (isFloating ? '#FFFEFA' : 'currentColor');
+  // Spice pop #F4A11A when clicked/liked
+  const iconColor = isLiked ? '#F4A11A' : (isFloating ? '#FFFEFA' : 'currentColor');
 
   // Only surface count once it has crossed the threshold (>= 2)
   const displayCount = likes >= LIKE_COUNT_THRESHOLD ? likes : null;

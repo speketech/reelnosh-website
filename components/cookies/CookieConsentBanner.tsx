@@ -80,7 +80,7 @@ export const CookieConsentBanner: React.FC = () => {
       */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 rounded-brand bg-white dark:bg-[#241E1C] px-6 py-4 sm:py-3.5 border border-[#E7DED5] dark:border-[#4A403A] shadow-elevation2 dark:shadow-[0_12px_36px_rgba(0,0,0,0.6)]">
         {/* Copy with high-contrast text in both themes: on dark mode 'Cookie Policy' CTA changes to white */}
-        <p className="font-sans text-sm leading-relaxed text-center sm:text-left text-neutral-charcoal dark:text-neutral-warmWhite">
+        <p className="font-sans text-sm leading-relaxed text-center sm:text-left text-[#1E1B18] dark:text-[#FFFEFA]">
           We use cookies to improve your experience. By continuing, you agree to our{' '}
           <Link
             href="/cookies"
