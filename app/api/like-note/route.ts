@@ -1,15 +1,18 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client lazily to prevent Next.js build errors
-const getSupabase = () => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-  return createClient(supabaseUrl, supabaseServiceKey);
-};
-
 export async function POST(req: Request) {
   try {
+    // Initialize Supabase client inside the handler
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    
+    if (!supabaseUrl || !supabaseServiceKey) {
+      return NextResponse.json({ error: 'Database configuration missing' }, { status: 500 });
+    }
+    
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
     const { slug, action } = await req.json();
 
     if (!slug || (action !== 'like' && action !== 'unlike')) {
@@ -17,7 +20,7 @@ export async function POST(req: Request) {
     }
 
     // Fetch current likes
-    const { data: note, error: fetchError } = await getSupabase()
+    const { data: note, error: fetchError } = await supabase
       .from('founder_notes')
       .select('likes_count')
       .eq('slug', slug)
@@ -33,7 +36,7 @@ export async function POST(req: Request) {
     const currentLikes = note.likes_count || 0;
     const newLikes = action === 'like' ? currentLikes + 1 : Math.max(0, currentLikes - 1);
 
-    const { error: updateError } = await getSupabase()
+    const { error: updateError } = await supabase
       .from('founder_notes')
       .update({ likes_count: newLikes } as any)
       .eq('slug', slug);

@@ -25,9 +25,8 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
         className={`group relative overflow-hidden cursor-zoom-in ${containerClassName}`} 
         onClick={() => setIsOpen(true)}
       >
-        {/* Subtle scale out on hover to reveal cropped areas without layout shift. We start slightly scaled up (scale-105) so scaling down reveals edges. */}
-        <div className={`w-full h-full transition-transform duration-500 ease-out ${revealCropOnHover ? 'scale-[1.05] group-hover:scale-100' : 'group-hover:scale-[1.03]'} ${imageClassName}`}>
-          <Image src={src} alt={alt} {...props} />
+        <div className={`relative w-full h-full transition-transform duration-500 ease-out ${revealCropOnHover ? 'scale-[1.05] group-hover:scale-100' : 'group-hover:scale-[1.03]'}`}>
+          <Image src={src} alt={alt} className={imageClassName} {...props} />
         </div>
         
         {/* Expand Icon Overlay */}

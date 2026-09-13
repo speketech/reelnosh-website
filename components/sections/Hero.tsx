@@ -18,7 +18,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
   }
 
   const mediaUrl = content?.public_url || content?.media_url || '';
-  const isVideo = content?.media_type === 'video';
+  const isVideo = content?.media_type === 'video' && !mediaUrl.match(/\.(webp|jpg|jpeg|png|avif|gif)$/i);
   const creatorUsername = content?.creator_username || content?.creator_handle?.replace(/^@/, '') || '';
   const sourcePostUrl = content?.source_post_url || content?.creator_profile_url || (creatorUsername ? `https://instagram.com/${creatorUsername}` : 'https://instagram.com/reelnosh');
 

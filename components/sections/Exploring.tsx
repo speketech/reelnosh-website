@@ -52,7 +52,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
               {displayItems.map((item) => {
                 const mediaUrl = item.public_url || item.media_url;
-                const isVideo = item.media_type === 'video';
+                const isVideo = item.media_type === 'video' && !mediaUrl.match(/\.(webp|jpg|jpeg|png|avif|gif)$/i);
                 const creatorUsername = item.creator_username || item.creator_handle?.replace(/^@/, '') || '';
                 const creatorHandle = creatorUsername ? `@${creatorUsername}` : '@reelnosh';
                 const sourcePostUrl = item.source_post_url || item.creator_profile_url || (creatorUsername ? `https://instagram.com/${creatorUsername}` : 'https://instagram.com/reelnosh');
