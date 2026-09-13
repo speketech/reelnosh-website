@@ -169,19 +169,45 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                     </div>
                   </blockquote>
                 ),
-                code: ({ className, children }) => {
-                  // Intercept fenced code blocks whose language is `mermaid`.
-                  // Inline code snippets have no className — pass them through.
-                  const language = /language-(\w+)/.exec(className ?? '')?.[1];
-                  if (language === 'mermaid') {
-                    return <MermaidDiagram chart={String(children).replace(/\n$/, '')} />;
+                // `pre` wraps every fenced code block. We intercept here
+                // (not in `code`) because react-markdown v10 always renders
+                // the outer <pre> even when the `code` override returns a div,
+                // producing invalid HTML and preventing MermaidDiagram from
+                // mounting. Detecting mermaid at the pre level lets us
+                // short-circuit the entire <pre><code> pair cleanly.
+                pre: ({ children }) => {
+                  // Children of <pre> from react-markdown is always a single
+                  // <code> element for fenced blocks.
+                  const child = React.Children.toArray(children)[0] as React.ReactElement<{ className?: string; children?: React.ReactNode }> | undefined;
+                  if (child && typeof child === 'object' && 'props' in child) {
+                    const lang = /language-(\w+)/.exec(child.props.className ?? '')?.[1];
+                    if (lang === 'mermaid') {
+                      return (
+                        <MermaidDiagram
+                          chart={String(child.props.children ?? '').replace(/\n$/, '')}
+                        />
+                      );
+                    }
                   }
-                  // Default: styled inline or block code.
+                  // Default: styled preformatted block for non-mermaid fences.
                   return (
-                    <code className="rounded-[5px] bg-[var(--rn-bg-surface)] px-[0.35em] py-[0.15em] font-mono text-[0.9em] text-[var(--rn-text-secondary)]">
+                    <pre className="my-6 overflow-x-auto rounded-[10px] bg-[var(--rn-bg-surface)] p-5 font-mono text-sm leading-relaxed text-[var(--rn-text-secondary)]">
                       {children}
-                    </code>
+                    </pre>
                   );
+                },
+                code: ({ className, children }) => {
+                  // This handles inline `code` only (no className on inline snippets).
+                  // Fenced block code elements are intercepted via `pre` above.
+                  if (!className) {
+                    return (
+                      <code className="rounded-[5px] bg-[var(--rn-bg-surface)] px-[0.35em] py-[0.15em] font-mono text-[0.9em] text-[var(--rn-text-secondary)]">
+                        {children}
+                      </code>
+                    );
+                  }
+                  // Pass through for non-mermaid fenced blocks (handled by pre above).
+                  return <code className={className}>{children}</code>;
                 },
               }}
             >
