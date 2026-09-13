@@ -24,8 +24,10 @@ const figtree = Figtree({
 
 const defaultTitle = `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`;
 
+import { getBaseUrl } from '@/lib/constants';
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com'),
+  metadataBase: new URL(getBaseUrl()),
   title: {
     default: defaultTitle,
     template: `%s | ${SITE_CONFIG.name}`,

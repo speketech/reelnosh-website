@@ -21,8 +21,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
-  const noteUrl = `${siteUrl}/founders-note/${note.slug}`;
+  const { getBaseUrl } = await import('@/lib/constants');
+  const siteUrl = getBaseUrl();
+  const noteUrl = `/founders-note/${note.slug}`;
   const imageUrl = note.image?.startsWith('http')
     ? note.image
     : `${siteUrl}${note.image || '/images/notes/kudirat-hero.png'}`;
@@ -70,7 +71,8 @@ export default async function SingleFoundersNotePage({ params }: PageProps) {
 
   const relatedNotes = await getRelatedFounderNotes(slug, 3);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
+  const { getBaseUrl } = await import('@/lib/constants');
+  const siteUrl = getBaseUrl();
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',

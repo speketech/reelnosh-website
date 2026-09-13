@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer className="relative bg-[#1E1B18] px-0 pb-0 pt-20 sm:pt-32 font-sans text-[#FFFEFA] overflow-hidden border-t border-white/5">
+    <footer className="relative bg-[#1E1B18] px-0 pb-0 pt-24 sm:pt-40 font-sans text-[#FFFEFA] overflow-hidden border-t border-white/5">
       {/* Noise Texture */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none mix-blend-overlay" 
@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
       <div className="relative z-10 mx-auto max-w-[1200px] px-5 md:px-12 min-[1200px]:px-0">
         
         {/* Top Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-12 pb-8 lg:pb-4">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-12 pb-16 lg:pb-12">
           
           {/* Left Side: Quote, Description, CTA */}
           <div className="w-full lg:w-[50%] flex flex-col items-start pt-8">
@@ -134,8 +134,8 @@ export const Footer: React.FC = () => {
               <div className="relative z-20 flex items-center gap-4">
                 {socialLinks.map(({ icon, href, label }) => (
                   <a key={icon} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 shrink-0">
-                    <div className="w-[14px] h-[14px] relative flex items-center justify-center">
-                      <Image src={`/icons/${icon}.svg`} alt="" fill className="object-contain brightness-0 invert opacity-70" />
+                    <div className="w-[14px] h-[14px] flex items-center justify-center">
+                      <img src={`/icons/${icon}.svg`} alt="" className="w-full h-full object-contain brightness-0 invert opacity-70" />
                     </div>
                   </a>
                 ))}
@@ -151,7 +151,7 @@ export const Footer: React.FC = () => {
       <div className="relative z-10 w-full mt-0 sm:mt-4 flex flex-col items-center pointer-events-none select-none">
         
         {/* Giant Logo - Edge to Edge, Blend Mode, Sharp Crop */}
-        <div className="w-full opacity-[0.15] mix-blend-overlay -mt-8 sm:-mt-16 lg:-mt-24 -mb-4 sm:-mb-8 md:-mb-10 lg:-mb-12 flex justify-center overflow-hidden">
+        <div className="w-full opacity-[0.15] mix-blend-overlay mt-4 sm:mt-8 lg:mt-10 -mb-4 sm:-mb-8 md:-mb-10 lg:-mb-12 flex justify-center overflow-hidden">
           <Image 
             src="/brand/logo-white.svg" 
             alt="Reelnosh" 

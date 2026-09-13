@@ -16,6 +16,23 @@ export const SITE_CONFIG = {
   },
 };
 
+export function getBaseUrl() {
+  if (process.env.NEXT_PUBLIC_SITE_URL && process.env.NEXT_PUBLIC_SITE_URL !== 'http://localhost:3000') {
+    return process.env.NEXT_PUBLIC_SITE_URL;
+  }
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  // Local development fallback only if no Vercel envs exist and NODE_ENV is development
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:3000';
+  }
+  return 'https://reelnosh.com';
+}
+
 export interface FeaturedContentItem {
   id: string;
   placement: 'hero' | 'exploring';

@@ -12,8 +12,6 @@ export interface LegalPolicyContent {
 }
 
 export function getLegalMetadata(policy: LegalPolicyContent, pathname: string): Metadata {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
-  const canonicalUrl = `${siteUrl}${pathname}`;
   const pageTitle = `${policy.title} | Reelnosh`;
   const description = policy.intro || policy.subtitle || policy.title;
 
@@ -21,12 +19,12 @@ export function getLegalMetadata(policy: LegalPolicyContent, pathname: string): 
     title: policy.title,
     description,
     alternates: {
-      canonical: canonicalUrl,
+      canonical: pathname,
     },
     openGraph: {
       title: pageTitle,
       description,
-      url: canonicalUrl,
+      url: pathname,
       siteName: 'Reelnosh',
       type: 'website',
     },

@@ -5,18 +5,16 @@ import { Exploring } from '@/components/sections/Exploring';
 import { SITE_CONFIG } from '@/lib/constants';
 import type { Metadata } from 'next';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
-
 export const metadata: Metadata = {
   title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
   description: SITE_CONFIG.description,
   alternates: {
-    canonical: siteUrl,
+    canonical: '/',
   },
   openGraph: {
     title: `${SITE_CONFIG.name} | ${SITE_CONFIG.tagline}`,
     description: SITE_CONFIG.description,
-    url: siteUrl,
+    url: '/',
     siteName: SITE_CONFIG.name,
     type: 'website',
   },

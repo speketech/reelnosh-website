@@ -92,6 +92,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                   {mediaUrl ? (
                     isVideo ? (
                       <video
+                        key={mediaUrl}
                         src={mediaUrl}
                         autoPlay
                         loop
