@@ -74,6 +74,7 @@ export async function getFounderNotes(limit?: number): Promise<FounderNoteItem[]
       excerpt: row.excerpt || '',
       category: row.category || '',
       image: row.cover_image_url || row.image || '',
+      image_credit: row.image_credit || '',
       published_at: row.published_at,
       date: new Date(row.published_at).toLocaleDateString('en-US', {
         month: 'short',
@@ -113,6 +114,7 @@ export async function getFounderNoteBySlug(slug: string): Promise<FounderNoteIte
       excerpt: data.excerpt || '',
       category: data.category || '',
       image: data.cover_image_url || data.image || '',
+      image_credit: data.image_credit || '',
       published_at: data.published_at,
       date: new Date(data.published_at).toLocaleDateString('en-US', {
         month: 'long',
@@ -157,6 +159,7 @@ export async function getRelatedFounderNotes(
       excerpt: row.excerpt || '',
       category: row.category || '',
       image: row.cover_image_url || row.image || '',
+      image_credit: row.image_credit || '',
       published_at: row.published_at,
       date: new Date(row.published_at).toLocaleDateString('en-US', {
         month: 'short',
