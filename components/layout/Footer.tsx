@@ -105,7 +105,7 @@ export const Footer: React.FC = () => {
               </nav>
 
               {/* Copyright */}
-              <div className="mt-20 lg:mt-32 text-[10px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium">
+              <div className="mt-6 lg:mt-8 text-[10px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium">
                  &copy; 2026 Reelnosh
               </div>
             </div>
@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
                 Say hello
               </h3>
               
-              <a href={`mailto:${SITE_CONFIG.email}`} className="relative z-20 cursor-pointer font-serif text-[20px] sm:text-[24px] text-[#FFFEFA] border-b border-white/20 pb-2 mb-6 inline-block hover:border-white transition-colors whitespace-nowrap">
+              <a href={`mailto:${SITE_CONFIG.email}`} className="relative z-[999] cursor-pointer font-serif text-[20px] sm:text-[24px] text-[#FFFEFA] border-b border-white/20 pb-2 mb-6 inline-block hover:border-white transition-colors whitespace-nowrap">
                 {SITE_CONFIG.email}
               </a>
               
