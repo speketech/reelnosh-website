@@ -5,7 +5,7 @@ export const SITE_CONFIG = {
     'We turn food content into meals you can actually order. Help shape the first creator-led food drops in Lagos.',
   location: 'Lagos, Nigeria',
   phone: '+2348080821273',
-  email: 'enquiries@reelnosh.com',
+  email: 'hello@reelnosh.com',
   links: {
     whatsapp: 'https://wa.me/2348080821273',
     tiktok: 'https://tiktok.com/@reelnosh',
@@ -118,6 +118,7 @@ export interface FounderNoteItem {
   excerpt: string;
   category?: string;
   image?: string;
+  image_credit?: string;
   body_markdown?: string;
   published_at: string;
   quote?: string;

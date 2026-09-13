@@ -89,6 +89,13 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                 className="object-cover"
               />
             </div>
+            {note.image_credit && (
+              <div className="mx-auto max-w-[960px] mt-3 sm:mt-4 text-center sm:text-right px-2">
+                <p className="font-sans text-[11px] text-neutral-clayGray/80 tracking-wide">
+                  Image: {note.image_credit}
+                </p>
+              </div>
+            )}
           </section>
         )}
 
