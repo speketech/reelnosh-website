@@ -30,7 +30,7 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
         onClick={() => setIsOpen(true)}
       >
         <div className={`relative w-full h-full transition-transform duration-500 ease-out ${revealCropOnHover ? 'scale-[1.05] group-hover:scale-100' : 'group-hover:scale-[1.03]'}`}>
-          <Image src={src} alt={alt} className={imageClassName} {...props} />
+          <Image src={src} alt={alt} className={imageClassName} quality={props.quality || 80} {...props} />
         </div>
         
         {/* Expand Icon Overlay */}

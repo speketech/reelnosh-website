@@ -50,79 +50,6 @@ export interface FeaturedContentItem {
   display_order?: number;  // cold-start fallback ordering
 }
 
-export const SEED_HERO_CONTENT: FeaturedContentItem = {
-  id: 'hero-1',
-  placement: 'hero',
-  title: 'Smokey Jollof Rice with Grilled Chicken',
-  description: 'Slow cooked smokey jollof rice with plantain, grilled turkey and house sauce',
-  creator_name: 'Kudirat Ijeoma',
-  creator_handle: '@kudiratijeoma',
-  creator_username: 'kudiratijeoma',
-  creator_profile_url: 'https://instagram.com/kudiratijeoma',
-  source_post_url: 'https://instagram.com/kudiratijeoma',
-  media_url: '/images/hero/hero-image.png',
-  public_url: '/images/hero/hero-image.png',
-  media_type: 'image',
-  permission_confirmed: true,
-};
-
-export const SEED_EXPLORING_ITEMS: FeaturedContentItem[] = [
-  {
-    id: 'exp-1',
-    placement: 'exploring',
-    title: 'Smokey Jollof',
-    description: 'Slow cooked smokey jollof rice with plantain, grilled turkey and house sauce',
-    badge: 'Vote for this Drop',
-    creator_name: 'Kudirat Ijeoma',
-    creator_handle: '@kudiratijeoma',
-    creator_username: 'kudiratijeoma',
-    creator_profile_url: 'https://instagram.com/kudiratijeoma',
-    source_post_url: 'https://instagram.com/kudiratijeoma',
-    media_url: '/images/drops/smokey-jollof.jpg',
-    public_url: '/images/drops/smokey-jollof.jpg',
-    media_type: 'image',
-    display_order: 0,
-    is_featured: true,
-    permission_confirmed: true,
-  },
-  {
-    id: 'exp-2',
-    placement: 'exploring',
-    title: 'Abula with Ewedu',
-    description: 'Smooth amala with delicious ewedu and assorted beef',
-    badge: 'Vote for this Drop',
-    creator_name: 'Kudirat Ijeoma',
-    creator_handle: '@kudiratijeoma',
-    creator_username: 'kudiratijeoma',
-    creator_profile_url: 'https://instagram.com/kudiratijeoma',
-    source_post_url: 'https://instagram.com/kudiratijeoma',
-    media_url: '/images/drops/abula-ewedu.jpg',
-    public_url: '/images/drops/abula-ewedu.jpg',
-    media_type: 'image',
-    display_order: 1,
-    is_featured: false,
-    permission_confirmed: true,
-  },
-  {
-    id: 'exp-3',
-    placement: 'exploring',
-    title: 'White Rice & Stew',
-    description: 'White rice and seafood stew and plantain',
-    badge: 'Vote for this Drop',
-    creator_name: 'Kudirat Ijeoma',
-    creator_handle: '@kudiratijeoma',
-    creator_username: 'kudiratijeoma',
-    creator_profile_url: 'https://instagram.com/kudiratijeoma',
-    source_post_url: 'https://instagram.com/kudiratijeoma',
-    media_url: '/images/drops/white-rice-stew.jpg',
-    public_url: '/images/drops/white-rice-stew.jpg',
-    media_type: 'image',
-    display_order: 2,
-    is_featured: false,
-    permission_confirmed: true,
-  },
-];
-
 export interface FounderNoteItem {
   id: string;
   slug: string;
@@ -142,8 +69,4 @@ export interface FeaturedFounderNoteItem extends FounderNoteItem {
   quote: string;
   category: string;
 }
-
-export const SEED_FEATURED_NOTE: FeaturedFounderNoteItem | null = null;
-
-export const SEED_FOUNDER_NOTES: FounderNoteItem[] = [];
 

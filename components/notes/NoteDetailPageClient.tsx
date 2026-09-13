@@ -48,9 +48,9 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
               {note.title}
             </h1>
 
-            {/* Note Snippet / Standfirst */}
+            {/* Excerpt — secondary caption, distinct from the body lead paragraph */}
             {note.excerpt && (
-              <p className="mt-4 sm:mt-5 font-sans text-base sm:text-lg md:text-xl text-neutral-clayGray leading-relaxed max-w-[760px]">
+              <p className="mt-3 font-sans text-sm italic text-neutral-clayGray/80 leading-relaxed max-w-[680px]">
                 {note.excerpt}
               </p>
             )}
@@ -102,6 +102,11 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
         {/* Editorial Body Content */}
         <section className="px-4 pb-14 sm:px-6 md:px-8 md:pb-20">
           <div className="mx-auto max-w-[760px] font-sans text-[17px] leading-[1.8] text-neutral-charcoal">
+            {/*
+              Wrapper anchors the lead-paragraph treatment to the first <p> of
+              body_markdown — not the excerpt, which lives in a separate section above.
+            */}
+            <div className="[&>p:first-child]:mb-9 [&>p:first-child]:border-b [&>p:first-child]:border-neutral-lightClay [&>p:first-child]:pb-8 [&>p:first-child]:font-serif [&>p:first-child]:text-xl [&>p:first-child]:leading-[1.45]">
             <ReactMarkdown
               components={{
                 h2: ({ children }) => (
@@ -110,7 +115,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                   </h2>
                 ),
                 p: ({ children }) => (
-                  <p className="my-5 leading-[1.8] text-neutral-charcoal first:mb-9 first:border-b first:border-neutral-lightClay first:pb-8 first:font-serif first:text-xl first:leading-[1.45]">
+                  <p className="my-5 leading-[1.8] text-neutral-charcoal">
                     {children}
                   </p>
                 ),
@@ -154,6 +159,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             >
               {body}
             </ReactMarkdown>
+            </div>
 
             {/* Like Action */}
             <div className="mt-12 flex items-center gap-4 border-t border-neutral-lightClay/60 pt-8">

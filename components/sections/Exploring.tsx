@@ -81,7 +81,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                             fill
                             imageClassName="object-cover"
                             containerClassName="absolute inset-0 z-0"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 384px"
+                            sizes="(max-width: 768px) 90vw, (max-width: 1024px) 33vw, 384px"
                           />
                         )
                       ) : (

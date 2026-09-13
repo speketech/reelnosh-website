@@ -109,7 +109,7 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                         fetchPriority="high"
                         imageClassName="object-cover"
                         containerClassName="absolute inset-0 z-0"
-                        sizes="(max-width: 640px) calc(100vw - 64px), (max-width: 1024px) 408px, 420px"
+                        sizes="(max-width: 640px) 90vw, (max-width: 1024px) 408px, 420px"
                       />
                     )
                   ) : (
