@@ -143,18 +143,23 @@ export const Footer: React.FC = () => {
       </div>
       
       {/* Bottom Section (Giant Logo Spreading Full Screen) */}
-      <div className="relative z-10 w-full pt-12 pb-4 flex flex-col items-center mt-auto">
-        {/* Giant Logo */}
-        <div 
-          className="relative w-full h-[150px] sm:h-[250px] lg:h-[350px] opacity-[0.15] pointer-events-none select-none"
-          style={{ maskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)' }}
-        >
-          <Image src="/brand/logo-white.svg" alt="Reelnosh" fill className="object-cover object-top" priority />
+      <div className="relative z-10 w-full mt-20 flex flex-col items-center pointer-events-none select-none">
+        
+        {/* Copyright */}
+        <div className="absolute bottom-4 sm:bottom-8 z-20 w-full text-center text-[11px] text-[#F7F3ED]/50 uppercase tracking-[2px] font-medium">
+           &copy; {new Date().getFullYear()} Reelnosh. All rights reserved.
         </div>
 
-        {/* Copyright */}
-        <div className="absolute bottom-4 sm:bottom-6 w-full text-center text-[11px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium pointer-events-none">
-           &copy; {new Date().getFullYear()} Reelnosh. All rights reserved.
+        {/* Giant Logo - Edge to Edge, Blend Mode, Sharp Crop */}
+        <div className="w-full opacity-[0.15] mix-blend-overlay -mb-6 sm:-mb-12 flex justify-center">
+          <Image 
+            src="/brand/logo-white.svg" 
+            alt="Reelnosh" 
+            width={2400} 
+            height={600} 
+            className="w-[110%] sm:w-full h-auto object-contain object-bottom" 
+            priority 
+          />
         </div>
       </div>
     </footer>
