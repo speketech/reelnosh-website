@@ -37,14 +37,13 @@ export default async function HomePage() {
   ]);
 
   const hasServiceKey = !!process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
 
   return (
     <>
-      {!hasServiceKey && (
-        <div className="bg-red-500 text-white text-center py-2 text-sm z-50 relative">
-          WARNING: SUPABASE_SERVICE_ROLE_KEY is missing from Vercel environment variables. Data cannot be fetched.
-        </div>
-      )}
+      <div className="bg-yellow-500 text-black text-center py-2 text-sm z-50 relative">
+        DEBUG INFO: ServiceKey={hasServiceKey ? 'YES' : 'NO'}, URL={hasUrl ? 'YES' : 'NO'}, HeroItems={heroItems.length}, ExploringItems={exploringItems.length}
+      </div>
       <HomePageClient
         hero={<Hero content={heroItems[0]} />}
         exploring={<Exploring items={exploringItems} />}
