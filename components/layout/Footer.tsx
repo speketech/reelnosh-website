@@ -79,6 +79,11 @@ export const Footer: React.FC = () => {
                 </svg>
               </span>
             </a>
+
+            {/* Copyright */}
+            <div className="mt-20 lg:mt-32 text-[10px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium">
+               &copy; {new Date().getFullYear()} Reelnosh. All rights reserved.
+            </div>
           </div>
 
           {/* Right Side: Menus & Contact */}
@@ -145,11 +150,6 @@ export const Footer: React.FC = () => {
       {/* Bottom Section (Giant Logo Spreading Full Screen) */}
       <div className="relative z-10 w-full mt-20 flex flex-col items-center pointer-events-none select-none">
         
-        {/* Copyright */}
-        <div className="absolute bottom-4 sm:bottom-8 z-20 w-full text-center text-[11px] text-[#F7F3ED]/50 uppercase tracking-[2px] font-medium">
-           &copy; {new Date().getFullYear()} Reelnosh. All rights reserved.
-        </div>
-
         {/* Giant Logo - Edge to Edge, Blend Mode, Sharp Crop */}
         <div className="w-full opacity-[0.15] mix-blend-overlay -mb-4 sm:-mb-8 md:-mb-10 lg:-mb-12 flex justify-center overflow-hidden">
           <Image 
