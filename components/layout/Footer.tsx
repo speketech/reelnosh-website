@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
       <div className="relative z-10 mx-auto max-w-[1200px] px-5 md:px-12 min-[1200px]:px-0">
         
         {/* Top Section */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-20 lg:gap-12 pb-20">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-16 lg:gap-12 pb-8 lg:pb-4">
           
           {/* Left Side: Quote, Description, CTA */}
           <div className="w-full lg:w-[50%] flex flex-col items-start pt-8">
@@ -82,7 +82,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Right Side: Menus & Contact */}
-          <div className="w-full lg:w-[45%] flex flex-col sm:flex-row gap-16 sm:gap-24 pt-4 lg:pl-10">
+          <div className="w-full lg:w-[45%] flex flex-col sm:flex-row gap-16 sm:gap-24 pt-4 lg:pl-10 relative z-50 pointer-events-auto">
             
             {/* Column 1: The Ingredients */}
             <div className="flex flex-col">
@@ -148,10 +148,10 @@ export const Footer: React.FC = () => {
       </div>
       
       {/* Bottom Section (Giant Logo Spreading Full Screen) */}
-      <div className="relative z-10 w-full mt-20 flex flex-col items-center pointer-events-none select-none">
+      <div className="relative z-10 w-full mt-0 sm:mt-4 flex flex-col items-center pointer-events-none select-none">
         
         {/* Giant Logo - Edge to Edge, Blend Mode, Sharp Crop */}
-        <div className="w-full opacity-[0.15] mix-blend-overlay -mb-4 sm:-mb-8 md:-mb-10 lg:-mb-12 flex justify-center overflow-hidden">
+        <div className="w-full opacity-[0.15] mix-blend-overlay -mt-8 sm:-mt-16 lg:-mt-24 -mb-4 sm:-mb-8 md:-mb-10 lg:-mb-12 flex justify-center overflow-hidden">
           <Image 
             src="/brand/logo-white.svg" 
             alt="Reelnosh" 
