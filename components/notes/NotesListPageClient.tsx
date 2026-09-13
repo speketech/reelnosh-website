@@ -216,9 +216,13 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                   <h2 className="font-sans text-xs font-semibold uppercase tracking-[1.5px] text-neutral-charcoal dark:text-accent-spicePop">
                     ALL NOTES
                   </h2>
-                  <span className="font-sans text-xs font-medium text-neutral-clayGray">
-                    {notes.length} of {notes.length}
-                  </span>
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center rounded-full border border-neutral-lightClay/40 bg-neutral-softCream px-3.5 py-1.5 shadow-sm dark:border-white/10 dark:bg-white/5">
+                      <span className="font-sans text-[11px] font-semibold tracking-wide uppercase text-neutral-charcoal dark:text-white">
+                        Page {notes.length} of {notes.length}
+                      </span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* 3-Column Grid */}

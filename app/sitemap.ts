@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { getBaseUrl } from '@/lib/constants';
 
 interface SitemapNoteItem {
   slug: string;
@@ -7,7 +8,7 @@ interface SitemapNoteItem {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
+  const baseUrl = getBaseUrl();
   let notes: SitemapNoteItem[] = [];
 
   try {

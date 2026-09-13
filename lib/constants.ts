@@ -26,10 +26,6 @@ export function getBaseUrl() {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  // Local development fallback only if no Vercel envs exist and NODE_ENV is development
-  if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:3000';
-  }
   return 'https://reelnosh.com';
 }
 

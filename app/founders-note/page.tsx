@@ -5,19 +5,16 @@ import { FOUNDERS_NOTES_INDEX_CONTENT } from '@/lib/notesContent';
 
 export const revalidate = 300; // ISR, 5-minute refresh per specification
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://reelnosh.com';
-const canonicalUrl = `${siteUrl}/founders-note`;
-
 export const metadata: Metadata = {
   title: FOUNDERS_NOTES_INDEX_CONTENT.title,
   description: FOUNDERS_NOTES_INDEX_CONTENT.description,
   alternates: {
-    canonical: canonicalUrl,
+    canonical: '/founders-note',
   },
   openGraph: {
     title: `${FOUNDERS_NOTES_INDEX_CONTENT.title} | Reelnosh`,
     description: FOUNDERS_NOTES_INDEX_CONTENT.description,
-    url: canonicalUrl,
+    url: '/founders-note',
     siteName: 'Reelnosh',
     type: 'website',
   },

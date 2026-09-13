@@ -184,7 +184,7 @@ export const PRIVACY_POLICY_CONTENT: LegalPolicyContent = {
     {
       title: '5. Your Rights as a Data Subject',
       paragraphs: [
-        'Under the NDPA 2023, you can contact our team at privacy@reelnosh.com to:',
+        'Under the NDPA 2023, you can contact our team at hello@reelnosh.com to:',
       ],
       bulletList: [
         'Access a copy of the data we hold about you',
