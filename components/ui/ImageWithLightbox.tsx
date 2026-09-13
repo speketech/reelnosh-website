@@ -22,7 +22,11 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
   return (
     <>
       <div 
-        className={`group relative overflow-hidden cursor-zoom-in ${containerClassName}`} 
+        className={`group overflow-hidden cursor-zoom-in ${
+          containerClassName.includes('absolute') || containerClassName.includes('fixed') || containerClassName.includes('relative')
+            ? containerClassName 
+            : `relative ${containerClassName}`
+        }`}
         onClick={() => setIsOpen(true)}
       >
         <div className={`relative w-full h-full transition-transform duration-500 ease-out ${revealCropOnHover ? 'scale-[1.05] group-hover:scale-100' : 'group-hover:scale-[1.03]'}`}>
