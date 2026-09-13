@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 300; // ISR, 5-minute refresh per specification
 
 export default async function HomePage() {
   const [notes, heroItems, exploringItems] = await Promise.all([
@@ -36,19 +36,11 @@ export default async function HomePage() {
     getFeaturedContent('exploring'),
   ]);
 
-  const hasServiceKey = !!process.env.SUPABASE_SERVICE_ROLE_KEY;
-  const hasUrl = !!process.env.NEXT_PUBLIC_SUPABASE_URL;
-
   return (
-    <>
-      <div className="bg-yellow-500 text-black text-center py-2 text-sm z-50 relative">
-        DEBUG INFO: ServiceKey={hasServiceKey ? 'YES' : 'NO'}, URL={hasUrl ? 'YES' : 'NO'}, HeroItems={heroItems.length}, ExploringItems={exploringItems.length}
-      </div>
-      <HomePageClient
-        hero={<Hero content={heroItems[0]} />}
-        exploring={<Exploring items={exploringItems} />}
-        founderNotes={notes}
-      />
-    </>
+    <HomePageClient
+      hero={<Hero content={heroItems[0]} />}
+      exploring={<Exploring items={exploringItems} />}
+      founderNotes={notes}
+    />
   );
 }
