@@ -2,7 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
 import { FounderNoteItem } from '@/lib/constants';
 import { OriginAwareBackButton } from '@/components/notes/OriginAwareBackButton';
@@ -10,6 +12,16 @@ import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 import { MarkdownLink } from '@/components/notes/MarkdownLink';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 import { LikeButton } from '@/components/notes/LikeButton';
+
+/**
+ * MermaidDiagram is loaded via next/dynamic so its ~570 KB (gzipped) bundle
+ * is only fetched for the specific notes that contain a mermaid fence block.
+ * Every other note pays exactly zero bytes for this feature.
+ */
+const MermaidDiagram = dynamic(
+  () => import('@/components/notes/MermaidDiagram').then((m) => m.MermaidDiagram),
+  { ssr: false, loading: () => <div className="my-8 h-24 animate-pulse rounded-[10px] bg-[var(--rn-bg-surface)]" /> },
+);
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
@@ -109,6 +121,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             */}
             <div className="[&>p:first-child]:mb-9 [&>p:first-child]:border-b [&>p:first-child]:border-neutral-lightClay [&>p:first-child]:pb-8 [&>p:first-child]:font-serif [&>p:first-child]:text-xl [&>p:first-child]:leading-[1.45]">
             <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
               components={{
                 h2: ({ children }) => (
                   <h2 className="mt-12 mb-5 border-l-2 border-clay pl-3 font-serif text-[21px] font-semibold leading-tight text-neutral-charcoal">
@@ -156,6 +169,20 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                     </div>
                   </blockquote>
                 ),
+                code: ({ className, children }) => {
+                  // Intercept fenced code blocks whose language is `mermaid`.
+                  // Inline code snippets have no className — pass them through.
+                  const language = /language-(\w+)/.exec(className ?? '')?.[1];
+                  if (language === 'mermaid') {
+                    return <MermaidDiagram chart={String(children).replace(/\n$/, '')} />;
+                  }
+                  // Default: styled inline or block code.
+                  return (
+                    <code className="rounded-[5px] bg-[var(--rn-bg-surface)] px-[0.35em] py-[0.15em] font-mono text-[0.9em] text-[var(--rn-text-secondary)]">
+                      {children}
+                    </code>
+                  );
+                },
               }}
             >
               {body}
