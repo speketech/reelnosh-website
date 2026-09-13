@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 300; // ISR, 5-minute refresh per specification
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
   const [notes, heroItems, exploringItems] = await Promise.all([
@@ -36,11 +36,20 @@ export default async function HomePage() {
     getFeaturedContent('exploring'),
   ]);
 
+  const hasServiceKey = !!process.env.SUPABASE_SERVICE_ROLE_KEY;
+
   return (
-    <HomePageClient
-      hero={<Hero content={heroItems[0]} />}
-      exploring={<Exploring items={exploringItems} />}
-      founderNotes={notes}
-    />
+    <>
+      {!hasServiceKey && (
+        <div className="bg-red-500 text-white text-center py-2 text-sm z-50 relative">
+          WARNING: SUPABASE_SERVICE_ROLE_KEY is missing from Vercel environment variables. Data cannot be fetched.
+        </div>
+      )}
+      <HomePageClient
+        hero={<Hero content={heroItems[0]} />}
+        exploring={<Exploring items={exploringItems} />}
+        founderNotes={notes}
+      />
+    </>
   );
 }
