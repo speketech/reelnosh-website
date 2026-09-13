@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
               href={SITE_CONFIG.links.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-4 text-[14px] font-bold text-[#FFFEFA] transition-all duration-300 hover:text-[#8B3A2A]"
+              className="relative z-20 group flex items-center gap-4 text-[14px] font-bold text-[#FFFEFA] transition-all duration-300 hover:text-[#8B3A2A]"
             >
               Join the Reelnosh community
               <span className="flex items-center justify-center w-8 h-8 rounded-full border border-white/30 group-hover:border-[#8B3A2A] transition-colors duration-300">
@@ -79,11 +79,6 @@ export const Footer: React.FC = () => {
                 </svg>
               </span>
             </a>
-
-            {/* Copyright */}
-            <div className="mt-20 lg:mt-32 text-[10px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium">
-               &copy; {new Date().getFullYear()} Reelnosh. All rights reserved.
-            </div>
           </div>
 
           {/* Right Side: Menus & Contact */}
@@ -108,6 +103,11 @@ export const Footer: React.FC = () => {
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#F6D3A0] transition-all duration-300 group-hover:w-full"></span>
                 </Link>
               </nav>
+
+              {/* Copyright */}
+              <div className="mt-20 lg:mt-32 text-[10px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium">
+                 &copy; 2026 Reelnosh
+              </div>
             </div>
 
             {/* Column 2: Contact (Say Hello) */}
@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
                 Say hello
               </h3>
               
-              <a href={`mailto:${SITE_CONFIG.email}`} className="font-serif text-[20px] sm:text-[24px] text-[#FFFEFA] border-b border-white/20 pb-2 mb-6 inline-block hover:border-white transition-colors whitespace-nowrap">
+              <a href={`mailto:${SITE_CONFIG.email}`} className="relative z-20 cursor-pointer font-serif text-[20px] sm:text-[24px] text-[#FFFEFA] border-b border-white/20 pb-2 mb-6 inline-block hover:border-white transition-colors whitespace-nowrap">
                 {SITE_CONFIG.email}
               </a>
               
@@ -131,7 +131,7 @@ export const Footer: React.FC = () => {
               </address>
 
               {/* Socials */}
-              <div className="flex items-center gap-4">
+              <div className="relative z-20 flex items-center gap-4">
                 {socialLinks.map(({ icon, href, label }) => (
                   <a key={icon} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 shrink-0">
                     <div className="w-[14px] h-[14px] relative flex items-center justify-center">
