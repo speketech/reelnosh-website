@@ -139,7 +139,7 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                         </div>
 
                         {/* Card Title */}
-                        <h3 className="font-sans text-[22px] font-semibold text-neutral-charcoal pt-2.5 leading-[1.3] line-clamp-2">
+                        <h3 className="font-sans text-[22px] font-semibold text-neutral-charcoal mt-2.5 leading-[1.3] line-clamp-2 min-h-[58px]">
                           {item.title}
                         </h3>
 
