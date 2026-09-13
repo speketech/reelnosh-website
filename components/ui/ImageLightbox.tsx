@@ -1,7 +1,6 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { createPortal } from 'react-dom';
-import Image from 'next/image';
 
 interface ImageLightboxProps {
   src: string;
@@ -17,11 +16,13 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, 
     setMounted(true);
   }, []);
 
+  const stableOnClose = useCallback(() => onClose(), [onClose]);
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') onClose();
+        if (e.key === 'Escape') stableOnClose();
       };
       window.addEventListener('keydown', handleEsc);
       return () => {
@@ -31,36 +32,43 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, 
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isOpen, onClose]);
+  }, [isOpen, stableOnClose]);
 
   if (!isOpen || !mounted) return null;
 
   return createPortal(
     <div 
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4 sm:p-8 backdrop-blur-sm" 
-      onClick={onClose}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4 sm:p-8 backdrop-blur-sm animate-[fadeIn_100ms_ease-out]" 
+      onClick={stableOnClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image preview"
     >
       <button 
-        onClick={onClose}
-        className="absolute top-6 right-6 z-10 p-2.5 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors shadow-lg backdrop-blur-md"
+        type="button"
+        onClick={stableOnClose}
+        className="absolute top-6 right-6 z-10 p-2.5 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors shadow-lg backdrop-blur-md cursor-pointer"
         aria-label="Close fullscreen image"
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
-      
+
       <div 
-        className="relative w-full h-full max-w-7xl max-h-screen" 
+        className="relative w-full h-full max-w-7xl max-h-screen flex items-center justify-center" 
         onClick={(e) => e.stopPropagation()}
       >
-        <Image 
-          src={src} 
-          alt={alt} 
-          fill 
-          className="object-contain"
-          quality={100}
+        {/* Instant display — no artificial opacity-0 delay or spinners */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt || "Enlarged meal drop image"}
+          loading="eager"
+          decoding="async"
+          className="max-w-full max-h-full object-contain select-none"
+          style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
         />
       </div>
     </div>,

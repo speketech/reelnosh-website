@@ -9,10 +9,31 @@ export const OriginAwareBackButton: React.FC<{ fallbackHref?: string }> = ({
   const router = useRouter();
 
   const handleBack = () => {
-    const origin = typeof window !== 'undefined'
-      ? window.sessionStorage.getItem('reelnosh:note-origin')
-      : null;
-    router.push(origin === 'home' ? '/' : fallbackHref);
+    if (typeof window === 'undefined') return;
+
+    const origin = window.sessionStorage.getItem('reelnosh:note-origin');
+    const originUrl = window.sessionStorage.getItem('reelnosh:note-origin-url');
+    const originScroll = window.sessionStorage.getItem('reelnosh:note-origin-scroll');
+
+    // If user navigated within the site, browser history back cleanly restores exact position
+    const isInternalReferrer = !!document.referrer && document.referrer.includes(window.location.host);
+    if (window.history.length > 1 && isInternalReferrer) {
+      router.back();
+      return;
+    }
+
+    // Fallback if accessed directly or refreshed
+    const target = originUrl || (origin === 'home' ? '/#founders-note' : fallbackHref);
+    router.push(target);
+
+    if (originScroll) {
+      const scrollY = parseInt(originScroll, 10);
+      if (!isNaN(scrollY)) {
+        setTimeout(() => {
+          window.scrollTo({ top: scrollY, behavior: 'smooth' });
+        }, 150);
+      }
+    }
   };
 
   return (

@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { SITE_CONFIG } from '@/lib/constants';
 import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+import { CookieConsentBanner } from '@/components/cookies/CookieConsentBanner';
 
 const lora = Lora({
   subsets: ['latin'],
@@ -85,6 +86,7 @@ export default function RootLayout({
           <HeaderWrapper />
           <div className="flex-1">{children}</div>
           <Footer />
+          <CookieConsentBanner />
         </ThemeProvider>
         <Analytics />
         <GoogleAnalytics />

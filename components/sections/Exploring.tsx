@@ -77,11 +77,12 @@ export async function Exploring({ items: propItems }: ExploringProps = {}) {
                         ) : (
                           <ImageWithLightbox
                             src={mediaUrl}
-                            alt={item.title}
+                            alt={item.title || "Exploring culinary drop"}
                             fill
+                            quality={75}
                             imageClassName="object-cover"
                             containerClassName="absolute inset-0 z-0"
-                            sizes="(max-width: 768px) 90vw, (max-width: 1024px) 33vw, 384px"
+                            sizes="(max-width: 640px) 360px, (max-width: 1024px) 340px, 360px"
                           />
                         )
                       ) : (

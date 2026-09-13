@@ -11,7 +11,16 @@ interface ArticleCardProps {
 }
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founders-note' }) => {
-  const rememberOrigin = () => window.sessionStorage.setItem('reelnosh:note-origin', origin);
+  const rememberOrigin = () => {
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('reelnosh:note-origin', origin);
+      window.sessionStorage.setItem(
+        'reelnosh:note-origin-url',
+        window.location.pathname + window.location.search + (origin === 'home' ? '#founders-note' : window.location.hash)
+      );
+      window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
+    }
+  };
   const body = note.body_markdown || note.excerpt || '';
   const readTime = calculateReadingTime(body);
 
@@ -28,9 +37,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
           {note.image ? (
             <Image
               src={note.image}
-              alt={note.title}
+              alt={note.title || "Founder's note cover image"}
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
               className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
             />
           ) : (
@@ -39,7 +48,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
             </div>
           )}
         </Link>
-        <div className="absolute bottom-3 left-3 z-10 bg-black/40 backdrop-blur-md rounded-full shadow-sm p-1.5 px-3 border border-white/20">
+        <div className="absolute bottom-3 left-3 z-10">
           <LikeButton slug={note.slug} initialLikes={note.likes_count || 0} variant="floating" />
         </div>
       </div>

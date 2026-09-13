@@ -170,7 +170,14 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                         {featuredNote.date} · {featuredReadTime} min read
                       </span>
                       <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal leading-snug mb-3 hover:text-clay transition-colors">
-                        <Link href={`/founders-note/${featuredNote.slug}`} onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}>
+                        <Link
+                          href={`/founders-note/${featuredNote.slug}`}
+                          onClick={() => {
+                            window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note');
+                            window.sessionStorage.setItem('reelnosh:note-origin-url', window.location.pathname + window.location.search);
+                            window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
+                          }}
+                        >
                           {featuredNote.title}
                         </Link>
                       </h3>
@@ -182,7 +189,11 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                     <div className="pt-6 sm:pt-8 mt-auto">
                       <Link
                         href={`/founders-note/${featuredNote.slug}`}
-                        onClick={() => window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note')}
+                        onClick={() => {
+                          window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note');
+                          window.sessionStorage.setItem('reelnosh:note-origin-url', window.location.pathname + window.location.search);
+                          window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
+                        }}
                         aria-label={`Read full note: ${featuredNote.title}`}
                         className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group cursor-pointer dark:text-white dark:hover:text-white/90"
                       >

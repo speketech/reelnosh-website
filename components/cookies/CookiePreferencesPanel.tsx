@@ -1,12 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 export function CookiePreferencesPanel() {
-  const [analytics, setAnalytics] = useState(
-    () => typeof window !== 'undefined' && localStorage.getItem('reelnosh-analytics-consent') === 'granted'
-  );
+  const [analytics, setAnalytics] = useState(false);
   const [saved, setSaved] = useState(false);
+
+  // Read initial value after mount (localStorage is client-only)
+  useEffect(() => {
+    const stored = localStorage.getItem('reelnosh-analytics-consent');
+    setAnalytics(stored === 'granted');
+  }, []);
+
+  // Sync checkbox when consent changes from the banner or cross-tab
+  const syncFromStorage = useCallback(() => {
+    const stored = localStorage.getItem('reelnosh-analytics-consent');
+    setAnalytics(stored === 'granted');
+  }, []);
+
+  useEffect(() => {
+    // Listen for banner "Accept All" / "Save Preferences" events
+    const handleConsentEvent = () => syncFromStorage();
+    const handleStorageEvent = (e: StorageEvent) => {
+      if (e.key === 'reelnosh-analytics-consent') syncFromStorage();
+    };
+
+    window.addEventListener('reelnosh-consent-change', handleConsentEvent);
+    window.addEventListener('storage', handleStorageEvent);
+    return () => {
+      window.removeEventListener('reelnosh-consent-change', handleConsentEvent);
+      window.removeEventListener('storage', handleStorageEvent);
+    };
+  }, [syncFromStorage]);
 
   const handleToggle = (checked: boolean) => {
     setAnalytics(checked);
@@ -54,7 +79,7 @@ export function CookiePreferencesPanel() {
           <button
             type="button"
             onClick={savePreferences}
-            className="rounded-brand bg-clay px-5 py-3 text-sm font-semibold text-white hover:bg-clay-hover transition-colors"
+            className="rounded-brand bg-clay px-6 py-3 text-sm font-semibold text-[#FFFEFA] hover:bg-clay-hover active:bg-clay-pressed shadow-elevation1 transition-colors"
           >
             {saved ? 'Preferences saved' : 'Save preferences'}
           </button>

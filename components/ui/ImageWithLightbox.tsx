@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image, { ImageProps } from 'next/image';
 import { ImageLightbox } from './ImageLightbox';
 
@@ -19,24 +19,50 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Eagerly preload full image in background as soon as component mounts
+  useEffect(() => {
+    if (typeof window !== 'undefined' && typeof src === 'string' && src) {
+      const img = new window.Image();
+      img.src = src;
+    }
+  }, [src]);
+
+  const handlePreload = () => {
+    if (typeof window !== 'undefined' && typeof src === 'string' && src) {
+      const img = new window.Image();
+      img.src = src;
+    }
+  };
+
   return (
     <>
       <div 
+        role="button"
+        tabIndex={0}
+        aria-label={`Enlarge image: ${alt || 'view full image'}`}
         className={`group overflow-hidden cursor-zoom-in ${
           containerClassName.includes('absolute') || containerClassName.includes('fixed') || containerClassName.includes('relative')
             ? containerClassName 
             : `relative ${containerClassName}`
         }`}
         onClick={() => setIsOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsOpen(true);
+          }
+        }}
+        onMouseEnter={handlePreload}
+        onTouchStart={handlePreload}
       >
         <div className={`relative w-full h-full transition-transform duration-500 ease-out ${revealCropOnHover ? 'scale-[1.05] group-hover:scale-100' : 'group-hover:scale-[1.03]'}`}>
-          <Image src={src} alt={alt} className={imageClassName} quality={props.quality || 80} {...props} />
+          <Image src={src} alt={alt || "Culinary drop image"} className={imageClassName} quality={props.quality || 75} {...props} />
         </div>
         
         {/* Expand Icon Overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100 pointer-events-none">
            <div className="bg-black/40 backdrop-blur-sm p-3 rounded-full text-white scale-90 group-hover:scale-100 transition-transform duration-300 shadow-xl border border-white/10">
-             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                <polyline points="15 3 21 3 21 9"></polyline>
                <polyline points="9 21 3 21 3 15"></polyline>
                <line x1="21" y1="3" x2="14" y2="10"></line>

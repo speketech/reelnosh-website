@@ -82,9 +82,10 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             <div className="relative mx-auto max-w-[960px] aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[20px] sm:rounded-[24px] shadow-elevation1">
               <Image
                 src={note.image}
-                alt={note.title}
+                alt={note.title || "Founder's note header cover"}
                 fill
                 priority
+                quality={75}
                 sizes="(max-width: 768px) 100vw, 960px"
                 className="object-cover"
               />
@@ -185,25 +186,40 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedNotes.map((related) => (
-                  <Link
+                  <article
                     key={related.id}
-                    href={`/founders-note/${related.slug}`}
-                    aria-label={`Read note: ${related.title}`}
-                    className="group overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
+                    className="group relative overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
                   >
                     <div className="relative aspect-[1.5] w-full overflow-hidden bg-neutral-softCream">
-                      {related.image ? (
-                        <Image
-                          src={related.image}
-                          alt={related.title}
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="flex h-full w-full items-center justify-center p-4 text-center">
-                          <span className="font-serif text-xs text-neutral-clayGray">Reelnosh Note</span>
-                        </div>
-                      )}
+                      <Link
+                        href={`/founders-note/${related.slug}`}
+                        onClick={() => {
+                          if (typeof window !== 'undefined') {
+                            window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note');
+                            window.sessionStorage.setItem('reelnosh:note-origin-url', window.location.pathname + window.location.search);
+                            window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
+                          }
+                        }}
+                        aria-label={`Read note: ${related.title}`}
+                        className="absolute inset-0 z-0 block"
+                      >
+                        {related.image ? (
+                          <Image
+                            src={related.image}
+                            alt={related.title || "Founder's note preview"}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center p-4 text-center">
+                            <span className="font-serif text-xs text-neutral-clayGray">Reelnosh Note</span>
+                          </div>
+                        )}
+                      </Link>
+                      <div className="absolute bottom-3 left-3 z-10">
+                        <LikeButton slug={related.slug} initialLikes={related.likes_count || 0} variant="floating" />
+                      </div>
                     </div>
                     <div className="p-6 flex flex-col justify-between flex-1">
                       <div>
@@ -214,14 +230,25 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                           </span>
                         )}
                         <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay transition-colors">
-                          {related.title}
+                          <Link
+                            href={`/founders-note/${related.slug}`}
+                            onClick={() => {
+                              if (typeof window !== 'undefined') {
+                                window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note');
+                                window.sessionStorage.setItem('reelnosh:note-origin-url', window.location.pathname + window.location.search);
+                                window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
+                              }
+                            }}
+                          >
+                            {related.title}
+                          </Link>
                         </h3>
                       </div>
                       <p className="mt-4 font-sans text-xs text-neutral-clayGray">
                         {related.date} · {calculateReadingTime(related.body_markdown || related.excerpt || '')} min read
                       </p>
                     </div>
-                  </Link>
+                  </article>
                 ))}
               </div>
             </div>
