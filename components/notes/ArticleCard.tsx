@@ -18,26 +18,31 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
   return (
     <article className="flex h-[440px] flex-col justify-between overflow-hidden rounded-[20px] border border-neutral-lightClay/70 bg-[var(--color-warm-white)] shadow-elevation1 transition-shadow duration-300 hover:shadow-elevation2 group">
       {/* Note Image (Fixed 210px height) */}
-      <Link
-        href={`/founders-note/${note.slug}`}
-        onClick={rememberOrigin}
-        aria-label={`Read note: ${note.title}`}
-        className="relative w-full h-[210px] shrink-0 overflow-hidden bg-neutral-lightClay/20 block"
-      >
-        {note.image ? (
-          <Image
-            src={note.image}
-            alt={note.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-neutral-softCream/60 p-4 text-center">
-            <span className="font-serif text-sm font-medium text-neutral-clayGray">Reelnosh Founder&apos;s Note</span>
-          </div>
-        )}
-      </Link>
+      <div className="relative w-full h-[210px] shrink-0 overflow-hidden bg-neutral-lightClay/20 block">
+        <Link
+          href={`/founders-note/${note.slug}`}
+          onClick={rememberOrigin}
+          aria-label={`Read note: ${note.title}`}
+          className="absolute inset-0 z-0 block"
+        >
+          {note.image ? (
+            <Image
+              src={note.image}
+              alt={note.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-neutral-softCream/60 p-4 text-center">
+              <span className="font-serif text-sm font-medium text-neutral-clayGray">Reelnosh Founder&apos;s Note</span>
+            </div>
+          )}
+        </Link>
+        <div className="absolute bottom-3 left-3 z-10 bg-black/40 backdrop-blur-md rounded-full shadow-sm p-1.5 px-3 border border-white/20">
+          <LikeButton slug={note.slug} initialLikes={note.likes_count || 0} variant="floating" />
+        </div>
+      </div>
 
       {/* Card Body (Flex 1, with title clamped to 2 lines) */}
       <div className="p-6 flex flex-col justify-between flex-1 min-h-0">
@@ -62,16 +67,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
             </Link>
           </h3>
 
-        {/* Excerpt */}
-        <p className="font-sans text-xs sm:text-sm text-neutral-clayGray leading-relaxed line-clamp-3 mb-4">
-          {note.excerpt}
-        </p>
-      </div>
-      
-      {/* Footer: Like Action */}
-      <div className="mt-auto border-t border-neutral-lightClay/30 pt-4 pb-2">
-        <LikeButton slug={note.slug} initialLikes={note.likes_count || 0} />
-      </div>
+          {/* Excerpt */}
+          <p className="font-sans text-xs sm:text-sm text-neutral-clayGray leading-relaxed line-clamp-3 mb-4">
+            {note.excerpt}
+          </p>
+        </div>
       </div>
     </article>
   );

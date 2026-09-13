@@ -1,4 +1,6 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { SITE_CONFIG } from '@/lib/constants';
@@ -11,126 +13,150 @@ const socialLinks = [
   { icon: 'facebook', href: SITE_CONFIG.links.facebook, label: 'Facebook' },
 ] as const;
 
-export const Footer: React.FC = () => (
-  <footer className="bg-[#1E1B18] px-0 pb-12 pt-16 sm:pt-24 font-sans text-[#FFFEFA]">
-    <div className="mx-auto max-w-[1120px] px-5 md:px-12 min-[1120px]:px-0">
-      
-      {/* Top Section: Quote and CTA */}
-      <div className="flex flex-col md:flex-row justify-between items-start gap-16 md:gap-12 pb-16 sm:pb-24 border-b border-[#6B665F]/30">
+export const Footer: React.FC = () => {
+  const [lagosTime, setLagosTime] = useState<string>('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      try {
+        const formatter = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Africa/Lagos',
+          hour: 'numeric',
+          minute: 'numeric',
+          hour12: true
+        });
+        setLagosTime(formatter.format(new Date()));
+      } catch (e) {
+        setLagosTime('');
+      }
+    };
+    
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <footer className="relative bg-[#1E1B18] px-0 pb-0 pt-20 sm:pt-32 font-sans text-[#FFFEFA] overflow-hidden border-t border-white/5">
+      {/* Noise Texture */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none mix-blend-overlay" 
+        style={{ 
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`, 
+          opacity: 0.04 
+        }}
+      ></div>
+
+      <div className="relative z-10 mx-auto max-w-[1200px] px-5 md:px-12 min-[1200px]:px-0">
         
-        {/* Left Side: Quote */}
-        <div className="w-full md:w-1/2 md:pr-12">
-          <blockquote className="font-serif text-[28px] sm:text-[36px] md:text-[40px] font-semibold leading-[1.25] text-[#FFFEFA]">
-            &ldquo;Good food is worth the wait.<br className="hidden sm:block" /> Thanks for being early.&rdquo;
-          </blockquote>
-          <p className="mt-6 font-sans text-lg italic text-[#F7F3ED]/80">
-            — Kudirat Ijeoma Ibeabuchi
-          </p>
-        </div>
-
-        {/* Right Side: CTA */}
-        <div className="w-full md:w-1/2 md:pl-12 md:border-l md:border-[#6B665F]/30 flex flex-col items-start md:items-end md:text-right">
-          <h2 className="font-sans text-xs font-bold uppercase tracking-[1.5px] text-[#F4A11A] mb-4">
-            A Seat at Our Table
-          </h2>
-          <p className="font-sans text-[17px] leading-[1.6] text-[#F7F3ED] max-w-[380px] mb-8">
-            Join a growing community of creators, food lovers, and curious eaters shaping the future of food content. Be the first to taste what&apos;s next.
-          </p>
-          <a
-            href={SITE_CONFIG.links.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-[52px] items-center justify-center rounded-brand bg-[#8B3A2A] px-8 font-sans text-[15px] font-semibold text-[#FFFEFA] transition-colors hover:bg-[#743022] active:bg-[#5A2418]"
-          >
-            Join the Reelnosh Community
-          </a>
-        </div>
-      </div>
-
-      {/* Middle Section: Links, Contact, Social */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 sm:gap-8 pt-16 sm:pt-20 pb-16 sm:pb-24">
-        
-        {/* The Ingredients */}
-        <div>
-          <h3 className="font-sans text-xs font-bold uppercase tracking-[1.5px] text-[#F4A11A] mb-6">
-            The Ingredients
-          </h3>
-          <nav className="flex flex-col gap-5">
-            <Link href="/terms" className="text-[15px] text-[#F7F3ED] hover:text-[#FFFEFA] transition-colors font-medium">Terms of Service</Link>
-            <Link href="/privacy" className="text-[15px] text-[#F7F3ED] hover:text-[#FFFEFA] transition-colors font-medium">Privacy Policy</Link>
-            <Link href="/cookies" className="text-[15px] text-[#F7F3ED] hover:text-[#FFFEFA] transition-colors font-medium">Cookie Policy</Link>
-          </nav>
-        </div>
-
-        {/* Contact */}
-        <div>
-          <h3 className="font-sans text-xs font-bold uppercase tracking-[1.5px] text-[#F4A11A] mb-6">
-            Contact
-          </h3>
-          <address className="not-italic flex flex-col gap-5 text-[15px] text-[#F7F3ED]">
-            <span className="flex items-center gap-3 font-medium">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFEFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80 shrink-0">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
-              </svg>
-              {SITE_CONFIG.location}
-            </span>
-            <a href={`tel:${SITE_CONFIG.phone}`} className="flex items-center gap-3 font-medium hover:text-[#FFFEFA] transition-colors">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFEFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80 shrink-0">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-              {SITE_CONFIG.phone}
+        {/* Top Section */}
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-20 lg:gap-12 pb-20">
+          
+          {/* Left Side: Quote, Description, CTA */}
+          <div className="w-full lg:w-[50%] flex flex-col items-start pt-8">
+            
+            <blockquote className="font-serif text-[40px] sm:text-[52px] lg:text-[60px] font-normal leading-[1.05] text-[#FFFEFA] tracking-tight mb-8">
+              Good food is<br />
+              <span className="text-[#D79A8A] italic font-medium">worth the wait.</span>
+            </blockquote>
+            
+            <p className="font-sans text-[14px] leading-relaxed text-[#F7F3ED]/50 mb-14 max-w-sm">
+              Thanks for being early.<br />
+              We&apos;re still finding our recipe, and that&apos;s okay.
+            </p>
+            
+            <a
+              href={SITE_CONFIG.links.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-4 text-[14px] font-bold text-[#FFFEFA] transition-all duration-300 hover:text-[#8B3A2A]"
+            >
+              Join the Reelnosh community
+              <span className="flex items-center justify-center w-8 h-8 rounded-full border border-white/30 group-hover:border-[#8B3A2A] transition-colors duration-300">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:-translate-y-[2px] group-hover:translate-x-[2px]">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </span>
             </a>
-            <a href={`mailto:${SITE_CONFIG.email}`} className="flex items-center gap-3 font-medium hover:text-[#FFFEFA] transition-colors">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFEFA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80 shrink-0">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline>
-              </svg>
-              {SITE_CONFIG.email}
-            </a>
-          </address>
-        </div>
+          </div>
 
-        {/* Follow Us */}
-        <div>
-          <h3 className="font-sans text-xs font-bold uppercase tracking-[1.5px] text-[#F4A11A] mb-6">
-            Follow Us
-          </h3>
-          <div className="flex flex-col gap-5">
-            {socialLinks.map(({ icon, href, label }) => (
-              <a key={icon} href={href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 group">
-                <div className="w-5 h-5 relative flex items-center justify-center shrink-0">
-                  <Image src={`/icons/${icon}.svg`} alt="" fill className="object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
-                </div>
-                <span className="text-[15px] font-medium text-[#F7F3ED] group-hover:text-[#FFFEFA] transition-colors">
-                  {label}
-                </span>
+          {/* Right Side: Menus & Contact */}
+          <div className="w-full lg:w-[45%] flex flex-col sm:flex-row gap-16 sm:gap-24 pt-4 lg:pl-10">
+            
+            {/* Column 1: The Ingredients */}
+            <div className="flex flex-col">
+              <h3 className="font-sans text-[10px] font-bold uppercase tracking-[2px] text-[#F7F3ED] mb-8">
+                The Ingredients
+              </h3>
+              <nav className="flex flex-col gap-5">
+                <Link href="/terms" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#F6D3A0] transition-colors duration-300 group">
+                  Terms of Service
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#F6D3A0] transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+                <Link href="/privacy" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#F6D3A0] transition-colors duration-300 group">
+                  Privacy Policy
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#F6D3A0] transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+                <Link href="/cookies" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#F6D3A0] transition-colors duration-300 group">
+                  Cookie Policy
+                  <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#F6D3A0] transition-all duration-300 group-hover:w-full"></span>
+                </Link>
+              </nav>
+            </div>
+
+            {/* Column 2: Contact (Say Hello) */}
+            <div className="flex flex-col">
+              <h3 className="font-sans text-[10px] font-bold uppercase tracking-[2px] text-[#F7F3ED] mb-8">
+                Say hello
+              </h3>
+              
+              <a href={`mailto:${SITE_CONFIG.email}`} className="font-serif text-[20px] sm:text-[24px] text-[#FFFEFA] border-b border-white/20 pb-2 mb-6 inline-block hover:border-white transition-colors whitespace-nowrap">
+                {SITE_CONFIG.email}
               </a>
-            ))}
+              
+              <address className="not-italic text-[13px] text-[#F7F3ED]/50 leading-[1.8] mb-10 flex flex-col gap-1">
+                <span>{SITE_CONFIG.location}</span>
+                {lagosTime && (
+                  <span className="flex items-center gap-2 mt-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#D79A8A] animate-pulse"></span>
+                    {lagosTime}
+                  </span>
+                )}
+              </address>
+
+              {/* Socials */}
+              <div className="flex items-center gap-4">
+                {socialLinks.map(({ icon, href, label }) => (
+                  <a key={icon} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg transition-all duration-300 shrink-0">
+                    <div className="w-[14px] h-[14px] relative flex items-center justify-center">
+                      <Image src={`/icons/${icon}.svg`} alt="" fill className="object-contain brightness-0 invert opacity-70" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+            
           </div>
         </div>
-
-      </div>
-
-      {/* Bottom Section: Logo, Tagline, Copyright */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-10 pt-10 border-t border-[#6B665F]/30">
-        <div>
-          <Link href="/" className="block relative h-10 w-40 sm:h-12 sm:w-48 mb-4" aria-label="Reelnosh Home">
-            <Image src="/brand/logo-white.svg" alt="Reelnosh" fill className="object-contain object-left" priority />
-          </Link>
-          <p className="font-serif text-[22px] sm:text-[24px] text-[#FFFEFA] font-medium tracking-tight">
-            {SITE_CONFIG.tagline}
-          </p>
-        </div>
-        <div className="w-full sm:w-auto flex flex-col items-start sm:items-end gap-2">
-          <p className="text-[13px] text-[#6B665F] font-medium">
-            &copy; {new Date().getFullYear()} Reelnosh.
-          </p>
-          <p className="text-[13px] text-[#6B665F]">
-            We&apos;re still finding our recipe — and that&apos;s okay.
-          </p>
-        </div>
+        
       </div>
       
-    </div>
-  </footer>
-);
+      {/* Bottom Section (Giant Logo Spreading Full Screen) */}
+      <div className="relative z-10 w-full pt-12 pb-4 flex flex-col items-center mt-auto">
+        {/* Giant Logo */}
+        <div 
+          className="relative w-full h-[150px] sm:h-[250px] lg:h-[350px] opacity-[0.15] pointer-events-none select-none"
+          style={{ maskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)' }}
+        >
+          <Image src="/brand/logo-white.svg" alt="Reelnosh" fill className="object-cover object-top" priority />
+        </div>
 
+        {/* Copyright */}
+        <div className="absolute bottom-4 sm:bottom-6 w-full text-center text-[11px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium pointer-events-none">
+           &copy; {new Date().getFullYear()} Reelnosh. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  );
+};
