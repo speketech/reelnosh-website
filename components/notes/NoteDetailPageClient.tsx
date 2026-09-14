@@ -71,7 +71,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                 </span>
               )}
               <span>{note.date}</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-neutral-clayGray/70 dark:bg-[#C2B5AA] shrink-0" aria-hidden="true" />
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#6E645B] dark:bg-[#D4C5B9] shrink-0" aria-hidden="true" />
               <span>{readTime} min read</span>
             </div>
 

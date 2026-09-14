@@ -167,7 +167,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                     <div>
                       <div className="flex items-center gap-2 font-sans text-[13px] sm:text-[13.5px] font-normal text-neutral-clayGray dark:text-[#C2B5AA] mb-3">
                         <span>{featuredNote.date}</span>
-                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-clayGray/70 dark:bg-[#C2B5AA] shrink-0" aria-hidden="true" />
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#6E645B] dark:bg-[#D4C5B9] shrink-0" aria-hidden="true" />
                         <span>{featuredReadTime} min read</span>
                       </div>
                       <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal leading-snug mb-3 hover:text-clay dark:hover:text-[#F4A11A] transition-colors">
