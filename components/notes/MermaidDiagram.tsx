@@ -106,8 +106,11 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
           const svgEl = containerRef.current.querySelector('svg');
           if (svgEl) {
             svgEl.removeAttribute('height');
-            svgEl.setAttribute('width', '100%');
+            svgEl.removeAttribute('width');
             svgEl.style.maxWidth = '100%';
+            svgEl.style.height = 'auto';
+            svgEl.style.display = 'block';
+            svgEl.style.margin = '0 auto';
           }
         }
 
@@ -150,8 +153,8 @@ export function MermaidDiagram({ chart }: MermaidDiagramProps) {
       ref={containerRef}
       role="img"
       aria-label="Mermaid diagram"
-      className="my-8 overflow-x-auto rounded-[10px] border border-[var(--rn-border-default)] bg-[var(--rn-bg-surface)] p-4 sm:p-6"
-      style={{ minHeight: rendered ? undefined : '6rem' }}
+      className="my-8 overflow-x-auto rounded-[12px] border border-[var(--rn-border-default)] bg-[var(--rn-bg-surface)] p-4 sm:p-6 flex justify-center"
+      style={{ minHeight: rendered ? undefined : '4rem' }}
     />
   );
 }

@@ -12,6 +12,7 @@ import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 import { MarkdownLink } from '@/components/notes/MarkdownLink';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 import { LikeButton } from '@/components/notes/LikeButton';
+import { JourneyBox } from '@/components/notes/JourneyBox';
 
 /**
  * MermaidDiagram is loaded via next/dynamic so its ~570 KB (gzipped) bundle
@@ -185,6 +186,13 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                       return (
                         <MermaidDiagram
                           chart={String(child.props.children ?? '').replace(/\n$/, '')}
+                        />
+                      );
+                    }
+                    if (lang === 'box' || lang === 'journey' || lang === 'steps' || lang === 'flow') {
+                      return (
+                        <JourneyBox
+                          content={String(child.props.children ?? '').replace(/\n$/, '')}
                         />
                       );
                     }
