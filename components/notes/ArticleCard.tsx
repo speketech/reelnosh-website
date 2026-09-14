@@ -80,8 +80,9 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
         </div>
 
         {/* Timestamp & Reading Time at Bottom */}
-        <div className="pt-3 mt-auto border-t border-neutral-lightClay/40 dark:border-white/5 flex items-center justify-between text-xs text-neutral-clayGray font-normal">
+        <div className="mt-auto pt-2 flex items-center gap-2 font-sans text-[13px] sm:text-[13.5px] text-neutral-clayGray dark:text-[#C2B5AA] font-normal">
           <span>{note.date}</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-neutral-clayGray/70 dark:bg-[#C2B5AA] shrink-0" aria-hidden="true" />
           <span>{readTime} min read</span>
         </div>
       </div>

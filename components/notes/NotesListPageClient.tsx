@@ -163,12 +163,13 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                     </blockquote>
                   </div>
 
-                  {/* Right Side: Note Summary and CTA */}
                   <div className="flex flex-col justify-between p-8 sm:p-10 md:col-span-7">
                     <div>
-                      <span className="font-sans text-xs font-medium text-neutral-clayGray block mb-3">
-                        {featuredNote.date} · {featuredReadTime} min read
-                      </span>
+                      <div className="flex items-center gap-2 font-sans text-[13px] sm:text-[13.5px] font-normal text-neutral-clayGray dark:text-[#C2B5AA] mb-3">
+                        <span>{featuredNote.date}</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-clayGray/70 dark:bg-[#C2B5AA] shrink-0" aria-hidden="true" />
+                        <span>{featuredReadTime} min read</span>
+                      </div>
                       <h3 className="font-serif text-2xl sm:text-3xl font-bold text-neutral-charcoal leading-snug mb-3 hover:text-clay dark:hover:text-[#F4A11A] transition-colors">
                         <Link
                           href={`/founders-note/${featuredNote.slug}`}

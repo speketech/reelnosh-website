@@ -63,7 +63,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             </div>
 
             {/* Metadata Badges */}
-            <div className="mb-4 flex flex-wrap items-center gap-2.5 font-sans text-xs text-neutral-clayGray">
+            <div className="mb-4 flex flex-wrap items-center gap-2.5 font-sans text-[13px] sm:text-[13.5px] text-neutral-clayGray dark:text-[#C2B5AA]">
               {note.category && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream text-clay dark:bg-[#3A241D] dark:text-[#FFA07A] dark:border dark:border-[#5A382D] px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px]">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop shrink-0" />
@@ -71,7 +71,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                 </span>
               )}
               <span>{note.date}</span>
-              <span className="text-neutral-lightClay">•</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-neutral-clayGray/70 dark:bg-[#C2B5AA] shrink-0" aria-hidden="true" />
               <span>{readTime} min read</span>
             </div>
 
@@ -214,8 +214,11 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
         {relatedNotes.length > 0 && (
           <section className="bg-neutral-softCream px-4 py-16 sm:px-6 md:px-8 md:py-20">
             <div className="mx-auto max-w-[1120px]">
-              <div className="mb-8 flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay">
-                <span className="text-accent-spicePop">•</span> MORE NOTES
+              <div className="mb-8 inline-flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent-spicePop inline-block shrink-0" />
+                <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-clay dark:text-accent-spicePop">
+                  MORE NOTES
+                </span>
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedNotes.map((related) => (

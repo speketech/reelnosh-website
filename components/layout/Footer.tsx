@@ -87,7 +87,7 @@ export const Footer: React.FC = () => {
             {/* Column 1: The Ingredients */}
             <div className="flex flex-col">
               <h3 className="font-sans text-[12px] sm:text-[13px] font-bold uppercase tracking-[2.5px] text-[#F4A11A] mb-8">
-                The Ingredients
+                Ingredients
               </h3>
               <nav className="flex flex-col gap-5">
                 <Link href="/terms" className="relative w-fit text-[14px] text-[#F7F3ED]/70 hover:text-[#F4A11A] transition-colors duration-300 group">
