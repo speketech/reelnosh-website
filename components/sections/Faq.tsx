@@ -13,7 +13,7 @@ export const Faq: React.FC = () => {
             <span className="h-2 w-2 shrink-0 rounded-full bg-[#F4A11A]" />
             <span className="font-sans text-xs font-semibold uppercase tracking-[1.2px] text-[#8B3A2A] dark:text-[#F4A11A]">CLEAR BEFORE CLEVER</span>
           </div>
-          <h2 className="font-serif text-[36px] font-semibold leading-[1.2] text-neutral-charcoal dark:text-[#FFF5FA]">Frequently Asked Questions</h2>
+          <h2 className="font-serif text-[36px] font-semibold leading-[1.2] text-neutral-charcoal dark:text-[#FFFEFA]">Frequently Asked Questions</h2>
           <p className="mt-4 font-sans text-base leading-relaxed text-neutral-clayGray dark:text-[#B9ADA4]">Everything in this first version is designed to help us learn, with you.</p>
         </div>
 
