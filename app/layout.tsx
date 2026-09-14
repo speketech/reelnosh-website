@@ -62,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${lora.variable} ${figtree.variable}`}>
       <head>
+        <link rel="preconnect" href="https://kavivysyshmbnlzgcibg.supabase.co" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var stored=localStorage.getItem('theme');var theme=(stored==='dark'||stored==='light')?stored:'light';document.documentElement.setAttribute('data-theme',theme);if(theme==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,

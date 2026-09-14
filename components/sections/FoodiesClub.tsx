@@ -26,9 +26,10 @@ export const FoodiesClubCard: React.FC<FoodiesClubCardProps> = ({ compact = fals
           {/* Centered Foodies Club Badge */}
           <div className={`relative z-10 mx-auto ${compact ? 'mb-5 h-20 w-20 sm:h-24 sm:w-24' : 'mb-8 h-28 w-28 sm:h-32 sm:w-32'}`}>
             <Image
-              src="/icons/foodies-club-badge.svg"
+              src="/icons/foodies-club-badge.webp"
               alt="Foodies Club"
               fill
+              sizes="(max-width: 640px) 96px, 128px"
               className="object-contain"
             />
           </div>

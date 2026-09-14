@@ -41,6 +41,16 @@ export async function getFeaturedContent(
   }
 }
 
+function formatNoteDate(row: any, formatStyle: 'short' | 'long' = 'short'): string {
+  const isEdited = Boolean(row.is_edited);
+  const formatted = new Date(row.published_at).toLocaleDateString('en-US', {
+    month: formatStyle === 'long' ? 'long' : 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
+  return isEdited ? `Edited ${formatted}` : formatted;
+}
+
 export async function getFounderNotes(limit?: number): Promise<FounderNoteItem[]> {
   try {
     const supabase = createServerSupabaseClient();
@@ -74,15 +84,14 @@ export async function getFounderNotes(limit?: number): Promise<FounderNoteItem[]
       excerpt: row.excerpt || '',
       category: row.category || '',
       image: row.cover_image_url || row.image || '',
+      image_alt: row.image_alt || row.cover_image_alt || '',
       image_credit: row.image_credit || '',
       published_at: row.published_at,
-      date: new Date(row.published_at).toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric',
-      }),
+      date: formatNoteDate(row, 'short'),
       body_markdown: row.body_markdown || '',
       quote: row.quote || row.excerpt || '',
       likes_count: row.likes_count || 0,
+      is_edited: Boolean(row.is_edited),
     }));
   } catch (err) {
     console.warn('Exception querying founder_notes:', err);
@@ -114,16 +123,14 @@ export async function getFounderNoteBySlug(slug: string): Promise<FounderNoteIte
       excerpt: data.excerpt || '',
       category: data.category || '',
       image: data.cover_image_url || data.image || '',
+      image_alt: data.image_alt || data.cover_image_alt || '',
       image_credit: data.image_credit || '',
       published_at: data.published_at,
-      date: new Date(data.published_at).toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      }),
+      date: formatNoteDate(data, 'long'),
       body_markdown: data.body_markdown || '',
       quote: data.quote || data.excerpt || '',
       likes_count: data.likes_count || 0,
+      is_edited: Boolean(data.is_edited),
     };
   } catch (err) {
     console.warn(`Exception querying founder note by slug ${slug}:`, err);
@@ -159,15 +166,14 @@ export async function getRelatedFounderNotes(
       excerpt: row.excerpt || '',
       category: row.category || '',
       image: row.cover_image_url || row.image || '',
+      image_alt: row.image_alt || row.cover_image_alt || '',
       image_credit: row.image_credit || '',
       published_at: row.published_at,
-      date: new Date(row.published_at).toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric',
-      }),
+      date: formatNoteDate(row, 'short'),
       body_markdown: row.body_markdown || '',
       quote: row.quote || row.excerpt || '',
       likes_count: row.likes_count || 0,
+      is_edited: Boolean(row.is_edited),
     }));
   } catch (err) {
     console.warn('Exception querying related founder notes:', err);

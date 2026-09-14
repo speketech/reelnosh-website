@@ -58,11 +58,13 @@ export interface FounderNoteItem {
   excerpt: string;
   category?: string;
   image?: string;
+  image_alt?: string;
   image_credit?: string;
   body_markdown?: string;
   published_at: string;
   quote?: string;
   likes_count?: number;
+  is_edited?: boolean;
 }
 
 export interface FeaturedFounderNoteItem extends FounderNoteItem {

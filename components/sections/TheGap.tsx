@@ -11,7 +11,7 @@ export const TheGap: React.FC = () => {
       avatarBg: 'bg-[var(--comment-avatar-1-bg)] text-[var(--comment-avatar-1-text)] border border-[var(--comment-avatar-1-border)]',
       text: 'I need this.',
       timestamp: '2m ago',
-      positionClasses: 'top-[114px] sm:top-[134px] left-3 sm:left-[32px]',
+      positionClasses: 'top-[122px] sm:top-[142px] left-3 sm:left-[32px]',
       rotation: '-rotate-1.5',
       widthClass: 'w-[205px] sm:w-[230px]',
     },
@@ -22,7 +22,7 @@ export const TheGap: React.FC = () => {
       avatarBg: 'bg-[var(--comment-avatar-2-bg)] text-[var(--comment-avatar-2-text)] border border-[var(--comment-avatar-2-border)]',
       text: 'How much?',
       timestamp: '14m ago',
-      positionClasses: 'top-[186px] sm:top-[214px] left-[110px] sm:left-[215px]',
+      positionClasses: 'top-[196px] sm:top-[224px] left-[110px] sm:left-[215px]',
       rotation: 'rotate-[1.5deg]',
       widthClass: 'w-[190px] sm:w-[205px]',
     },
@@ -33,7 +33,7 @@ export const TheGap: React.FC = () => {
       avatarBg: 'bg-[var(--comment-avatar-3-bg)] text-[var(--comment-avatar-3-text)] border border-[var(--comment-avatar-3-border)]',
       text: 'Can I order?',
       timestamp: '1h ago',
-      positionClasses: 'top-[258px] sm:top-[294px] left-4 sm:left-[48px]',
+      positionClasses: 'top-[270px] sm:top-[306px] left-4 sm:left-[48px]',
       rotation: '-rotate-1',
       widthClass: 'w-[205px] sm:w-[225px]',
     },
@@ -72,7 +72,7 @@ export const TheGap: React.FC = () => {
 
           {/* Right Column: The Comment Thread Card */}
           <div className="flex w-full items-center justify-center lg:col-span-6">
-            <ScrollReveal className="relative h-[450px] sm:h-[500px] w-full max-w-[360px] sm:max-w-[460px] overflow-hidden rounded-[24px] bg-neutral-softCream border border-neutral-lightClay/60 shadow-elevation1">
+            <ScrollReveal className="relative h-[460px] sm:h-[510px] w-full max-w-[360px] sm:max-w-[460px] overflow-hidden rounded-[24px] bg-neutral-softCream border border-neutral-lightClay/60 dark:border-white/10 shadow-elevation1">
 
               {/* Organic thread: vector stroke, 2px, Divider color #DCCFC4, no fill */}
               <svg
@@ -93,21 +93,21 @@ export const TheGap: React.FC = () => {
               {/* Thread Content: Static Video Still + Comments */}
               <div className="relative z-10 h-full w-full">
                 {/* Static Still Video Card (The food content that sparked the cravings) */}
-                <div className="absolute top-6 sm:top-8 left-7 sm:left-[85px] w-[210px] sm:w-[240px] overflow-hidden rounded-[14px] sm:rounded-[16px] bg-neutral-charcoal text-white shadow-elevation1 border border-neutral-lightClay/50 -rotate-1 transition-transform duration-300 hover:scale-[1.02]">
-                  <div className="relative h-[70px] sm:h-[78px] w-full overflow-hidden bg-neutral-charcoal">
+                <div className="absolute top-5 sm:top-7 left-6 sm:left-[80px] w-[220px] sm:w-[255px] overflow-hidden rounded-[14px] sm:rounded-[16px] bg-neutral-charcoal text-white shadow-elevation2 border border-neutral-lightClay/60 dark:border-white/20 -rotate-1 transition-transform duration-300 hover:scale-[1.02]">
+                  <div className="relative h-[82px] sm:h-[92px] w-full overflow-hidden bg-neutral-charcoal">
                     <Image
-                      src="/images/drops/smokey-jollof.jpg"
-                      alt="Food reel preview"
+                      src="/images/drops/live-reel.webp"
+                      alt="Food reel preview: Party Jollof by @chef_kemi"
                       fill
-                      sizes="250px"
-                      className="object-cover opacity-90"
+                      sizes="280px"
+                      className="object-cover opacity-95"
                     />
                     {/* Dark gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/30" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/35" />
 
                     {/* Play Icon Badge */}
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-black/45 backdrop-blur-xs text-white border border-white/25 shadow-xs">
+                      <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-black/55 backdrop-blur-xs text-white border border-white/30 shadow-xs">
                         <svg width="11" height="13" viewBox="0 0 12 14" fill="currentColor" className="ml-0.5">
                           <path d="M1.5 1.5L10.5 7L1.5 12.5V1.5Z" />
                         </svg>
@@ -115,15 +115,15 @@ export const TheGap: React.FC = () => {
                     </div>
 
                     {/* Reel badge top-left */}
-                    <div className="absolute top-1.5 sm:top-2 left-2 sm:left-2.5 flex items-center gap-1 rounded-full bg-black/50 px-2 py-0.5 text-[9px] sm:text-[10px] font-medium tracking-wide text-white backdrop-blur-xs">
+                    <div className="absolute top-1.5 sm:top-2 left-2 sm:left-2.5 flex items-center gap-1.5 rounded-full bg-black/60 px-2 py-0.5 text-[9px] sm:text-[10px] font-semibold tracking-wide text-white backdrop-blur-xs border border-white/10">
                       <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop animate-pulse" />
                       <span>Reel</span>
                     </div>
 
                     {/* Bottom caption */}
-                    <div className="absolute bottom-1.5 sm:bottom-2 left-2 sm:left-2.5 right-2 sm:right-2.5 flex items-center justify-between text-[10px] sm:text-[11px] text-white/90">
-                      <span className="font-medium truncate">@chef_kemi · Party Jollof</span>
-                      <span className="text-[9px] sm:text-[10px] text-white/70 shrink-0">0:15</span>
+                    <div className="absolute bottom-1.5 sm:bottom-2 left-2.5 right-2.5 flex items-center justify-between text-[11px] sm:text-[12px] text-white">
+                      <span className="font-semibold truncate drop-shadow-sm">@chef_kemi · Party Jollof</span>
+                      <span className="text-[10px] sm:text-[11px] text-white/80 font-medium shrink-0 ml-1.5">0:15</span>
                     </div>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ export const TheGap: React.FC = () => {
                     key={bubble.id}
                     className={`absolute ${bubble.positionClasses} ${bubble.widthClass} ${bubble.rotation} transition-transform duration-300 hover:scale-[1.02]`}
                   >
-                    <div className="relative flex items-center gap-3 rounded-[14px] sm:rounded-[16px] bg-[var(--color-surface-alt)] p-2.5 sm:p-3 shadow-elevation1 border border-neutral-lightClay/50">
+                    <div className="relative flex items-center gap-3 rounded-[14px] sm:rounded-[16px] bg-[var(--color-surface-alt)] p-2.5 sm:p-3 shadow-elevation1 border border-neutral-lightClay/50 dark:border-white/10">
                       {/* 28px/32px Circular Avatar with distinct initials & tints */}
                       <div
                         style={{
@@ -144,7 +144,7 @@ export const TheGap: React.FC = () => {
                         }}
                         className={`flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-full shadow-xs transition-colors duration-200 border ${bubble.avatarBg}`}
                       >
-                        <span className="font-sans text-[11px] font-bold tracking-tight">{bubble.initials}</span>
+                        <span className="font-sans text-[11px] sm:text-[12px] font-bold tracking-tight">{bubble.initials}</span>
                       </div>
 
                       {/* Comment text & timestamp */}
@@ -159,7 +159,7 @@ export const TheGap: React.FC = () => {
 
                       {/* Small hollow accessibility-sequence badge */}
                       <span
-                        className="absolute -bottom-1.5 -left-1.5 sm:-bottom-2 sm:-left-2 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border border-clay bg-[var(--color-surface-alt)] font-sans text-[10px] sm:text-[11px] font-semibold text-clay shadow-xs"
+                        className="absolute -bottom-1.5 -left-1.5 sm:-bottom-2 sm:-left-2 flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-full border border-clay dark:border-[#F4A11A] bg-[var(--color-surface-alt)] dark:bg-[#251E1C] font-sans text-[10px] sm:text-[11px] font-semibold text-clay dark:text-[#F4A11A] shadow-xs"
                         aria-label={`Comment sequence ${bubble.number}`}
                       >
                         {bubble.number}

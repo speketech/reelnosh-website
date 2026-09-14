@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -11,6 +11,7 @@ import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 import { MarkdownLink } from '@/components/notes/MarkdownLink';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 import { LikeButton } from '@/components/notes/LikeButton';
+import { ArticleCard } from '@/components/notes/ArticleCard';
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
@@ -18,11 +19,40 @@ interface NoteDetailPageClientProps {
 }
 
 export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note, relatedNotes }) => {
+  const [readingProgress, setReadingProgress] = useState(0);
   const body = note.body_markdown || note.excerpt || '';
   const readTime = calculateReadingTime(body);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100));
+        setReadingProgress(progress);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <main className="bg-neutral-warmWhite min-h-screen">
+      {/* Sticky Reading Progress Bar (positioned directly beneath the sticky nav) */}
+      <div
+        className="sticky top-[var(--nav-height,72px)] z-30 h-[3px] w-full bg-transparent overflow-hidden pointer-events-none"
+        role="progressbar"
+        aria-valuenow={Math.round(readingProgress)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label="Reading progress"
+      >
+        <div
+          className="h-full bg-accent-spicePop dark:bg-[#FFA07A] transition-all duration-150 ease-out"
+          style={{ width: `${readingProgress}%` }}
+        />
+      </div>
+
       <article>
         {/* Article header */}
         <section className="px-4 pb-10 pt-6 sm:px-6 sm:pb-14 sm:pt-8 md:px-8 md:pb-16 md:pt-10">
@@ -35,11 +65,12 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             {/* Metadata Badges */}
             <div className="mb-4 flex flex-wrap items-center gap-2.5 font-sans text-xs text-neutral-clayGray">
               {note.category && (
-                <span className="rounded-full bg-[#8B3A2A]/10 dark:bg-[#C06B54]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px] text-clay">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream text-clay dark:bg-[#3A241D] dark:text-[#FFA07A] dark:border dark:border-[#5A382D] px-3 py-1 text-[11px] font-semibold uppercase tracking-[1.2px]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop shrink-0" />
                   {note.category}
                 </span>
               )}
-              <span>{new Date(note.published_at).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</span>
+              <span>{note.date}</span>
               <span className="text-neutral-lightClay">•</span>
               <span>{readTime} min read</span>
             </div>
@@ -83,7 +114,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
             <div className="relative mx-auto max-w-[960px] aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-[20px] sm:rounded-[24px] shadow-elevation1">
               <Image
                 src={note.image}
-                alt={note.title || "Founder's note header cover"}
+                alt={note.image_alt || note.title || "Founder's note header cover"}
                 fill
                 priority
                 quality={75}
@@ -188,69 +219,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
               </div>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedNotes.map((related) => (
-                  <article
-                    key={related.id}
-                    className="group relative overflow-hidden rounded-[16px] border border-neutral-lightClay bg-neutral-warmWhite shadow-elevation1 transition-all duration-200 hover:-translate-y-1 hover:shadow-elevation2 flex flex-col justify-between"
-                  >
-                    <div className="relative aspect-[1.5] w-full overflow-hidden bg-neutral-softCream">
-                      <Link
-                        href={`/founders-note/${related.slug}`}
-                        onClick={() => {
-                          if (typeof window !== 'undefined') {
-                            window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note');
-                            window.sessionStorage.setItem('reelnosh:note-origin-url', window.location.pathname + window.location.search);
-                            window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
-                          }
-                        }}
-                        aria-label={`Read note: ${related.title}`}
-                        className="absolute inset-0 z-0 block"
-                      >
-                        {related.image ? (
-                          <Image
-                            src={related.image}
-                            alt={related.title || "Founder's note preview"}
-                            fill
-                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center p-4 text-center">
-                            <span className="font-serif text-xs text-neutral-clayGray">Reelnosh Note</span>
-                          </div>
-                        )}
-                      </Link>
-                      <div className="absolute bottom-3 left-3 z-10">
-                        <LikeButton slug={related.slug} initialLikes={related.likes_count || 0} variant="floating" />
-                      </div>
-                    </div>
-                    <div className="p-6 flex flex-col justify-between flex-1">
-                      <div>
-                        {related.category && (
-                          <span className="inline-flex items-center gap-1.5 rounded-full bg-neutral-softCream px-2.5 py-0.5 font-sans text-[11px] font-semibold uppercase tracking-wide text-clay">
-                            <span className="h-1.5 w-1.5 rounded-full bg-accent-spicePop" />
-                            {related.category}
-                          </span>
-                        )}
-                        <h3 className="mt-3 font-serif text-lg sm:text-xl font-semibold leading-snug text-neutral-charcoal group-hover:text-clay dark:group-hover:text-[#F4A11A] transition-colors">
-                          <Link
-                            href={`/founders-note/${related.slug}`}
-                            onClick={() => {
-                              if (typeof window !== 'undefined') {
-                                window.sessionStorage.setItem('reelnosh:note-origin', 'founders-note');
-                                window.sessionStorage.setItem('reelnosh:note-origin-url', window.location.pathname + window.location.search);
-                                window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
-                              }
-                            }}
-                          >
-                            {related.title}
-                          </Link>
-                        </h3>
-                      </div>
-                      <p className="mt-4 font-sans text-xs text-neutral-clayGray">
-                        {related.date} · {calculateReadingTime(related.body_markdown || related.excerpt || '')} min read
-                      </p>
-                    </div>
-                  </article>
+                  <ArticleCard key={related.id} note={related} origin="detail" />
                 ))}
               </div>
             </div>

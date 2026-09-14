@@ -99,8 +99,7 @@ export const ForCreators: React.FC<ForCreatorsProps> = ({ onOpenCreatorWaitlist 
                 />
                 <img
                   src="/images/creator/creator-mockup-dark.svg"
-                  alt=""
-                  aria-hidden="true"
+                  alt="How one post becomes a sold-out Drop: You post, it becomes a Drop, it sells out"
                   width={424}
                   height={486}
                   loading="lazy"

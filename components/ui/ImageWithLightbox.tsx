@@ -19,14 +19,7 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Eagerly preload full image in background as soon as component mounts
-  useEffect(() => {
-    if (typeof window !== 'undefined' && typeof src === 'string' && src) {
-      const img = new window.Image();
-      img.src = src;
-    }
-  }, [src]);
-
+  // Preload full resolution image only on user intent (hover or touch before opening lightbox)
   const handlePreload = () => {
     if (typeof window !== 'undefined' && typeof src === 'string' && src) {
       const img = new window.Image();

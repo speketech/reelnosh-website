@@ -7,7 +7,7 @@ import { LikeButton } from './LikeButton';
 
 interface ArticleCardProps {
   note: FounderNoteItem;
-  origin?: 'home' | 'founders-note';
+  origin?: 'home' | 'founders-note' | 'detail';
 }
 
 export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founders-note' }) => {
@@ -37,7 +37,7 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
           {note.image ? (
             <Image
               src={note.image}
-              alt={note.title || "Founder's note cover image"}
+              alt={note.image_alt || note.title || "Founder's note cover image"}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
               className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
@@ -53,20 +53,17 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
         </div>
       </div>
 
-      {/* Card Body (Flex 1, with title clamped to 2 lines) */}
+      {/* Card Body (Flex 1, with title clamped to 2 lines, timestamp at bottom) */}
       <div className="p-6 flex flex-col justify-between flex-1 min-h-0">
         <div>
-          {/* Category & Read Meta */}
-          <div className="flex items-center justify-between gap-2 mb-3">
+          {/* Category */}
+          <div className="flex items-center mb-3">
             {note.category && (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-softCream text-clay text-[11px] font-semibold tracking-wide uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop" />
-                {note.category}
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-softCream text-clay dark:bg-[#3A241D] dark:text-[#FFA07A] dark:border dark:border-[#5A382D] text-[11px] font-semibold tracking-wide uppercase max-w-full">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-spicePop shrink-0" />
+                <span className="truncate">{note.category}</span>
               </span>
             )}
-            <span className="font-sans text-xs text-neutral-clayGray font-normal ml-auto">
-              {note.date} · {readTime} min read
-            </span>
           </div>
 
           {/* DESIGN_OVERRIDES §1: Card title role , 22px Figtree semibold, clamped to 2 lines */}
@@ -77,9 +74,15 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ note, origin = 'founde
           </h3>
 
           {/* Excerpt */}
-          <p className="font-sans text-xs sm:text-sm text-neutral-clayGray leading-relaxed line-clamp-3 mb-4">
+          <p className="font-sans text-xs sm:text-sm text-neutral-clayGray leading-relaxed line-clamp-2">
             {note.excerpt}
           </p>
+        </div>
+
+        {/* Timestamp & Reading Time at Bottom */}
+        <div className="pt-3 mt-auto border-t border-neutral-lightClay/40 dark:border-white/5 flex items-center justify-between text-xs text-neutral-clayGray font-normal">
+          <span>{note.date}</span>
+          <span>{readTime} min read</span>
         </div>
       </div>
     </article>

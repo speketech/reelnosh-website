@@ -86,7 +86,7 @@ export const Footer: React.FC = () => {
 
             {/* Column 1: The Ingredients */}
             <div className="flex flex-col">
-              <h3 className="font-sans text-[10px] font-bold uppercase tracking-[2px] text-[#F4A11A] mb-8">
+              <h3 className="font-sans text-[12px] sm:text-[13px] font-bold uppercase tracking-[2.5px] text-[#F4A11A] mb-8">
                 The Ingredients
               </h3>
               <nav className="flex flex-col gap-5">
@@ -105,14 +105,14 @@ export const Footer: React.FC = () => {
               </nav>
 
               {/* Copyright */}
-              <div className="mt-6 lg:mt-8 text-[10px] text-[#F7F3ED]/30 uppercase tracking-[2px] font-medium">
+              <div className="mt-6 lg:mt-8 text-[12px] text-[#F7F3ED]/75 uppercase tracking-[2px] font-medium">
                 &copy; 2026 Reelnosh
               </div>
             </div>
 
             {/* Column 2: Contact (Say Hello) */}
             <div className="flex flex-col">
-              <h3 className="font-sans text-[10px] font-bold uppercase tracking-[2px] text-[#F4A11A] mb-8">
+              <h3 className="font-sans text-[12px] sm:text-[13px] font-bold uppercase tracking-[2.5px] text-[#F4A11A] mb-8">
                 Say hello
               </h3>
 
