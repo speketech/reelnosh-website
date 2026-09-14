@@ -10,7 +10,7 @@ interface JourneyBoxProps {
 export function JourneyBox({ content, title = 'The Commerce Loop' }: JourneyBoxProps) {
   const trimmed = content.trim();
 
-  // If mermaid flowchart/graph syntax is passed, extract the node texts in order
+  // If bracketed node syntax is passed (e.g. A[Step 1] --> B[Step 2]), extract the node texts in order
   let steps: string[] = [];
   if (/^(graph|flowchart)\s+/i.test(trimmed)) {
     const matches = Array.from(trimmed.matchAll(/\[(.*?)\]/g)).map((m) => m[1].trim());

@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
@@ -13,16 +12,6 @@ import { MarkdownLink } from '@/components/notes/MarkdownLink';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 import { LikeButton } from '@/components/notes/LikeButton';
 import { JourneyBox } from '@/components/notes/JourneyBox';
-
-/**
- * MermaidDiagram is loaded via next/dynamic so its ~570 KB (gzipped) bundle
- * is only fetched for the specific notes that contain a mermaid fence block.
- * Every other note pays exactly zero bytes for this feature.
- */
-const MermaidDiagram = dynamic(
-  () => import('@/components/notes/MermaidDiagram').then((m) => m.MermaidDiagram),
-  { ssr: false, loading: () => <div className="my-8 h-24 animate-pulse rounded-[10px] bg-[var(--rn-bg-surface)]" /> },
-);
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
@@ -170,25 +159,12 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                     </div>
                   </blockquote>
                 ),
-                // `pre` wraps every fenced code block. We intercept here
-                // (not in `code`) because react-markdown v10 always renders
-                // the outer <pre> even when the `code` override returns a div,
-                // producing invalid HTML and preventing MermaidDiagram from
-                // mounting. Detecting mermaid at the pre level lets us
-                // short-circuit the entire <pre><code> pair cleanly.
+                // `pre` wraps every fenced code block. We intercept here to render
+                // custom components like JourneyBox cleanly.
                 pre: ({ children }) => {
-                  // Children of <pre> from react-markdown is always a single
-                  // <code> element for fenced blocks.
                   const child = React.Children.toArray(children)[0] as React.ReactElement<{ className?: string; children?: React.ReactNode }> | undefined;
                   if (child && typeof child === 'object' && 'props' in child) {
                     const lang = /language-(\w+)/.exec(child.props.className ?? '')?.[1];
-                    if (lang === 'mermaid') {
-                      return (
-                        <MermaidDiagram
-                          chart={String(child.props.children ?? '').replace(/\n$/, '')}
-                        />
-                      );
-                    }
                     if (lang === 'box' || lang === 'journey' || lang === 'steps' || lang === 'flow') {
                       return (
                         <JourneyBox
@@ -197,7 +173,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                       );
                     }
                   }
-                  // Default: styled preformatted block for non-mermaid fences.
+                  // Default: styled preformatted block for generic code fences.
                   return (
                     <pre className="my-6 overflow-x-auto rounded-[10px] bg-[var(--rn-bg-surface)] p-5 font-mono text-sm leading-relaxed text-[var(--rn-text-secondary)]">
                       {children}
@@ -205,8 +181,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                   );
                 },
                 code: ({ className, children }) => {
-                  // This handles inline `code` only (no className on inline snippets).
-                  // Fenced block code elements are intercepted via `pre` above.
+                  // Inline code snippets
                   if (!className) {
                     return (
                       <code className="rounded-[5px] bg-[var(--rn-bg-surface)] px-[0.35em] py-[0.15em] font-mono text-[0.9em] text-[var(--rn-text-secondary)]">
@@ -214,7 +189,6 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                       </code>
                     );
                   }
-                  // Pass through for non-mermaid fenced blocks (handled by pre above).
                   return <code className={className}>{children}</code>;
                 },
               }}
