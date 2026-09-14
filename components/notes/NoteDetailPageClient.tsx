@@ -11,7 +11,6 @@ import { FoodiesClubCard } from '@/components/sections/FoodiesClub';
 import { MarkdownLink } from '@/components/notes/MarkdownLink';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
 import { LikeButton } from '@/components/notes/LikeButton';
-import { JourneyBox } from '@/components/notes/JourneyBox';
 
 interface NoteDetailPageClientProps {
   note: FounderNoteItem;
@@ -159,38 +158,6 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                     </div>
                   </blockquote>
                 ),
-                // `pre` wraps every fenced code block. We intercept here to render
-                // custom components like JourneyBox cleanly.
-                pre: ({ children }) => {
-                  const child = React.Children.toArray(children)[0] as React.ReactElement<{ className?: string; children?: React.ReactNode }> | undefined;
-                  if (child && typeof child === 'object' && 'props' in child) {
-                    const lang = /language-(\w+)/.exec(child.props.className ?? '')?.[1];
-                    if (lang === 'box' || lang === 'journey' || lang === 'steps' || lang === 'flow') {
-                      return (
-                        <JourneyBox
-                          content={String(child.props.children ?? '').replace(/\n$/, '')}
-                        />
-                      );
-                    }
-                  }
-                  // Default: styled preformatted block for generic code fences.
-                  return (
-                    <pre className="my-6 overflow-x-auto rounded-[10px] bg-[var(--rn-bg-surface)] p-5 font-mono text-sm leading-relaxed text-[var(--rn-text-secondary)]">
-                      {children}
-                    </pre>
-                  );
-                },
-                code: ({ className, children }) => {
-                  // Inline code snippets
-                  if (!className) {
-                    return (
-                      <code className="rounded-[5px] bg-[var(--rn-bg-surface)] px-[0.35em] py-[0.15em] font-mono text-[0.9em] text-[var(--rn-text-secondary)]">
-                        {children}
-                      </code>
-                    );
-                  }
-                  return <code className={className}>{children}</code>;
-                },
               }}
             >
               {body}
