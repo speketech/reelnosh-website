@@ -35,8 +35,8 @@ export const metadata: Metadata = {
   },
   description: SITE_CONFIG.description,
   icons: {
-    icon: '/brand/icon-mark.svg',
-    apple: '/brand/icon-mark.svg',
+    icon: '/brand/logo.png',
+    apple: '/brand/logo.png',
   },
   openGraph: {
     title: defaultTitle,
@@ -44,11 +44,20 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     locale: 'en_NG',
     type: 'website',
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Reelnosh — Where food content becomes meals.",
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: defaultTitle,
     description: SITE_CONFIG.description,
+    images: ["/og-image.png"],
   },
 };
 
@@ -81,7 +90,7 @@ export default function RootLayout({
               '@type': 'Organization',
               name: SITE_CONFIG.name,
               url: 'https://reelnosh.com',
-              logo: 'https://reelnosh.com/brand/icon-mark.svg',
+              logo: 'https://reelnosh.com/brand/logo.png',
               sameAs: Object.values(SITE_CONFIG.links),
             }),
           }}
