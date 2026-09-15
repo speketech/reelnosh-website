@@ -62,12 +62,15 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${lora.variable} ${figtree.variable}`}>
       <head>
-        <link rel="preconnect" href="https://kavivysyshmbnlzgcibg.supabase.co" />
+        {/* Inline theme detection runs first to prevent flash of wrong theme */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var stored=localStorage.getItem('theme');var theme=(stored==='dark'||stored==='light')?stored:'light';document.documentElement.setAttribute('data-theme',theme);if(theme==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`,
           }}
         />
+        {/* Preconnects: establish early connections to key origins */}
+        <link rel="preconnect" href="https://kavivysyshmbnlzgcibg.supabase.co" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="bg-neutral-warmWhite text-neutral-charcoal antialiased min-h-screen flex flex-col font-sans">
         <script

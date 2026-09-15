@@ -7,12 +7,14 @@ interface ImageWithLightboxProps extends ImageProps {
   containerClassName?: string;
   imageClassName?: string;
   revealCropOnHover?: boolean;
+  lightboxSrc?: string;
 }
 
 export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({ 
   containerClassName = '', 
   imageClassName = '', 
   revealCropOnHover = true,
+  lightboxSrc,
   src, 
   alt, 
   ...props 
@@ -21,9 +23,10 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
 
   // Preload full resolution image only on user intent (hover or touch before opening lightbox)
   const handlePreload = () => {
-    if (typeof window !== 'undefined' && typeof src === 'string' && src) {
+    const targetSrc = lightboxSrc || src;
+    if (typeof window !== 'undefined' && typeof targetSrc === 'string' && targetSrc) {
       const img = new window.Image();
-      img.src = src;
+      img.src = targetSrc;
     }
   };
 
@@ -66,7 +69,7 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
       </div>
 
       <ImageLightbox 
-        src={src as string} 
+        src={(lightboxSrc || src) as string} 
         alt={alt as string} 
         isOpen={isOpen} 
         onClose={() => setIsOpen(false)} 

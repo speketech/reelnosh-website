@@ -110,14 +110,15 @@ export async function Hero({ content: propContent }: HeroProps = {}) {
                     ) : (
                       <ImageWithLightbox
                         src={mediaUrl}
-                        alt={content?.title || 'Featured culinary drop'}
+                        lightboxSrc={mediaUrl}
+                        alt={content?.image_alt || content?.title || 'Featured culinary drop'}
                         fill
                         priority
                         fetchPriority="high"
-                        quality={75}
+                        quality={65}
                         imageClassName="object-cover"
                         containerClassName="absolute inset-0 z-0"
-                        sizes="(max-width: 640px) 360px, (max-width: 1024px) 420px, 440px"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 420px, 440px"
                       />
                     )
                   ) : (

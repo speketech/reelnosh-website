@@ -34,6 +34,21 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, 
     }
   }, [isOpen, stableOnClose]);
 
+  const resolvedSrc = React.useMemo(() => {
+    if (src && src.startsWith('/_next/image')) {
+      try {
+        const params = new URLSearchParams(src.split('?')[1]);
+        const originalUrl = params.get('url');
+        if (originalUrl) {
+          return decodeURIComponent(originalUrl);
+        }
+      } catch {
+        // Fallback to original src if parsing fails
+      }
+    }
+    return src;
+  }, [src]);
+
   if (!isOpen || !mounted) return null;
 
   return createPortal(
@@ -63,10 +78,12 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, 
         {/* Instant display — no artificial opacity-0 delay or spinners */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={src}
+          src={resolvedSrc}
           alt={alt || "Enlarged meal drop image"}
           loading="eager"
           decoding="async"
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
           className="max-w-full max-h-full object-contain select-none"
           style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
         />

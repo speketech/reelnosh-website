@@ -34,6 +34,8 @@ export async function getFeaturedContent(
       public_url: row.public_url || row.media_url || '',
       media_url: row.media_url || row.public_url || '',
       media_type: (row.media_type as 'image' | 'video') || 'image',
+      // image_alt from DB column; fall back to title for accessibility
+      image_alt: row.image_alt || row.title || '',
     })) as FeaturedContentItem[];
   } catch (err) {
     console.warn(`Exception querying featured_content for ${placement}:`, err);

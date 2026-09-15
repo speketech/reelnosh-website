@@ -34,6 +34,8 @@ export interface FeaturedContentItem {
   placement: 'hero' | 'exploring';
   title: string;
   description: string;
+  /** Alt text for the image, stored in the database for proper accessibility. */
+  image_alt?: string;
   badge?: string;
   creator_name?: string;
   creator_handle?: string;
