@@ -37,11 +37,11 @@ export function LegalPage({
     <main className="min-h-screen bg-neutral-warmWhite px-5 py-14 font-sans md:py-20">
       <div className="mx-auto max-w-[776px]">
         <nav className="mb-10 flex items-center gap-2 text-xs text-neutral-clayGray">
-          <Link href="/" className="hover:text-clay">
+          <Link href="/" className="hover:text-clay dark:hover:text-accent-spicePop transition-colors">
             Home
           </Link>
           <span>/</span>
-          <span className="text-clay">{title}</span>
+          <span className="text-clay dark:text-accent-spicePop">{title}</span>
         </nav>
 
         <header className="border-b border-neutral-lightClay/70 pb-8">

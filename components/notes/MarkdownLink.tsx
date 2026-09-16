@@ -184,7 +184,15 @@ export const MarkdownLink: React.FC<MarkdownLinkProps> = ({
     : undefined;
 
   const linkTitle = title || (isGeneric ? descriptiveContext : undefined);
-  const linkClass = className || 'text-clay dark:text-white underline underline-offset-4 hover:text-clay-hover dark:hover:text-white/90';
+  const defaultLinkClass =
+    'text-clay hover:text-clay-hover active:text-clay-pressed ' +
+    'decoration-clay/50 hover:decoration-clay hover:decoration-2 hover:underline-offset-2 ' +
+    'dark:text-accent-spicePop dark:hover:text-[#F6B242] dark:active:text-[#D98A0F] ' +
+    'dark:decoration-accent-spicePop/50 dark:hover:decoration-accent-spicePop dark:hover:decoration-2 dark:hover:underline-offset-2 ' +
+    'underline underline-offset-4 decoration-1 ' +
+    'transition-all duration-200 ease-out cursor-pointer ' +
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 dark:focus-visible:ring-accent-spicePop/60 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#1E1B18] rounded-xs';
+  const linkClass = className || defaultLinkClass;
 
   const content = isGeneric ? (
     <>

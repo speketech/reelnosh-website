@@ -141,7 +141,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
   };
 
   const navLinkClass = (isActive: boolean) =>
-    `rounded-brand px-2 py-1 transition-colors duration-200 ${isActive ? 'text-clay' : 'hover:bg-neutral-softCream hover:text-clay'
+    `rounded-brand px-2 py-1 transition-colors duration-200 ${isActive ? 'text-clay dark:text-accent-spicePop' : 'hover:bg-neutral-softCream hover:text-clay dark:hover:bg-rn-subtle dark:hover:text-accent-spicePop'
     }`;
 
   return (

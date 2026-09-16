@@ -494,20 +494,51 @@
   color: var(--rn-brand);
   text-decoration: underline;
   text-underline-offset: 0.18em;
+  text-decoration-color: rgba(139, 58, 42, 0.45);
+  text-decoration-thickness: 1px;
+  transition: color 200ms ease, text-decoration-color 200ms ease, text-decoration-thickness 200ms ease, text-underline-offset 200ms ease;
+  cursor: pointer;
 }
 
 .dark .rn-link,
 [data-theme='dark'] .rn-link {
-  color: #FFFFFF;
+  color: var(--color-spice-pop);
+  text-decoration-color: rgba(244, 161, 26, 0.5);
 }
 
 .rn-link:hover {
   color: var(--rn-brand-hover);
+  text-decoration-color: var(--rn-brand-hover);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
 }
 
 .dark .rn-link:hover,
 [data-theme='dark'] .rn-link:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: #F6B242;
+  text-decoration-color: #F6B242;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
+}
+
+.rn-link:active {
+  color: var(--rn-brand-pressed);
+}
+
+.dark .rn-link:active,
+[data-theme='dark'] .rn-link:active {
+  color: #D98A0F;
+}
+
+.rn-link:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.dark .rn-link:focus-visible,
+[data-theme='dark'] .rn-link:focus-visible {
+  outline-color: var(--color-spice-pop);
 }
 
 * {

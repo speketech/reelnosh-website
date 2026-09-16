@@ -84,7 +84,7 @@ export const CookieConsentBanner: React.FC = () => {
           We use cookies to improve your experience. By continuing, you agree to our{' '}
           <Link
             href="/cookies"
-            className="font-semibold text-clay dark:text-white underline underline-offset-2 hover:text-clay-hover dark:hover:text-white/90 transition-colors"
+            className="font-semibold text-clay hover:text-clay-hover active:text-clay-pressed decoration-clay/50 hover:decoration-clay dark:text-accent-spicePop dark:hover:text-[#F6B242] dark:active:text-[#D98A0F] dark:decoration-accent-spicePop/50 dark:hover:decoration-accent-spicePop underline underline-offset-2 hover:underline-offset-[3px] transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 dark:focus-visible:ring-accent-spicePop/60 rounded-xs"
           >
             Cookie Policy
           </Link>

@@ -196,7 +196,7 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                           window.sessionStorage.setItem('reelnosh:note-origin-scroll', window.scrollY.toString());
                         }}
                         aria-label={`Read full note: ${featuredNote.title}`}
-                        className="font-sans text-sm font-semibold text-clay hover:underline inline-flex items-center gap-1.5 transition-all group cursor-pointer dark:text-white dark:hover:text-white/90"
+                        className="font-sans text-sm font-semibold text-clay hover:text-clay-hover active:text-clay-pressed dark:text-accent-spicePop dark:hover:text-[#F6B242] dark:active:text-[#D98A0F] hover:underline inline-flex items-center gap-1.5 transition-all group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 dark:focus-visible:ring-accent-spicePop/60 rounded-xs"
                       >
                         <span>Read full note</span>
                         <span className="sr-only">: {featuredNote.title}</span>
