@@ -98,7 +98,7 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
               />
               <div>
                 <p className="font-sans text-sm sm:text-[15px] font-semibold text-neutral-charcoal leading-snug">
-                  Kudirat
+                  Kudirat Ijeoma
                 </p>
                 <p className="font-sans text-xs sm:text-sm text-neutral-clayGray">
                   Founder &amp; CEO, Reelnosh

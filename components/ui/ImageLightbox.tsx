@@ -11,10 +11,17 @@ interface ImageLightboxProps {
 
 export const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, onClose }) => {
   const [mounted, setMounted] = useState(false);
+  const [lightboxError, setLightboxError] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      setLightboxError(false);
+    }
+  }, [isOpen]);
 
   const stableOnClose = useCallback(() => onClose(), [onClose]);
 
@@ -77,16 +84,24 @@ export const ImageLightbox: React.FC<ImageLightboxProps> = ({ src, alt, isOpen, 
       >
         {/* Instant display — no artificial opacity-0 delay or spinners */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={resolvedSrc}
-          alt={alt || "Enlarged meal drop image"}
-          loading="eager"
-          decoding="async"
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-          className="max-w-full max-h-full object-contain select-none"
-          style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
-        />
+        {lightboxError ? (
+          <div className="flex flex-col items-center justify-center p-8 bg-neutral-charcoal/80 text-white rounded-brand border border-white/20 text-center max-w-sm">
+            <p className="font-serif text-lg mb-2">Image preview unavailable</p>
+            <p className="font-sans text-xs text-neutral-lightClay">{alt}</p>
+          </div>
+        ) : (
+          <img
+            src={resolvedSrc}
+            alt={alt || "Enlarged meal drop image"}
+            loading="eager"
+            decoding="async"
+            crossOrigin="anonymous"
+            referrerPolicy="no-referrer"
+            onError={() => setLightboxError(true)}
+            className="max-w-full max-h-full object-contain select-none"
+            style={{ width: 'auto', height: 'auto', maxWidth: '100%', maxHeight: '100%' }}
+          />
+        )}
       </div>
     </div>,
     document.body

@@ -164,6 +164,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                 alt="Reelnosh"
                 fill
                 priority
+                unoptimized
                 className="object-contain object-left"
               />
             </div>
@@ -174,6 +175,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                 alt="Reelnosh"
                 fill
                 priority
+                unoptimized
                 className="object-contain"
               />
             </div>
@@ -258,6 +260,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenEarlyAccess }) => {
                     src={theme === 'dark' ? '/brand/logo-white.svg' : '/brand/logo-primary.svg'}
                     alt="Reelnosh"
                     fill
+                    unoptimized
                     className="object-contain object-left"
                   />
                 </div>

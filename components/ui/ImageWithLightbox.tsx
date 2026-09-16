@@ -20,9 +20,11 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
   ...props 
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasError, setHasError] = useState(false);
 
   // Preload full resolution image only on user intent (hover or touch before opening lightbox)
   const handlePreload = () => {
+    if (hasError) return;
     const targetSrc = lightboxSrc || src;
     if (typeof window !== 'undefined' && typeof targetSrc === 'string' && targetSrc) {
       const img = new window.Image();
@@ -41,9 +43,9 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
             ? containerClassName 
             : `relative ${containerClassName}`
         }`}
-        onClick={() => setIsOpen(true)}
+        onClick={() => !hasError && setIsOpen(true)}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (!hasError && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
             setIsOpen(true);
           }
@@ -52,7 +54,20 @@ export const ImageWithLightbox: React.FC<ImageWithLightboxProps> = ({
         onTouchStart={handlePreload}
       >
         <div className={`relative w-full h-full transition-transform duration-500 ease-out ${revealCropOnHover ? 'scale-[1.05] group-hover:scale-100' : 'group-hover:scale-[1.03]'}`}>
-          <Image src={src} alt={alt || "Culinary drop image"} className={imageClassName} quality={props.quality || 75} {...props} />
+          {hasError ? (
+            <div className="flex h-full w-full items-center justify-center bg-neutral-lightClay/20 p-4 text-center">
+              <span className="font-serif text-xs text-neutral-clayGray">{alt || 'Culinary drop preview'}</span>
+            </div>
+          ) : (
+            <Image
+              src={src}
+              alt={alt || "Culinary drop image"}
+              className={imageClassName}
+              quality={props.quality || 75}
+              onError={() => setHasError(true)}
+              {...props}
+            />
+          )}
         </div>
         
         {/* Expand Icon Overlay */}

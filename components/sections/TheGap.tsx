@@ -97,7 +97,7 @@ export const TheGap: React.FC = () => {
                   <div className="relative h-[82px] sm:h-[92px] w-full overflow-hidden bg-neutral-charcoal">
                     <Image
                       src="/images/drops/live-reel.webp"
-                      alt="Food reel preview: Party Jollof by @chef_kemi"
+                      alt="Food reel preview: White Rice & Beans by @chef_kemi"
                       fill
                       sizes="280px"
                       className="object-cover opacity-95"
@@ -122,7 +122,7 @@ export const TheGap: React.FC = () => {
 
                     {/* Bottom caption */}
                     <div className="absolute bottom-1.5 sm:bottom-2 left-2.5 right-2.5 flex items-center justify-between text-[11px] sm:text-[12px] text-white">
-                      <span className="font-semibold truncate drop-shadow-sm">@chef_kemi · Party Jollof</span>
+                      <span className="font-semibold truncate drop-shadow-sm">@chef_kemi · White Rice & Beans</span>
                       <span className="text-[10px] sm:text-[11px] text-white/80 font-medium shrink-0 ml-1.5">0:15</span>
                     </div>
                   </div>

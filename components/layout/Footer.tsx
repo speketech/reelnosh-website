@@ -157,6 +157,7 @@ export const Footer: React.FC = () => {
             alt="Reelnosh"
             width={2400}
             height={600}
+            unoptimized
             className="w-[180%] sm:w-[150%] md:w-[120%] lg:w-full max-w-none h-auto object-contain object-bottom"
             priority
           />
