@@ -9,7 +9,7 @@ export const FOUNDERS_NOTES_INDEX_CONTENT = {
   headingPart1: 'Building ',
   brandWord: 'Reelnosh',
   headingPart2: 'publicly.',
-  author: '- Kudirat',
+  author: '- Kudirat Ijeoma',
   description:
     "Hi, this is where I write honestly about what we're learning while building Reelnosh: the product decisions, the Lagos food scene, what you're teaching us, and yes, what we're still getting wrong.",
 };
@@ -312,4 +312,35 @@ Every Drop and conversation in Lagos teaches us something new about trust, food 
 
 We will keep listening, testing, and sharing what changes our minds. The work is deliberately open because the people this is for should help shape what Reelnosh becomes.
 `.trim();
+}
+
+/**
+ * Extracts the first blockquote (> ...) encountered in markdown.
+ * If found, returns the clean text of the quote block.
+ */
+export function getFirstPullQuote(markdown?: string): string | null {
+  if (!markdown) return null;
+  const lines = markdown.split('\n');
+  const quoteLines: string[] = [];
+  let capturing = false;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('>')) {
+      capturing = true;
+      quoteLines.push(trimmed.replace(/^>\s*/, ''));
+    } else if (capturing) {
+      // End of contiguous blockquote
+      break;
+    }
+  }
+
+  if (quoteLines.length > 0) {
+    let result = quoteLines.join(' ').trim();
+    // Strip surrounding quotes if already enclosed
+    result = result.replace(/^["'“](.*)["'”]$/, '$1');
+    return result;
+  }
+
+  return null;
 }

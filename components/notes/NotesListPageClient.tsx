@@ -10,7 +10,7 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ArticleCard } from './ArticleCard';
 import { Button } from '@/components/ui/Button';
 import { calculateReadingTime } from '@/lib/utils/reading-time';
-import { getFounderNoteBody, FOUNDERS_NOTES_INDEX_CONTENT } from '@/lib/notesContent';
+import { getFounderNoteBody, getFirstPullQuote, FOUNDERS_NOTES_INDEX_CONTENT } from '@/lib/notesContent';
 import { EmptyNoteState } from '@/components/notes/EmptyNoteState';
 
 // Load form + its dependencies (react-hook-form, zod) only when the modal opens.
@@ -41,6 +41,9 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
   const [isFoodieModalOpen, setIsFoodieModalOpen] = useState(false);
   const featuredBody = featuredNote ? (featuredNote.body_markdown || getFounderNoteBody(featuredNote.slug, featuredNote.excerpt)) : '';
   const featuredReadTime = featuredNote ? calculateReadingTime(featuredBody) : 1;
+  const latestPullQuote = featuredNote
+    ? (getFirstPullQuote(featuredBody) || featuredNote.quote || featuredNote.excerpt)
+    : '';
 
   const hasNotes = Boolean(featuredNote || notes.length > 0);
 
@@ -49,9 +52,9 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
       {/* 1. Hero Section (Consolidated single DOM structure for all viewports) */}
       <section className="bg-neutral-warmWhite px-4 pt-4 pb-2 sm:px-6 sm:pt-6 sm:pb-4 md:px-12 md:pt-8 md:pb-6 min-[1120px]:px-0">
         <div
-          className="relative mx-auto w-full max-w-[363px] min-[500px]:max-w-[1072px] overflow-hidden rounded-[24px] min-[500px]:rounded-none border border-neutral-lightClay/70 bg-neutral-softCream shadow-elevation1 min-[500px]:border-none min-[500px]:bg-transparent min-[500px]:shadow-none aspect-[363/340] min-[500px]:aspect-[1072/460]"
+          className="relative mx-auto w-full max-w-[363px] min-[500px]:max-w-[1072px] overflow-hidden rounded-[24px] min-[500px]:rounded-none border border-neutral-lightClay/70 bg-neutral-softCream shadow-elevation1 min-[500px]:border-none min-[500px]:bg-transparent min-[500px]:shadow-none aspect-[363/250] min-[500px]:aspect-[1072/460]"
           style={{
-            borderRadius: '30.65% 21.46% 21.46% 12.26% / 71.43% 50% 50% 28.57%',
+            borderRadius: '15% 21.46% 28% 16% / 25% 48% 40% 69%',
           }}
         >
           {/* Layer 1: Background Vector Frame for Desktop (Adaptive to dark mode surface) */}
@@ -73,14 +76,20 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
             />
           </svg>
 
-          {/* Mobile accent circle */}
-          <div
-            className="pointer-events-none absolute top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-accent-spicePop/25 min-[500px]:hidden"
-            aria-hidden="true"
-          />
+          {/* Mobile Kudirat Avatar (Aligned with text right margin, moved slightly down, clear of title) */}
+          <div className="absolute top-5 right-7 xs:right-8 z-20 min-[500px]:hidden">
+            <Image
+              src="/images/notes/kudirat-avatar.png"
+              alt="Kudirat Ijeoma"
+              width={60}
+              height={60}
+              priority
+              className="rounded-full bg-[#F4C16D] object-cover ring-2 ring-accent-spicePop/60 shadow-xs"
+            />
+          </div>
 
-          {/* Layer 2: Visual Anchor — Kudirat photo & Desktop Spicepop Shape (Single Render) */}
-          <div className="pointer-events-none absolute select-none top-4 left-1/2 -translate-x-1/2 w-16 h-16 rounded-full overflow-hidden border-2 border-accent-spicePop/60 min-[500px]:border-none min-[500px]:rounded-none min-[500px]:top-auto min-[500px]:left-auto min-[500px]:translate-x-0 min-[500px]:bottom-0 min-[500px]:right-[2%] min-[500px]:w-[26%] min-[500px]:h-[82%] sm:right-[2%] sm:w-[29%] sm:h-[86%] md:right-[2.5%] md:w-[32%] md:h-[88%] tablet:right-[3%] tablet:w-[34%] tablet:h-[91%] lg:right-[3.5%] lg:w-[36%] lg:h-[93%] lg:left-auto xl:left-[54.1%] xl:right-auto xl:w-[41.04%] xl:h-full">
+          {/* Desktop Visual Anchor — Kudirat photo & Desktop Spicepop Shape (>= 500px) */}
+          <div className="pointer-events-none absolute select-none hidden min-[500px]:block min-[500px]:bottom-0 min-[500px]:right-[2%] min-[500px]:w-[26%] min-[500px]:h-[82%] sm:right-[2%] sm:w-[29%] sm:h-[86%] md:right-[2.5%] md:w-[32%] md:h-[88%] tablet:right-[3%] tablet:w-[34%] tablet:h-[91%] lg:right-[3.5%] lg:w-[36%] lg:h-[93%] lg:left-auto xl:left-[54.1%] xl:right-auto xl:w-[41.04%] xl:h-full">
             {/* Spicepop background shape (desktop only) */}
             <img
               src="/images/notes/hero-spicepop.svg"
@@ -93,29 +102,29 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
             <div className="relative h-full w-full min-[500px]:absolute min-[500px]:left-[8.11%] min-[500px]:w-[85.91%] min-[500px]:top-[-1.49%] min-[500px]:h-[102.61%]">
               <Image
                 src="/images/notes/kudirat-hero.png"
-                alt="Kudirat Ijeoma Ibeabuchi, Founder of Reelnosh"
+                alt="Kudirat Ijeoma, Founder of Reelnosh"
                 fill
                 priority
-                sizes="(max-width: 500px) 64px, (max-width: 640px) 210px, (max-width: 768px) 270px, (max-width: 1024px) 340px, 450px"
-                className="object-cover object-top min-[500px]:object-contain min-[500px]:object-bottom"
+                sizes="(max-width: 640px) 210px, (max-width: 768px) 270px, (max-width: 1024px) 340px, 450px"
+                className="object-contain object-bottom"
               />
             </div>
           </div>
 
-          {/* Content Layer (Single responsive block) */}
-          <div className="relative z-10 flex h-full flex-col justify-start pt-[88px] px-6 min-[500px]:justify-center min-[500px]:pt-3 sm:pt-4 md:pt-4 lg:pt-0 pl-6 min-[500px]:pl-16 sm:pl-20 md:pl-28 tablet:pl-[105px] lg:pl-[120px] xl:pl-[130px] pr-4 w-full min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] tablet:w-[58%] lg:w-[54%] xl:w-[50%]">
-            <h1 className="font-serif text-[24px] xs:text-[26px] min-[500px]:text-[19px] sm:text-2xl md:text-[30px] lg:text-[42px] xl:text-[50px] font-semibold leading-[1.2] min-[500px]:leading-[1.35] lg:leading-[1.18] xl:leading-[1.2] text-neutral-charcoal tracking-tight">
+          {/* Content Layer (Single responsive block with balanced margins and padding) */}
+          <div className="relative z-10 flex h-full flex-col justify-center pt-7 pb-6 px-7 xs:px-8 min-[500px]:justify-center min-[500px]:pt-3 min-[500px]:pb-0 sm:pt-4 md:pt-4 lg:pt-0 min-[500px]:px-0 min-[500px]:pl-16 sm:pl-20 md:pl-28 tablet:pl-[105px] lg:pl-[120px] xl:pl-[130px] min-[500px]:pr-4 w-full min-[500px]:w-[68%] sm:w-[65%] md:w-[60%] tablet:w-[58%] lg:w-[54%] xl:w-[50%]">
+            <h1 className="font-serif text-[21px] xs:text-[23px] min-[500px]:text-[19px] sm:text-2xl md:text-[30px] lg:text-[42px] xl:text-[50px] font-semibold leading-[1.2] min-[500px]:leading-[1.35] lg:leading-[1.18] xl:leading-[1.2] text-neutral-charcoal tracking-tight pr-16 min-[500px]:pr-0">
               {FOUNDERS_NOTES_INDEX_CONTENT.headingPart1}
               <span className="italic text-clay font-normal">{FOUNDERS_NOTES_INDEX_CONTENT.brandWord}</span>
               <br />
               <span className="inline-block mt-0.5 sm:mt-1 md:mt-1.5 lg:mt-0">{FOUNDERS_NOTES_INDEX_CONTENT.headingPart2}</span>
             </h1>
 
-            <p className="mt-2.5 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-4 font-sans text-[12.5px] min-[500px]:text-[12.5px] sm:text-[13.5px] md:text-[15px] lg:text-[16px] xl:text-[17px] leading-[1.45] min-[500px]:leading-[1.5] md:leading-[1.6] lg:leading-[1.65] text-neutral-clayGray max-w-[268px] min-[500px]:max-w-[465px]">
+            <p className="mt-2.5 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-4 font-sans text-[12px] xs:text-[12.5px] min-[500px]:text-[12.5px] sm:text-[13.5px] md:text-[15px] lg:text-[16px] xl:text-[17px] leading-[1.45] min-[500px]:leading-[1.5] md:leading-[1.6] lg:leading-[1.65] text-neutral-clayGray w-full max-w-none min-[500px]:max-w-[465px]">
               {FOUNDERS_NOTES_INDEX_CONTENT.description}
             </p>
 
-            <p className="mt-3 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-5 font-serif italic font-normal text-neutral-charcoal text-[13.5px] min-[500px]:text-[12.5px] sm:text-sm md:text-[15px] lg:text-base xl:text-[17px]">
+            <p className="mt-3 min-[500px]:mt-2 sm:mt-2.5 md:mt-3.5 lg:mt-5 font-serif italic font-normal text-neutral-charcoal text-[13px] xs:text-[13.5px] min-[500px]:text-[12.5px] sm:text-sm md:text-[15px] lg:text-base xl:text-[17px]">
               {FOUNDERS_NOTES_INDEX_CONTENT.author}
             </p>
           </div>
@@ -157,9 +166,9 @@ export const NotesListPageClient: React.FC<NotesListPageClientProps> = ({
                       )}
                     </div>
 
-                    {/* Bottom Quote */}
-                    <blockquote className="font-serif italic text-[24px] text-white leading-snug mt-8 sm:mt-12 relative z-10">
-                      {featuredNote.quote || featuredNote.excerpt}
+                    {/* Bottom Quote: 3 lines fixed with ellipses */}
+                    <blockquote className="font-serif italic text-[20px] sm:text-[22px] md:text-[24px] text-white leading-snug mt-8 sm:mt-12 relative z-10 line-clamp-3">
+                      {latestPullQuote}
                     </blockquote>
                   </div>
 

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: 'Reelnosh',
       type: 'article',
       publishedTime: note.published_at,
-      authors: ['Kudirat Ijeoma Ibeabuchi'],
+      authors: ['Kudirat Ijeoma'],
       images: [
         {
           url: imageUrl,
@@ -79,7 +79,7 @@ export default async function SingleFoundersNotePage({ params }: PageProps) {
     headline: note.title,
     description: note.excerpt,
     datePublished: note.published_at,
-    author: { '@type': 'Person', name: 'Kudirat Ijeoma Ibeabuchi' },
+    author: { '@type': 'Person', name: 'Kudirat Ijeoma' },
     publisher: {
       '@type': 'Organization',
       name: 'Reelnosh',

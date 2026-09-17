@@ -165,8 +165,15 @@ export const MarkdownLink: React.FC<MarkdownLinkProps> = ({
 }) => {
   const plainText = extractText(children).trim();
   const normalizedText = plainText.toLowerCase().replace(/[.,!?:;…]+$/, '').trim();
-  const isGeneric = !normalizedText || GENERIC_LINK_TEXTS.has(normalizedText);
 
+  // Check if link text is a raw URL or just the href itself
+  const isRawUrl =
+    /^https?:\/\//i.test(plainText) ||
+    /^www\./i.test(plainText) ||
+    /^(?:instagram\.com|tiktok\.com|twitter\.com|x\.com|facebook\.com|linkedin\.com|wa\.me|whatsapp\.com)/i.test(plainText) ||
+    (Boolean(href) && plainText === href.trim());
+
+  const isGeneric = !normalizedText || GENERIC_LINK_TEXTS.has(normalizedText);
   const descriptiveContext = getDescriptiveContext(href, title);
 
   // Determine prefix based on the phrasing
@@ -177,13 +184,13 @@ export const MarkdownLink: React.FC<MarkdownLinkProps> = ({
     prefix = 'to';
   }
 
-  const computedAriaLabel = isGeneric
+  const computedAriaLabel = isGeneric && !isRawUrl
     ? plainText
       ? `${plainText} ${prefix} ${descriptiveContext}`
       : descriptiveContext
-    : undefined;
+    : (isRawUrl ? descriptiveContext : undefined);
 
-  const linkTitle = title || (isGeneric ? descriptiveContext : undefined);
+  const linkTitle = title || descriptiveContext;
   const defaultLinkClass =
     'text-clay hover:text-clay-hover active:text-clay-pressed ' +
     'decoration-clay/50 hover:decoration-clay hover:decoration-2 hover:underline-offset-2 ' +
@@ -194,7 +201,10 @@ export const MarkdownLink: React.FC<MarkdownLinkProps> = ({
     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-clay/40 dark:focus-visible:ring-accent-spicePop/60 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#1E1B18] rounded-xs';
   const linkClass = className || defaultLinkClass;
 
-  const content = isGeneric ? (
+  // Never render raw URLs as visible text — replace with descriptive destination context
+  const content = isRawUrl ? (
+    descriptiveContext
+  ) : isGeneric ? (
     <>
       {plainText ? children : descriptiveContext}
       {plainText && (

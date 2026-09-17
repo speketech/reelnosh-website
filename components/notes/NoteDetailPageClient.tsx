@@ -80,9 +80,9 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
               {note.title}
             </h1>
 
-            {/* Excerpt — secondary caption, distinct from the body lead paragraph */}
+            {/* Excerpt — secondary caption, spans note title */}
             {note.excerpt && (
-              <p className="mt-3 font-sans text-sm italic text-neutral-clayGray/80 leading-relaxed max-w-[680px]">
+              <p className="mt-3 font-sans text-sm italic text-neutral-clayGray/80 leading-relaxed w-full">
                 {note.excerpt}
               </p>
             )}

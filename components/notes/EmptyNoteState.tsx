@@ -46,7 +46,7 @@ export const EmptyNoteState: React.FC<EmptyNoteStateProps> = ({
 
       {/* 3. Description */}
       <p className="font-sans text-[14px] sm:text-[15.5px] leading-[1.6] text-neutral-clayGray dark:text-[#C4B5AE] max-w-[460px] mx-auto mb-8">
-        Kudirat shares candid updates about what we&apos;re learning, the Lagos food scene, and the decisions behind Reelnosh. The first note will be published soon.
+        Kudirat Ijeoma shares candid updates about what we&apos;re learning, the Lagos food scene, and the decisions behind Reelnosh. The first note will be published soon.
       </p>
 
       {/* 4. Action Button */}
