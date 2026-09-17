@@ -158,6 +158,58 @@ export const NoteDetailPageClient: React.FC<NoteDetailPageClientProps> = ({ note
                     {children}
                   </MarkdownLink>
                 ),
+                ul: ({ children }) => (
+                  <ul className="my-6 space-y-2.5 text-neutral-charcoal [&>li]:relative [&>li]:pl-6 [&>li]:list-none [&>li]:before:content-[''] [&>li]:before:absolute [&>li]:before:left-1.5 [&>li]:before:top-[0.58em] [&>li]:before:h-2 [&>li]:before:w-2 [&>li]:before:rounded-full [&>li]:before:bg-clay dark:[&>li]:before:bg-accent-spicePop">
+                    {children}
+                  </ul>
+                ),
+                ol: ({ children }) => (
+                  <ol className="my-6 space-y-2.5 text-neutral-charcoal [counter-reset:note-step] [&>li]:relative [&>li]:pl-7 [&>li]:list-none [&>li]:before:[counter-increment:note-step] [&>li]:before:content-[counter(note-step)'.'] [&>li]:before:absolute [&>li]:before:left-0 [&>li]:before:font-semibold [&>li]:before:text-clay dark:[&>li]:before:text-accent-spicePop">
+                    {children}
+                  </ol>
+                ),
+                li: ({ children }) => (
+                  <li className="leading-[1.75]">
+                    {children}
+                  </li>
+                ),
+                table: ({ children }) => (
+                  <div className="my-8 w-full overflow-x-auto rounded-[14px] border border-neutral-lightClay/70 bg-neutral-softCream/40 shadow-2xs">
+                    <table className="w-full text-left font-sans text-sm text-neutral-charcoal border-collapse">
+                      {children}
+                    </table>
+                  </div>
+                ),
+                thead: ({ children }) => (
+                  <thead className="border-b border-neutral-lightClay bg-neutral-softCream/90 font-semibold text-clay uppercase tracking-[1px] text-[11.5px]">
+                    {children}
+                  </thead>
+                ),
+                th: ({ children }) => (
+                  <th className="px-4 py-3 font-semibold text-neutral-charcoal">
+                    {children}
+                  </th>
+                ),
+                td: ({ children }) => (
+                  <td className="px-4 py-3 border-b border-neutral-lightClay/40 last:border-b-0">
+                    {children}
+                  </td>
+                ),
+                img: ({ src, alt }) => (
+                  <figure className="my-8 overflow-hidden rounded-[16px] border border-neutral-lightClay/60 bg-neutral-softCream shadow-xs">
+                    <img
+                      src={src || ''}
+                      alt={alt || ''}
+                      className="w-full h-auto object-contain max-h-[480px] mx-auto"
+                      loading="lazy"
+                    />
+                    {alt && (
+                      <figcaption className="px-4 py-2.5 text-center font-sans text-xs text-neutral-clayGray border-t border-neutral-lightClay/40 bg-neutral-softCream/80">
+                        {alt}
+                      </figcaption>
+                    )}
+                  </figure>
+                ),
                 blockquote: ({ children }) => (
                   <blockquote className="relative my-10 overflow-hidden rounded-[12px] bg-neutral-softCream px-5 py-7 text-center shadow-xs sm:px-8 sm:py-8 [&_p]:my-0">
                     {/* Decorative quote mark in top-left */}
